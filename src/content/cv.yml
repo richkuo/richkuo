@@ -1,0 +1,6 @@
+- id: "experience"
+  heading: "Experience"
+  items:
+    - title: "Product Engineer"
+      description: "Building products."
+      datetime: "2024 – Present"
