@@ -1,25 +1,28 @@
 author:
-  name: Richard Kuo
+  name: Rich Kuo
   role: Product Engineer
   bio: I build products.
   location: ""
 
 social:
-  - id: "github"
-    label: "GitHub"
-    href: "https://github.com/richkuo"
+  - id: "discord"
+    label: "Discord"
+    href: "https://discord.gg/44BykmWZsP"
+  - id: "youtube"
+    label: "YouTube"
+    href: "https://youtube.com/@richkuo7"
+  - id: "instagram"
+    label: "Instagram"
+    href: "https://instagram.com/richkuo7"
+  - id: "tiktok"
+    label: "TikTok"
+    href: "https://tiktok.com/@rich_kuo1"
   - id: "x"
     label: "X"
-    href: "https://x.com/richkuo"
+    href: "https://x.com/richkuo7"
   - id: "linkedin"
     label: "LinkedIn"
     href: "https://linkedin.com/in/richkuo"
-  - id: "tiktok"
-    label: "TikTok"
-    href: "https://tiktok.com/@richkuo"
-  - id: "instagram"
-    label: "Instagram"
-    href: "https://instagram.com/richkuo"
-  - id: "youtube"
-    label: "YouTube"
-    href: "https://youtube.com/@richkuo"
+  - id: "github"
+    label: "GitHub"
+    href: "https://github.com/richkuo"

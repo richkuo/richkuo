@@ -25,14 +25,6 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], Content 
 		<header class="section-heading">
 			<p class="eyebrow">Project</p>
 			<h1>{title}</h1>
-			<p class="post-meta">
-				<FormattedDate date={pubDate} />
-				{updatedDate && (
-					<span>
-						&middot; Updated <FormattedDate date={updatedDate} />
-					</span>
-				)}
-			</p>
 			{tags.length > 0 && (
 				<ul class="mt-2 flex flex-wrap gap-2 text-sm text-muted">
 					{tags.map((tag) => (

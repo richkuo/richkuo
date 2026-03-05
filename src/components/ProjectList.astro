@@ -52,7 +52,7 @@ export interface Props {
 let {
     heading = "Projects",
     items = [],
-    limit = 4,
+    limit = Infinity,
     viewAllHref,
     viewAllLabel = "View all projects",
 } = Astro.props as Props;
@@ -81,32 +81,30 @@ const baseUrl =
 ---
 
 <section>
-    <div class="max-w-[90rem] mx-auto pt-8 px-8">
+    <div class="max-w-[90rem] mx-auto pt-4 px-8">
         <div
-            class="grid grid-cols-1 gap-y-24 md:grid-cols-3 border-b py-24 border-base-200"
+            class="border-b py-8 border-base-200"
         >
-            <div class="lg:sticky lg:top-24 lg:z-40 self-start">
-                <h2
-                    class="text-sm 2xl:text-xl text-base-900 font-bold uppercase"
-                >
-                    {heading}
-                </h2>
-            </div>
+            <h2 class="text-sm 2xl:text-xl text-base-900 font-bold uppercase mb-6">
+                {heading}
+            </h2>
 
             <div
-                class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-y-20 gap-x-8"
+                class="grid grid-cols-1 md:grid-cols-3 gap-6"
             >
                 {
                     visibleItems.map((item) => {
                         const p = getProjectData(item) || {};
                         const id = (item as any).id;
-                        const href = id ? withBase(`/projects/${id}/`) : p.link;
-                        const external = isExternal(href);
+                        const internalHref = id ? withBase(`/projects/${id}/`) : undefined;
+                        const externalHref = p.link;
+                        const href = externalHref || internalHref || '#';
 
                         return (
                             <Card
                                 title={p.title}
                                 href={href}
+                                readMoreHref={internalHref}
                                 image={p.image}
                                 imageAlt={p.title}
                                 description={p.description}
@@ -116,12 +114,6 @@ const baseUrl =
                         );
                     })
                 }
-                <Card
-                    title={viewAllLabel}
-                    href={`${baseUrl + (viewAllHref ?? '/projects/')}`}
-                    variant="project"
-                />
             </div>
-        </div>
     </div>
 </section>

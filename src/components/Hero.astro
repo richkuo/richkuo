@@ -2,6 +2,7 @@
 interface Action {
   label: string;
   href: string;
+  icon?: string;
 }
 
 interface Props {
@@ -14,60 +15,64 @@ interface Props {
 }
 
 import { withBase } from "../utils/slugify";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import profilePic from "../assets/profile.jpg";
 
 const isExternal = (path: string) => /^[a-z][a-z0-9+.-]*:/i.test(path) || path.startsWith('//');
 
-const { title, description, actions = [], role, location } = Astro.props as Props; 
+const { title, description, actions = [], role, location } = Astro.props as Props;
 ---
 
-<section class="flex flex-col justify-between" style="min-height: calc(100vh - (var(--grid-cell) / 2));">
-  <div class="grid gap-3 md:gap-4 max-w-3xl pb-6 md:pb-10">
-    <div class="flex flex-col lg:flex-row lg:justify-between items-start gap-8">
+<section class="flex flex-col">
+  <div class="flex items-start gap-6 px-8 pb-4" style="align-items: flex-start;">
+    <!-- Profile image: sits to the left, aligned with message section -->
+    <Image
+      src={profilePic}
+      alt="Rich Kuo"
+      width={400}
+      height={400}
+      class="rounded-full object-cover shrink-0 w-20 md:w-32"
+    />
+
+    <!-- Right column: title, icons, messages all aligned -->
+    <div class="flex flex-col gap-3 flex-1 max-w-md">
       <div
-        class="hero-letters text-[10vw] md:text-[10rem] lg:text-[10rem] leading-[0.85] font-extrabold text-base-900 uppercase"
+        class="hero-letters text-[6vw] md:text-[5rem] lg:text-[5rem] leading-[0.85] font-extrabold text-base-900"
         aria-hidden="true"
       >
         {title}
       </div>
+
+      {actions.length > 0 && (
+        <div class="flex flex-row justify-between w-full">
+          {actions.map((action) => (
+            isExternal(action.href) ? (
+              <a
+                class="text-base-900 hover:text-base-500 inline-flex items-center"
+                href={action.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={action.label}
+              >
+                {action.icon ? <Icon name={action.icon} size={50} /> : action.label}
+              </a>
+            ) : (
+              <a
+                class="text-base-900 hover:text-base-500 inline-flex items-center"
+                href={withBase(action.href)}
+                aria-label={action.label}
+              >
+                {action.icon ? <Icon name={action.icon} size={50} /> : action.label}
+              </a>
+            )
+          ))}
+        </div>
+      )}
+
+      <slot />
     </div>
   </div>
 
-  <div class="max-w-360 mx-auto px-8 w-full mt-auto">
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-3 border-b pb-8 border-base-200">
-      <div>
-        {role && <h1 class="text-xs 2xl:text-lg text-base-900 font-bold uppercase">{role}</h1>}
-      </div>
-
-      <div class="md:col-span-1">
-        {description && <p class="text-sm 2xl:text-xl text-base-600">{description}</p>}
-        {location && <p class="text-sm text-base-600 mt-2">{location}</p>}
-      </div>
-
-      <div class="md:col-span-1 flex items-start md:justify-end">
-        {actions.length > 0 && (
-          <div class="mt-0 md:mt-0 flex flex-col md:flex-row md:items-start md:justify-end gap-3">
-            {actions.map((action) => (
-              isExternal(action.href) ? (
-                <a
-                  class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase inline-block px-4 py-2"
-                  href={action.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {action.label}
-                </a>
-              ) : (
-                <a
-                  class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase inline-block px-4 py-2"
-                  href={withBase(action.href)}
-                >
-                  {action.label}
-                </a>
-              )
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  </div>
+  <div class="border-b border-base-200"></div>
 </section>
