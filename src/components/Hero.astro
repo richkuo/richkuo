@@ -22,6 +22,24 @@ import profilePic from "../assets/profile.jpg";
 const isExternal = (path: string) => /^[a-z][a-z0-9+.-]*:/i.test(path) || path.startsWith('//');
 
 const { title, description, actions = [], role, location } = Astro.props as Props;
+
+const letterColors = [
+  '#ef4444', // red
+  '#f97316', // orange
+  '#eab308', // yellow
+  '#22c55e', // green
+  '#06b6d4', // cyan
+  '#3b82f6', // blue
+  '#6366f1', // indigo
+  '#7c3aed', // violet
+  '#a855f7', // purple
+  '#ec4899', // pink
+];
+
+const letters = title.split('').map((char: string, i: number) => ({
+  char,
+  color: char.trim() === '' ? 'transparent' : letterColors[i % letterColors.length],
+}));
 ---
 
 <section class="flex flex-col">
@@ -38,10 +56,12 @@ const { title, description, actions = [], role, location } = Astro.props as Prop
     <!-- Right column: title, icons (md+), messages -->
     <div class="flex flex-col gap-3 flex-1 max-w-md">
       <div
-        class="hero-letters text-[13vw] sm:text-[10vw] md:text-[5rem] lg:text-[5rem] leading-[0.85] font-extrabold text-base-900"
+        class="hero-letters shimmer-text text-[13vw] sm:text-[10vw] md:text-[5rem] lg:text-[5rem] leading-[0.85] font-extrabold"
         aria-hidden="true"
       >
-        {title}
+        {letters.map(({ char, color }: { char: string; color: string }) => (
+          <span style={`color: ${color}`}>{char}</span>
+        ))}
       </div>
 
       {actions.length > 0 && (
