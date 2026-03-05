@@ -144,17 +144,21 @@ const letters = title.split('').map((char: string, i: number) => ({
   // Shimmer social icons with staggered color-cycling animation
   const iconEls = document.querySelectorAll('.hero-social-icons a');
   if (iconEls.length > 0) {
-    // Build keyframes: cycle through all palette colors evenly
+    // Build keyframes matching text shimmer: sweep in 77.8%, hold for 22.2%
+    const sweepPct = 77.8;
     const stops = palette.map((color, i) => {
-      const pct = (i / palette.length * 100).toFixed(1);
+      const pct = (i / palette.length * sweepPct).toFixed(2);
       return `${pct}% { color: ${color}; }`;
     });
+    stops.push(`${sweepPct}% { color: ${palette[0]}; }`);
     stops.push(`100% { color: ${palette[0]}; }`);
     const styleEl = document.createElement('style');
     styleEl.textContent = `@keyframes icon-shimmer { ${stops.join(' ')} }`;
     document.head.appendChild(styleEl);
 
-    const stagger = 9 / iconEls.length;
+    // Stagger across the sweep window only (not the hold portion)
+    const sweepDuration = 9 * (sweepPct / 100);
+    const stagger = sweepDuration / iconEls.length;
     iconEls.forEach((el, i) => {
       const htmlEl = el as HTMLElement;
       htmlEl.style.animation = 'icon-shimmer 9s linear infinite';
