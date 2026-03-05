@@ -25,7 +25,7 @@ const { title, description, actions = [], role, location } = Astro.props as Prop
 ---
 
 <section class="flex flex-col">
-  <div class="flex items-start gap-6 px-8 pb-4" style="align-items: flex-start;">
+  <div class="flex items-center gap-6 px-3 sm:px-5 md:px-8 pb-4">
     <!-- Profile image: sits to the left, aligned with message section -->
     <Image
       src={profilePic}
@@ -35,17 +35,17 @@ const { title, description, actions = [], role, location } = Astro.props as Prop
       class="rounded-full object-cover shrink-0 w-20 md:w-32"
     />
 
-    <!-- Right column: title, icons, messages all aligned -->
+    <!-- Right column: title, icons (md+), messages -->
     <div class="flex flex-col gap-3 flex-1 max-w-md">
       <div
-        class="hero-letters text-[6vw] md:text-[5rem] lg:text-[5rem] leading-[0.85] font-extrabold text-base-900"
+        class="hero-letters text-[13vw] sm:text-[10vw] md:text-[5rem] lg:text-[5rem] leading-[0.85] font-extrabold text-base-900"
         aria-hidden="true"
       >
         {title}
       </div>
 
       {actions.length > 0 && (
-        <div class="flex flex-row justify-between w-full">
+        <div class="hidden md:flex flex-row justify-between w-full">
           {actions.map((action) => (
             isExternal(action.href) ? (
               <a
@@ -73,6 +73,32 @@ const { title, description, actions = [], role, location } = Astro.props as Prop
       <slot />
     </div>
   </div>
+
+  {actions.length > 0 && (
+    <div class="md:hidden flex flex-row justify-between w-full pb-4">
+      {actions.map((action) => (
+        isExternal(action.href) ? (
+          <a
+            class="text-base-900 hover:text-base-500 inline-flex items-center"
+            href={action.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={action.label}
+          >
+            {action.icon ? <Icon name={action.icon} size={50} /> : action.label}
+          </a>
+        ) : (
+          <a
+            class="text-base-900 hover:text-base-500 inline-flex items-center"
+            href={withBase(action.href)}
+            aria-label={action.label}
+          >
+            {action.icon ? <Icon name={action.icon} size={50} /> : action.label}
+          </a>
+        )
+      ))}
+    </div>
+  )}
 
   <div class="border-b border-base-200"></div>
 </section>
