@@ -19,7 +19,7 @@
 		--grid-cell: calc(100vw / var(--grid-divisions));
 		--grid-cell-x: var(--grid-cell);
 		--grid-cell-y: var(--grid-cell);
-		--content-columns: 19;
+		--content-columns: 14;
 		--content-width: calc(var(--grid-cell) * var(--content-columns));
 	}
 
