@@ -23,7 +23,7 @@ import ThemeToggle from "./ThemeToggle.astro";
     <div
       class="hidden md:flex items-center gap-2 text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase"
     >
-      <HeaderLink href="/">Home</HeaderLink>
+      {/* <HeaderLink href="/">Home</HeaderLink> */}
       {hasBlog && <HeaderLink href="/blog">Blog</HeaderLink>}
 
 <ThemeToggle class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase" />
@@ -33,7 +33,7 @@ import ThemeToggle from "./ThemeToggle.astro";
     <div id="mobile-nav" role="dialog" aria-label="Mobile navigation" aria-hidden="true" style="display:none;" class="fixed inset-0 z-[1000] p-8 overflow-auto bg-[var(--color-paper)] text-[var(--color-ink)]">
       <button id="mobile-close" aria-label="Close navigation" style="position:absolute;right:1rem;top:1rem;" class="text-xs 2xl:text-lg font-bold uppercase">Close</button>
       <div class="flex flex-col gap-2 items-start text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase">
-        <HeaderLink href="/">Home</HeaderLink>
+        {/* <HeaderLink href="/">Home</HeaderLink> */}
         {hasBlog && <HeaderLink href="/blog">Blog</HeaderLink>}
   <ThemeToggle class="text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase" />
       </div>
