@@ -3,6 +3,7 @@
 export interface Props {
   class?: string;
 }
+import { Icon } from "astro-icon/components";
 const { class: className = '' } = Astro.props as Props;
 ---
 
@@ -13,11 +14,11 @@ const { class: className = '' } = Astro.props as Props;
 	class={className}
 >
 	<span class="sr-only">Toggle theme</span>
-	<span class="theme-toggle__icon inline-flex [html[data-theme='dark']_&]:hidden [html[data-theme='blue']_&]:hidden" aria-hidden="true">
-		Dark
+	<span class="theme-toggle__icon inline-flex [html[data-theme='dark']_&]:hidden" aria-hidden="true">
+		<Icon name="tabler:moon" size={22} />
 	</span>
 	<span class="theme-toggle__icon hidden [html[data-theme='dark']_&]:inline-flex" aria-hidden="true">
-		Light
+		<Icon name="tabler:sun" size={22} />
 	</span>
 </button>
 
