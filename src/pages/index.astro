@@ -37,8 +37,11 @@ const friendProjects = allProjects.filter((p) => p.data.friend);
 	>
 	</Hero>
 
-	<section class="content-shell py-12 space-y-6">
-		<div class="flex justify-start mb-6"><p class="text-lg px-4 py-3 rounded-2xl rounded-bl-none bg-gray-200 text-gray-900">Its time for your next adventure</p></div>
+	<div class="content-shell py-6">
+		<div class="flex justify-start"><p class="text-lg px-4 py-3 rounded-2xl rounded-bl-none bg-gray-200 text-gray-900">Its time for your next adventure</p></div>
+	</div>
+
+	<section class="content-shell py-6 space-y-6">
 		<h2 class="text-sm font-bold uppercase tracking-widest text-base-900">Current Projects</h2>
 		{projects.length === 0 ? (
 			<p class="text-muted">No projects published yet.</p>
@@ -68,8 +71,11 @@ const friendProjects = allProjects.filter((p) => p.data.friend);
 				))}
 			</div>
 		)}
-		<div class="flex justify-end mt-6"><p class="text-lg px-4 py-3 rounded-2xl rounded-br-none bg-[#1d9bf0] text-white">I have no idea what I'm going to do tomorrow</p></div>
 	</section>
+
+	<div class="content-shell py-6">
+		<div class="flex justify-end"><p class="text-lg px-4 py-3 rounded-2xl rounded-br-none bg-[#1d9bf0] text-white">I have no idea what I'm going to do tomorrow</p></div>
+	</div>
 
 	<section class="content-shell py-6 space-y-6">
 		{friendProjects.length > 0 && (
@@ -101,7 +107,10 @@ const friendProjects = allProjects.filter((p) => p.data.friend);
 				</div>
 			</>
 		)}
-		<div class="flex justify-start mt-6"><p class="text-lg px-4 py-3 rounded-2xl rounded-bl-none bg-gray-200 text-gray-900">How exciting</p></div>
 	</section>
+
+	<div class="content-shell py-6">
+		<div class="flex justify-start"><p class="text-lg px-4 py-3 rounded-2xl rounded-bl-none bg-gray-200 text-gray-900">How exciting</p></div>
+	</div>
 
 </PageLayout>
