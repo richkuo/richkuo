@@ -23,26 +23,15 @@ const isExternal = (path: string) => /^[a-z][a-z0-9+.-]*:/i.test(path) || path.s
 
 const { title, description, actions = [], role, location } = Astro.props as Props;
 
-const letterColors = [
-  '#ef4444', // red
-  '#f97316', // orange
-  '#eab308', // yellow
-  '#22c55e', // green
-  '#06b6d4', // cyan
-  '#3b82f6', // blue
-  '#6366f1', // indigo
-  '#7c3aed', // violet
-  '#a855f7', // purple
-  '#000000', // black
-];
+const palette = ['#ef4444','#f97316','#eab308','#22c55e','#06b6d4','#3b82f6','#6366f1','#7c3aed','#a855f7','#000000'];
 
 const letters = title.split('').map((char: string, i: number) => ({
   char,
-  color: char.trim() === '' ? 'transparent' : letterColors[i % letterColors.length],
+  color: char.trim() === '' ? 'transparent' : palette[i % palette.length],
 }));
 ---
 
-<section class="flex flex-col">
+<section class="flex flex-col" data-palette={JSON.stringify(palette)}>
   <div class="flex items-center gap-6 px-3 sm:px-5 md:px-8 pb-4">
     <!-- Profile image: sits to the left, aligned with message section -->
     <Image
@@ -65,7 +54,7 @@ const letters = title.split('').map((char: string, i: number) => ({
       </div>
 
       {actions.length > 0 && (
-        <div class="hero-social-icons hidden md:flex flex-row justify-between w-full">
+        <div class="hero-social-icons flex flex-row justify-between w-full">
           {actions.map((action) => (
             isExternal(action.href) ? (
               <a
@@ -94,32 +83,6 @@ const letters = title.split('').map((char: string, i: number) => ({
     </div>
   </div>
 
-  {actions.length > 0 && (
-    <div class="hero-social-icons md:hidden flex flex-row justify-between w-full pb-4">
-      {actions.map((action) => (
-        isExternal(action.href) ? (
-          <a
-            class="inline-flex items-center"
-            href={action.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={action.label}
-          >
-            {action.icon ? <Icon name={action.icon} size={50} /> : action.label}
-          </a>
-        ) : (
-          <a
-            class="inline-flex items-center"
-            href={withBase(action.href)}
-            aria-label={action.label}
-          >
-            {action.icon ? <Icon name={action.icon} size={50} /> : action.label}
-          </a>
-        )
-      ))}
-    </div>
-  )}
-
   <div class="border-b border-base-200"></div>
 </section>
 
@@ -128,48 +91,46 @@ const letters = title.split('').map((char: string, i: number) => ({
   const holdDuration = 5;   // seconds to pause at end of sweep
   const sweepPct = ((totalDuration - holdDuration) / totalDuration) * 100;
 
-  const palette = ['#ef4444','#f97316','#eab308','#22c55e','#06b6d4','#3b82f6','#6366f1','#7c3aed','#a855f7','#000000'];
+  const paletteEl = document.querySelector('section[data-palette]');
+  const palette: string[] = paletteEl ? JSON.parse(paletteEl.getAttribute('data-palette')!) : [];
   // Fisher-Yates shuffle
   for (let i = palette.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [palette[i], palette[j]] = [palette[j], palette[i]];
   }
 
-  // Inject text-shimmer keyframes and apply animation
-  const shimmer = document.querySelector('.hero-letters') as HTMLElement | null;
-  if (shimmer) {
-    shimmer.style.setProperty('--shimmer-gradient', `linear-gradient(90deg, ${[...palette, palette[0]].join(',')})`);
-    const spans = shimmer.querySelectorAll('span');
-    spans.forEach((span, i) => {
-      const color = palette[i % palette.length];
-      (span as HTMLElement).style.color = color;
-    });
-    const textStyleEl = document.createElement('style');
-    textStyleEl.textContent = `@keyframes text-shimmer {
+  // Inject keyframes for both text-shimmer and icon-shimmer
+  const iconStops = palette.map((color, i) => {
+    const pct = (i / palette.length * sweepPct).toFixed(2);
+    return `${pct}% { color: ${color}; }`;
+  });
+  iconStops.push(`${sweepPct.toFixed(1)}% { color: ${palette[0]}; }`);
+  iconStops.push(`100% { color: ${palette[0]}; }`);
+  const styleEl = document.createElement('style');
+  styleEl.textContent = `
+    @keyframes text-shimmer {
       0%        { background-position: 200% center; }
       ${sweepPct.toFixed(1)}% { background-position: 0% center; }
       100%      { background-position: 0% center; }
-    }`;
-    document.head.appendChild(textStyleEl);
+    }
+    @keyframes icon-shimmer { ${iconStops.join(' ')} }
+  `;
+  document.head.appendChild(styleEl);
+
+  // Apply text shimmer animation
+  const shimmer = document.querySelector('.hero-letters') as HTMLElement | null;
+  if (shimmer) {
+    shimmer.style.setProperty('--shimmer-gradient', `linear-gradient(90deg, ${[...palette, palette[0]].join(',')})`);
+    shimmer.querySelectorAll('span').forEach((span, i) => {
+      (span as HTMLElement).style.color = palette[i % palette.length];
+    });
     shimmer.style.animation = `text-shimmer ${totalDuration}s linear infinite`;
   }
 
-  // Shimmer social icons with staggered color-cycling animation
+  // Apply icon shimmer animation with staggered delays
   const iconEls = document.querySelectorAll('.hero-social-icons a');
   if (iconEls.length > 0) {
-    const stops = palette.map((color, i) => {
-      const pct = (i / palette.length * sweepPct).toFixed(2);
-      return `${pct}% { color: ${color}; }`;
-    });
-    stops.push(`${sweepPct.toFixed(1)}% { color: ${palette[0]}; }`);
-    stops.push(`100% { color: ${palette[0]}; }`);
-    const iconStyleEl = document.createElement('style');
-    iconStyleEl.textContent = `@keyframes icon-shimmer { ${stops.join(' ')} }`;
-    document.head.appendChild(iconStyleEl);
-
-    // Stagger across the sweep window only (not the hold portion)
-    const sweepDuration = totalDuration * (sweepPct / 100);
-    const stagger = sweepDuration / iconEls.length;
+    const stagger = (totalDuration * sweepPct / 100) / iconEls.length;
     iconEls.forEach((el, i) => {
       const htmlEl = el as HTMLElement;
       htmlEl.style.animation = `icon-shimmer ${totalDuration}s linear infinite reverse`;
