@@ -122,3 +122,23 @@ const letters = title.split('').map((char: string, i: number) => ({
 
   <div class="border-b border-base-200"></div>
 </section>
+
+<script>
+  const palette = ['#ef4444','#f97316','#eab308','#22c55e','#06b6d4','#3b82f6','#6366f1','#7c3aed','#a855f7','#ec4899'];
+  // Fisher-Yates shuffle
+  for (let i = palette.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [palette[i], palette[j]] = [palette[j], palette[i]];
+  }
+  // Update shimmer gradient
+  const shimmer = document.querySelector('.hero-letters') as HTMLElement | null;
+  if (shimmer) {
+    shimmer.style.setProperty('--shimmer-gradient', `linear-gradient(90deg, ${[...palette, palette[0]].join(',')})`);
+    // Update per-letter colors
+    const spans = shimmer.querySelectorAll('span');
+    spans.forEach((span, i) => {
+      const color = palette[i % palette.length];
+      (span as HTMLElement).style.color = color;
+    });
+  }
+</script>

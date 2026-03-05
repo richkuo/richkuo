@@ -106,20 +106,7 @@
 }
 
 .shimmer-text {
-	background: linear-gradient(
-		90deg,
-		#a855f7,
-		#06b6d4,
-		#ef4444,
-		#7c3aed,
-		#eab308,
-		#ec4899,
-		#3b82f6,
-		#22c55e,
-		#f97316,
-		#6366f1,
-		#a855f7
-	);
+	background: var(--shimmer-gradient, linear-gradient(90deg, #a855f7, #06b6d4, #ef4444, #7c3aed, #eab308, #ec4899, #3b82f6, #22c55e, #f97316, #6366f1, #a855f7));
 	background-size: 200% auto;
 	-webkit-background-clip: text;
 	background-clip: text;
