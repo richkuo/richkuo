@@ -1,0 +1,20 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import ProjectPost from '../../layouts/ProjectPost.astro';
+
+export async function getStaticPaths() {
+	const resources = await getCollection('openclaw');
+	return resources.map((resource) => ({
+		params: { slug: resource.id },
+		props: resource,
+	}));
+}
+
+type Props = CollectionEntry<'openclaw'>;
+
+const resource = Astro.props as Props;
+const { Content } = await render(resource);
+---
+<ProjectPost {...resource.data}>
+	<Content />
+</ProjectPost>

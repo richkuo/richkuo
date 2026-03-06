@@ -69,4 +69,19 @@ const cv = defineCollection({
   }),
 });
 
-export const collections = { blog, cv, projects, site };
+const openclaw = defineCollection({
+	loader: glob({ base: './src/content/openclaw', pattern: '**/*.{md,mdx}' }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+			pubDate: z.coerce.date(),
+			updatedDate: z.coerce.date().optional(),
+			heroImage: image().optional(),
+			tags: z.array(z.string()).default([]),
+			link: z.string().optional(),
+			icon: z.string().optional(),
+		}),
+});
+
+export const collections = { blog, cv, openclaw, projects, site };
