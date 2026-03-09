@@ -83,6 +83,18 @@ const letters = title.split('').map((char: string, i: number) => ({
     </div>
   )}
 
+  <div id="discord-copy-row" class="hidden px-3 sm:px-5 md:px-8 pb-4 flex items-center gap-3">
+    <span class="text-sm text-base-content/70">Viewing from TikTok? Click here to copy the link and paste it into your regular web browser</span>
+    <button
+      id="discord-copy-btn"
+      class="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#5865F2] text-white font-semibold text-sm transition hover:bg-[#4752c4] active:scale-[0.98] cursor-pointer"
+      data-link="https://discord.gg/44BykmWZsP"
+    >
+      <Icon name="tabler:brand-discord" size={18} />
+      <span>Copy Invite</span>
+    </button>
+  </div>
+
   <div class="border-b border-base-200"></div>
 </section>
 
@@ -135,6 +147,27 @@ const letters = title.split('').map((char: string, i: number) => ({
       const htmlEl = el as HTMLElement;
       htmlEl.style.animation = `icon-shimmer ${totalDuration}s linear infinite reverse`;
       htmlEl.style.animationDelay = `${-(i * stagger)}s`;
+    });
+  }
+
+  // Show Discord copy row for TikTok visitors
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('source') === 'tt') {
+    const row = document.getElementById('discord-copy-row');
+    if (row) row.classList.remove('hidden');
+  }
+
+  const copyBtn = document.getElementById('discord-copy-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const link = copyBtn.getAttribute('data-link')!;
+      navigator.clipboard.writeText(link).then(() => {
+        const span = copyBtn.querySelector('span');
+        if (span) {
+          span.textContent = 'Copied!';
+          setTimeout(() => { span.textContent = 'Copy Invite'; }, 2000);
+        }
+      });
     });
   }
 </script>
