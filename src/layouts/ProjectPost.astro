@@ -19,7 +19,7 @@ interface Props {
 const { title, description, pubDate, updatedDate, heroImage, tags = [], Content } = Astro.props as Props;
 ---
 
-<BaseLayout title={title} description={description} image={heroImage}>
+<BaseLayout title={title} description={description} image={heroImage} type="article" pubDate={pubDate}>
 	<div class="flex-1 flex flex-col py-12 md:py-16 lg:py-20 space-y-16">
 	<article class="post-page max-w-4xl w-full mx-auto">
 		<header class="section-heading">
@@ -38,7 +38,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], Content 
 
 		{heroImage && (
 			<figure class="post-hero-image">
-				<Image width={1020} height={510} src={heroImage} alt="" />
+				<Image width={1020} height={510} src={heroImage} alt={title} />
 			</figure>
 		)}
 

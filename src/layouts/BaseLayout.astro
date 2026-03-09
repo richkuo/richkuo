@@ -9,16 +9,18 @@ interface Props {
 	title?: string;
 	description?: string;
 	image?: ImageMetadata;
+	type?: 'website' | 'article';
+	pubDate?: Date;
 }
 
 const site = await getSite();
-const { title = site.author.name, description, image } = Astro.props;
+const { title = site.author.name, description, image, type, pubDate } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={title} description={description} image={image} />
+        <BaseHead title={title} description={description} image={image} type={type} pubDate={pubDate} />
     </head>
     <body>
         <Header />

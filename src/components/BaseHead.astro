@@ -13,12 +13,36 @@ interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
+	type?: 'website' | 'article';
+	pubDate?: Date;
 }
 
-const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, image = FallbackImage, type = 'website', pubDate } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL((image as ImageMetadata).src, Astro.site ?? Astro.url);
+
+const websiteJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: site.title,
+	description: site.description,
+	url: Astro.site?.toString(),
+};
+
+const articleJsonLd = type === 'article' ? {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: title,
+	description,
+	datePublished: pubDate?.toISOString(),
+	author: {
+		'@type': 'Person',
+		name: site.author?.name,
+	},
+	image: imageURL.toString(),
+	url: canonicalURL.toString(),
+} : null;
 ---
 
 <SEO
@@ -29,13 +53,14 @@ const imageURL = new URL((image as ImageMetadata).src, Astro.site ?? Astro.url);
 	openGraph={{
 		basic: {
 			title,
-			type: 'website',
+			type,
 			image: imageURL.toString(),
 			url: canonicalURL.toString(),
 		},
 		optional: {
 			description,
-			siteName: site.author.name || 'Dasein',
+			siteName: site.author?.name || 'Dasein',
+			locale: 'en_US',
 		},
 	}}
 	twitter={{
@@ -54,6 +79,10 @@ const imageURL = new URL((image as ImageMetadata).src, Astro.site ?? Astro.url);
 		meta: [
 			{ name: 'viewport', content: 'width=device-width,initial-scale=1' },
 			{ name: 'generator', content: Astro.generator },
+			{ name: 'robots', content: 'index, follow' },
 		],
 	}}
 />
+
+<script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+{articleJsonLd && <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />}
