@@ -42,7 +42,7 @@ const letters = title.split('').map((char: string, i: number) => ({
       class="rounded-full object-cover shrink-0 w-20 md:w-32"
     />
 
-    <!-- Right column: title, icons (md+), messages -->
+    <!-- Right column: title, messages -->
     <div class="flex flex-col gap-3 flex-1 max-w-md">
       <div
         class="hero-letters shimmer-text text-[13vw] sm:text-[10vw] md:text-[5rem] lg:text-[5rem] leading-[0.85] font-extrabold"
@@ -53,35 +53,35 @@ const letters = title.split('').map((char: string, i: number) => ({
         ))}
       </div>
 
-      {actions.length > 0 && (
-        <div class="hero-social-icons flex flex-row justify-between w-full">
-          {actions.map((action) => (
-            isExternal(action.href) ? (
-              <a
-                class="inline-flex items-center"
-                href={action.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={action.label}
-              >
-                {action.icon ? <Icon name={action.icon} size={50} /> : action.label}
-              </a>
-            ) : (
-              <a
-                class="inline-flex items-center"
-                href={withBase(action.href)}
-                aria-label={action.label}
-              >
-                {action.icon ? <Icon name={action.icon} size={50} /> : action.label}
-              </a>
-            )
-          ))}
-        </div>
-      )}
-
       <slot />
     </div>
   </div>
+
+  {actions.length > 0 && (
+    <div class="hero-social-icons flex flex-row justify-between w-full px-3 sm:px-5 md:px-8 pb-4">
+      {actions.map((action) => (
+        isExternal(action.href) ? (
+          <a
+            class="inline-flex items-center"
+            href={action.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={action.label}
+          >
+            {action.icon ? <Icon name={action.icon} size={50} /> : action.label}
+          </a>
+        ) : (
+          <a
+            class="inline-flex items-center"
+            href={withBase(action.href)}
+            aria-label={action.label}
+          >
+            {action.icon ? <Icon name={action.icon} size={50} /> : action.label}
+          </a>
+        )
+      ))}
+    </div>
+  )}
 
   <div class="border-b border-base-200"></div>
 </section>
