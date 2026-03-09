@@ -11,7 +11,8 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://richkuo.github.io",
+  site: "https://www.richkuo7.com",
+  compressHTML: true,
   integrations: [mdx(), sitemap(), pagefind(), icon()],
 
   vite: {
