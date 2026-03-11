@@ -290,6 +290,7 @@
 	.post-page {
 		display: grid;
 		gap: 2rem;
+		grid-template-columns: minmax(0, 1fr);
 	}
 
 	.content-shell {
@@ -309,6 +310,8 @@
 		display: grid;
 		gap: 1.25rem;
 		color: var(--color-ink);
+		min-width: 0;
+		grid-template-columns: minmax(0, 1fr);
 	}
 
 	.post-article p {
