@@ -47,7 +47,7 @@ function getYouTubeVideoId(url: string): string | null {
 	</Hero>
 
 	<div class="content-shell py-6">
-		<div class="flex justify-start"><p class="text-lg px-4 py-3 rounded-2xl font-serif rounded-bl-none bg-gray-200 text-gray-900">Its time for your next adventure</p></div>
+		<div class="chat-bubble flex justify-start"><p class="text-lg px-4 py-3 rounded-2xl font-serif rounded-bl-none bg-gray-200 text-gray-900">Its time for your next adventure</p></div>
 	</div>
 
 	<section class="content-shell py-6 space-y-6">
@@ -83,7 +83,7 @@ function getYouTubeVideoId(url: string): string | null {
 	</section>
 
 	<div class="content-shell py-6">
-		<div class="flex justify-end"><p class="text-lg px-4 py-3 rounded-2xl font-serif rounded-br-none bg-[#1d9bf0] text-white">I have no idea what I'm going to do tomorrow</p></div>
+		<div class="chat-bubble flex justify-end"><p class="text-lg px-4 py-3 rounded-2xl font-serif rounded-br-none bg-[#1d9bf0] text-white">I have no idea what I'm going to do tomorrow</p></div>
 	</div>
 
 	<section class="content-shell py-6 space-y-6">
@@ -119,7 +119,7 @@ function getYouTubeVideoId(url: string): string | null {
 	</section>
 
 	<div class="content-shell py-6">
-		<div class="flex justify-start"><p class="text-lg px-4 py-3 rounded-2xl font-serif rounded-bl-none bg-gray-200 text-gray-900">How exciting</p></div>
+		<div class="chat-bubble flex justify-start"><p class="text-lg px-4 py-3 rounded-2xl font-serif rounded-bl-none bg-gray-200 text-gray-900">How exciting</p></div>
 	</div>
 
 	<section class="content-shell py-6 space-y-6">
@@ -161,5 +161,29 @@ function getYouTubeVideoId(url: string): string | null {
 			</div>
 		)}
 	</section>
+
+<style>
+  .chat-bubble {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+  .chat-bubble.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle('visible', entry.isIntersecting);
+      });
+    },
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.chat-bubble').forEach((el) => observer.observe(el));
+</script>
 
 </PageLayout>
