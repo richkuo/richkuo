@@ -1,11 +1,8 @@
 ---
 import { getSite } from "../utils/consts";
 import HeaderLink from "./HeaderLink.astro";
-import { getCollection } from "astro:content";
 
 const site = await getSite();
-const posts = await getCollection("blog");
-const hasBlog = posts.length > 0;
 const hasNavItems = true;
 import ThemeToggle from "./ThemeToggle.astro";
 ---
@@ -27,7 +24,6 @@ import ThemeToggle from "./ThemeToggle.astro";
           class="hidden md:flex gap-2 text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase"
         >
           <HeaderLink href="/">Home</HeaderLink>
-          {hasBlog && <HeaderLink href="/blog">Blog</HeaderLink>}
           <ThemeToggle class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase" />
         </div>
 
@@ -36,7 +32,6 @@ import ThemeToggle from "./ThemeToggle.astro";
           <button id="mobile-close" aria-label="Close navigation" style="position:absolute;right:1rem;top:1rem;" class="text-xs 2xl:text-lg font-bold uppercase">Close</button>
           <div class="flex flex-col gap-2 items-start text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase">
             <HeaderLink href="/">Home</HeaderLink>
-            {hasBlog && <HeaderLink href="/blog">Blog</HeaderLink>}
             <ThemeToggle class="text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase sm:mt-5" />
           </div>
         </div>

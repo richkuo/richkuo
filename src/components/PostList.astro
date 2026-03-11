@@ -1,7 +1,6 @@
 ---
 
 import Card from './Card.astro';
-import { getCollection } from 'astro:content';
 import { withBase } from '../utils/slugify';
 
 interface RawPost {
@@ -43,15 +42,6 @@ let {
 
 function getPostData(item: RawPost) {
     return item && (item as any).data ? (item as any).data : item;
-}
-
-if (posts.length === 0) {
-    console.warn(
-        '[PostList] No posts provided; fetching from "blog" collection.'
-    );
-    posts = posts.concat(await getCollection("blog")).sort(
-        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-    );
 }
 
 const subpath = import.meta.env.BASE_URL;
