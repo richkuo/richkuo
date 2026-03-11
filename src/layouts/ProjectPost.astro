@@ -46,7 +46,35 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], Content 
 			<Prose>
 				{Content ? <Content /> : <slot />}
 			</Prose>
+			<div class="mt-6 flex justify-center">
+				<button
+					id="copy-text-btn"
+					class="inline-flex items-center justify-center gap-3 text-base text-muted hover:text-ink transition-colors cursor-pointer px-8 py-3 w-64 rounded-lg border border-border hover:border-ink"
+					aria-label="Copy page text to clipboard"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+						<path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+					</svg>
+					<span id="copy-text-label">Copy text</span>
+				</button>
+			</div>
 		</section>
 	</article>
 	</div>
+
+<script>
+	const btn = document.getElementById('copy-text-btn');
+	const label = document.getElementById('copy-text-label');
+
+	btn?.addEventListener('click', async () => {
+		const prose = document.querySelector('.prose');
+		if (!prose || !label) return;
+
+		await navigator.clipboard.writeText((prose as HTMLElement).innerText);
+
+		label.textContent = 'Copied!';
+		setTimeout(() => { label.textContent = 'Copy text'; }, 2000);
+	});
+</script>
 </BaseLayout>
