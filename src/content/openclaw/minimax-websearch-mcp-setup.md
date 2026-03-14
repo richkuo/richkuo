@@ -3,6 +3,7 @@ title: MiniMax Web Search MCP Server Setup for OpenClaw
 description: Step-by-step guide to setting up MiniMax's web search MCP server with mcporter for real-time search in OpenClaw agents.
 pubDate: 2026-03-10
 tags: ["mcp", "minimax", "web-search", "setup"]
+icon: tabler:world-search
 ---
 
 # MiniMax Web Search MCP Server Setup for OpenClaw

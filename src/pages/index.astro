@@ -135,14 +135,6 @@ function getYouTubeVideoId(url: string): string | null {
 						target={resource.data.link ? '_blank' : undefined}
 						rel={resource.data.link ? 'noopener noreferrer' : undefined}
 					>
-						{(() => {
-							const videoId = resource.data.link ? getYouTubeVideoId(resource.data.link) : null;
-							return videoId ? (
-								<figure class="mb-4 w-full overflow-hidden rounded-[18px] md:mb-0 md:h-auto md:w-40 md:shrink-0">
-									<img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} alt={resource.data.title} class="h-full w-full rounded-[18px] object-cover" />
-								</figure>
-							) : null;
-						})()}
 						<div class="flex flex-1 flex-col">
 							<div class="flex items-center gap-3">
 								{resource.data.icon && <Icon name={resource.data.icon} size={28} class="shrink-0 text-base-900" />}
@@ -151,6 +143,14 @@ function getYouTubeVideoId(url: string): string | null {
 							{resource.data.link && <p class="mt-1 text-xs text-muted">{resource.data.link}</p>}
 							<p class="mt-3 text-lg text-muted">{resource.data.description}</p>
 						</div>
+						{(() => {
+							const videoId = resource.data.link ? getYouTubeVideoId(resource.data.link) : null;
+							return videoId ? (
+								<figure class="mt-4 w-full overflow-hidden rounded-[18px] md:mt-0 md:h-auto md:w-40 md:shrink-0">
+									<img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} alt={resource.data.title} class="h-full w-full rounded-[18px] object-cover" />
+								</figure>
+							) : null;
+						})()}
 						{resource.data.heroImage && (
 							<figure class="mt-4 h-32 w-full overflow-hidden rounded-[18px] bg-[color-mix(in_oklab,var(--color-surface)_80%,transparent)] md:mt-0 md:h-24 md:w-32">
 								<Image src={resource.data.heroImage} alt={resource.data.title} width={220} height={140} class="h-full w-full object-cover" />
