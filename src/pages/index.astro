@@ -13,7 +13,7 @@ const allProjects = (await getCollection('projects')).sort(
 );
 const projects = allProjects.filter((p) => !p.data.friend);
 const friendProjects = allProjects.filter((p) => p.data.friend);
-const openclawResources = (await getCollection('openclaw')).sort(
+const allOpenclawResources = (await getCollection('openclaw')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
 );
 
@@ -21,6 +21,9 @@ function getYouTubeVideoId(url: string): string | null {
 	const match = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&?\/]+)/);
 	return match ? match[1] : null;
 }
+
+const openclawVideos = allOpenclawResources.filter((r) => r.data.link && getYouTubeVideoId(r.data.link));
+const openclawResources = allOpenclawResources.filter((r) => !r.data.link || !getYouTubeVideoId(r.data.link));
 ---
 
 <PageLayout
@@ -122,44 +125,73 @@ function getYouTubeVideoId(url: string): string | null {
 		<div class="chat-bubble flex justify-start"><p class="text-lg px-4 py-3 rounded-2xl font-serif rounded-bl-none bg-gray-200 text-gray-900">How exciting</p></div>
 	</div>
 
-	<section class="content-shell py-6 space-y-6">
-		<h2 class="text-sm font-bold uppercase tracking-widest text-base-900">OpenClaw Resources</h2>
-		{openclawResources.length === 0 ? (
-			<p class="text-muted">No resources published yet.</p>
-		) : (
-			<div class="space-y-6">
-				{openclawResources.map((resource) => (
-					<a
-						class="group block w-full overflow-hidden rounded-[28px] border-[5px] border-transparent bg-[color:var(--color-surface)] p-5 shadow-none transition duration-200 hover:-translate-y-[2px] hover:border-black hover:shadow-[0_18px_45px_color-mix(in_oklab,var(--color-ink)_25%,transparent)] md:flex md:items-center md:gap-6"
-						href={resource.data.link || withBase(`/openclaw/${resource.id}/`)}
-						target={resource.data.link ? '_blank' : undefined}
-						rel={resource.data.link ? 'noopener noreferrer' : undefined}
-					>
-						<div class="flex flex-1 flex-col">
-							<div class="flex items-center gap-3">
-								{resource.data.icon && <Icon name={resource.data.icon} size={28} class="shrink-0 text-base-900" />}
-								<h3 class="text-2xl font-semibold text-green-500 group-hover:text-green-500">{resource.data.title}</h3>
+	<section class="content-shell py-6 space-y-10">
+		<div class="space-y-6">
+			<h2 class="text-sm font-bold uppercase tracking-widest text-base-900">Videos</h2>
+			{openclawVideos.length === 0 ? (
+				<p class="text-muted">No videos published yet.</p>
+			) : (
+				<div class="space-y-6">
+					{openclawVideos.map((resource) => {
+						const videoId = getYouTubeVideoId(resource.data.link!);
+						return (
+							<a
+								class="group block w-full overflow-hidden rounded-[28px] border-[5px] border-transparent bg-[color:var(--color-surface)] p-5 shadow-none transition duration-200 hover:-translate-y-[2px] hover:border-black hover:shadow-[0_18px_45px_color-mix(in_oklab,var(--color-ink)_25%,transparent)] md:flex md:items-center md:gap-6"
+								href={resource.data.link!}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<div class="flex flex-1 flex-col">
+									<div class="flex items-center gap-3">
+										{resource.data.icon && <Icon name={resource.data.icon} size={28} class="shrink-0 text-base-900" />}
+										<h3 class="text-2xl font-semibold text-green-500 group-hover:text-green-500">{resource.data.title}</h3>
+									</div>
+									<p class="mt-1 text-xs text-muted">{resource.data.link}</p>
+									<p class="mt-3 text-lg text-muted">{resource.data.description}</p>
+								</div>
+								{videoId && (
+									<figure class="mt-4 w-full overflow-hidden rounded-[18px] md:mt-0 md:h-auto md:w-40 md:shrink-0">
+										<img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} alt={resource.data.title} class="h-full w-full rounded-[18px] object-cover" />
+									</figure>
+								)}
+							</a>
+						);
+					})}
+				</div>
+			)}
+		</div>
+
+		<div class="space-y-6">
+			<h2 class="text-sm font-bold uppercase tracking-widest text-base-900">Resources</h2>
+			{openclawResources.length === 0 ? (
+				<p class="text-muted">No resources published yet.</p>
+			) : (
+				<div class="space-y-6">
+					{openclawResources.map((resource) => (
+						<a
+							class="group block w-full overflow-hidden rounded-[28px] border-[5px] border-transparent bg-[color:var(--color-surface)] p-5 shadow-none transition duration-200 hover:-translate-y-[2px] hover:border-black hover:shadow-[0_18px_45px_color-mix(in_oklab,var(--color-ink)_25%,transparent)] md:flex md:items-center md:gap-6"
+							href={resource.data.link || withBase(`/openclaw/${resource.id}/`)}
+							target={resource.data.link ? '_blank' : undefined}
+							rel={resource.data.link ? 'noopener noreferrer' : undefined}
+						>
+							<div class="flex flex-1 flex-col">
+								<div class="flex items-center gap-3">
+									{resource.data.icon && <Icon name={resource.data.icon} size={28} class="shrink-0 text-base-900" />}
+									<h3 class="text-2xl font-semibold text-green-500 group-hover:text-green-500">{resource.data.title}</h3>
+								</div>
+								{resource.data.link && <p class="mt-1 text-xs text-muted">{resource.data.link}</p>}
+								<p class="mt-3 text-lg text-muted">{resource.data.description}</p>
 							</div>
-							{resource.data.link && <p class="mt-1 text-xs text-muted">{resource.data.link}</p>}
-							<p class="mt-3 text-lg text-muted">{resource.data.description}</p>
-						</div>
-						{(() => {
-							const videoId = resource.data.link ? getYouTubeVideoId(resource.data.link) : null;
-							return videoId ? (
-								<figure class="mt-4 w-full overflow-hidden rounded-[18px] md:mt-0 md:h-auto md:w-40 md:shrink-0">
-									<img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} alt={resource.data.title} class="h-full w-full rounded-[18px] object-cover" />
+							{resource.data.heroImage && (
+								<figure class="mt-4 h-32 w-full overflow-hidden rounded-[18px] bg-[color-mix(in_oklab,var(--color-surface)_80%,transparent)] md:mt-0 md:h-24 md:w-32">
+									<Image src={resource.data.heroImage} alt={resource.data.title} width={220} height={140} class="h-full w-full object-cover" />
 								</figure>
-							) : null;
-						})()}
-						{resource.data.heroImage && (
-							<figure class="mt-4 h-32 w-full overflow-hidden rounded-[18px] bg-[color-mix(in_oklab,var(--color-surface)_80%,transparent)] md:mt-0 md:h-24 md:w-32">
-								<Image src={resource.data.heroImage} alt={resource.data.title} width={220} height={140} class="h-full w-full object-cover" />
-							</figure>
-						)}
-					</a>
-				))}
-			</div>
-		)}
+							)}
+						</a>
+					))}
+				</div>
+			)}
+		</div>
 	</section>
 
 <style>
