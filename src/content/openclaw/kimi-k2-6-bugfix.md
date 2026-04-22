@@ -40,11 +40,27 @@ Normalize the entire Kimi path end-to-end:
   </button>
 </div>
 
-<pre id="kimi-fix-prompt" style="white-space: pre-wrap; word-break: break-word;">We need to fix my OpenClaw Kimi config. I have the bug where sessions keep falling back to another model instead of staying on moonshot/kimi-k2.6.
+<pre id="kimi-fix-prompt" style="white-space: pre-wrap; word-break: break-word;">please fix my OpenClaw Kimi config. i have the bug where sessions keep falling back to another model instead of staying on moonshot/kimi-k2.6. this issue often happens because Kimi settings drift across both global and agent-local config files, and stale fallback state can keep the wrong model active even after partial fixes.
 
-Please inspect both global /root/.openclaw/openclaw.json and all agent-local ~/.openclaw/agents/*/agent/{models.json,auth-profiles.json,auth-state.json} files.
+please do this carefully and verify exhaustively:
 
-Remove old kimi and kimi-coding providers/auth profiles.
-Keep only moonshot/kimi-k2.6 and make sure its base URL is https://api.kimi.com/coding
-Clear stale session/provider fallback state that pins sessions to the fallback model.
-Verify the active session actually runs on Kimi after reload/new session.</pre>
+1. inspect global /root/.openclaw/openclaw.json
+2. inspect every agent-local file under ~/.openclaw/agents/*/agent/, especially:
+   - models.json
+   - auth-profiles.json
+   - auth-state.json
+3. remove all legacy kimi and kimi-coding provider/auth entries everywhere, not just the first block you find
+4. keep only moonshot/kimi-k2.6
+5. make sure its base URL is exactly https://api.kimi.com/coding
+6. verify there are no leftover Kimi variants anywhere, including:
+   - k2p5
+   - kimi-code
+   - kimi-k2.5
+   - kimi-k2-thinking
+   - kimi-k2-thinking-turbo
+   - kimi-k2-turbo
+7. clear stale session/provider fallback state that pins sessions to the fallback model
+8. reload/restart if needed
+9. verify the active session actually runs on Kimi after the cleanup
+
+important: don't do a shallow check. after editing, explicitly confirm every relevant file only contains the intended moonshot provider and kimi-k2.6 model.</pre>
