@@ -1,81 +1,108 @@
-# Dasein
+# richkuo
 
-An Astro starter for personal blogs and portfolios with TypeScript, Tailwind CSS, Pagefind search, and theming.
+Personal site for [Rich Kuo](https://www.richkuo7.com) — product engineer portfolio, project showcase, and OpenClaw tutorials.
 
-![](./public/SS-1.png)
+Live at **https://www.richkuo7.com**.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/roicort/dasein)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Froicort%2Fdasein)
+## What this site is
 
-## Features
+A static, single-page-forward marketing site built with Astro. The homepage introduces Rich, links to social profiles, and surfaces three main content areas:
 
-- Blog with Markdown/MDX, featured post, and tag listings
-- Typed collections for posts, authors, and socials in [src/content.config.ts](src/content.config.ts)
-- Site-wide search via Pagefind with an accessible modal
-- SEO-ready: OpenGraph/Twitter, canonical links, and preloaded fonts in [src/components/BaseHead.astro](src/components/BaseHead.astro)
-- Themes `light/dark` with persistent toggle; debug toggle for layout borders
-- RSS (`/rss.xml`) and sitemap (`/sitemap-index.xml`) generated automatically
+- **Current projects** — products and tools (e.g. go-trader, SceneCutAI, Art Ping Pong) with optional external links or detail pages under `/projects/[slug]/`.
+- **Friend projects** — collaborations flagged with `friend: true` in frontmatter.
+- **OpenClaw** — YouTube videos and written guides (VPS setup, trading bots, MCP servers, bugfix notes) under `/openclaw/[slug]/` or external links.
 
+The layout uses a playful hero (animated name, profile photo, social actions), chat-style callout bubbles, and card lists with hover states. A **Work with me** button links to email for inquiries.
 
-<div style="display: flex; align-items: center; gap: 10px; width: 100%; margin-top: 20px;">
-    <img src="./public/SS-2.png" style="width: 180px; vertical-align: middle;" />
-    <img src="./public/SS-3.png" style="width: 180px; vertical-align: middle;" />
-    <img src="./public/SS-4.png" style="width: 180px; vertical-align: middle;" />
-</div>
+## Tech stack
 
+- [Astro](https://astro.build) 5 (static output)
+- TypeScript content collections ([`src/content.config.ts`](src/content.config.ts))
+- Tailwind CSS 4 + [`@tailwindcss/typography`](https://tailwindcss.com/docs/typography-plugin)
+- [astro-icon](https://github.com/natemoo-re/astro-icon) (Tabler icons)
+- [astro-seo](https://github.com/jonasmerlin/astro-seo) + JSON-LD in [`src/components/BaseHead.astro`](src/components/BaseHead.astro)
+- [Pagefind](https://pagefind.app/) indexes the build (search UI component exists but is not wired into the header yet)
+- Fonts: Space Grotesk, IBM Plex Mono (Astro experimental font pipeline)
+- Package manager: [Bun](https://bun.sh)
+
+The project started from the [Dasein](https://github.com/roicort/dasein) Astro starter and was customized for this portfolio.
 
 ## Requirements
-- Bun
-- Astro@latest
-- Tailwdind CSS
 
-## Install & run
+- Bun
+- Node.js 18+ (for Astro tooling if needed)
+
+## Install and run
 
 ```sh
-# install dependencies
 bun install
-
-# start dev server
-bun run dev
-
-# production build
-bun run build
-
-# preview the build
-bun run preview
+bun run dev      # http://localhost:4321
+bun run build    # output in dist/
+bun run preview  # serve the production build locally
 ```
 
 ## Content
 
-- Posts: add `.md` or `.mdx` under `src/content/blog`. Schema validates `title`, `description`, `pubDate`, `updatedDate?`, `heroImage?`, `tags[]`.
-- Authors: `src/content/authors.yml`.
-- Socials: `src/content/socials.yml`.
+| Collection | Location | Purpose |
+|------------|----------|---------|
+| Site config | [`src/site-config.yml`](src/site-config.yml) | Title, description, author, social links |
+| Projects | `src/content/projects/*.md` | Portfolio entries |
+| OpenClaw | `src/content/openclaw/*.md` | Videos (`link` → YouTube) and resource articles |
+| CV | [`src/content/cv.yml`](src/content/cv.yml) | Structured résumé sections (schema in content config) |
 
-Frontmatter example:
-```md
+### Project frontmatter
+
+```yaml
 ---
-title: "How we launch in 6 weeks"
-description: "End-to-end process for small teams."
-pubDate: 2024-12-12
-updatedDate: 2025-01-03
-tags: [delivery, process]
-heroImage: ../../assets/blog/ship.jpg
+title: go-trader
+description: An OpenClaw trading bot for Discord.
+pubDate: 2026-01-01
+link: https://github.com/richkuo/go-trader   # optional; external instead of /projects/slug
+icon: tabler:chart-line                      # optional
+friend: false                                # true → "Friend Projects" section
+heroImage: ../../assets/example.jpg          # optional
+tags: []
 ---
 ```
 
-## Quick customization
+Entries with a `link` open externally; otherwise Astro generates `/projects/[id]/` from the Markdown body.
 
-- Site name and description in [src/consts.ts](src/consts.ts).
-- Navigation and hero actions in [src/pages/index.astro](src/pages/index.astro).
-- Colors, type, and utilities in `src/styles/global.css`.
-- Key components: header with search and toggles ([src/components/Header.astro](src/components/Header.astro)), base layout ([src/layouts/BaseLayout.astro](src/layouts/BaseLayout.astro)).
+### OpenClaw frontmatter
 
-## Available scripts
+Same shape as projects. Items whose `link` is a YouTube URL appear under **Videos** on the homepage; everything else appears under **Resources** (or links to `/openclaw/[slug]/` when no external URL).
 
-- `npm run dev`: server on `localhost:4321` (Astro default).
-- `npm run build`: outputs `dist/` ready to deploy.
-- `npm run preview`: serves the built site locally.
+## Customization
+
+- **Identity and socials** — edit [`src/site-config.yml`](src/site-config.yml).
+- **Homepage sections** — [`src/pages/index.astro`](src/pages/index.astro).
+- **Hero** — [`src/components/Hero.astro`](src/components/Hero.astro); profile image at [`src/assets/profile.jpg`](src/assets/profile.jpg).
+- **Global styles and design tokens** — [`src/styles/global.css`](src/styles/global.css).
+- **Site URL** — [`astro.config.mjs`](astro.config.mjs) (`site` field).
+
+## Theming
+
+- Defaults to the visitor’s **system** color scheme (`prefers-color-scheme`).
+- Header toggle saves an explicit `light` or `dark` choice in `localStorage` (`theme` key). Clear site data to follow the OS again.
+- [`src/components/ThemeScript.astro`](src/components/ThemeScript.astro) runs in `<head>` to avoid a flash of the wrong scheme and to react to OS theme changes until overridden.
+
+## Project layout
+
+```
+src/
+  components/     UI (Header, Hero, ThemeToggle, …)
+  content/        Markdown collections
+  layouts/        Page and post wrappers
+  pages/          Routes (index, projects, openclaw, about, 404)
+  styles/         global.css
+  site-config.yml Site metadata
+```
 
 ## Deploy
 
-Output is static HTML. Upload `dist/` to your platform of choice (Netlify, Vercel, Cloudflare Pages, S3+CDN). Set `BASE_URL` if you publish under a subpath.
+Build output is static HTML in `dist/`. Deploy to any static host (Vercel, Netlify, Cloudflare Pages, etc.). The canonical site URL is set in `astro.config.mjs`; update it if the domain changes.
+
+Sitemap: `/sitemap-index.xml` (via `@astrojs/sitemap`).
+
+## License
+
+Private personal site repository unless otherwise noted.
