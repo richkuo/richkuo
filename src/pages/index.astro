@@ -13,9 +13,9 @@ const allProjects = (await getCollection('projects')).sort(
 );
 const projects = allProjects.filter((p) => !p.data.friend);
 const friendProjects = allProjects.filter((p) => p.data.friend);
-const allOpenclawResources = (await getCollection('openclaw')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
-);
+const allOpenclawResources = (await getCollection('openclaw'))
+	.filter((r) => !r.data.unlisted)
+	.sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 
 function getYouTubeVideoId(url: string): string | null {
 	const match = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&?\/]+)/);

@@ -65,6 +65,7 @@ const openclaw = defineCollection({
 			tags: z.array(z.string()).default([]),
 			link: z.string().optional(),
 			icon: z.string().optional(),
+			unlisted: z.boolean().default(false),
 		}),
 });
 
