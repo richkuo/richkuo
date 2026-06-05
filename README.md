@@ -9,10 +9,12 @@ Live at **https://www.richkuo7.com**.
 A static, single-page-forward marketing site built with Astro. The homepage introduces Rich, links to social profiles, and surfaces three main content areas:
 
 - **Current projects** — products and tools (e.g. go-trader, SceneCutAI, Art Ping Pong) with optional external links or detail pages under `/projects/[slug]/`.
-- **Friend projects** — collaborations flagged with `friend: true` in frontmatter.
+- **Friend projects** — collaborations and side projects by others.
 - **OpenClaw** — YouTube videos and written guides (VPS setup, trading bots, MCP servers, bugfix notes) under `/openclaw/[slug]/` or external links.
 
-The layout uses a playful hero (animated name, profile photo, social actions), chat-style callout bubbles, and card lists with hover states. A **Work with me** button links to email for inquiries.
+The homepage is a GSAP + ScrollTrigger single-page design: a floating glass nav capsule that assembles on scroll, glass project cards with 3D mouse-tilt and alternating slide-ins, drifting gradient blobs, letter-by-letter chat bubbles, and a scroll-scrubbed hero. A **Work with me** handshake icon links to email for inquiries.
+
+> **Note:** homepage content (projects, friend projects, videos, resources, social links) is **hardcoded as JS arrays** in `src/pages/index.astro` — adding or editing a Markdown file in `src/content/` does **not** update the homepage automatically. The content collections (`/projects/[slug]/`, `/openclaw/[slug]/`) still power the individual detail pages.
 
 ## Tech stack
 
@@ -65,17 +67,16 @@ tags: []
 ---
 ```
 
-Entries with a `link` open externally; otherwise Astro generates `/projects/[id]/` from the Markdown body.
+Entries with a `link` open externally; otherwise Astro generates `/projects/[id]/` from the Markdown body. These entries power the detail pages only — the homepage project list is hardcoded in `index.astro` and must be updated separately.
 
 ### OpenClaw frontmatter
 
-Same shape as projects. Items whose `link` is a YouTube URL appear under **Videos** on the homepage; everything else appears under **Resources** (or links to `/openclaw/[slug]/` when no external URL).
+Same shape as projects. Items whose `link` is a YouTube URL appear under **Videos** on the `/openclaw/` index; everything else appears under **Resources** (or links to `/openclaw/[slug]/` when no external URL). These entries do **not** feed the homepage automatically — see the note above about hardcoded homepage content.
 
 ## Customization
 
 - **Identity and socials** — edit [`src/site-config.yml`](src/site-config.yml).
-- **Homepage sections** — [`src/pages/index.astro`](src/pages/index.astro).
-- **Hero** — [`src/components/Hero.astro`](src/components/Hero.astro); profile image at [`src/assets/profile.jpg`](src/assets/profile.jpg).
+- **Homepage sections and hero** — all in [`src/pages/index.astro`](src/pages/index.astro); hardcoded JS arrays (`currentProjects`, `friendProjects`, `videos`, `resources`) near line 380. Profile image: [`src/assets/profile.jpg`](src/assets/profile.jpg).
 - **Global styles and design tokens** — [`src/styles/global.css`](src/styles/global.css).
 - **Site URL** — [`astro.config.mjs`](astro.config.mjs) (`site` field).
 
