@@ -1,25 +1,121 @@
 ---
 import profilePic from '../assets/profile.jpg';
+import { getSite } from '../utils/consts';
+
+const site = await getSite();
+const SITE_URL = 'https://www.richkuo7.com';
+const ogImage = `${SITE_URL}/og-home.png`;
+const profileURL = new URL(profilePic.src, SITE_URL).toString();
+const pageTitle = 'Rich Kuo — Product Engineer';
+const metaDescription =
+	'Product engineer building creative and technical products like SceneCut AI, go-trader, and VibeCode Support.';
+
+const PALETTE = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#06b6d4', '#3b82f6', '#6366f1', '#7c3aed', '#a855f7'];
+const HERO_NAME = 'Rich Kuo';
+
+const ICONS: Record<string, string> = {
+	github: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>',
+	linkedin: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.8 2.6 4.8 6V21H18v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V21H10z"/></svg>',
+	x: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23.2 22h-6.6l-5.2-6.8L5.5 22H2.4l7.8-8.9L1.2 2h6.8l4.7 6.2zm-1.2 18h1.8L7.4 3.8H5.5z"/></svg>',
+	youtube: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 00-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 001 7.5 31 31 0 00.6 12 31 31 0 001 16.5a3 3 0 002.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 002.1-2.1A31 31 0 0023.4 12 31 31 0 0023 7.5zM9.8 15.3V8.7l5.7 3.3z"/></svg>',
+	tiktok: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.1-2.5-.3-3.5-.9v6.3c0 3.1-2.5 5.6-5.6 5.6S5.3 18 5.3 14.9c0-2.9 2.2-5.3 5.1-5.6v2.7c-1.4.2-2.5 1.4-2.5 2.9 0 1.6 1.3 2.9 2.9 2.9s2.9-1.3 2.9-2.9V3z"/></svg>',
+	discord: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4.4A19 19 0 0015.4 3l-.3.5a14 14 0 014 2 13 13 0 00-11.2 0 14 14 0 014-2L11.6 3A19 19 0 004 4.4 19.6 19.6 0 00.6 17.6 19 19 0 006.5 21l.7-1.2c-.6-.2-1.2-.5-1.7-.8l.4-.3a13.6 13.6 0 0012.2 0l.4.3c-.5.3-1.1.6-1.7.8l.7 1.2a19 19 0 005.9-3.4A19.6 19.6 0 0020 4.4zM8.6 15c-1 0-1.7-.9-1.7-2s.8-2 1.7-2 1.7.9 1.7 2-.8 2-1.7 2zm6.8 0c-1 0-1.7-.9-1.7-2s.8-2 1.7-2 1.7.9 1.7 2-.7 2-1.7 2z"/></svg>',
+	mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>',
+	video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l4.5-2.5v9L15 14M3 6h12v12H3z"/></svg>',
+	chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 3 3 5-6"/></svg>',
+	palette: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 100 18c1 0 1.7-.8 1.7-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H16a5 5 0 005-5c0-3.9-4-7-9-7z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>',
+	headset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14v-2a8 8 0 0116 0v2M4 14a2 2 0 002 2h1v-5H6a2 2 0 00-2 2zM20 14a2 2 0 01-2 2h-1v-5h1a2 2 0 012 2zM18 16v1a4 4 0 01-4 4h-2"/></svg>',
+	search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>',
+	bug: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="6" width="8" height="12" rx="4"/><path d="M8 10H4M8 14H4M16 10h4M16 14h4M9 6l-1-2M15 6l1-2M9 18l-1 2M15 18l1 2"/></svg>',
+};
+
+const socials = [
+	{ href: 'https://github.com/richkuo', label: 'GitHub', icon: 'github' },
+	{ href: 'https://www.linkedin.com/in/richkuo7', label: 'LinkedIn', icon: 'linkedin' },
+	{ href: 'https://x.com/richkuo7', label: 'X', icon: 'x' },
+	{ href: 'https://www.youtube.com/@richkuo7', label: 'YouTube', icon: 'youtube' },
+	{ href: 'https://www.tiktok.com/@richkuo7', label: 'TikTok', icon: 'tiktok' },
+	{ href: 'https://discord.gg/44BykmWZsP', label: 'Discord', icon: 'discord' },
+	{ href: 'mailto:rich.kuo.ai@gmail.com', label: 'Email', icon: 'mail' },
+];
+
+type Card = { title: string; icon: string; desc?: string; link?: string; href?: string; vid?: string };
+
+const currentProjects: Card[] = [
+	{ title: 'SceneCut AI', icon: 'video', link: 'https://www.scenecutai.com', desc: 'The best content creation app — no edits, easy reshoots, scripting, voice overs, sound effects, advanced AI video generation, and more.' },
+	{ title: 'go-trader', icon: 'chart', link: 'https://github.com/richkuo/go-trader', desc: 'An OpenClaw trading bot for Discord that enables custom trading platforms and algorithms.' },
+	{ title: 'VibeCode Support', icon: 'headset', link: 'https://www.officialvibecodesupport.com', desc: 'Got a vibe coded app? Stuck on a bug? Schedule a consultation today! Bugfix guaranteed!' },
+];
+const friendProjects: Card[] = [
+	{ title: 'Art Ping Pong', icon: 'palette', link: 'https://artpingpong.valyss.com', desc: 'AI enhanced drawing fun for the entire family. Draw and share digital art together!' },
+];
+const videos: Card[] = [
+	{ title: 'Full OpenClaw Setup on a VPS with TailScale VPN and Maximum Firewall', icon: 'youtube', link: 'https://youtu.be/SHcTKVAdgV0', vid: 'SHcTKVAdgV0', desc: 'YouTube video walkthrough of setting up OpenClaw on a VPS with TailScale VPN and maximum firewall configuration.' },
+	{ title: 'Openclaw Full Setup Part 2: Discord Bot and the UI Dashboard', icon: 'youtube', link: 'https://youtu.be/4UjAP6W06TY', vid: '4UjAP6W06TY', desc: 'YouTube video walkthrough of setting up the OpenClaw Discord bot and UI dashboard.' },
+	{ title: 'OpenClaw Fully Automated Live Trading Bot on Hyperliquid - Full Setup Tutorial', icon: 'youtube', link: 'https://youtu.be/TgaKtLfxtb8', vid: 'TgaKtLfxtb8', desc: 'YouTube video walkthrough of setting up OpenClaw as an automated live trading bot on Hyperliquid.' },
+	{ title: 'GPT 5.5 + OpenClaw + AI Trading Bot + Part 1 Tutorial 🦞May 2026 Update🦞', icon: 'youtube', link: 'https://www.youtube.com/watch?v=CyLjU4GEH5w', vid: 'CyLjU4GEH5w', desc: 'YouTube video walkthrough of building an AI trading bot with GPT 5.5 and OpenClaw.' },
+	{ title: 'Ai Trading with Go-Trader on Hyperliquid Part 2: Hermes/OpenClaw Bots Running 24/7', icon: 'youtube', link: 'https://www.youtube.com/watch?v=n6OPc8j1GoQ', vid: 'n6OPc8j1GoQ', desc: 'YouTube video walkthrough of running Hermes and OpenClaw trading bots 24/7 with Go-Trader on Hyperliquid.' },
+];
+const resources: Card[] = [
+	{ title: 'MiniMax Web Search MCP Server Setup for OpenClaw', icon: 'search', href: '/openclaw/minimax-websearch-mcp-setup/', desc: "Step-by-step guide to setting up MiniMax's web search MCP server with mcporter for real-time search in OpenClaw agents." },
+	{ title: 'OpenClaw Kimi K2.6 Bugfix', icon: 'bug', href: '/openclaw/kimi-k2-6-bugfix/', desc: 'How to fix Kimi configuration drift in OpenClaw where sessions silently fall back to a different model instead of staying on kimi-k2.6.' },
+];
+
+const sameAs = socials.filter((s) => s.href.startsWith('http')).map((s) => s.href);
+
+const personJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Rich Kuo',
+	url: `${SITE_URL}/`,
+	image: profileURL,
+	jobTitle: 'Product Engineer',
+	description: site.description,
+	sameAs,
+};
+
+const websiteJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'Rich Kuo',
+	url: `${SITE_URL}/`,
+	description: site.description,
+};
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rich Kuo</title>
-<meta name="description" content="Product engineer building creative and technical products." />
+<title>{pageTitle}</title>
+<meta name="description" content={metaDescription} />
+<meta name="author" content="Rich Kuo" />
 <link rel="canonical" href="https://www.richkuo7.com/" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d0d10" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-<link rel="icon" href="/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" title="Rich Kuo" href="https://www.richkuo7.com/rss.xml" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Rich Kuo" />
-<meta property="og:title" content="Rich Kuo" />
+<meta property="og:title" content={pageTitle} />
 <meta property="og:description" content="Product engineer building creative and technical products." />
 <meta property="og:url" content="https://www.richkuo7.com/" />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Rich Kuo — Product Engineer" />
+<meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Rich Kuo" />
+<meta name="twitter:site" content="@richkuo7" />
+<meta name="twitter:creator" content="@richkuo7" />
+<meta name="twitter:title" content={pageTitle} />
 <meta name="twitter:description" content="Product engineer building creative and technical products." />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content="Rich Kuo — Product Engineer" />
+<script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
 
 <script is:inline>
   /* set theme before paint to avoid a flash */
@@ -307,18 +403,20 @@ import profilePic from '../assets/profile.jpg';
   <section class="hero">
     <img class="avatar" id="avatar" src={profilePic.src} alt="Rich Kuo" />
     <div class="hero-right">
-      <div class="hero-letters shimmer" id="heroLetters" aria-label="Rich Kuo"></div>
+      <h1 class="hero-letters shimmer" id="heroLetters" aria-label="Rich Kuo" style="margin:0">
+        {HERO_NAME.split('').map((ch, i) => (
+          ch === ' '
+            ? <span class="space"></span>
+            : <span style={`color:${PALETTE[i % PALETTE.length]}`}>{ch}</span>
+        ))}
+      </h1>
     </div>
   </section>
 
   <div class="social-row" id="socialRow">
-    <a href="https://github.com/richkuo" aria-label="GitHub" data-icon="github"></a>
-    <a href="https://www.linkedin.com/in/richkuo7" aria-label="LinkedIn" data-icon="linkedin"></a>
-    <a href="https://x.com/richkuo7" aria-label="X" data-icon="x"></a>
-    <a href="https://www.youtube.com/@richkuo7" aria-label="YouTube" data-icon="youtube"></a>
-    <a href="https://www.tiktok.com/@richkuo7" aria-label="TikTok" data-icon="tiktok"></a>
-    <a href="https://discord.gg/44BykmWZsP" aria-label="Discord" data-icon="discord"></a>
-    <a href="mailto:rich.kuo.ai@gmail.com" aria-label="Email" data-icon="mail"></a>
+    {socials.map((s) => (
+      <a href={s.href} aria-label={s.label}><Fragment set:html={ICONS[s.icon]} /></a>
+    ))}
   </div>
   <div class="divider"></div>
 
@@ -333,23 +431,99 @@ import profilePic from '../assets/profile.jpg';
 
   <!-- CURRENT PROJECTS -->
   <h2 class="eyebrow reveal-text"><span>Current Projects</span></h2>
-  <div id="currentProjects"></div>
+  <div id="currentProjects">
+    {currentProjects.map((p) => {
+      const href = p.href ?? p.link ?? '#';
+      const external = /^https?:/.test(href);
+      return (
+        <a class="card" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+          <div class="card-body">
+            <div class="card-title"><Fragment set:html={ICONS[p.icon]} /><span>{p.title}</span></div>
+            {p.link && <p class="card-link">{p.link}</p>}
+            {p.desc && <p class="card-desc">{p.desc}</p>}
+          </div>
+          {p.vid && (
+            <div class="card-thumb">
+              <img src={`https://img.youtube.com/vi/${p.vid}/mqdefault.jpg`} alt={p.title} loading="lazy" />
+            </div>
+          )}
+        </a>
+      );
+    })}
+  </div>
 
   <div class="bubble-row me"><div class="bubble me">I have no idea what I'm going to do tomorrow</div></div>
 
   <!-- FRIEND PROJECTS -->
   <h2 class="eyebrow reveal-text"><span>Friend Projects</span></h2>
-  <div id="friendProjects"></div>
+  <div id="friendProjects">
+    {friendProjects.map((p) => {
+      const href = p.href ?? p.link ?? '#';
+      const external = /^https?:/.test(href);
+      return (
+        <a class="card" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+          <div class="card-body">
+            <div class="card-title"><Fragment set:html={ICONS[p.icon]} /><span>{p.title}</span></div>
+            {p.link && <p class="card-link">{p.link}</p>}
+            {p.desc && <p class="card-desc">{p.desc}</p>}
+          </div>
+          {p.vid && (
+            <div class="card-thumb">
+              <img src={`https://img.youtube.com/vi/${p.vid}/mqdefault.jpg`} alt={p.title} loading="lazy" />
+            </div>
+          )}
+        </a>
+      );
+    })}
+  </div>
 
   <div class="bubble-row them"><div class="bubble them">How exciting</div></div>
 
   <!-- VIDEOS -->
   <h2 class="eyebrow reveal-text"><span>Videos</span></h2>
-  <div id="videos"></div>
+  <div id="videos">
+    {videos.map((p) => {
+      const href = p.href ?? p.link ?? '#';
+      const external = /^https?:/.test(href);
+      return (
+        <a class="card" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+          <div class="card-body">
+            <div class="card-title"><Fragment set:html={ICONS[p.icon]} /><span>{p.title}</span></div>
+            {p.link && <p class="card-link">{p.link}</p>}
+            {p.desc && <p class="card-desc">{p.desc}</p>}
+          </div>
+          {p.vid && (
+            <div class="card-thumb">
+              <img src={`https://img.youtube.com/vi/${p.vid}/mqdefault.jpg`} alt={p.title} loading="lazy" />
+            </div>
+          )}
+        </a>
+      );
+    })}
+  </div>
 
   <!-- RESOURCES -->
   <h2 class="eyebrow reveal-text"><span>Resources</span></h2>
-  <div id="resources"></div>
+  <div id="resources">
+    {resources.map((p) => {
+      const href = p.href ?? p.link ?? '#';
+      const external = /^https?:/.test(href);
+      return (
+        <a class="card" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+          <div class="card-body">
+            <div class="card-title"><Fragment set:html={ICONS[p.icon]} /><span>{p.title}</span></div>
+            {p.link && <p class="card-link">{p.link}</p>}
+            {p.desc && <p class="card-desc">{p.desc}</p>}
+          </div>
+          {p.vid && (
+            <div class="card-thumb">
+              <img src={`https://img.youtube.com/vi/${p.vid}/mqdefault.jpg`} alt={p.title} loading="lazy" />
+            </div>
+          )}
+        </a>
+      );
+    })}
+  </div>
 
 </main>
 
@@ -360,77 +534,10 @@ import profilePic from '../assets/profile.jpg';
 <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
 <script is:inline>
-/* ---------------- data ---------------- */
-const ICONS = {
-  github:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>',
-  linkedin:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.8 2.6 4.8 6V21H18v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V21H10z"/></svg>',
-  x:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23.2 22h-6.6l-5.2-6.8L5.5 22H2.4l7.8-8.9L1.2 2h6.8l4.7 6.2zm-1.2 18h1.8L7.4 3.8H5.5z"/></svg>',
-  youtube:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 00-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 001 7.5 31 31 0 00.6 12 31 31 0 001 16.5a3 3 0 002.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 002.1-2.1A31 31 0 0023.4 12 31 31 0 0023 7.5zM9.8 15.3V8.7l5.7 3.3z"/></svg>',
-  tiktok:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.1-2.5-.3-3.5-.9v6.3c0 3.1-2.5 5.6-5.6 5.6S5.3 18 5.3 14.9c0-2.9 2.2-5.3 5.1-5.6v2.7c-1.4.2-2.5 1.4-2.5 2.9 0 1.6 1.3 2.9 2.9 2.9s2.9-1.3 2.9-2.9V3z"/></svg>',
-  discord:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4.4A19 19 0 0015.4 3l-.3.5a14 14 0 014 2 13 13 0 00-11.2 0 14 14 0 014-2L11.6 3A19 19 0 004 4.4 19.6 19.6 0 00.6 17.6 19 19 0 006.5 21l.7-1.2c-.6-.2-1.2-.5-1.7-.8l.4-.3a13.6 13.6 0 0012.2 0l.4.3c-.5.3-1.1.6-1.7.8l.7 1.2a19 19 0 005.9-3.4A19.6 19.6 0 0020 4.4zM8.6 15c-1 0-1.7-.9-1.7-2s.8-2 1.7-2 1.7.9 1.7 2-.8 2-1.7 2zm6.8 0c-1 0-1.7-.9-1.7-2s.8-2 1.7-2 1.7.9 1.7 2-.7 2-1.7 2z"/></svg>',
-  mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>',
-  video:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l4.5-2.5v9L15 14M3 6h12v12H3z"/></svg>',
-  chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 3 3 5-6"/></svg>',
-  palette:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 100 18c1 0 1.7-.8 1.7-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H16a5 5 0 005-5c0-3.9-4-7-9-7z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>',
-  headset:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14v-2a8 8 0 0116 0v2M4 14a2 2 0 002 2h1v-5H6a2 2 0 00-2 2zM20 14a2 2 0 01-2 2h-1v-5h1a2 2 0 012 2zM18 16v1a4 4 0 01-4 4h-2"/></svg>',
-  search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>',
-  bug:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="6" width="8" height="12" rx="4"/><path d="M8 10H4M8 14H4M16 10h4M16 14h4M9 6l-1-2M15 6l1-2M9 18l-1 2M15 18l1 2"/></svg>',
-};
-
-const currentProjects = [
-  { title:'SceneCut AI', icon:'video', link:'https://www.scenecutai.com', desc:'The best content creation app — no edits, easy reshoots, scripting, voice overs, sound effects, advanced AI video generation, and more.' },
-  { title:'go-trader', icon:'chart', link:'https://github.com/richkuo/go-trader', desc:'An OpenClaw trading bot for Discord that enables custom trading platforms and algorithms.' },
-  { title:'VibeCode Support', icon:'headset', link:'https://www.officialvibecodesupport.com', desc:'Got a vibe coded app? Stuck on a bug? Schedule a consultation today! Bugfix guaranteed!' },
-];
-const friendProjects = [
-  { title:'Art Ping Pong', icon:'palette', link:'https://artpingpong.valyss.com', desc:'AI enhanced drawing fun for the entire family. Draw and share digital art together!' },
-];
-const videos = [
-  { title:'Full OpenClaw Setup on a VPS with TailScale VPN and Maximum Firewall', icon:'youtube', link:'https://youtu.be/SHcTKVAdgV0', vid:'SHcTKVAdgV0', desc:'YouTube video walkthrough of setting up OpenClaw on a VPS with TailScale VPN and maximum firewall configuration.' },
-  { title:'Openclaw Full Setup Part 2: Discord Bot and the UI Dashboard', icon:'youtube', link:'https://youtu.be/4UjAP6W06TY', vid:'4UjAP6W06TY', desc:'YouTube video walkthrough of setting up the OpenClaw Discord bot and UI dashboard.' },
-  { title:'OpenClaw Fully Automated Live Trading Bot on Hyperliquid - Full Setup Tutorial', icon:'youtube', link:'https://youtu.be/TgaKtLfxtb8', vid:'TgaKtLfxtb8', desc:'YouTube video walkthrough of setting up OpenClaw as an automated live trading bot on Hyperliquid.' },
-  { title:'GPT 5.5 + OpenClaw + AI Trading Bot + Part 1 Tutorial 🦞May 2026 Update🦞', icon:'youtube', link:'https://www.youtube.com/watch?v=CyLjU4GEH5w', vid:'CyLjU4GEH5w', desc:'YouTube video walkthrough of building an AI trading bot with GPT 5.5 and OpenClaw.' },
-  { title:'Ai Trading with Go-Trader on Hyperliquid Part 2: Hermes/OpenClaw Bots Running 24/7', icon:'youtube', link:'https://www.youtube.com/watch?v=n6OPc8j1GoQ', vid:'n6OPc8j1GoQ', desc:'YouTube video walkthrough of running Hermes and OpenClaw trading bots 24/7 with Go-Trader on Hyperliquid.' },
-];
-const resources = [
-  { title:'MiniMax Web Search MCP Server Setup for OpenClaw', icon:'search', desc:"Step-by-step guide to setting up MiniMax's web search MCP server with mcporter for real-time search in OpenClaw agents." },
-  { title:'OpenClaw Kimi K2.6 Bugfix', icon:'bug', desc:'How to fix Kimi configuration drift in OpenClaw where sessions silently fall back to a different model instead of staying on kimi-k2.6.' },
-];
-
-/* ---------------- build DOM ---------------- */
+/* ---------------- palette (drives card accents + hero shimmer) ---------------- */
+/* Cards, hero letters, and social icons are server-rendered in the markup above;
+   this script only enhances and animates the existing DOM. */
 const PALETTE = ['#ef4444','#f97316','#eab308','#22c55e','#06b6d4','#3b82f6','#6366f1','#7c3aed','#a855f7'];
-
-(function buildHero(){
-  const wrap = document.getElementById('heroLetters');
-  'Rich Kuo'.split('').forEach((ch,i) => {
-    const s = document.createElement('span');
-    if (ch === ' ') { s.className = 'space'; }
-    else { s.textContent = ch; s.style.color = PALETTE[i % PALETTE.length]; }
-    wrap.appendChild(s);
-  });
-})();
-
-document.querySelectorAll('#socialRow a').forEach(a => { a.innerHTML = ICONS[a.dataset.icon]; });
-
-function projectCard(p){
-  const a = document.createElement('a');
-  a.className = 'card';
-  a.href = p.link || '#';
-  if (p.link) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
-  a.innerHTML = `
-    <div class="card-body">
-      <div class="card-title">${p.icon ? ICONS[p.icon] : ''}<span>${p.title}</span></div>
-      ${p.link ? `<p class="card-link">${p.link}</p>` : ''}
-      ${p.desc ? `<p class="card-desc">${p.desc}</p>` : ''}
-    </div>
-    ${p.vid ? `<div class="card-thumb"><img src="https://img.youtube.com/vi/${p.vid}/mqdefault.jpg" alt="${p.title}" loading="lazy"/></div>` : ''}
-  `;
-  return a;
-}
-currentProjects.forEach(p => document.getElementById('currentProjects').appendChild(projectCard(p)));
-friendProjects.forEach(p => document.getElementById('friendProjects').appendChild(projectCard(p)));
-videos.forEach(p => document.getElementById('videos').appendChild(projectCard(p)));
-resources.forEach(p => document.getElementById('resources').appendChild(projectCard(p)));
 
 /* per-card accent colour for the hover color-bleed */
 document.querySelectorAll('.card').forEach((card, i) => {

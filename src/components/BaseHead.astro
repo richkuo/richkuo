@@ -16,12 +16,31 @@ interface Props {
 	image?: ImageMetadata;
 	type?: 'website' | 'article';
 	pubDate?: Date;
+	updatedDate?: Date;
+	tags?: string[];
+	noindex?: boolean;
 }
 
-const { title, description, image = FallbackImage, type = 'website', pubDate } = Astro.props;
+const {
+	title,
+	description,
+	image = FallbackImage,
+	type = 'website',
+	pubDate,
+	updatedDate,
+	tags = [],
+	noindex = false,
+} = Astro.props;
+
+const siteName = site.author?.name || site.title || 'Rich Kuo';
+const twitterHandle = '@richkuo7';
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const imageURL = new URL((image as ImageMetadata).src, Astro.site ?? Astro.url);
+const img = image as ImageMetadata;
+const imageURL = new URL(img.src, Astro.site ?? Astro.url);
+
+const publishedISO = pubDate?.toISOString();
+const modifiedISO = (updatedDate ?? pubDate)?.toISOString();
 
 const websiteJsonLd = {
 	'@context': 'https://schema.org',
@@ -31,26 +50,54 @@ const websiteJsonLd = {
 	url: Astro.site?.toString(),
 };
 
-const articleJsonLd = type === 'article' ? {
-	'@context': 'https://schema.org',
-	'@type': 'Article',
-	headline: title,
-	description,
-	datePublished: pubDate?.toISOString(),
-	author: {
-		'@type': 'Person',
-		name: site.author?.name,
-	},
-	image: imageURL.toString(),
-	url: canonicalURL.toString(),
-} : null;
+const articleJsonLd =
+	type === 'article'
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'Article',
+				headline: title,
+				description,
+				datePublished: publishedISO,
+				dateModified: modifiedISO,
+				keywords: tags.length ? tags.join(', ') : undefined,
+				author: { '@type': 'Person', name: siteName, url: Astro.site?.toString() },
+				publisher: { '@type': 'Person', name: siteName, url: Astro.site?.toString() },
+				image: imageURL.toString(),
+				url: canonicalURL.toString(),
+				mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL.toString() },
+			}
+		: null;
+
+// Breadcrumbs for article pages: Home > Section > Title
+const segments = canonicalURL.pathname.split('/').filter(Boolean);
+const breadcrumbJsonLd =
+	type === 'article' && segments.length > 1
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'BreadcrumbList',
+				itemListElement: [
+					{ '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).toString() },
+					{
+						'@type': 'ListItem',
+						position: 2,
+						name: segments[0].charAt(0).toUpperCase() + segments[0].slice(1),
+						item: new URL(`/${segments[0]}/`, Astro.site).toString(),
+					},
+					{ '@type': 'ListItem', position: 3, name: title, item: canonicalURL.toString() },
+				],
+			}
+		: null;
 ---
 
 <SEO
 	charset="utf-8"
 	title={title}
+	titleTemplate={type === 'article' ? `%s · ${siteName}` : undefined}
 	description={description}
 	canonical={canonicalURL.toString()}
+	noindex={noindex}
+	nofollow={noindex}
+	robotsExtras="max-image-preview:large, max-snippet:-1, max-video-preview:-1"
 	openGraph={{
 		basic: {
 			title,
@@ -60,18 +107,36 @@ const articleJsonLd = type === 'article' ? {
 		},
 		optional: {
 			description,
-			siteName: site.author?.name || 'Dasein',
+			siteName,
 			locale: 'en_US',
 		},
+		image: {
+			url: imageURL.toString(),
+			width: img.width,
+			height: img.height,
+			alt: title,
+		},
+		...(type === 'article'
+			? {
+					article: {
+						publishedTime: publishedISO,
+						modifiedTime: modifiedISO,
+						authors: [siteName],
+						tags,
+					},
+				}
+			: {}),
 	}}
 	twitter={{
 		card: 'summary_large_image',
+		site: twitterHandle,
+		creator: twitterHandle,
 		title,
 		description,
 		image: imageURL.toString(),
 		imageAlt: title,
 	}}
-		extend={{
+	extend={{
 		link: [
 			{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
 			{ rel: 'sitemap', href: '/sitemap-index.xml' },
@@ -80,7 +145,7 @@ const articleJsonLd = type === 'article' ? {
 		meta: [
 			{ name: 'viewport', content: 'width=device-width,initial-scale=1' },
 			{ name: 'generator', content: Astro.generator },
-			{ name: 'robots', content: 'index, follow' },
+			{ name: 'author', content: siteName },
 		],
 	}}
 />
@@ -89,3 +154,4 @@ const articleJsonLd = type === 'article' ? {
 
 <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
 {articleJsonLd && <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />}
+{breadcrumbJsonLd && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />}
