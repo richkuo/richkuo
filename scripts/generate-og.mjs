@@ -52,7 +52,7 @@ const background = `
   <text x="${TEXT_X + 4}" y="426" font-family="Helvetica, Arial, sans-serif" font-weight="400" font-size="31" fill="#9ca3af">Building creative &amp; technical products</text>
 
   <rect x="${TEXT_X + 4}" y="470" width="320" height="6" rx="3" fill="url(#bar)"/>
-  <text x="${TEXT_X + 4}" y="524" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="30" fill="#22c55e">richkuo7.com</text>
+  <text x="${TEXT_X + 4}" y="524" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="30" fill="#22c55e">richkuo.com</text>
 </svg>`;
 
 const mask = Buffer.from(

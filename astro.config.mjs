@@ -36,7 +36,7 @@ const pageMeta = {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://www.richkuo7.com",
+  site: "https://www.richkuo.com",
   compressHTML: true,
   integrations: [
     mdx(),

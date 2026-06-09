@@ -30,7 +30,7 @@ export async function GET(context: APIContext) {
 		title: site.title ?? 'Rich Kuo',
 		description:
 			site.description ?? 'Product engineer building creative and technical products.',
-		site: context.site ?? 'https://www.richkuo7.com',
+		site: context.site ?? 'https://www.richkuo.com',
 		items,
 		customData: `<language>en-us</language>`,
 	});

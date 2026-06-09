@@ -1,8 +1,8 @@
 # richkuo
 
-Personal site for [Rich Kuo](https://www.richkuo7.com) — product engineer portfolio, project showcase, and OpenClaw tutorials.
+Personal site for [Rich Kuo](https://www.richkuo.com) — product engineer portfolio, project showcase, and OpenClaw tutorials.
 
-Live at **https://www.richkuo7.com**.
+Live at **https://www.richkuo.com**.
 
 ## What this site is
 
