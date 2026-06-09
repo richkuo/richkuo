@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ===== SEO ===== -->
+<title>AI Coding Bake-off Ep. 3: Six Runs, One Refactor — The Judge Picked Itself (Issue #879)</title>
+<meta name="description" content="Six AI coding runs — Fable 5, Opus 4.8 at two effort levels, GPT-5.5, GPT-5, and Cursor's Composer 2.5 — each implemented the same safety-critical regime-calculator refactor in a live trading bot. A scored, code-verified head-to-head — judged by a model that was also a contestant." />
+<meta name="keywords" content="AI coding comparison, Fable 5, Opus 4.8, GPT-5.5, GPT-5, Composer 2.5, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, market regime, trading bot, LLM judge conflict of interest, Rich Kuo" />
+<meta name="author" content="Rich Kuo" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://www.richkuo.com/reports/issue-879/" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0908" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3ecdd" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Rich Kuo" />
+<meta property="og:title" content="AI Coding Bake-off Ep. 3: Six Runs, One Refactor — The Judge Picked Itself" />
+<meta property="og:description" content="Six AI coding runs rebuilt the same safety-critical plumbing in a live trading bot. Scored, code-verified — and the judge was one of the contestants." />
+<meta property="og:url" content="https://www.richkuo.com/reports/issue-879/" />
+<meta property="og:image" content="https://www.richkuo.com/reports/issue-879/og-regime-bakeoff.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="AI Coding Bake-off Episode 3 — six runs scored head-to-head on a global regime calculator refactor" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:author" content="Rich Kuo" />
+<meta property="article:published_time" content="2026-06-09" />
+<meta property="article:modified_time" content="2026-06-09" />
+<meta property="article:section" content="AI &amp; Developer Tools" />
+<meta property="article:tag" content="Fable 5" />
+<meta property="article:tag" content="Claude Opus 4.8" />
+<meta property="article:tag" content="GPT-5.5" />
+<meta property="article:tag" content="GPT-5" />
+<meta property="article:tag" content="Composer 2.5" />
+<meta property="article:tag" content="AI coding comparison" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@richkuo7" />
+<meta name="twitter:creator" content="@richkuo7" />
+<meta name="twitter:title" content="AI Coding Bake-off Ep. 3: Six Runs, One Refactor — The Judge Picked Itself" />
+<meta name="twitter:description" content="Six AI coding runs rebuilt the same safety-critical plumbing in a live trading bot. The judge was one of the contestants." />
+<meta name="twitter:image" content="https://www.richkuo.com/reports/issue-879/og-regime-bakeoff.png" />
+<meta name="twitter:image:alt" content="AI Coding Bake-off Episode 3 — six runs scored head-to-head" />
+<meta name="twitter:label1" content="Models compared" />
+<meta name="twitter:data1" content="Fable 5 · Opus 4.8 ×2 · GPT-5.5 · GPT-5 · Composer 2.5" />
+<meta name="twitter:label2" content="Format" />
+<meta name="twitter:data2" content="Scored, code-verified six-way bake-off" />
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "AI Coding Bake-off Ep. 3: Six Runs, One Refactor — The Judge Picked Itself (Issue #879)",
+  "description": "Six AI coding runs — Fable 5, Opus 4.8 at two effort levels, GPT-5.5, GPT-5, and Cursor's Composer 2.5 — each implemented the same safety-critical regime-calculator refactor in a live trading bot. A scored, code-verified head-to-head — judged by a model that was also a contestant.",
+  "image": "https://www.richkuo.com/reports/issue-879/og-regime-bakeoff.png",
+  "url": "https://www.richkuo.com/reports/issue-879/",
+  "datePublished": "2026-06-09",
+  "dateModified": "2026-06-09",
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true,
+  "author": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "publisher": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.richkuo.com/reports/issue-879/" },
+  "keywords": "AI coding comparison, Fable 5, Opus 4.8, GPT-5.5, GPT-5, Composer 2.5, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, market regime",
+  "articleSection": "AI & Developer Tools",
+  "about": "A scored comparison of six AI coding runs implementing the same safety-critical refactor, with a disclosed judge conflict of interest.",
+  "mentions": [
+    { "@type": "SoftwareApplication", "name": "Fable 5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
+    { "@type": "SoftwareApplication", "name": "Claude Opus 4.8", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
+    { "@type": "SoftwareApplication", "name": "GPT-5.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
+    { "@type": "SoftwareApplication", "name": "GPT-5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
+    { "@type": "SoftwareApplication", "name": "Composer 2.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Cursor", "url": "https://cursor.com" } }
+  ]
+}
+</script>
+<!-- ===== /SEO ===== -->
+<script>
+  /* set saved theme before paint to avoid a flash; 'auto' leaves it to the OS */
+  document.documentElement.classList.add('js');
+  (function(){ try { var p = localStorage.getItem('theme-pref');
+    if (p === 'light' || p === 'dark') document.documentElement.setAttribute('data-theme', p);
+  } catch(e){} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Hanken+Grotesk:wght@300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0a0908;
+    --char: #14110d;
+    --char2: #1d1812;
+    --gold: #e3b25a;
+    --gold-soft: #d4a24e;
+    --gold-glow: rgba(227, 178, 90, 0.5);
+    --paper: #f4ede0;
+    --muted: #8c8276;
+    --muted2: #5a544b;
+    --line: rgba(227, 178, 90, 0.16);
+    --track: rgba(255,255,255,0.06);
+    --hairline: rgba(255,255,255,0.05);
+    --grain-opacity: 0.045;
+    --hero-glow: rgba(227,178,90,0.16);
+    --finale-grad: linear-gradient(180deg, #fbecc8, var(--gold) 55%, #b9863a);
+    --scrim: rgba(6,5,4,0.72);
+    /* contestant signatures */
+    --c-fable: #e3b25a;
+    --c-opus-high: #d4a27f;
+    --c-opus-xhigh: #cc785c;
+    --c-gpt55: #74AA9C;
+    --c-gpt5: #8FBFB3;
+    --c-composer: #D6D5D2;
+  }
+  :root[data-theme="light"] {
+    --black: #f3ecdd;
+    --char: #fbf6ec;
+    --char2: #fffdf7;
+    --gold: #a9762a;
+    --gold-soft: #b88534;
+    --gold-glow: rgba(169, 118, 42, 0.35);
+    --paper: #221c12;
+    --muted: #6a6253;
+    --muted2: #9d9486;
+    --line: rgba(169, 118, 42, 0.22);
+    --track: rgba(34,28,18,0.08);
+    --hairline: rgba(34,28,18,0.08);
+    --grain-opacity: 0.028;
+    --hero-glow: rgba(169,118,42,0.16);
+    --finale-grad: linear-gradient(180deg, #c79a45, #8a5f22 60%, #6d4a1a);
+    --scrim: rgba(60,50,32,0.4);
+    --c-fable: #a9762a;
+    --c-opus-high: #a87a52;
+    --c-opus-xhigh: #cc785c;
+    --c-gpt55: #74AA9C;
+    --c-gpt5: #5f9486;
+    --c-composer: #55544F;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --black: #f3ecdd;
+      --char: #fbf6ec;
+      --char2: #fffdf7;
+      --gold: #a9762a;
+      --gold-soft: #b88534;
+      --gold-glow: rgba(169, 118, 42, 0.35);
+      --paper: #221c12;
+      --muted: #6a6253;
+      --muted2: #9d9486;
+      --line: rgba(169, 118, 42, 0.22);
+      --track: rgba(34,28,18,0.08);
+      --hairline: rgba(34,28,18,0.08);
+      --grain-opacity: 0.028;
+      --hero-glow: rgba(169,118,42,0.16);
+      --finale-grad: linear-gradient(180deg, #c79a45, #8a5f22 60%, #6d4a1a);
+      --scrim: rgba(60,50,32,0.4);
+      --c-fable: #a9762a;
+      --c-opus-high: #a87a52;
+      --c-opus-xhigh: #cc785c;
+      --c-gpt55: #74AA9C;
+      --c-gpt5: #5f9486;
+      --c-composer: #55544F;
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    background: var(--black); color: var(--paper);
+    font-family: 'Hanken Grotesk', sans-serif; font-weight: 350; line-height: 1.65;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    transition: background-color .45s ease, color .45s ease;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection { background: var(--gold); color: var(--black); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .display { font-family: 'Fraunces', serif; font-weight: 600; line-height: 0.98; letter-spacing: -0.02em; }
+  .serif-it { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; top: -30%; left: 50%; width: 120vw; height: 120vh; transform: translateX(-50%); background: radial-gradient(ellipse 45% 40% at 50% 32%, var(--hero-glow), transparent 60%); pointer-events: none; }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero > .kicker { position: absolute; top: 40px; left: 28px; z-index: 3; }
+  .hero h1 { font-size: clamp(2.2rem, 7vw, 5.5rem); margin: 0.2em 0 0.1em; }
+  .hero h1 em { color: var(--gold); }
+  .hero .sub { max-width: none; font-size: clamp(1.05rem, 2.2vw, 1.4rem); color: var(--muted); margin-top: 1.4rem; }
+  .hero .sub b { color: var(--paper); font-weight: 600; }
+  .scrollcue { position: absolute; bottom: 38px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted2); z-index: 3; animation: bob 2.4s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{transform:translate(-50%,0);opacity:.5} 50%{transform:translate(-50%,8px);opacity:1} }
+
+  section { padding: clamp(80px, 13vh, 160px) 0; position: relative; }
+  .seclabel { display:flex; align-items:center; gap:18px; margin-bottom: 2.6rem; }
+  .seclabel .no { font-family:'Fraunces',serif; font-style:italic; font-size:1.1rem; color:var(--gold); }
+  .seclabel .ln { flex:1; height:1px; background:var(--line); }
+  h2.sec { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 1.4rem; }
+  .lead { font-size: 1.18rem; color: var(--muted); max-width: none; }
+  .lead b { color: var(--paper); font-weight: 600; }
+
+  /* GSAP drives reveals; only hide when JS is active so a no-JS visitor still sees everything */
+  .js .reveal { opacity: 0; transform: translateY(36px); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  .grid3 { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: linear-gradient(160deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 14px; padding: 28px 26px; position: relative; overflow: hidden; transition: border-color .25s, transform .25s, box-shadow .25s; }
+  .card .tape { position:absolute; top:0; left:0; right:0; height:3px; background: var(--sig, var(--gold)); opacity:.85; }
+  .card .pr { font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.18em; color:var(--muted); }
+  .card h3 { font-family:'Fraunces',serif; font-weight:600; font-size:1.7rem; margin:.3rem 0 .1rem; }
+  .card .label { color:var(--muted); font-size:.92rem; }
+  .card .branch { font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--muted2); margin-top:14px; word-break:break-all; }
+
+  .flow { display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin-top:2rem; }
+  .step { background:var(--char); border:1px solid var(--line); border-radius:12px; padding:22px 20px; position:relative; }
+  .step .n { font-family:'Fraunces',serif; font-style:italic; font-size:2.2rem; color:var(--gold); line-height:1; }
+  .step p { font-size:.92rem; color:var(--muted); margin-top:.6rem; }
+  .step b { color:var(--paper); font-weight:600; }
+  .loopnote { margin-top:1.8rem; padding:18px 22px; border-left:2px solid var(--gold); background: rgba(227,178,90,0.05); border-radius: 0 10px 10px 0; font-size:.98rem; color:var(--muted); }
+  .loopnote b { color:var(--paper); }
+
+  .tbl { width:100%; border-collapse:collapse; margin-top:1.6rem; font-size:.96rem; }
+  .tbl th { text-align:left; font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:500; padding:0 12px 14px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  .tbl td { padding:15px 12px; border-bottom:1px solid var(--hairline); vertical-align:middle; }
+  .tbl tr:last-child td { border-bottom:none; }
+  .tbl .model { font-weight:600; color:var(--paper); }
+  .tbl .big { font-family:'Fraunces',serif; font-size:1.3rem; }
+  .tbl .num { font-family:'JetBrains Mono',monospace; white-space:nowrap; }
+  .tbl a.pr { text-decoration: none; transition: color .2s; }
+  .tbl a.pr:hover { color: var(--gold) !important; }
+
+  .pill { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.72rem; padding:3px 9px; border-radius:999px; border:1px solid var(--line); color:var(--muted); }
+  .pill.good { color:var(--c-gpt55); border-color: rgba(116,170,156,.4); }
+  .pill.warn { color:var(--c-opus-xhigh); border-color: rgba(204,120,92,.4); }
+
+  .bar { height:8px; border-radius:999px; background:var(--track); overflow:hidden; min-width:90px; }
+  .bar i { display:block; height:100%; border-radius:999px; background: var(--sig, var(--gold)); width:0; transition: width 1.2s cubic-bezier(.16,1,.3,1); }
+
+  .verdict-intro { text-align:center; }
+  .verdict-intro h2 { font-size: clamp(2.4rem, 7vw, 5rem); }
+  .verdict-intro .lead { margin: 1.4rem auto 0; }
+
+  .rank { min-height: 78vh; display:flex; align-items:center; }
+  .rank .inner { width:100%; }
+  .placetag { font-family:'Fraunces',serif; font-style:italic; font-size: clamp(1rem,2.4vw,1.4rem); color: var(--muted); letter-spacing:.02em; }
+  .rankrow { display:grid; grid-template-columns: minmax(0,1fr) auto; gap:30px; align-items:center; margin-top:.4rem; }
+  .rankname { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(2.4rem, 8vw, 5.4rem); line-height:.96; letter-spacing:-.02em; }
+  .rankname .eff { display:inline-block; font-family:'JetBrains Mono',monospace; font-weight:400; font-size:.28em; letter-spacing:.18em; text-transform:uppercase; color:var(--sig,var(--muted)); vertical-align:.55em; margin-left:.5em; }
+  .rankname .sub { display:block; font-family:'Hanken Grotesk',sans-serif; font-style:normal; font-weight:400; font-size: clamp(.9rem,1.6vw,1.05rem); color:var(--muted); letter-spacing:0; margin-top:.7rem; max-width:52ch; line-height:1.55; }
+  .score { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(4rem, 16vw, 11rem); line-height:.8; letter-spacing:-.04em; color: var(--sig, var(--gold)); text-align:right; }
+  .score small { font-size:.28em; color:var(--muted); font-weight:400; letter-spacing:0; }
+  .rankrule { height:1px; background:var(--line); margin-top:2.4rem; }
+
+  .awards { display:grid; grid-template-columns: repeat(2,1fr); gap:18px; margin-top:1rem; }
+  .award { background: linear-gradient(160deg,var(--char2),var(--char)); border:1px solid var(--line); border-radius:14px; padding:30px 28px; }
+  .award .crown { font-size:1.5rem; }
+  .award h4 { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin:.8rem 0 .5rem; }
+  .award .who { font-family:'Fraunces',serif; font-size:1.9rem; font-weight:600; }
+  .award p { color:var(--muted); font-size:.95rem; margin-top:.5rem; }
+  .award p b { color:var(--paper); font-weight:600; }
+
+  .finale { min-height: 100vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
+  .finale::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 50% 42%, rgba(227,178,90,0.22), rgba(227,178,90,0.04) 38%, transparent 64%); opacity:0; transition: opacity 1.6s ease; }
+  .finale.in::before { opacity:1; }
+  .finale .rays { position:absolute; top:42%; left:50%; width:160vmax; height:160vmax; transform: translate(-50%,-50%) scale(.4); opacity:0; background: repeating-conic-gradient(from 0deg, rgba(227,178,90,0.07) 0deg 6deg, transparent 6deg 12deg); transition: opacity 2s ease, transform 2.4s cubic-bezier(.16,1,.3,1); animation: spin 60s linear infinite; pointer-events:none; }
+  .finale.in .rays { opacity:1; transform: translate(-50%,-50%) scale(1); }
+  @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg) scale(1);} }
+  .finale .wrap { position:relative; z-index:2; }
+  .finale .trophy { font-size: clamp(2.6rem,7vw,4.4rem); transform: scale(.4); opacity:0; transition: all 1s cubic-bezier(.34,1.56,.64,1) .2s; }
+  .finale.in .trophy { transform:none; opacity:1; }
+  .finale .crowned { font-family:'JetBrains Mono',monospace; letter-spacing:.4em; text-transform:uppercase; font-size:.8rem; color:var(--gold); margin:1.6rem 0 .4rem; }
+  .finale h2 { font-family:'Fraunces',serif; font-weight:700; font-size: clamp(3.4rem, 13vw, 9rem); line-height:.92; letter-spacing:-.03em; background: var(--finale-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .finale .pr { font-family:'JetBrains Mono',monospace; color:var(--muted); letter-spacing:.2em; margin-top:1rem; }
+  .finale .why { max-width: 52ch; margin: 2rem auto 0; color: var(--muted); font-size:1.12rem; }
+  .finale .why b { color: var(--paper); font-weight:600; }
+  .finale .scorebadge { display:inline-block; margin-top:2.2rem; font-family:'Fraunces',serif; font-weight:600; font-size:2.6rem; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:.3em .8em; box-shadow: 0 0 40px var(--gold-glow); }
+  .finale .scorebadge small { font-size:.38em; color:var(--muted); font-weight:400; }
+  .caveat { margin-top:3rem; font-size:.95rem; color:var(--muted2); max-width:58ch; margin-left:auto; margin-right:auto; }
+  .caveat b { color: var(--muted); }
+  .coi { margin: 2.6rem auto 0; max-width: 62ch; text-align: left; padding: 22px 26px; border: 1px solid rgba(204,120,92,.45); border-left: 3px solid var(--c-opus-xhigh); border-radius: 0 12px 12px 0; background: rgba(204,120,92,0.07); font-size: .98rem; color: var(--muted); }
+  .coi b { color: var(--paper); }
+  .coi .coik { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.26em; text-transform:uppercase; color:var(--c-opus-xhigh); display:block; margin-bottom:.6rem; }
+
+  footer { padding: 80px 0 100px; text-align:center; color:var(--muted2); font-size:.84rem; }
+  footer .mono { color:var(--muted); }
+
+  .kicker a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .2s, color .2s; }
+  .kicker a:hover { color: var(--paper); border-color: var(--gold); }
+  a.card { text-decoration: none; color: inherit; display: block; }
+  a.card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 18px 50px rgba(0,0,0,.3); }
+  .card .pr { display: inline-flex; align-items: center; gap: 5px; }
+  .card .ar { font-size: .8em; opacity: .5; transition: opacity .2s, color .2s; }
+  a.card:hover .ar { opacity: 1; color: var(--gold); }
+  .finale .pr a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .2s; }
+  .finale .pr a:hover { border-color: var(--gold); }
+  .srclinks { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; }
+  .srclinks a { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .06em; color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 8px 15px; transition: color .2s, border-color .2s, transform .2s; display: inline-flex; align-items: center; gap: 7px; }
+  .srclinks a:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-1px); }
+  .srclinks a .ar { opacity: .6; }
+
+  .logo { fill: currentColor; flex: 0 0 auto; display: inline-block; }
+  .card h3 { display: flex; align-items: center; gap: 11px; }
+  .card h3 .logo { width: 1.05em; height: 1.05em; color: var(--sig, var(--gold)); }
+  .tbl .model { white-space: nowrap; }
+  .tbl .model .logo { width: 1.05em; height: 1.05em; vertical-align: -0.18em; margin-right: 9px; }
+  .ranklogo { display: inline-flex; margin-bottom: 18px; }
+  .ranklogo .logo { width: 44px; height: 44px; color: var(--sig, var(--gold)); }
+  .award .who { display: inline-flex; align-items: center; gap: 11px; }
+  .award .who .logo { width: 1em; height: 1em; }
+  .finale .winlogo { display: flex; justify-content: center; margin: 8px 0 4px; }
+  .finale .winlogo .logo { width: 52px; height: 52px; color: var(--gold); filter: drop-shadow(0 0 26px var(--gold-glow)); }
+  .srclinks a .logo { width: 1.05em; height: 1.05em; }
+
+  .controls { position: fixed; top: 16px; right: 16px; z-index: 1000; display: flex; gap: 8px; }
+  .ctrl { display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); background:var(--scrim); border:1px solid var(--line); border-radius:999px; padding:9px 14px; cursor:pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: color .2s, border-color .2s, background .2s, transform .2s; }
+  .ctrl:hover { color:var(--gold); border-color:var(--gold); transform: translateY(-1px); }
+  .ctrl .ico { font-size:.95rem; line-height:1; }
+
+  .modal { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 24px; background: var(--scrim); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s; }
+  .modal.open { opacity: 1; visibility: visible; }
+  .modal-card { width: min(760px, 100%); max-height: 86vh; overflow-y: auto; background: linear-gradient(165deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 18px; padding: 38px 40px 40px; position: relative; box-shadow: 0 40px 120px rgba(0,0,0,.45); transform: translateY(24px) scale(.98); transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .modal.open .modal-card { transform: none; }
+  .modal-card .x { position: absolute; top: 18px; right: 20px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 1.1rem; cursor: pointer; line-height: 1; transition: color .2s, border-color .2s, transform .2s; }
+  .modal-card .x:hover { color: var(--gold); border-color: var(--gold); transform: rotate(90deg); }
+  .modal-card .mkick { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); }
+  .modal-card h3 { font-family:'Fraunces',serif; font-weight:600; font-size:1.9rem; margin:.5rem 0 .3rem; }
+  .modal-card .msub { color: var(--muted); font-size:.95rem; margin-bottom: 1.6rem; }
+  .prompt-box { font-family:'JetBrains Mono',monospace; font-size:.84rem; line-height:1.75; color: var(--paper); white-space: pre-wrap; word-break: break-word; background: var(--track); border:1px solid var(--line); border-left:2px solid var(--gold); border-radius: 0 12px 12px 0; padding: 22px 24px; }
+  .prompt-box a { color: var(--gold); }
+  .modal-note { margin-top: 1.6rem; font-size:.84rem; color: var(--muted2); line-height:1.6; }
+  .modal-note .mono { color: var(--muted); }
+
+  .byline { font-family:'Fraunces',serif; font-style:italic; font-size:1.15rem; color:var(--paper); margin-top:42px; }
+  .byline b { font-style:normal; font-weight:600; }
+  .socials { display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin-top:18px; }
+  .socials a { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:8px 15px; transition:color .2s, border-color .2s, transform .2s, background .2s; }
+  .socials a:hover { color:var(--black); background:var(--gold); border-color:var(--gold); transform:translateY(-2px); }
+
+  .timetbl th:nth-child(2), .timetbl td:nth-child(2) { width: 260px; }
+
+  .hero-title-row { display: flex; align-items: center; gap: 40px; margin-top: 0.2em; width: fit-content; margin-left: auto; margin-right: auto; }
+  .logo-battle { position: relative; width: 140px; height: 285px; flex-shrink: 0; overflow: visible; }
+  .logo-battle::before { content: ""; position: absolute; left: 50%; top: 49px; width: 160px; height: 160px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, var(--gold-glow), transparent 70%); opacity: .5; pointer-events: none; }
+  .lb { position: absolute; left: 50px; top: 0; width: 82px; height: 82px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--char2); border: 1px solid var(--line); will-change: transform; }
+  .lb svg { width: 50px; height: 50px; }
+  .lb-cursor    { color: var(--c-composer); }
+  .lb-gpt       { color: var(--c-gpt55);  top: 90px; }   /* static fallback stack (no JS) */
+  .lb-anthropic { color: var(--c-opus-xhigh); top: 180px; }
+  .js .lb { top: 0; }   /* with JS, GSAP positions all three from a common origin via transforms */
+
+  @media (max-width: 720px) {
+    .grid3, .flow, .awards { grid-template-columns: 1fr; }
+    .rankrow { grid-template-columns: 1fr; gap: 8px; }
+    .score { text-align:left; }
+    .hero .sub { max-width: none; }
+    .hero-title-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .tbl, .tbl tbody { display: block; table-layout: auto; }
+    .tbl thead { display: none; }
+    .tbl tr { display: block; border: 1px solid var(--line); border-radius: 14px; padding: 6px 16px 14px; margin-bottom: 14px; }
+    .tbl td { display: block; border: none; border-top: 1px solid var(--hairline); padding: 9px 0; white-space: normal; width: auto !important; text-align: left; }
+    .tbl td:first-child { border-top: none; }
+    .tbl td::before { content: ""; display: block; color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
+    .timetbl td:nth-child(2)::before { content: "First-pass time"; }
+    .tokentbl td:nth-child(2)::before { content: "Quota consumed"; }
+    .fixtbl td:nth-child(2)::before { content: "Fix commits"; }
+    .fixtbl td:nth-child(3)::before { content: "Files"; }
+    .fixtbl td:nth-child(4)::before { content: "Lines"; }
+    .tbl td.model { font-size: 1.2rem; font-weight: 600; padding-top: 6px; }
+    .tbl td.model::before { content: none; }
+    .tbl .bar { display: none; }
+    .tbl td.num { white-space: normal; }
+    .tbl td.num.big { font-size: 1.1rem; }
+  }
+
+  .sumgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 2rem; }
+  .sumcard { background: linear-gradient(160deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .sumcard .stape { height: 3px; background: var(--sig, var(--gold)); opacity: .85; }
+  .sumcard .sbody { padding: 18px 20px 12px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+  .sumcard .sbody-left { min-width: 0; }
+  .sumcard .sbody-right { text-align: right; flex-shrink: 0; }
+  .sumcard .sbody-right .slbl { text-align: right; }
+  .sumcard .sco { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--sig, var(--gold)); opacity: .7; }
+  .sumcard .sname { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.35rem; margin: .2rem 0 0; color: var(--paper); display: flex; align-items: center; gap: 8px; }
+  .sumcard .sname .logo { width: .85em; height: .85em; color: var(--sig, var(--gold)); flex-shrink: 0; }
+  .sumcard .srow { border-top: 1px solid var(--hairline); padding: 9px 20px; }
+  .sumcard .srow-split { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .sumcard .slbl { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sig, var(--gold)); margin-bottom: 3px; }
+  .sumcard .sval { font-size: .94rem; color: var(--paper); }
+  .sumcard .sval.muted { color: var(--muted); font-size: .88rem; }
+  .sumcard .sval.big-score { font-family: 'Fraunces', serif; font-weight: 600; font-size: 2rem; color: var(--sig, var(--gold)); line-height: 1; padding-bottom: 4px; }
+  .sumcard .sval.big-score small { font-size: .38em; color: var(--muted); font-weight: 400; }
+  @media (max-width: 980px) { .sumgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 720px) { .sumgrid { grid-template-columns: 1fr; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1 !important; transform:none !important; transition:none; }
+    .finale .rays { animation:none; }
+    html { scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BRAND LOGO SPRITE -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="logo-openai" viewBox="0 0 24 24"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></symbol>
+  <symbol id="logo-anthropic" viewBox="0 0 24 24"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></symbol>
+  <symbol id="logo-cursor" viewBox="0 0 24 24"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+</svg>
+
+<!-- FLOATING CONTROLS -->
+<div class="controls">
+  <button class="ctrl" id="promptBtn" aria-label="View the assignment"><span class="ico">❝</span><span>The brief</span></button>
+  <button class="ctrl" id="themeToggle" aria-label="Toggle color theme"><span class="ico" id="themeIco">🖥️</span><span id="themeLbl">Auto</span></button>
+</div>
+
+<!-- BRIEF MODAL -->
+<div class="modal" id="promptModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="promptTitle">
+  <div class="modal-card">
+    <button class="x" id="promptClose" aria-label="Close">✕</button>
+    <div class="mkick">The brief</div>
+    <h3 id="promptTitle">The assignment</h3>
+    <div class="msub">The settled design each run had to implement — condensed from issue #879.</div>
+    <div class="prompt-box"><a href="https://github.com/richkuo/go-trader/issues/879" target="_blank" rel="noopener">Issue #879</a> — feat(regime): shared regime bundle per (asset, interval, period) with 3-state + 7-state views and per-strategy override.
+
+Today every strategy computes the market-regime label privately, inside its own per-cycle Python check subprocess — there is no single source of truth. Move ALL regime computation into a Go-scheduler-owned global calculator: one dedicated read-only subprocess per distinct signature per cycle, results in a per-cycle store, injected into every consumer — entry gating, position stamping, dynamic TP-SL, directional policy, the dashboard — and bring flat manual + options into the same system.
+
+Failure policy — settled decision (b): if the regime subprocess fails, CLEAR the store entry to empty (regime=-) and fail open in every consumer, with throttled alerts. Rejected alternatives, named in the issue: (a) reuse the last known label, (c) skip the cycle. Do not implement them.</div>
+    <p class="modal-note">✎ <b>Label &amp; effort note.</b> Model mapping verified from each PR's branch name and <span class="mono">LLM:</span> footer: <span class="mono">#899</span> = GPT-5 (<span class="mono">codex/</span>), <span class="mono">#900</span> = Composer 2.5 (Cursor), <span class="mono">#901</span> + <span class="mono">#903</span> = Opus 4.8 (<span class="mono">cc/</span>), <span class="mono">#902</span> = GPT-5.5 (<span class="mono">codex/</span>), <span class="mono">#910</span> = Fable 5 (<span class="mono">cc/</span>). One correction: #903's footer says <span class="mono">high</span>, but the operator confirms that run was <span class="mono">xhigh</span> — this report uses the operator-confirmed value.</p>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="kicker reveal in"><a href="https://github.com/richkuo/go-trader" target="_blank" rel="noopener">Go-Trader</a> · <a href="https://github.com/richkuo/go-trader/issues/879" target="_blank" rel="noopener">Issue&nbsp;#879</a> · Bake-off Episode&nbsp;3</div>
+  <div class="wrap">
+    <div class="hero-title-row reveal in d1">
+      <div class="logo-battle" aria-hidden="true">
+        <div class="lb lb-cursor"><svg class="logo"><use href="#logo-cursor"/></svg></div>
+        <div class="lb lb-gpt"><svg class="logo"><use href="#logo-openai"/></svg></div>
+        <div class="lb lb-anthropic"><svg class="logo"><use href="#logo-anthropic"/></svg></div>
+      </div>
+      <h1 class="display">Six runs.<br />One refactor.<br /><em>The judge picked itself.</em></h1>
+    </div>
+    <p class="sub reveal in d2"><b>Six runs. Five models. One winner.</b> Fable 5, Opus 4.8 at two effort levels, GPT-5.5, GPT-5, and Composer 2.5 each rebuilt the same safety-critical plumbing in a live trading bot — fully independently, from one issue. We measured what it <b>cost</b>, how long it <b>took</b>, and how <b>correct</b> the code actually was.</p>
+    <p class="sub serif-it reveal in d3" style="color:var(--gold);font-size:1.15rem;margin-top:1.8rem;text-align:center;">One more thing: the judge is one of the contestants. Keep scrolling — the winner is at the bottom.</p>
+  </div>
+  <div class="scrollcue">scroll ↓</div>
+</header>
+
+<main>
+
+<!-- THE ASSIGNMENT -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">i.</span><span>The assignment</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">One regime to rule them all.</h2>
+    <p class="lead reveal d1"><b style="color:var(--gold)">In plain English</b> — the bot decides when to trade partly by classifying the market's <b>regime</b>: trending up, trending down, ranging, with finer-grained flavors. Until now, <b>every strategy computed that label privately</b>, inside its own per-cycle subprocess — two strategies on the same coin redid the same math, and nothing else could ask "what's the regime right now?" Issue&nbsp;#879 moves it all into <b>one Go-scheduler-owned calculator</b>: computed once per cycle in a per-cycle store, injected into every consumer — entry gates, position stamping, dynamic stop-loss, the dashboard, even strategies sitting flat. The issue also settles the scariest question in writing: if the calculator <b>fails</b>, clear the value to empty and <b>fail open</b> — and it names the two alternatives it considered and rejected. This is a refactor of <b>safety-critical plumbing</b>, not a feature bolt-on. Spec-reading discipline was a scored event.</p>
+    <div class="srclinks reveal d2" style="justify-content:center;margin-top:28px">
+      <a href="https://github.com/richkuo/go-trader/issues/879" target="_blank" rel="noopener">Read the full issue #879 on GitHub <span class="ar">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTESTANTS -->
+<section style="background:linear-gradient(180deg,transparent,rgba(227,178,90,0.025),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">ii.</span><span>The contestants — the biggest field yet</span><span class="ln"></span></div>
+    <div class="grid3">
+      <a class="card reveal" href="https://github.com/richkuo/go-trader/pull/899" target="_blank" rel="noopener" style="--sig:var(--c-gpt5)">
+        <div class="tape"></div>
+        <div class="label">OpenAI · Codex · high</div>
+        <h3><svg class="logo"><use href="#logo-openai"/></svg>GPT-5</h3>
+        <div class="pr">PR #899 <span class="ar">↗</span></div>
+        <div class="branch">codex/issue-879-regime-bundle</div>
+      </a>
+      <a class="card reveal d1" href="https://github.com/richkuo/go-trader/pull/900" target="_blank" rel="noopener" style="--sig:var(--c-composer)">
+        <div class="tape"></div>
+        <div class="label">Cursor · default</div>
+        <h3><svg class="logo"><use href="#logo-cursor"/></svg>Composer 2.5</h3>
+        <div class="pr">PR #900 <span class="ar">↗</span></div>
+        <div class="branch">feat/issue-879-shared-regime-bundle</div>
+      </a>
+      <a class="card reveal d2" href="https://github.com/richkuo/go-trader/pull/901" target="_blank" rel="noopener" style="--sig:var(--c-opus-high)">
+        <div class="tape"></div>
+        <div class="label">Anthropic · Claude Code · high</div>
+        <h3><svg class="logo"><use href="#logo-anthropic"/></svg>Opus 4.8</h3>
+        <div class="pr">PR #901 <span class="ar">↗</span></div>
+        <div class="branch">cc/feat/issue-879-shared-regime-bundle</div>
+      </a>
+      <a class="card reveal" href="https://github.com/richkuo/go-trader/pull/902" target="_blank" rel="noopener" style="--sig:var(--c-gpt55)">
+        <div class="tape"></div>
+        <div class="label">OpenAI · Codex · xhigh</div>
+        <h3><svg class="logo"><use href="#logo-openai"/></svg>GPT-5.5</h3>
+        <div class="pr">PR #902 <span class="ar">↗</span></div>
+        <div class="branch">codex/issue-879-global-regime</div>
+      </a>
+      <a class="card reveal d1" href="https://github.com/richkuo/go-trader/pull/903" target="_blank" rel="noopener" style="--sig:var(--c-opus-xhigh)">
+        <div class="tape"></div>
+        <div class="label">Anthropic · Claude Code · xhigh</div>
+        <h3><svg class="logo"><use href="#logo-anthropic"/></svg>Opus 4.8</h3>
+        <div class="pr">PR #903 <span class="ar">↗</span></div>
+        <div class="branch">cc/feat/879-shared-regime-bundle</div>
+      </a>
+      <a class="card reveal d2" href="https://github.com/richkuo/go-trader/pull/910" target="_blank" rel="noopener" style="--sig:var(--c-fable)">
+        <div class="tape"></div>
+        <div class="label">Anthropic · Claude Code · high</div>
+        <h3><svg class="logo"><use href="#logo-anthropic"/></svg>Fable 5</h3>
+        <div class="pr">PR #910 <span class="ar">↗</span></div>
+        <div class="branch">cc/regime-global-store-879</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">iii.</span><span>How they were judged</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Six blind reviews.</h2>
+    <p class="lead reveal d1">One independent, <b>blind reviewer per PR</b> — six reviewers, each sealed off from the other five branches. PR descriptions were treated as <b>claims to falsify</b>, not facts.</p>
+    <div class="flow">
+      <div class="step reveal"><div class="n">01</div><p><b>Read the issue.</b> Enumerate all 8 acceptance criteria.</p></div>
+      <div class="step reveal d1"><div class="n">02</div><p><b>Check out the PR at HEAD.</b> Verify every claim against the actual code, with <span class="mono">file:line</span> citations.</p></div>
+      <div class="step reveal d2"><div class="n">03</div><p><b>Build &amp; run everything.</b> <span class="mono">go build</span>, <span class="mono">go vet</span>, the full Go test suite, and the complete Python suites — locally.</p></div>
+      <div class="step reveal d3"><div class="n">04</div><p><b>Score /100</b> against the acceptance criteria. Report the misses, cited.</p></div>
+    </div>
+    <div class="loopnote reveal">All six PRs pass <b>every</b> local check — <span class="mono" style="color:var(--c-gpt55)">go build</span>, <span class="mono" style="color:var(--c-gpt55)">go vet</span>, the full Go and Python suites. Hold that thought: <b>a fully green CI does not mean the feature works.</b> This episode proves it in the harshest way possible.</div>
+    <div class="loopnote reveal d1" style="border-left-color:var(--c-opus-xhigh);background:rgba(204,120,92,0.05);">⚖️ <b>A note on the judge.</b> The reviewers all ran on a single model — and <b>that model is one of the six contestants</b>. We'll name it at the bottom, next to the result it produced. Keep scrolling.</div>
+  </div>
+</section>
+
+<!-- TIME -->
+<section style="background:linear-gradient(180deg,transparent,rgba(227,178,90,0.025),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">iv.</span><span>Time to first pass</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">How long it took.</h2>
+    <p class="lead reveal d1">Wall-clock to produce the first pass: <b>11 minutes to 53 minutes</b> — a <b>5× spread</b> for the same issue. And it runs almost exactly opposite to the final scores.</p>
+    <table class="tbl timetbl reveal d1">
+      <thead><tr><th>Model</th><th>First-pass time</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-composer)"><use href="#logo-cursor"/></svg>Composer 2.5</td>
+          <td class="num big">11<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-composer);margin-top:8px"><i data-w="21"></i></div></td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>GPT-5</td>
+          <td class="num big">16<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-gpt5);margin-top:8px"><i data-w="30"></i></div></td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt55)"><use href="#logo-openai"/></svg>GPT-5.5</td>
+          <td class="num big">19.5<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-gpt55);margin-top:8px"><i data-w="37"></i></div></td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-fable)"><use href="#logo-anthropic"/></svg>Fable 5</td>
+          <td class="num big">29.5<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-fable);margin-top:8px"><i data-w="56"></i></div></td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-opus-high)"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="mono" style="font-size:.7em;color:var(--muted2)">high</span></td>
+          <td class="num big">42<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-opus-high);margin-top:8px"><i data-w="79"></i></div></td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-opus-xhigh)"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="mono" style="font-size:.7em;color:var(--muted2)">xhigh</span></td>
+          <td class="num big">53<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-opus-xhigh);margin-top:8px"><i data-w="100"></i></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- QUOTA COST -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">v.</span><span>Quota cost</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">The quota bill.</h2>
+    <p class="lead reveal d1">First-pass spend. Units differ by provider, so these aren't directly comparable — but the gap in <b>magnitude</b> is the story: from <b>~2% of a monthly plan</b> to <b>half a 5-hour window in under 20 minutes</b>.</p>
+    <table class="tbl tokentbl reveal d1">
+      <thead><tr><th>Model</th><th>Quota consumed</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-composer)"><use href="#logo-cursor"/></svg>Composer 2.5</td>
+          <td class="num" style="color:var(--muted)">~2% of Cursor Pro monthly</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-opus-high)"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="mono" style="font-size:.7em;color:var(--muted2)">high</span></td>
+          <td class="num" style="color:var(--muted)">14% of a 5-hour window</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-opus-xhigh)"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="mono" style="font-size:.7em;color:var(--muted2)">xhigh</span></td>
+          <td class="num" style="color:var(--muted)">20% of a 5-hour window</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-fable)"><use href="#logo-anthropic"/></svg>Fable 5</td>
+          <td class="num" style="color:var(--muted)">27% of a 5-hour window</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>GPT-5</td>
+          <td class="num" style="color:var(--muted)">44% of a 5-hour window · 7% of weekly</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt55)"><use href="#logo-openai"/></svg>GPT-5.5</td>
+          <td class="num" style="color:var(--muted)"><b style="color:var(--paper)">51% of a 5-hour window</b> · 8% of weekly — in 19.5 min</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="loopnote reveal">⛽ <b>Highest burn rate ever recorded in this series:</b> GPT-5.5 at xhigh consumed <b>half a 5-hour quota window in under twenty minutes</b>. Composer, at the other extreme, was roughly <b>10× cheaper than the Opus runs</b> — and 5× faster.</div>
+  </div>
+</section>
+
+<!-- FIX COMMITS + FOOTPRINT -->
+<section style="background:linear-gradient(180deg,transparent,rgba(227,178,90,0.025),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">vi.</span><span>Fix commits &amp; footprint</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">How many tries — and how much code.</h2>
+    <p class="lead reveal d1">Fix commits after the first pass (the fix→re-review loops ran outside GitHub, so branch history stands in for re-review count) — and how big each diff was.</p>
+    <table class="tbl fixtbl reveal d1">
+      <thead><tr><th>Model</th><th>Fix commits</th><th>Files</th><th>Lines</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-opus-xhigh)"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="mono" style="font-size:.7em;color:var(--muted2)">xhigh</span> <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/903" target="_blank" rel="noopener">#903</a></td>
+          <td><span class="pill good">0 — single commit</span></td>
+          <td class="num">20</td>
+          <td class="num">+1,241 / −46</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>GPT-5 <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/899" target="_blank" rel="noopener">#899</a></td>
+          <td><span class="pill">1</span></td>
+          <td class="num">22</td>
+          <td class="num">+1,070 / −68</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-composer)"><use href="#logo-cursor"/></svg>Composer 2.5 <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/900" target="_blank" rel="noopener">#900</a></td>
+          <td><span class="pill">1</span></td>
+          <td class="num">27</td>
+          <td class="num">+1,440 / −112</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-opus-high)"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="mono" style="font-size:.7em;color:var(--muted2)">high</span> <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/901" target="_blank" rel="noopener">#901</a></td>
+          <td><span class="pill">1</span></td>
+          <td class="num">27</td>
+          <td class="num">+2,334 / −53</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt55)"><use href="#logo-openai"/></svg>GPT-5.5 <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/902" target="_blank" rel="noopener">#902</a></td>
+          <td><span class="pill">1</span></td>
+          <td class="num">19</td>
+          <td class="num">+1,237 / −103</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-fable)"><use href="#logo-anthropic"/></svg>Fable 5 <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/910" target="_blank" rel="noopener">#910</a></td>
+          <td><span class="pill warn">2</span></td>
+          <td class="num">20</td>
+          <td class="num">+1,749 / −46</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="loopnote reveal">📐 <b>Side note — diff size is not scored.</b> Diffs ranged from <b>+1,070 to +2,334 lines</b> for the same issue, and size predicted nothing about the final order — in either direction. The one footnote worth keeping: <b>#903 delivered its result in a single commit with zero fix rounds</b>, the only run in the field to do so.</div>
+  </div>
+</section>
+
+<!-- VERDICT INTRO -->
+<section class="verdict-intro">
+  <div class="wrap">
+    <div class="kicker reveal">The reckoning</div>
+    <h2 class="display reveal d1">But which one was<br /><span class="serif-it" style="color:var(--gold)">actually</span> right?</h2>
+    <p class="lead reveal d2">Time and quota tell you about effort. They don't tell you whether <b>a live trading-safety mechanism still fires</b>. All six were scored against the issue's 8 acceptance criteria — every claim verified against the code at HEAD.</p>
+    <p class="lead serif-it reveal d3" style="margin-top:1.6rem;color:var(--muted2)">Counting down, from sixth place…</p>
+  </div>
+</section>
+
+<!-- RANK 6 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">— Sixth place —</div>
+      <div class="rankrow" style="--sig:var(--c-composer)">
+        <div>
+          <span class="ranklogo"><svg class="logo"><use href="#logo-cursor"/></svg></span>
+          <div class="rankname">Composer 2.5
+            <span class="sub">Fastest (<b>11 min</b>), cheapest (~2% of a monthly plan), and the broadest cosmetic sweep of the field — status JSON, web UI, even Discord output. One problem: the new regime subprocess reads market-data rows as dictionaries when the fetcher returns lists, so it <b>crashes on every single real invocation</b>. The store stays permanently empty, and because every consumer was switched away from the old inline math, <b>regime entry-gating — a live trading-safety mechanism — silently stops firing</b>. The kicker: CI stayed green the whole way down, because the only subprocess test exits before reaching the broken line.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="38">38</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANK 5 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">— Fifth place —</div>
+      <div class="rankrow" style="--sig:var(--c-gpt5)">
+        <div>
+          <span class="ranklogo"><svg class="logo"><use href="#logo-openai"/></svg></span>
+          <div class="rankname">GPT-5<span class="eff">high</span>
+            <span class="sub">Honest description, clean build — but it <b>rebuilt the Python label classifiers in Go</b> instead of emitting them from Python, and the two copies disagree: a zero-ATR market maps to a different label family, and a 4-decimal rounding step flips labels exactly at thresholds. It shipped <b>zero Go-vs-Python parity tests</b> — the one safety net that redesign demanded. Stale window labels also leak through on bundle failure, and there's no dashboard surface at all.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="66">66</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANK 4 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">— Fourth place —</div>
+      <div class="rankrow" style="--sig:var(--c-gpt55)">
+        <div>
+          <span class="ranklogo"><svg class="logo"><use href="#logo-openai"/></svg></span>
+          <div class="rankname">GPT-5.5<span class="eff">xhigh</span>
+            <span class="sub">A genuinely solid, race-free core that passes everything. But where the issue enumerated three failure policies, picked (b), and documented why the others were rejected, GPT-5.5 quietly <b>invented a fourth option of its own</b> — silent inline recompute instead of clear-to-empty. Defensible engineering, except the whole point of that section was that the decision had already been made. No portfolio dashboard surface, no backtest work, most of the parity-test matrix unwritten — and the highest burn rate of the field.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="70">70</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANK 3 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">— Third place —</div>
+      <div class="rankrow" style="--sig:var(--c-opus-xhigh)">
+        <div>
+          <span class="ranklogo"><svg class="logo"><use href="#logo-anthropic"/></svg></span>
+          <div class="rankname">Opus 4.8<span class="eff">xhigh</span>
+            <span class="sub">The most disciplined run of the field: <b>a single commit, zero fix rounds</b>, textbook reuse, and an exact implementation of the failure policy. It also shipped the field's subtlest real bug: its subprocess fetches <b>spot</b> candles for OKX <b>perpetuals</b>, so swap strategies silently read a regime computed on the wrong market — falsifying the PR's "byte-identical" claim. The effort-knob surprise: <b>xhigh scored below high</b>, after 11 more minutes of deliberation.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="84">84</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANK 2 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">— Second place —</div>
+      <div class="rankrow" style="--sig:var(--c-opus-high)">
+        <div>
+          <span class="ranklogo"><svg class="logo"><use href="#logo-anthropic"/></svg></span>
+          <div class="rankname">Opus 4.8<span class="eff">high</span>
+            <span class="sub"><b>Zero correctness bugs found</b> — the only contestant with a clean sheet. It deliberately replaced the spec'd two-layer store with a per-window-exact redesign, well-argued and openly disclosed in the PR body, and shipped the only live/backtest parity test in the top three. The misses: <b>options never migrated off inline compute</b> (the store is populated <i>from</i> the result — the reverse direction), and a "no double network fetch" claim that's only true on one platform. The biggest diff of the field, +2,334 lines.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="86">86</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIAL AWARDS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">✦</span><span>Before the winner — four notes</span><span class="ln"></span></div>
+    <div class="awards">
+      <div class="award reveal" style="--sig:var(--c-composer)">
+        <div class="crown">⚡</div>
+        <h4>Fastest &amp; cheapest</h4>
+        <div class="who" style="color:var(--c-composer)"><svg class="logo"><use href="#logo-cursor"/></svg>Composer 2.5</div>
+        <p>A full first draft in <b>11 min at ~2% of a monthly quota</b> — 5× faster and ~10× cheaper than the Opus runs. It also produced the one PR that crashes in production.</p>
+      </div>
+      <div class="award reveal d1" style="--sig:var(--c-opus-xhigh)">
+        <div class="crown">🎯</div>
+        <h4>Only zero-fix-commit run</h4>
+        <div class="who" style="color:var(--c-opus-xhigh)"><svg class="logo"><use href="#logo-anthropic"/></svg>Opus 4.8 xhigh</div>
+        <p><b>One commit, zero fix rounds</b>, second-smallest diff. Maximum polish — yet more deliberation didn't buy more correctness: it scored two points below its own high-effort twin.</p>
+      </div>
+      <div class="award reveal" style="--sig:var(--c-gpt55)">
+        <div class="crown">⛽</div>
+        <h4>Highest burn rate</h4>
+        <div class="who" style="color:var(--c-gpt55)"><svg class="logo"><use href="#logo-openai"/></svg>GPT-5.5</div>
+        <p><b>51% of a 5-hour quota window in 19.5 minutes</b> — the fastest quota burn ever recorded in this series, for a fourth-place finish.</p>
+      </div>
+      <div class="award reveal d1" style="--sig:var(--c-opus-high)">
+        <div class="crown">💡</div>
+        <h4>Shared insight</h4>
+        <div class="who" style="color:var(--c-opus-high)"><svg class="logo"><use href="#logo-anthropic"/></svg>The Claude Code trio</div>
+        <p>All three Claude Code runs <b>independently discovered the same simplification</b> — the issue's two-layer store collapses to one in this codebase — and argued it openly in their PR bodies. None of the Codex or Cursor runs surfaced it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WINNER FINALE -->
+<section class="finale" id="finale">
+  <div class="rays"></div>
+  <div class="wrap">
+    <div class="trophy">🏆</div>
+    <div class="crowned">— First place —</div>
+    <div class="winlogo"><svg class="logo"><use href="#logo-anthropic"/></svg></div>
+    <h2>Fable 5</h2>
+    <div class="pr"><a href="https://github.com/richkuo/go-trader/pull/910" target="_blank" rel="noopener">PR #910 ↗</a> · cc/regime-global-store-879</div>
+    <p class="why">The only PR that migrated <b>every runtime consumer</b> onto the store — six dispatch sites, options, flat manual, every check script — with the failure policy implemented <b>exactly as the issue specified</b>, then hardened past it: a phase time-budget, a store seal against late writes, and a generation guard against cross-cycle stragglers, each with its own regression test. Every line of label math stayed in Python, single-sourced. Its misses were real but bounded: the backtest bullet untouched, a context-cancel leak on kill-switch cycles, one-bar staleness edges.</p>
+    <div class="scorebadge"><span class="count" data-to="91">91</span><small>&nbsp;/100</small></div>
+    <div class="coi">
+      <span class="coik">⚖️ Conflict of interest — read before trusting the margin</span>
+      <b>The judge is Fable 5. The winner is Fable 5.</b> Each PR was scored by an independent, <b>blind per-PR sub-reviewer</b>, but the family bias is structural — and the margin over <b>Opus 4.8 high (86)</b> is just <b>5 points</b>. Read that margin with the bias in mind. What doesn't depend on taste: every finding above is <b>file:line-cited and falsifiable</b> — a crash on every invocation, a wrong-market data feed, an explicitly rejected failure policy, an unmigrated consumer. Check out the branches and verify.</div>
+    <p class="caveat">The headline isn't the top-two order; it's that for the third episode running, the <b>cheapest, fastest runs got the safety-critical detail wrong</b> — and the failure mode escalated from "subtle geometry bug" to "feature does not run, CI green."</p>
+  </div>
+</section>
+
+<!-- SUMMARY CARDS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">✦</span><span>Summary</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">All six, at a glance.</h2>
+    <div class="sumgrid">
+
+      <div class="sumcard reveal" style="--sig:var(--c-fable)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic · high</div>
+            <div class="sname"><svg class="logo"><use href="#logo-anthropic"/></svg>Fable 5</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="91">91</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">First-pass time</div><div class="sval">29.5 min</div></div><div style="text-align:right"><div class="slbl">Fix commits</div><div class="sval">2</div></div></div>
+        <div class="srow"><div class="slbl">Quota</div><div class="sval muted">27% of a 5-hour window</div></div>
+      </div>
+
+      <div class="sumcard reveal d1" style="--sig:var(--c-opus-high)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic · high</div>
+            <div class="sname"><svg class="logo"><use href="#logo-anthropic"/></svg>Opus 4.8</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="86">86</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">First-pass time</div><div class="sval">42 min</div></div><div style="text-align:right"><div class="slbl">Fix commits</div><div class="sval">1</div></div></div>
+        <div class="srow"><div class="slbl">Quota</div><div class="sval muted">14% of a 5-hour window</div></div>
+      </div>
+
+      <div class="sumcard reveal d2" style="--sig:var(--c-opus-xhigh)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic · xhigh</div>
+            <div class="sname"><svg class="logo"><use href="#logo-anthropic"/></svg>Opus 4.8</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="84">84</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">First-pass time</div><div class="sval">53 min</div></div><div style="text-align:right"><div class="slbl">Fix commits</div><div class="sval">0</div></div></div>
+        <div class="srow"><div class="slbl">Quota</div><div class="sval muted">20% of a 5-hour window</div></div>
+      </div>
+
+      <div class="sumcard reveal" style="--sig:var(--c-gpt55)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">OpenAI · xhigh</div>
+            <div class="sname"><svg class="logo"><use href="#logo-openai"/></svg>GPT-5.5</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="70">70</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">First-pass time</div><div class="sval">19.5 min</div></div><div style="text-align:right"><div class="slbl">Fix commits</div><div class="sval">1</div></div></div>
+        <div class="srow"><div class="slbl">Quota</div><div class="sval muted">51% of 5h · 8% of weekly</div></div>
+      </div>
+
+      <div class="sumcard reveal d1" style="--sig:var(--c-gpt5)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">OpenAI · high</div>
+            <div class="sname"><svg class="logo"><use href="#logo-openai"/></svg>GPT-5</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="66">66</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">First-pass time</div><div class="sval">16 min</div></div><div style="text-align:right"><div class="slbl">Fix commits</div><div class="sval">1</div></div></div>
+        <div class="srow"><div class="slbl">Quota</div><div class="sval muted">44% of 5h · 7% of weekly</div></div>
+      </div>
+
+      <div class="sumcard reveal d2" style="--sig:var(--c-composer)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Cursor · default</div>
+            <div class="sname"><svg class="logo"><use href="#logo-cursor"/></svg>Composer 2.5</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="38">38</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">First-pass time</div><div class="sval">11 min</div></div><div style="text-align:right"><div class="slbl">Fix commits</div><div class="sval">1</div></div></div>
+        <div class="srow"><div class="slbl">Quota</div><div class="sval muted">~2% of Cursor Pro monthly</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EPILOGUE -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">✦</span><span>Epilogue — what ships next</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Still open.</h2>
+    <p class="lead reveal d1">As of scoring, issue&nbsp;#879 is <b>still open</b> — none of the six PRs has merged. But the precedent is two-for-two: Episodes&nbsp;1 and&nbsp;2 both ended with a <b>best-of-N synthesis built on the winner's branch</b>, with the strongest parts of the field folded in. If the pattern holds, <b style="color:var(--c-fable)">Fable 5's #910</b> — the fully-migrated store and the hardened failure policy — will be the foundation of what ships. Watch the issue for the close.</p>
+    <div class="srclinks reveal d2" style="justify-content:flex-start;margin-top:24px">
+      <a href="https://github.com/richkuo/go-trader/issues/879" target="_blank" rel="noopener">Issue #879 · watch for the synthesis <span class="ar">↗</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="srclinks">
+    <a href="https://github.com/richkuo/go-trader" target="_blank" rel="noopener">go-trader repo <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/issues/879" target="_blank" rel="noopener">Issue #879 <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/910" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-fable)"><use href="#logo-anthropic"/></svg>PR #910 · Fable 5 <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/901" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-opus-high)"><use href="#logo-anthropic"/></svg>PR #901 · Opus 4.8 high <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/903" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-opus-xhigh)"><use href="#logo-anthropic"/></svg>PR #903 · Opus 4.8 xhigh <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/902" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-gpt55)"><use href="#logo-openai"/></svg>PR #902 · GPT-5.5 <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/899" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>PR #899 · GPT-5 <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/900" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-composer)"><use href="#logo-cursor"/></svg>PR #900 · Composer <span class="ar">↗</span></a>
+  </div>
+  <div class="byline">by <b>Rich Kuo</b> — product engineer building creative &amp; technical products</div>
+  <div class="socials">
+    <a href="https://www.richkuo.com" target="_blank" rel="noopener">Newsletter</a>
+    <a href="https://github.com/richkuo" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/richkuo" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://youtube.com/@richkuo7" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/richkuo7" target="_blank" rel="noopener">X</a>
+    <a href="https://tiktok.com/@rich_kuo1" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://instagram.com/richkuo7" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://discord.gg/44BykmWZsP" target="_blank" rel="noopener">Discord</a>
+  </div>
+  <div class="mono" style="margin-top:32px">Episode&nbsp;3 · Issue&nbsp;#879 · Global Regime Calculator · Six-run bake-off</div>
+  <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px">
+    <span>Generation metrics supplied by operator</span>
+    <span>Scoring/judging: Fable 5 — also authored the winning PR #910 (disclosed conflict of interest)</span>
+    <span>Scores from independent, blind per-PR reviews against HEAD, with file:line citations</span>
+    <span>Created with LLM: Fable 5 | high | Harness: Claude Code</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+<script>
+  /* ---- Motion layer: GSAP + ScrollTrigger ---- */
+  gsap.registerPlugin(ScrollTrigger);
+  const mm = gsap.matchMedia();
+
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // Hero logo battle — one logo per company (Anthropic, OpenAI, Cursor) FIGHT
+    // for first place. The logo in last crouches, then explodes up to seize the
+    // top "crown" spot, shouldering the reigning champ aside; the champ recoils
+    // and tumbles down a rung while everyone shuffles. One master timeline
+    // rotates the crown through all three, returning to the start after three
+    // takeovers so the loop is seamless.
+    const lbs = gsap.utils.toArray('.lb');
+    const crown = { y: 8,   scale: 1.20, autoAlpha: 1,   boxShadow: '0 0 30px rgba(227,178,90,0.60)' }; // 1st
+    const p2    = { y: 100, scale: 0.92, autoAlpha: 0.8, boxShadow: '0 0 0px rgba(227,178,90,0)' };     // 2nd
+    const p3    = { y: 190, scale: 0.78, autoAlpha: 0.5, boxShadow: '0 0 0px rgba(227,178,90,0)' };     // 3rd (last)
+    lbs.forEach((el) => gsap.set(el, { left: 29, x: 0 }));
+    gsap.set(lbs[0], crown); gsap.set(lbs[1], p2); gsap.set(lbs[2], p3);
+
+    const fight = gsap.timeline({ repeat: -1 });
+    let order = [...lbs];          // [champ, 2nd, 3rd]
+    const STEP = 2.4;
+    for (let s = 0; s < 3; s++) {
+      const at = s * STEP;
+      const [champ, second, third] = order;
+      fight
+        .to(third,  { y: 206, scale: 0.73, duration: 0.18, ease: 'power2.in' }, at)                       // crouch — gather to pounce
+        .to(third,  { ...crown, duration: 0.6, ease: 'back.out(2.6)' }, at + 0.18)                        // explode up, seize the crown
+        .to(champ,  { x: 34, duration: 0.12, ease: 'power3.out' }, at + 0.52)                             // shouldered aside on impact
+        .to(champ,  { ...p2, x: 0, duration: 0.6, ease: 'bounce.out' }, at + 0.64)                        // tumbles down to 2nd
+        .to(second, { ...p3, duration: 0.55, ease: 'power2.inOut' }, at + 0.22)                           // old 2nd bumped to last
+        .to(third,  { x: 7, duration: 0.09, yoyo: true, repeat: 5, ease: 'power2.inOut' }, at + 0.74)     // triumphant wobble
+        .to(third,  { x: 0, duration: 0.12 }, at + 1.36)
+        .to(second, { y: 178, duration: 0.22, yoyo: true, repeat: 1, ease: 'power2.inOut' }, at + 1.7);   // the new last twitches, eager for its turn
+      order = [third, champ, second];   // crown rotates; identity after 3 steps
+    }
+
+    // Hero intro on load.
+    gsap.from('.hero .reveal', { opacity: 0, y: 30, duration: 0.9, stagger: 0.12, ease: 'power3.out', delay: 0.15 });
+
+    // Scroll reveals below the hero — ScrollTrigger.batch.
+    const below = gsap.utils.toArray('.reveal').filter(el => !el.closest('.hero'));
+    gsap.set(below, { opacity: 0, y: 40 });
+    ScrollTrigger.batch(below, {
+      start: 'top 85%',
+      onEnter: (els) => {
+        gsap.to(els, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', overwrite: true });
+        els.forEach(el => el.querySelectorAll('.bar i[data-w]').forEach(b => { b.style.width = b.dataset.w + '%'; }));
+      },
+    });
+
+    // Count scores up as they enter view.
+    gsap.utils.toArray('.count').forEach((el) => {
+      const o = { v: 0 };
+      gsap.to(o, {
+        v: +el.dataset.to, duration: 1.3, ease: 'power1.out', snap: { v: 1 },
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+        onUpdate: () => { el.textContent = Math.round(o.v); },
+      });
+    });
+
+    // Winner finale — fire the CSS spotlight/glow when it scrolls in.
+    ScrollTrigger.create({
+      trigger: '#finale', start: 'top 60%', once: true,
+      onEnter: () => document.getElementById('finale').classList.add('in'),
+    });
+
+    window.addEventListener('load', () => ScrollTrigger.refresh()); // recalc after fonts/images settle
+  });
+
+  mm.add('(prefers-reduced-motion: reduce)', () => {
+    // Static, accessible end-state — no motion. (.reveal shown via the reduced-motion CSS override.)
+    document.getElementById('finale').classList.add('in');
+    const lbs = gsap.utils.toArray('.lb');
+    lbs.forEach((el) => gsap.set(el, { left: 29, x: 0 }));
+    gsap.set(lbs[0], { y: 8,   scale: 1.20, autoAlpha: 1,   boxShadow: '0 0 30px rgba(227,178,90,0.60)' });
+    gsap.set(lbs[1], { y: 100, scale: 0.92, autoAlpha: 0.8 });
+    gsap.set(lbs[2], { y: 190, scale: 0.78, autoAlpha: 0.5 });
+    document.querySelectorAll('.bar i[data-w]').forEach(b => { b.style.width = b.dataset.w + '%'; });
+    document.querySelectorAll('.count').forEach(el => { el.textContent = el.dataset.to; });
+  });
+
+  (function () {
+    const root = document.documentElement, KEY = 'theme-pref';
+    const btn = document.getElementById('themeToggle');
+    const ico = document.getElementById('themeIco'), lbl = document.getElementById('themeLbl');
+    const meta = { auto: ['🖥️', 'Auto'], light: ['☀️', 'Light'], dark: ['🌙', 'Dark'] };
+    let pref;
+    try { pref = localStorage.getItem(KEY) || 'auto'; } catch (e) { pref = 'auto'; }
+    if (!meta[pref]) pref = 'auto';
+    function apply(p) {
+      if (p === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', p);
+      ico.textContent = meta[p][0]; lbl.textContent = meta[p][1];
+    }
+    apply(pref);
+    btn.addEventListener('click', () => {
+      pref = pref === 'auto' ? 'light' : pref === 'light' ? 'dark' : 'auto';
+      try { localStorage.setItem(KEY, pref); } catch (e) {}
+      apply(pref);
+    });
+  })();
+
+  (function () {
+    const modal = document.getElementById('promptModal');
+    const open = document.getElementById('promptBtn');
+    const close = document.getElementById('promptClose');
+    function show() { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); }
+    function hide() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); }
+    open.addEventListener('click', show);
+    close.addEventListener('click', hide);
+    modal.addEventListener('click', (e) => { if (e.target === modal) hide(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+  })();
+</script>
+</body>
+</html>

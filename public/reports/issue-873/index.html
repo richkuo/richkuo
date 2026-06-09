@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ===== SEO ===== -->
+<title>AI Coding Bake-off Ep. 2: Opus 4.8 vs GPT 5.5 vs Composer 2.5 (Issue #873)</title>
+<meta name="description" content="Three AI models — Claude Opus 4.8, GPT 5.5, and Cursor's Composer 2.5 — each built the same trading-bot scale-in feature from one issue. A scored head-to-head on cost, speed, review rounds, and code correctness." />
+<meta name="keywords" content="AI coding comparison, Opus 4.8 vs GPT 5.5, Composer 2.5, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, scale-in, pyramiding, trading bot, Rich Kuo" />
+<meta name="author" content="Rich Kuo" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://www.richkuo.com/reports/issue-873/" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0908" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3ecdd" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Rich Kuo" />
+<meta property="og:title" content="AI Coding Bake-off Ep. 2: Opus 4.8 vs GPT 5.5 vs Composer 2.5" />
+<meta property="og:description" content="Three AI models built the same trading-bot scale-in feature from one issue. The fastest, cheapest one was quietly wrong." />
+<meta property="og:url" content="https://www.richkuo.com/reports/issue-873/" />
+<meta property="og:image" content="https://www.richkuo.com/reports/issue-873/og-scale-in-bakeoff.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="AI Coding Bake-off — three models scored head-to-head on a scale-in feature" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:author" content="Rich Kuo" />
+<meta property="article:published_time" content="2026-06-03" />
+<meta property="article:modified_time" content="2026-06-05" />
+<meta property="article:section" content="AI &amp; Developer Tools" />
+<meta property="article:tag" content="Claude Opus 4.8" />
+<meta property="article:tag" content="GPT 5.5" />
+<meta property="article:tag" content="Composer 2.5" />
+<meta property="article:tag" content="AI coding comparison" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@richkuo7" />
+<meta name="twitter:creator" content="@richkuo7" />
+<meta name="twitter:title" content="AI Coding Bake-off Ep. 2: Opus 4.8 vs GPT 5.5 vs Composer 2.5" />
+<meta name="twitter:description" content="Three AI models built the same trading-bot scale-in feature. The fastest, cheapest one was quietly wrong." />
+<meta name="twitter:image" content="https://www.richkuo.com/reports/issue-873/og-scale-in-bakeoff.png" />
+<meta name="twitter:image:alt" content="AI Coding Bake-off — three models scored head-to-head" />
+<meta name="twitter:label1" content="Models compared" />
+<meta name="twitter:data1" content="Opus 4.8 · GPT 5.5 · Composer 2.5" />
+<meta name="twitter:label2" content="Format" />
+<meta name="twitter:data2" content="Scored, code-verified head-to-head" />
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "AI Coding Bake-off Ep. 2: Opus 4.8 vs GPT 5.5 vs Composer 2.5 (Issue #873)",
+  "description": "Three AI models — Claude Opus 4.8, GPT 5.5, and Cursor's Composer 2.5 — each built the same trading-bot scale-in feature from one issue. A scored head-to-head on cost, speed, review rounds, and code correctness.",
+  "image": "https://www.richkuo.com/reports/issue-873/og-scale-in-bakeoff.png",
+  "url": "https://www.richkuo.com/reports/issue-873/",
+  "datePublished": "2026-06-03",
+  "dateModified": "2026-06-05",
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true,
+  "author": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "publisher": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.richkuo.com/reports/issue-873/" },
+  "keywords": "AI coding comparison, Opus 4.8, GPT 5.5, Composer 2.5, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, scale-in",
+  "articleSection": "AI & Developer Tools",
+  "about": "A scored comparison of three AI models implementing the same software feature.",
+  "mentions": [
+    { "@type": "SoftwareApplication", "name": "Claude Opus 4.8", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
+    { "@type": "SoftwareApplication", "name": "GPT 5.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
+    { "@type": "SoftwareApplication", "name": "Composer 2.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Cursor", "url": "https://cursor.com" } }
+  ]
+}
+</script>
+<!-- ===== /SEO ===== -->
+<script>
+  /* set saved theme before paint to avoid a flash; 'auto' leaves it to the OS */
+  document.documentElement.classList.add('js');
+  (function(){ try { var p = localStorage.getItem('theme-pref');
+    if (p === 'light' || p === 'dark') document.documentElement.setAttribute('data-theme', p);
+  } catch(e){} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Hanken+Grotesk:wght@300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0a0908;
+    --char: #14110d;
+    --char2: #1d1812;
+    --gold: #e3b25a;
+    --gold-soft: #d4a24e;
+    --gold-glow: rgba(227, 178, 90, 0.5);
+    --paper: #f4ede0;
+    --muted: #8c8276;
+    --muted2: #5a544b;
+    --line: rgba(227, 178, 90, 0.16);
+    --track: rgba(255,255,255,0.06);
+    --hairline: rgba(255,255,255,0.05);
+    --grain-opacity: 0.045;
+    --hero-glow: rgba(227,178,90,0.16);
+    --finale-grad: linear-gradient(180deg, #fbecc8, var(--gold) 55%, #b9863a);
+    --scrim: rgba(6,5,4,0.72);
+    /* contestant signatures */
+    --c-gpt: #74AA9C;
+    --c-opus: #cc785c;
+    --c-cursor: #D6D5D2;
+  }
+  :root[data-theme="light"] {
+    --black: #f3ecdd;
+    --char: #fbf6ec;
+    --char2: #fffdf7;
+    --gold: #a9762a;
+    --gold-soft: #b88534;
+    --gold-glow: rgba(169, 118, 42, 0.35);
+    --paper: #221c12;
+    --muted: #6a6253;
+    --muted2: #9d9486;
+    --line: rgba(169, 118, 42, 0.22);
+    --track: rgba(34,28,18,0.08);
+    --hairline: rgba(34,28,18,0.08);
+    --grain-opacity: 0.028;
+    --hero-glow: rgba(169,118,42,0.16);
+    --finale-grad: linear-gradient(180deg, #c79a45, #8a5f22 60%, #6d4a1a);
+    --scrim: rgba(60,50,32,0.4);
+    --c-gpt: #74AA9C;
+    --c-opus: #cc785c;
+    --c-cursor: #55544F;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --black: #f3ecdd;
+      --char: #fbf6ec;
+      --char2: #fffdf7;
+      --gold: #a9762a;
+      --gold-soft: #b88534;
+      --gold-glow: rgba(169, 118, 42, 0.35);
+      --paper: #221c12;
+      --muted: #6a6253;
+      --muted2: #9d9486;
+      --line: rgba(169, 118, 42, 0.22);
+      --track: rgba(34,28,18,0.08);
+      --hairline: rgba(34,28,18,0.08);
+      --grain-opacity: 0.028;
+      --hero-glow: rgba(169,118,42,0.16);
+      --finale-grad: linear-gradient(180deg, #c79a45, #8a5f22 60%, #6d4a1a);
+      --scrim: rgba(60,50,32,0.4);
+      --c-gpt: #74AA9C;
+      --c-opus: #cc785c;
+      --c-cursor: #55544F;
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    background: var(--black); color: var(--paper);
+    font-family: 'Hanken Grotesk', sans-serif; font-weight: 350; line-height: 1.65;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    transition: background-color .45s ease, color .45s ease;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection { background: var(--gold); color: var(--black); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .display { font-family: 'Fraunces', serif; font-weight: 600; line-height: 0.98; letter-spacing: -0.02em; }
+  .serif-it { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; top: -30%; left: 50%; width: 120vw; height: 120vh; transform: translateX(-50%); background: radial-gradient(ellipse 45% 40% at 50% 32%, var(--hero-glow), transparent 60%); pointer-events: none; }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero > .kicker { position: absolute; top: 40px; left: 28px; z-index: 3; }
+  .hero h1 { font-size: clamp(2.2rem, 7vw, 5.5rem); margin: 0.2em 0 0.1em; }
+  .hero h1 em { color: var(--gold); }
+  .hero .sub { max-width: none; font-size: clamp(1.05rem, 2.2vw, 1.4rem); color: var(--muted); margin-top: 1.4rem; }
+  .hero .sub b { color: var(--paper); font-weight: 600; }
+  .scrollcue { position: absolute; bottom: 38px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted2); z-index: 3; animation: bob 2.4s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{transform:translate(-50%,0);opacity:.5} 50%{transform:translate(-50%,8px);opacity:1} }
+
+  section { padding: clamp(80px, 13vh, 160px) 0; position: relative; }
+  .seclabel { display:flex; align-items:center; gap:18px; margin-bottom: 2.6rem; }
+  .seclabel .no { font-family:'Fraunces',serif; font-style:italic; font-size:1.1rem; color:var(--gold); }
+  .seclabel .ln { flex:1; height:1px; background:var(--line); }
+  h2.sec { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 1.4rem; }
+  .lead { font-size: 1.18rem; color: var(--muted); max-width: none; }
+  .lead b { color: var(--paper); font-weight: 600; }
+
+  /* GSAP drives reveals; only hide when JS is active so a no-JS visitor still sees everything */
+  .js .reveal { opacity: 0; transform: translateY(36px); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  .grid3 { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: linear-gradient(160deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 14px; padding: 28px 26px; position: relative; overflow: hidden; transition: border-color .25s, transform .25s, box-shadow .25s; }
+  .card .tape { position:absolute; top:0; left:0; right:0; height:3px; background: var(--sig, var(--gold)); opacity:.85; }
+  .card .pr { font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.18em; color:var(--muted); }
+  .card h3 { font-family:'Fraunces',serif; font-weight:600; font-size:1.7rem; margin:.3rem 0 .1rem; }
+  .card .label { color:var(--muted); font-size:.92rem; }
+  .card .branch { font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--muted2); margin-top:14px; word-break:break-all; }
+
+  .flow { display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin-top:2rem; }
+  .step { background:var(--char); border:1px solid var(--line); border-radius:12px; padding:22px 20px; position:relative; }
+  .step .n { font-family:'Fraunces',serif; font-style:italic; font-size:2.2rem; color:var(--gold); line-height:1; }
+  .step p { font-size:.92rem; color:var(--muted); margin-top:.6rem; }
+  .step b { color:var(--paper); font-weight:600; }
+  .loopnote { margin-top:1.8rem; padding:18px 22px; border-left:2px solid var(--gold); background: rgba(227,178,90,0.05); border-radius: 0 10px 10px 0; font-size:.98rem; color:var(--muted); }
+  .loopnote b { color:var(--paper); }
+
+  .tbl { width:100%; border-collapse:collapse; margin-top:1.6rem; font-size:.96rem; }
+  .tbl th { text-align:left; font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:500; padding:0 12px 14px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  .tbl td { padding:15px 12px; border-bottom:1px solid var(--hairline); vertical-align:middle; }
+  .tbl tr:last-child td { border-bottom:none; }
+  .tbl .model { font-weight:600; color:var(--paper); }
+  .tbl .big { font-family:'Fraunces',serif; font-size:1.3rem; }
+  .tbl .num { font-family:'JetBrains Mono',monospace; white-space:nowrap; }
+  .tbl a.pr { text-decoration: none; transition: color .2s; }
+  .tbl a.pr:hover { color: var(--gold) !important; }
+
+  .pill { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.72rem; padding:3px 9px; border-radius:999px; border:1px solid var(--line); color:var(--muted); }
+  .pill.good { color:var(--c-gpt); border-color: rgba(116,170,156,.4); }
+  .pill.warn { color:var(--c-opus); border-color: rgba(204,120,92,.4); }
+
+  .bar { height:8px; border-radius:999px; background:var(--track); overflow:hidden; min-width:90px; }
+  .bar i { display:block; height:100%; border-radius:999px; background: var(--sig, var(--gold)); width:0; transition: width 1.2s cubic-bezier(.16,1,.3,1); }
+
+  .verdict-intro { text-align:center; }
+  .verdict-intro h2 { font-size: clamp(2.4rem, 7vw, 5rem); }
+  .verdict-intro .lead { margin: 1.4rem auto 0; }
+
+  .rank { min-height: 78vh; display:flex; align-items:center; }
+  .rank .inner { width:100%; }
+  .placetag { font-family:'Fraunces',serif; font-style:italic; font-size: clamp(1rem,2.4vw,1.4rem); color: var(--muted); letter-spacing:.02em; }
+  .rankrow { display:grid; grid-template-columns: minmax(0,1fr) auto; gap:30px; align-items:center; margin-top:.4rem; }
+  .rankname { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(2.4rem, 8vw, 5.4rem); line-height:.96; letter-spacing:-.02em; }
+  .rankname .sub { display:block; font-family:'Hanken Grotesk',sans-serif; font-style:normal; font-weight:400; font-size: clamp(.9rem,1.6vw,1.05rem); color:var(--muted); letter-spacing:0; margin-top:.7rem; max-width:52ch; line-height:1.55; }
+  .score { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(4rem, 16vw, 11rem); line-height:.8; letter-spacing:-.04em; color: var(--sig, var(--gold)); text-align:right; }
+  .score small { font-size:.28em; color:var(--muted); font-weight:400; letter-spacing:0; }
+  .rankrule { height:1px; background:var(--line); margin-top:2.4rem; }
+
+  .awards { display:grid; grid-template-columns: repeat(2,1fr); gap:18px; margin-top:1rem; }
+  .award { background: linear-gradient(160deg,var(--char2),var(--char)); border:1px solid var(--line); border-radius:14px; padding:30px 28px; }
+  .award .crown { font-size:1.5rem; }
+  .award h4 { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin:.8rem 0 .5rem; }
+  .award .who { font-family:'Fraunces',serif; font-size:1.9rem; font-weight:600; }
+  .award p { color:var(--muted); font-size:.95rem; margin-top:.5rem; }
+
+  .finale { min-height: 100vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
+  .finale::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 50% 42%, rgba(227,178,90,0.22), rgba(227,178,90,0.04) 38%, transparent 64%); opacity:0; transition: opacity 1.6s ease; }
+  .finale.in::before { opacity:1; }
+  .finale .rays { position:absolute; top:42%; left:50%; width:160vmax; height:160vmax; transform: translate(-50%,-50%) scale(.4); opacity:0; background: repeating-conic-gradient(from 0deg, rgba(227,178,90,0.07) 0deg 6deg, transparent 6deg 12deg); transition: opacity 2s ease, transform 2.4s cubic-bezier(.16,1,.3,1); animation: spin 60s linear infinite; pointer-events:none; }
+  .finale.in .rays { opacity:1; transform: translate(-50%,-50%) scale(1); }
+  @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg) scale(1);} }
+  .finale .wrap { position:relative; z-index:2; }
+  .finale .trophy { font-size: clamp(2.6rem,7vw,4.4rem); transform: scale(.4); opacity:0; transition: all 1s cubic-bezier(.34,1.56,.64,1) .2s; }
+  .finale.in .trophy { transform:none; opacity:1; }
+  .finale .crowned { font-family:'JetBrains Mono',monospace; letter-spacing:.4em; text-transform:uppercase; font-size:.8rem; color:var(--gold); margin:1.6rem 0 .4rem; }
+  .finale h2 { font-family:'Fraunces',serif; font-weight:700; font-size: clamp(3.4rem, 13vw, 9rem); line-height:.92; letter-spacing:-.03em; background: var(--finale-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .finale .pr { font-family:'JetBrains Mono',monospace; color:var(--muted); letter-spacing:.2em; margin-top:1rem; }
+  .finale .why { max-width: 52ch; margin: 2rem auto 0; color: var(--muted); font-size:1.12rem; }
+  .finale .why b { color: var(--paper); font-weight:600; }
+  .finale .scorebadge { display:inline-block; margin-top:2.2rem; font-family:'Fraunces',serif; font-weight:600; font-size:2.6rem; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:.3em .8em; box-shadow: 0 0 40px var(--gold-glow); }
+  .finale .scorebadge small { font-size:.38em; color:var(--muted); font-weight:400; }
+  .caveat { margin-top:3rem; font-size:.95rem; color:var(--muted2); max-width:58ch; margin-left:auto; margin-right:auto; }
+  .caveat b { color: var(--muted); }
+
+  footer { padding: 80px 0 100px; text-align:center; color:var(--muted2); font-size:.84rem; }
+  footer .mono { color:var(--muted); }
+
+  .kicker a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .2s, color .2s; }
+  .kicker a:hover { color: var(--paper); border-color: var(--gold); }
+  a.card { text-decoration: none; color: inherit; display: block; }
+  a.card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 18px 50px rgba(0,0,0,.3); }
+  .card .pr { display: inline-flex; align-items: center; gap: 5px; }
+  .card .ar { font-size: .8em; opacity: .5; transition: opacity .2s, color .2s; }
+  a.card:hover .ar { opacity: 1; color: var(--gold); }
+  .finale .pr a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .2s; }
+  .finale .pr a:hover { border-color: var(--gold); }
+  .srclinks { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; }
+  .srclinks a { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .06em; color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 8px 15px; transition: color .2s, border-color .2s, transform .2s; display: inline-flex; align-items: center; gap: 7px; }
+  .srclinks a:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-1px); }
+  .srclinks a .ar { opacity: .6; }
+
+  .logo { fill: currentColor; flex: 0 0 auto; display: inline-block; }
+  .card h3 { display: flex; align-items: center; gap: 11px; }
+  .card h3 .logo { width: 1.05em; height: 1.05em; color: var(--sig, var(--gold)); }
+  .tbl .model { white-space: nowrap; }
+  .tbl .model .logo { width: 1.05em; height: 1.05em; vertical-align: -0.18em; margin-right: 9px; }
+  .ranklogo { display: inline-flex; margin-bottom: 18px; }
+  .ranklogo .logo { width: 44px; height: 44px; color: var(--sig, var(--gold)); }
+  .award .who { display: inline-flex; align-items: center; gap: 11px; }
+  .award .who .logo { width: 1em; height: 1em; }
+  .finale .winlogo { display: flex; justify-content: center; margin: 8px 0 4px; }
+  .finale .winlogo .logo { width: 52px; height: 52px; color: var(--gold); filter: drop-shadow(0 0 26px var(--gold-glow)); }
+  .srclinks a .logo { width: 1.05em; height: 1.05em; }
+
+  .controls { position: fixed; top: 16px; right: 16px; z-index: 1000; display: flex; gap: 8px; }
+  .ctrl { display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); background:var(--scrim); border:1px solid var(--line); border-radius:999px; padding:9px 14px; cursor:pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: color .2s, border-color .2s, background .2s, transform .2s; }
+  .ctrl:hover { color:var(--gold); border-color:var(--gold); transform: translateY(-1px); }
+  .ctrl .ico { font-size:.95rem; line-height:1; }
+
+  .modal { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 24px; background: var(--scrim); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s; }
+  .modal.open { opacity: 1; visibility: visible; }
+  .modal-card { width: min(760px, 100%); max-height: 86vh; overflow-y: auto; background: linear-gradient(165deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 18px; padding: 38px 40px 40px; position: relative; box-shadow: 0 40px 120px rgba(0,0,0,.45); transform: translateY(24px) scale(.98); transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .modal.open .modal-card { transform: none; }
+  .modal-card .x { position: absolute; top: 18px; right: 20px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 1.1rem; cursor: pointer; line-height: 1; transition: color .2s, border-color .2s, transform .2s; }
+  .modal-card .x:hover { color: var(--gold); border-color: var(--gold); transform: rotate(90deg); }
+  .modal-card .mkick { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); }
+  .modal-card h3 { font-family:'Fraunces',serif; font-weight:600; font-size:1.9rem; margin:.5rem 0 .3rem; }
+  .modal-card .msub { color: var(--muted); font-size:.95rem; margin-bottom: 1.6rem; }
+  .prompt-box { font-family:'JetBrains Mono',monospace; font-size:.84rem; line-height:1.75; color: var(--paper); white-space: pre-wrap; word-break: break-word; background: var(--track); border:1px solid var(--line); border-left:2px solid var(--gold); border-radius: 0 12px 12px 0; padding: 22px 24px; }
+  .prompt-box a { color: var(--gold); }
+  .modal-note { margin-top: 1.6rem; font-size:.84rem; color: var(--muted2); line-height:1.6; }
+  .modal-note .mono { color: var(--muted); }
+
+  .byline { font-family:'Fraunces',serif; font-style:italic; font-size:1.15rem; color:var(--paper); margin-top:42px; }
+  .byline b { font-style:normal; font-weight:600; }
+  .socials { display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin-top:18px; }
+  .socials a { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:8px 15px; transition:color .2s, border-color .2s, transform .2s, background .2s; }
+  .socials a:hover { color:var(--black); background:var(--gold); border-color:var(--gold); transform:translateY(-2px); }
+
+  .timetbl th:nth-child(2), .timetbl td:nth-child(2) { width: 260px; }
+
+  .hero-title-row { display: flex; align-items: center; gap: 40px; margin-top: 0.2em; width: fit-content; margin-left: auto; margin-right: auto; }
+  .logo-battle { position: relative; width: 140px; height: 285px; flex-shrink: 0; overflow: visible; }
+  .logo-battle::before { content: ""; position: absolute; left: 50%; top: 49px; width: 160px; height: 160px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, var(--gold-glow), transparent 70%); opacity: .5; pointer-events: none; }
+  .lb { position: absolute; left: 50px; top: 0; width: 82px; height: 82px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--char2); border: 1px solid var(--line); will-change: transform; }
+  .lb svg { width: 50px; height: 50px; }
+  .lb-cursor    { color: var(--c-cursor); }
+  .lb-gpt       { color: var(--c-gpt);  top: 90px; }   /* static fallback stack (no JS) */
+  .lb-anthropic { color: var(--c-opus); top: 180px; }
+  .js .lb { top: 0; }   /* with JS, GSAP positions all three from a common origin via transforms */
+
+  @media (max-width: 720px) {
+    .grid3, .flow, .awards { grid-template-columns: 1fr; }
+    .rankrow { grid-template-columns: 1fr; gap: 8px; }
+    .score { text-align:left; }
+    .hero .sub { max-width: none; }
+    .hero-title-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .tbl, .tbl tbody { display: block; table-layout: auto; }
+    .tbl thead { display: none; }
+    .tbl tr { display: block; border: 1px solid var(--line); border-radius: 14px; padding: 6px 16px 14px; margin-bottom: 14px; }
+    .tbl td { display: block; border: none; border-top: 1px solid var(--hairline); padding: 9px 0; white-space: normal; width: auto !important; text-align: left; }
+    .tbl td:first-child { border-top: none; }
+    .tbl td::before { content: ""; display: block; color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
+    .timetbl td:nth-child(2)::before { content: "First-pass time"; }
+    .tokentbl td:nth-child(2)::before { content: "Token / quota cost"; }
+    .roundstbl td:nth-child(2)::before { content: "Re-reviews"; }
+    .roundstbl td:nth-child(3)::before { content: "First-pass verdict"; }
+    .roundstbl td:nth-child(4)::before { content: "Files"; }
+    .roundstbl td:nth-child(5)::before { content: "Net lines"; }
+    .tbl td.model { font-size: 1.2rem; font-weight: 600; padding-top: 6px; }
+    .tbl td.model::before { content: none; }
+    .tbl .bar { display: none; }
+    .tbl td.num { white-space: normal; }
+    .tbl td.num.big { font-size: 1.1rem; }
+  }
+
+  .sumgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 2rem; }
+  .sumcard { background: linear-gradient(160deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .sumcard .stape { height: 3px; background: var(--sig, var(--gold)); opacity: .85; }
+  .sumcard .sbody { padding: 18px 20px 12px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+  .sumcard .sbody-left { min-width: 0; }
+  .sumcard .sbody-right { text-align: right; flex-shrink: 0; }
+  .sumcard .sbody-right .slbl { text-align: right; }
+  .sumcard .sco { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--sig, var(--gold)); opacity: .7; }
+  .sumcard .sname { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.35rem; margin: .2rem 0 0; color: var(--paper); display: flex; align-items: center; gap: 8px; }
+  .sumcard .sname .logo { width: .85em; height: .85em; color: var(--sig, var(--gold)); flex-shrink: 0; }
+  .sumcard .srow { border-top: 1px solid var(--hairline); padding: 9px 20px; }
+  .sumcard .srow-split { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .sumcard .slbl { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sig, var(--gold)); margin-bottom: 3px; }
+  .sumcard .sval { font-size: .94rem; color: var(--paper); }
+  .sumcard .sval.muted { color: var(--muted); font-size: .88rem; }
+  .sumcard .sval.big-score { font-family: 'Fraunces', serif; font-weight: 600; font-size: 2rem; color: var(--sig, var(--gold)); line-height: 1; padding-bottom: 4px; }
+  .sumcard .sval.big-score small { font-size: .38em; color: var(--muted); font-weight: 400; }
+  @media (max-width: 720px) { .sumgrid { grid-template-columns: 1fr; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1 !important; transform:none !important; transition:none; }
+    .finale .rays { animation:none; }
+    html { scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BRAND LOGO SPRITE -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="logo-openai" viewBox="0 0 24 24"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></symbol>
+  <symbol id="logo-anthropic" viewBox="0 0 24 24"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></symbol>
+  <symbol id="logo-cursor" viewBox="0 0 24 24"><path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></symbol>
+</svg>
+
+<!-- FLOATING CONTROLS -->
+<div class="controls">
+  <button class="ctrl" id="promptBtn" aria-label="View the assignment"><span class="ico">❝</span><span>The brief</span></button>
+  <button class="ctrl" id="themeToggle" aria-label="Toggle color theme"><span class="ico" id="themeIco">🖥️</span><span id="themeLbl">Auto</span></button>
+</div>
+
+<!-- BRIEF MODAL -->
+<div class="modal" id="promptModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="promptTitle">
+  <div class="modal-card">
+    <button class="x" id="promptClose" aria-label="Close">✕</button>
+    <div class="mkick">The brief</div>
+    <h3 id="promptTitle">The assignment</h3>
+    <div class="msub">The settled design each model had to implement — verbatim from issue #873.</div>
+    <div class="prompt-box"><a href="https://github.com/richkuo/go-trader/issues/873" target="_blank" rel="noopener">Issue #873</a> — Add scale-in / pyramiding: increase an open position's size (strategy + manual).
+
+Settled decision — FREEZE THE ORIGINAL ENTRY. A scale-in blends only price and size for PnL — AvgCost = (oldQty·oldAvg + addQty·addPrice)/(oldQty+addQty), Quantity += addQty — and keeps EntryATR, the regime label, and the take-profit tier offsets pinned to the first entry. Stop-loss distance and TP geometry do NOT move when you add. Only on-chain protection SIZING is re-based.
+
+Rejected alternative: re-basing stop/TP/regime around the new blended average on every add. Not chosen — do not implement it.
+
+Must be opt-in (a manual-add CLI and/or an allow_scale_in strategy flag with caps); default skip-on-same-direction behavior is preserved. Reuse the existing trailing-stop / protection machinery — do not rebuild it.</div>
+    <p class="modal-note">✎ <b>Label &amp; effort note.</b> Model mapping verified from each PR's branch and <span class="mono">LLM:</span> footer: <span class="mono">#875</span> = Composer (Cursor), <span class="mono">#876</span> = GPT 5.5 (<span class="mono">codex/</span>), <span class="mono">#877</span> = Opus 4.8 (<span class="mono">cc/</span>). The PR-body effort labels were stale; the operator confirms the runs were <span class="mono">Composer 2.5 Fast</span>, <span class="mono">GPT 5.5 xhigh</span>, and <span class="mono">Opus 4.8 xhigh</span>.</p>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="kicker reveal in"><a href="https://github.com/richkuo/go-trader" target="_blank" rel="noopener">Go-Trader</a> · <a href="https://github.com/richkuo/go-trader/issues/873" target="_blank" rel="noopener">Issue&nbsp;#873</a> · Model Bake-off · Episode&nbsp;2</div>
+  <div class="wrap">
+    <div class="hero-title-row reveal in d1">
+      <div class="logo-battle" aria-hidden="true">
+        <div class="lb lb-cursor"><svg class="logo"><use href="#logo-cursor"/></svg></div>
+        <div class="lb lb-gpt"><svg class="logo"><use href="#logo-openai"/></svg></div>
+        <div class="lb lb-anthropic"><svg class="logo"><use href="#logo-anthropic"/></svg></div>
+      </div>
+      <h1 class="display">Three models.<br />One feature.<br /><em>One winner.</em></h1>
+    </div>
+    <p class="sub reveal in d2">Composer 2.5, GPT 5.5, and Opus 4.8 each built the same risk-critical trading feature from one issue. We measured what it <b>cost</b>, how many <b>review rounds</b> it took to pass, and how <b>correct</b> the code actually was.</p>
+    <p class="sub serif-it reveal in d3" style="color:var(--gold);font-size:1.15rem;margin-top:1.8rem;text-align:center;">Scroll to the bottom to see who won.</p>
+  </div>
+  <div class="scrollcue">scroll ↓</div>
+</header>
+
+<main>
+
+<!-- THE FEATURE -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">i.</span><span>The assignment</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Add to a winner — without moving the net.</h2>
+    <p class="lead reveal d1"><b style="color:var(--gold)">In plain English</b> — a trading bot normally only ever <b>shrinks</b> a position until it's closed. This feature lets you <b>add</b> to a position that's working (called scale-in, or pyramiding). The catch: adding more must <b>not</b> disturb the safety net you set at the start. Your stop-loss distance and your profit targets stay <b>frozen to the original entry</b> — only the <b>size</b> of the protective orders grows to cover the bigger position. The issue even named the tempting wrong way to do it — recompute everything around the new average price — and said, in writing, <b>don't.</b></p>
+    <div class="srclinks reveal d2" style="justify-content:center;margin-top:28px">
+      <a href="https://github.com/richkuo/go-trader/issues/873" target="_blank" rel="noopener">Read the full issue #873 on GitHub <span class="ar">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTESTANTS -->
+<section style="background:linear-gradient(180deg,transparent,rgba(227,178,90,0.025),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">ii.</span><span>The contestants</span><span class="ln"></span></div>
+    <div class="grid3">
+      <a class="card reveal" href="https://github.com/richkuo/go-trader/pull/875" target="_blank" rel="noopener" style="--sig:var(--c-cursor)">
+        <div class="tape"></div>
+        <div class="label">Cursor</div>
+        <h3><svg class="logo"><use href="#logo-cursor"/></svg>Composer 2.5 Fast</h3>
+        <div class="pr">PR #875 <span class="ar">↗</span></div>
+        <div class="branch">issue-873-scale-in</div>
+      </a>
+      <a class="card reveal d1" href="https://github.com/richkuo/go-trader/pull/876" target="_blank" rel="noopener" style="--sig:var(--c-gpt)">
+        <div class="tape"></div>
+        <div class="label">OpenAI</div>
+        <h3><svg class="logo"><use href="#logo-openai"/></svg>GPT 5.5</h3>
+        <div class="pr">PR #876 <span class="ar">↗</span></div>
+        <div class="branch">codex/issue-873-scale-in</div>
+      </a>
+      <a class="card reveal d2" href="https://github.com/richkuo/go-trader/pull/877" target="_blank" rel="noopener" style="--sig:var(--c-opus)">
+        <div class="tape"></div>
+        <div class="label">Anthropic</div>
+        <h3><svg class="logo"><use href="#logo-anthropic"/></svg>Opus 4.8</h3>
+        <div class="pr">PR #877 <span class="ar">↗</span></div>
+        <div class="branch">cc/issue-873-scale-in</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">iii.</span><span>How they were judged</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">The LGTM loop.</h2>
+    <p class="lead reveal d1">Every PR ran the same gate: an automated <b>Opus 4.8 reviewer</b> that builds the code and runs the tests on every round — verifying claims against the tree, not just reading the diff.</p>
+    <div class="flow">
+      <div class="step reveal"><div class="n">01</div><p><b>Review.</b> The action posts a verdict on the PR.</p></div>
+      <div class="step reveal d1"><div class="n">02</div><p><b>Not LGTM?</b> Send it back to the model's harness to fix <b>every</b> finding.</p></div>
+      <div class="step reveal d2"><div class="n">03</div><p><b>Re-review.</b> The action re-checks the updated PR.</p></div>
+      <div class="step reveal d3"><div class="n">04</div><p><b>Repeat</b> until <span class="mono" style="color:var(--c-gpt)">LGTM</span>.</p></div>
+    </div>
+    <div class="loopnote reveal">Then a second, stricter pass scored each PR against all <b>7 acceptance criteria</b>, verifying every claim against the codebase at HEAD. <b>A passing LGTM does not guarantee a perfect score</b> — and in this round, the gate approved a PR with a risk-critical defect the deeper pass caught.</div>
+    <div class="loopnote reveal d1" style="border-left-color:var(--c-opus);background:rgba(204,120,92,0.05);">⚖️ <b>A note on the judge.</b> The scoring pass was run by <b>Opus 4.8</b> — the same model that authored <b>the winning PR (#877)</b>. The margin over second place is only <b>3 points</b>; read the verdict with that conflict of interest in mind, and treat the top two as co-leaders.</div>
+  </div>
+</section>
+
+<!-- TIME -->
+<section style="background:linear-gradient(180deg,transparent,rgba(227,178,90,0.025),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">iv.</span><span>Time to first pass</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">How long it took.</h2>
+    <p class="lead reveal d1">Wall-clock to produce the first pass. The spread is roughly <b>6×</b> end-to-end — and it runs exactly opposite to the final scores.</p>
+    <table class="tbl timetbl reveal d1">
+      <thead><tr><th>Model</th><th>First-pass time</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-cursor)"><use href="#logo-cursor"/></svg>Composer 2.5 Fast</td>
+          <td class="num big">7.5<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-cursor);margin-top:8px"><i data-w="16"></i></div></td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-opus)"><use href="#logo-anthropic"/></svg>Opus 4.8</td>
+          <td class="num big">33<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-opus);margin-top:8px"><i data-w="70"></i></div></td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt)"><use href="#logo-openai"/></svg>GPT 5.5</td>
+          <td class="num big">47<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-gpt);margin-top:8px"><i data-w="100"></i></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TOKEN COST -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">v.</span><span>Token &amp; quota cost</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">The token bill.</h2>
+    <p class="lead reveal d1">First-pass spend. Units differ by provider, so these aren't directly comparable — but the gap in <b>magnitude</b> is the story.</p>
+    <table class="tbl tokentbl reveal d1">
+      <thead><tr><th>Model</th><th>First-pass token / quota cost</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-cursor)"><use href="#logo-cursor"/></svg>Composer 2.5 Fast</td>
+          <td class="num" style="color:var(--muted)">~2% of Cursor Pro monthly · 128k tokens · 64% of context</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-opus)"><use href="#logo-anthropic"/></svg>Opus 4.8</td>
+          <td class="num" style="color:var(--muted)">~340k tokens · 34% of 1M context</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt)"><use href="#logo-openai"/></svg>GPT 5.5</td>
+          <td class="num" style="color:var(--muted)">&gt;96% of Pro plan · compacted context once mid-task</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ITERATIONS + FILES -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">vi.</span><span>Rounds &amp; footprint</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">How many tries to pass?</h2>
+    <p class="lead reveal d1">Re-reviews needed before reaching LGTM — and how much code each touched. The cheapest, fastest model needed the <b>most</b> rounds.</p>
+    <table class="tbl roundstbl reveal d1">
+      <thead><tr><th>Model</th><th>Re-reviews to LGTM</th><th>First-pass verdict</th><th>Files</th><th>Net lines</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-opus)"><use href="#logo-anthropic"/></svg>Opus 4.8 <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/877" target="_blank" rel="noopener">#877</a></td>
+          <td><span class="pill good">1</span></td>
+          <td style="color:var(--muted)">2 findings, then LGTM</td>
+          <td class="num">13</td>
+          <td class="num">+1495 / −35</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt)"><use href="#logo-openai"/></svg>GPT 5.5 <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/876" target="_blank" rel="noopener">#876</a></td>
+          <td><span class="pill good">1</span></td>
+          <td style="color:var(--muted)">2 blocking, then LGTM</td>
+          <td class="num">29</td>
+          <td class="num">+1626 / −188</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-cursor)"><use href="#logo-cursor"/></svg>Composer 2.5 Fast <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/875" target="_blank" rel="noopener">#875</a></td>
+          <td><span class="pill warn">3</span></td>
+          <td style="color:var(--muted)">Changes requested ×3 rounds</td>
+          <td class="num">12</td>
+          <td class="num">+1075 / −64</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- VERDICT INTRO -->
+<section class="verdict-intro">
+  <div class="wrap">
+    <div class="kicker reveal">The reckoning</div>
+    <h2 class="display reveal d1">But which one was<br /><span class="serif-it" style="color:var(--gold)">actually</span> right?</h2>
+    <p class="lead reveal d2">Cost and review rounds tell you about effort. They don't tell you if the code is <b>correct</b>. We scored all three against the 7 acceptance criteria — verifying every claim against the code at HEAD.</p>
+    <p class="lead serif-it reveal d3" style="margin-top:1.6rem;color:var(--muted2)">Counting down, from third place…</p>
+  </div>
+</section>
+
+<!-- RANK 3 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">— Third place —</div>
+      <div class="rankrow" style="--sig:var(--c-cursor)">
+        <div>
+          <span class="ranklogo"><svg class="logo"><use href="#logo-cursor"/></svg></span>
+          <div class="rankname">Composer 2.5 Fast
+            <span class="sub">Got the <b>shape</b> right — the opt-in flag, the blend math, the manual command, the bookkeeping — and did it in <b>7.5 minutes</b>. But on the single most important rule it did the thing the issue forbade: it <b>re-based the stop-loss and take-profit triggers around the new blended average</b>, so adding to a position quietly shifts your safety net. That path had <b>no test</b>, and the PR described it as "frozen trigger prices" — which the code is not. Most review rounds (3), lowest score.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="62">62</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANK 2 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">— Second place —</div>
+      <div class="rankrow" style="--sig:var(--c-gpt)">
+        <div>
+          <span class="ranklogo"><svg class="logo"><use href="#logo-openai"/></svg></span>
+          <div class="rankname">GPT 5.5
+            <span class="sub">Correct, complete, and honest — every geometry consumer correctly pinned to the <b>frozen entry price</b>, backed by assertion-rich tests for both the blend math and the protective-order resizing. The cost: it was the <b>slowest (47 min) and most expensive</b> by a mile — over <b>96% of a plan</b>, with a mid-task context compaction. Deductions were minor: a redundant stop-loss replace per add and an uncapped manual-add path.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="92">92</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIAL AWARDS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">✦</span><span>Before the winner — two notes</span><span class="ln"></span></div>
+    <div class="awards">
+      <div class="award reveal" style="--sig:var(--c-cursor)">
+        <div class="crown">⚡</div>
+        <h4>Fastest &amp; cheapest</h4>
+        <div class="who" style="color:var(--c-cursor)"><svg class="logo"><use href="#logo-cursor"/></svg>Composer 2.5 Fast</div>
+        <p>A full first draft in <b>7.5 min at ~2% of a monthly quota</b> — roughly 6× faster than the field. Unbeatable for a fast scaffold, as long as a human hardens the risk-critical parts.</p>
+      </div>
+      <div class="award reveal d1" style="--sig:var(--c-gpt)">
+        <div class="crown">🤝</div>
+        <h4>Photo finish</h4>
+        <div class="who" style="color:var(--c-gpt)"><svg class="logo"><use href="#logo-openai"/></svg>GPT 5.5</div>
+        <p>Landed a correct, fully-tested result <b>3 points</b> behind the winner. Given the Opus-judges-Opus conflict of interest, this is effectively a tie at the top.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WINNER FINALE -->
+<section class="finale" id="finale">
+  <div class="rays"></div>
+  <div class="wrap">
+    <div class="trophy">🏆</div>
+    <div class="crowned">— First place —</div>
+    <div class="winlogo"><svg class="logo"><use href="#logo-anthropic"/></svg></div>
+    <h2>Opus 4.8</h2>
+    <div class="pr"><a href="https://github.com/richkuo/go-trader/pull/877" target="_blank" rel="noopener">PR #877 ↗</a> · cc/issue-873-scale-in</div>
+    <p class="why">The only PR that honored the "freeze the entry" decision <b>cleanly</b>: a dedicated <span class="mono" style="color:var(--gold)">RiskAnchorPrice</span> pins every trigger to the first entry while PnL and order sizing use the blended average — exactly as specified. It closed the live-fill consistency gap with a single source of truth, reused the existing protection machinery, and backed it all with meaningful tests. No acceptance-criteria misses.</p>
+    <div class="scorebadge"><span class="count" data-to="95">95</span><small>&nbsp;/100</small></div>
+    <p class="caveat">The asterisk: the judge was <b>Opus 4.8</b> — the same family that wrote this PR — and the margin over <b>GPT 5.5 (92)</b> is just three points. Treat them as co-leaders. The headline isn't the top-two order; it's that the <b>cheapest, fastest model got the risk-critical detail wrong</b>, and the slow, expensive ones got it right.</p>
+  </div>
+</section>
+
+<!-- SUMMARY CARDS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">✦</span><span>Summary</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">All three, at a glance.</h2>
+    <div class="sumgrid">
+
+      <div class="sumcard reveal" style="--sig:var(--c-opus)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic</div>
+            <div class="sname"><svg class="logo"><use href="#logo-anthropic"/></svg>Opus 4.8</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="95">95</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">First-pass time</div><div class="sval">33 min</div></div><div style="text-align:right"><div class="slbl">Re-reviews</div><div class="sval">1</div></div></div>
+        <div class="srow"><div class="slbl">Token / quota cost</div><div class="sval muted">~340k tokens · 34% of 1M ctx</div></div>
+      </div>
+
+      <div class="sumcard reveal d1" style="--sig:var(--c-gpt)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">OpenAI</div>
+            <div class="sname"><svg class="logo"><use href="#logo-openai"/></svg>GPT 5.5</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="92">92</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">First-pass time</div><div class="sval">47 min</div></div><div style="text-align:right"><div class="slbl">Re-reviews</div><div class="sval">1</div></div></div>
+        <div class="srow"><div class="slbl">Token / quota cost</div><div class="sval muted">&gt;96% of Pro plan · compacted 1×</div></div>
+      </div>
+
+      <div class="sumcard reveal d2" style="--sig:var(--c-cursor)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Cursor</div>
+            <div class="sname"><svg class="logo"><use href="#logo-cursor"/></svg>Composer 2.5 Fast</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="62">62</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">First-pass time</div><div class="sval">7.5 min</div></div><div style="text-align:right"><div class="slbl">Re-reviews</div><div class="sval">3</div></div></div>
+        <div class="srow"><div class="slbl">Token / quota cost</div><div class="sval muted">~2% monthly · 128k tok · 64% ctx</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EPILOGUE -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">✦</span><span>Epilogue — what shipped</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">The winner became the base.</h2>
+    <p class="lead reveal d1">The bake-off wasn't academic. Issue&nbsp;#873 shipped to <span class="mono">main</span> as <b>PR&nbsp;#882</b> — a <b>best-of-three synthesis</b> built on the winner's architecture, <b style="color:var(--c-opus)">Opus 4.8's #877</b> (its <span class="mono">RiskAnchorPrice</span> freeze-the-entry design and single-source decision), with the best parts of GPT 5.5 and Composer folded in. The three contestant PRs stayed open; the winning design is what's now running.</p>
+    <div class="srclinks reveal d2" style="justify-content:flex-start;margin-top:24px">
+      <a href="https://github.com/richkuo/go-trader/pull/882" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-opus)"><use href="#logo-anthropic"/></svg>PR #882 · best-of-three synthesis <span class="ar">↗</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="srclinks">
+    <a href="https://github.com/richkuo/go-trader" target="_blank" rel="noopener">go-trader repo <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/issues/873" target="_blank" rel="noopener">Issue #873 <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/877" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-opus)"><use href="#logo-anthropic"/></svg>PR #877 · Opus 4.8 <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/876" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-gpt)"><use href="#logo-openai"/></svg>PR #876 · GPT 5.5 <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/875" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-cursor)"><use href="#logo-cursor"/></svg>PR #875 · Composer <span class="ar">↗</span></a>
+  </div>
+  <div class="byline">by <b>Rich Kuo</b> — product engineer building creative &amp; technical products</div>
+  <div class="socials">
+    <a href="https://www.richkuo.com" target="_blank" rel="noopener">Newsletter</a>
+    <a href="https://github.com/richkuo" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/richkuo" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://youtube.com/@richkuo7" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/richkuo7" target="_blank" rel="noopener">X</a>
+    <a href="https://tiktok.com/@rich_kuo1" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://instagram.com/richkuo7" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://discord.gg/44BykmWZsP" target="_blank" rel="noopener">Discord</a>
+  </div>
+  <div class="mono" style="margin-top:32px">Episode&nbsp;2 · Issue&nbsp;#873 · Scale-in / Pyramiding · Multi-model bake-off</div>
+  <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px">
+    <span>Generation metrics supplied by operator</span>
+    <span>LGTM gate: Claude GitHub Action, Opus 4.8</span>
+    <span>Scoring/judging: Opus 4.8 — also authored the winning PR #877 (disclosed conflict of interest)</span>
+    <span>Scores from an independent per-acceptance-criteria review against HEAD</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+<script>
+  /* ---- Motion layer: GSAP + ScrollTrigger (replaces IntersectionObserver + CSS keyframes) ---- */
+  gsap.registerPlugin(ScrollTrigger);
+  const mm = gsap.matchMedia();
+
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // Hero logo battle — the three contenders FIGHT for first place. The logo in
+    // last crouches, then explodes up to seize the top "crown" spot, shouldering
+    // the reigning champ aside; the champ recoils and tumbles down a rung while
+    // everyone shuffles. One master timeline rotates the crown through all three,
+    // returning to the start after three takeovers so the loop is seamless.
+    const lbs = gsap.utils.toArray('.lb');
+    const crown = { y: 8,   scale: 1.20, autoAlpha: 1,   boxShadow: '0 0 30px rgba(227,178,90,0.60)' }; // 1st
+    const p2    = { y: 100, scale: 0.92, autoAlpha: 0.8, boxShadow: '0 0 0px rgba(227,178,90,0)' };     // 2nd
+    const p3    = { y: 190, scale: 0.78, autoAlpha: 0.5, boxShadow: '0 0 0px rgba(227,178,90,0)' };     // 3rd (last)
+    lbs.forEach((el) => gsap.set(el, { left: 29, x: 0 }));
+    gsap.set(lbs[0], crown); gsap.set(lbs[1], p2); gsap.set(lbs[2], p3);
+
+    const fight = gsap.timeline({ repeat: -1 });
+    let order = [...lbs];          // [champ, 2nd, 3rd]
+    const STEP = 2.4;
+    for (let s = 0; s < 3; s++) {
+      const at = s * STEP;
+      const [champ, second, third] = order;
+      fight
+        .to(third,  { y: 206, scale: 0.73, duration: 0.18, ease: 'power2.in' }, at)                       // crouch — gather to pounce
+        .to(third,  { ...crown, duration: 0.6, ease: 'back.out(2.6)' }, at + 0.18)                        // explode up, seize the crown
+        .to(champ,  { x: 34, duration: 0.12, ease: 'power3.out' }, at + 0.52)                             // shouldered aside on impact
+        .to(champ,  { ...p2, x: 0, duration: 0.6, ease: 'bounce.out' }, at + 0.64)                        // tumbles down to 2nd
+        .to(second, { ...p3, duration: 0.55, ease: 'power2.inOut' }, at + 0.22)                           // old 2nd bumped to last
+        .to(third,  { x: 7, duration: 0.09, yoyo: true, repeat: 5, ease: 'power2.inOut' }, at + 0.74)     // triumphant wobble
+        .to(third,  { x: 0, duration: 0.12 }, at + 1.36)
+        .to(second, { y: 178, duration: 0.22, yoyo: true, repeat: 1, ease: 'power2.inOut' }, at + 1.7);   // the new last twitches, eager for its turn
+      order = [third, champ, second];   // crown rotates; identity after 3 steps
+    }
+
+    // Hero intro on load.
+    gsap.from('.hero .reveal', { opacity: 0, y: 30, duration: 0.9, stagger: 0.12, ease: 'power3.out', delay: 0.15 });
+
+    // Scroll reveals below the hero — ScrollTrigger.batch (GSAP-native, replaces IntersectionObserver).
+    const below = gsap.utils.toArray('.reveal').filter(el => !el.closest('.hero'));
+    gsap.set(below, { opacity: 0, y: 40 });
+    ScrollTrigger.batch(below, {
+      start: 'top 85%',
+      onEnter: (els) => {
+        gsap.to(els, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', overwrite: true });
+        els.forEach(el => el.querySelectorAll('.bar i[data-w]').forEach(b => { b.style.width = b.dataset.w + '%'; }));
+      },
+    });
+
+    // Count scores up as they enter view.
+    gsap.utils.toArray('.count').forEach((el) => {
+      const o = { v: 0 };
+      gsap.to(o, {
+        v: +el.dataset.to, duration: 1.3, ease: 'power1.out', snap: { v: 1 },
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+        onUpdate: () => { el.textContent = Math.round(o.v); },
+      });
+    });
+
+    // Winner finale — fire the CSS spotlight/glow when it scrolls in.
+    ScrollTrigger.create({
+      trigger: '#finale', start: 'top 60%', once: true,
+      onEnter: () => document.getElementById('finale').classList.add('in'),
+    });
+
+    window.addEventListener('load', () => ScrollTrigger.refresh()); // recalc after fonts/images settle
+  });
+
+  mm.add('(prefers-reduced-motion: reduce)', () => {
+    // Static, accessible end-state — no motion. (.reveal shown via the reduced-motion CSS override.)
+    document.getElementById('finale').classList.add('in');
+    const lbs = gsap.utils.toArray('.lb');
+    lbs.forEach((el) => gsap.set(el, { left: 29, x: 0 }));
+    gsap.set(lbs[0], { y: 8,   scale: 1.20, autoAlpha: 1,   boxShadow: '0 0 30px rgba(227,178,90,0.60)' });
+    gsap.set(lbs[1], { y: 100, scale: 0.92, autoAlpha: 0.8 });
+    gsap.set(lbs[2], { y: 190, scale: 0.78, autoAlpha: 0.5 });
+    document.querySelectorAll('.bar i[data-w]').forEach(b => { b.style.width = b.dataset.w + '%'; });
+    document.querySelectorAll('.count').forEach(el => { el.textContent = el.dataset.to; });
+  });
+
+  (function () {
+    const root = document.documentElement, KEY = 'theme-pref';
+    const btn = document.getElementById('themeToggle');
+    const ico = document.getElementById('themeIco'), lbl = document.getElementById('themeLbl');
+    const meta = { auto: ['🖥️', 'Auto'], light: ['☀️', 'Light'], dark: ['🌙', 'Dark'] };
+    let pref;
+    try { pref = localStorage.getItem(KEY) || 'auto'; } catch (e) { pref = 'auto'; }
+    if (!meta[pref]) pref = 'auto';
+    function apply(p) {
+      if (p === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', p);
+      ico.textContent = meta[p][0]; lbl.textContent = meta[p][1];
+    }
+    apply(pref);
+    btn.addEventListener('click', () => {
+      pref = pref === 'auto' ? 'light' : pref === 'light' ? 'dark' : 'auto';
+      try { localStorage.setItem(KEY, pref); } catch (e) {}
+      apply(pref);
+    });
+  })();
+
+  (function () {
+    const modal = document.getElementById('promptModal');
+    const open = document.getElementById('promptBtn');
+    const close = document.getElementById('promptClose');
+    function show() { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); }
+    function hide() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); }
+    open.addEventListener('click', show);
+    close.addEventListener('click', hide);
+    modal.addEventListener('click', (e) => { if (e.target === modal) hide(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+  })();
+</script>
+</body>
+</html>
