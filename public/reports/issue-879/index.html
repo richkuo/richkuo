@@ -6,8 +6,8 @@
 
 <!-- ===== SEO ===== -->
 <title>AI Coding Bake-off Ep. 3: Six Runs, One Refactor — The Judge Picked Itself (Issue #879)</title>
-<meta name="description" content="Six AI coding runs — Fable 5, Opus 4.8 at two effort levels, GPT-5.5, GPT-5, and Cursor's Composer 2.5 — each implemented the same safety-critical regime-calculator refactor in a live trading bot. A scored, code-verified head-to-head — judged by a model that was also a contestant." />
-<meta name="keywords" content="AI coding comparison, Fable 5, Opus 4.8, GPT-5.5, GPT-5, Composer 2.5, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, market regime, trading bot, LLM judge conflict of interest, Rich Kuo" />
+<meta name="description" content="Six AI coding runs — Fable 5, Opus 4.8 at two effort levels, GPT-5.5 ×2, and Cursor's Composer 2.5 — each implemented the same safety-critical regime-calculator refactor in a live trading bot. A scored, code-verified head-to-head — judged by a model that was also a contestant." />
+<meta name="keywords" content="AI coding comparison, Fable 5, Opus 4.8, GPT-5.5, Composer 2.5, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, market regime, trading bot, LLM judge conflict of interest, Rich Kuo" />
 <meta name="author" content="Rich Kuo" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <link rel="canonical" href="https://www.richkuo.com/reports/issue-879/" />
@@ -33,7 +33,6 @@
 <meta property="article:tag" content="Fable 5" />
 <meta property="article:tag" content="Claude Opus 4.8" />
 <meta property="article:tag" content="GPT-5.5" />
-<meta property="article:tag" content="GPT-5" />
 <meta property="article:tag" content="Composer 2.5" />
 <meta property="article:tag" content="AI coding comparison" />
 
@@ -46,7 +45,7 @@
 <meta name="twitter:image" content="https://www.richkuo.com/reports/issue-879/og-regime-bakeoff.png" />
 <meta name="twitter:image:alt" content="AI Coding Bake-off Episode 3 — six runs scored head-to-head" />
 <meta name="twitter:label1" content="Models compared" />
-<meta name="twitter:data1" content="Fable 5 · Opus 4.8 ×2 · GPT-5.5 · GPT-5 · Composer 2.5" />
+<meta name="twitter:data1" content="Fable 5 · Opus 4.8 ×2 · GPT-5.5 ×2 · Composer 2.5" />
 <meta name="twitter:label2" content="Format" />
 <meta name="twitter:data2" content="Scored, code-verified six-way bake-off" />
 
@@ -56,7 +55,7 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "AI Coding Bake-off Ep. 3: Six Runs, One Refactor — The Judge Picked Itself (Issue #879)",
-  "description": "Six AI coding runs — Fable 5, Opus 4.8 at two effort levels, GPT-5.5, GPT-5, and Cursor's Composer 2.5 — each implemented the same safety-critical regime-calculator refactor in a live trading bot. A scored, code-verified head-to-head — judged by a model that was also a contestant.",
+  "description": "Six AI coding runs — Fable 5, Opus 4.8 at two effort levels, GPT-5.5 ×2, and Cursor's Composer 2.5 — each implemented the same safety-critical regime-calculator refactor in a live trading bot. A scored, code-verified head-to-head — judged by a model that was also a contestant.",
   "image": "https://www.richkuo.com/reports/issue-879/og-regime-bakeoff.png",
   "url": "https://www.richkuo.com/reports/issue-879/",
   "datePublished": "2026-06-09",
@@ -66,14 +65,14 @@
   "author": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
   "publisher": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.richkuo.com/reports/issue-879/" },
-  "keywords": "AI coding comparison, Fable 5, Opus 4.8, GPT-5.5, GPT-5, Composer 2.5, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, market regime",
+  "keywords": "AI coding comparison, Fable 5, Opus 4.8, GPT-5.5, Composer 2.5, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, market regime",
   "articleSection": "AI & Developer Tools",
   "about": "A scored comparison of six AI coding runs implementing the same safety-critical refactor, with a disclosed judge conflict of interest.",
   "mentions": [
     { "@type": "SoftwareApplication", "name": "Fable 5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
     { "@type": "SoftwareApplication", "name": "Claude Opus 4.8", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
     { "@type": "SoftwareApplication", "name": "GPT-5.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
-    { "@type": "SoftwareApplication", "name": "GPT-5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
+    { "@type": "SoftwareApplication", "name": "GPT-5.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
     { "@type": "SoftwareApplication", "name": "Composer 2.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Cursor", "url": "https://cursor.com" } }
   ]
 }
@@ -433,7 +432,7 @@
 Today every strategy computes the market-regime label privately, inside its own per-cycle Python check subprocess — there is no single source of truth. Move ALL regime computation into a Go-scheduler-owned global calculator: one dedicated read-only subprocess per distinct signature per cycle, results in a per-cycle store, injected into every consumer — entry gating, position stamping, dynamic TP-SL, directional policy, the dashboard — and bring flat manual + options into the same system.
 
 Failure policy — settled decision (b): if the regime subprocess fails, CLEAR the store entry to empty (regime=-) and fail open in every consumer, with throttled alerts. Rejected alternatives, named in the issue: (a) reuse the last known label, (c) skip the cycle. Do not implement them.</div>
-    <p class="modal-note">✎ <b>Label &amp; effort note.</b> Model mapping verified from each PR's branch name and <span class="mono">LLM:</span> footer: <span class="mono">#899</span> = GPT-5 (<span class="mono">codex/</span>), <span class="mono">#900</span> = Composer 2.5 (Cursor), <span class="mono">#901</span> + <span class="mono">#903</span> = Opus 4.8 (<span class="mono">cc/</span>), <span class="mono">#902</span> = GPT-5.5 (<span class="mono">codex/</span>), <span class="mono">#910</span> = Fable 5 (<span class="mono">cc/</span>). One correction: #903's footer says <span class="mono">high</span>, but the operator confirms that run was <span class="mono">xhigh</span> — this report uses the operator-confirmed value.</p>
+    <p class="modal-note">✎ <b>Label &amp; effort note.</b> Model mapping verified from each PR's branch name and <span class="mono">LLM:</span> footer: <span class="mono">#899</span> = GPT-5.5 (<span class="mono">codex/</span>), <span class="mono">#900</span> = Composer 2.5 (Cursor), <span class="mono">#901</span> + <span class="mono">#903</span> = Opus 4.8 (<span class="mono">cc/</span>), <span class="mono">#902</span> = GPT-5.5 (<span class="mono">codex/</span>), <span class="mono">#910</span> = Fable 5 (<span class="mono">cc/</span>). One correction: #903's footer says <span class="mono">high</span>, but the operator confirms that run was <span class="mono">xhigh</span> — this report uses the operator-confirmed value.</p>
   </div>
 </div>
 
@@ -449,7 +448,7 @@ Failure policy — settled decision (b): if the regime subprocess fails, CLEAR t
       </div>
       <h1 class="display">Six runs.<br />One refactor.<br /><em>The judge picked itself.</em></h1>
     </div>
-    <p class="sub reveal in d2"><b>Six runs. Five models. One winner.</b> Fable 5, Opus 4.8 at two effort levels, GPT-5.5, GPT-5, and Composer 2.5 each rebuilt the same safety-critical plumbing in a live trading bot — fully independently, from one issue. We measured what it <b>cost</b>, how long it <b>took</b>, and how <b>correct</b> the code actually was.</p>
+    <p class="sub reveal in d2"><b>Six runs. Four models. One winner.</b> Fable 5, Composer 2.5, plus Opus 4.8 and GPT-5.5 each at two effort levels, rebuilt the same safety-critical plumbing in a live trading bot — fully independently, from one issue. We measured what it <b>cost</b>, how long it <b>took</b>, and how <b>correct</b> the code actually was.</p>
     <p class="sub serif-it reveal in d3" style="color:var(--gold);font-size:1.15rem;margin-top:1.8rem;text-align:center;">One more thing: the judge is one of the contestants. Keep scrolling — the winner is at the bottom.</p>
   </div>
   <div class="scrollcue">scroll ↓</div>
@@ -477,7 +476,7 @@ Failure policy — settled decision (b): if the regime subprocess fails, CLEAR t
       <a class="card reveal" href="https://github.com/richkuo/go-trader/pull/899" target="_blank" rel="noopener" style="--sig:var(--c-gpt5)">
         <div class="tape"></div>
         <div class="label">OpenAI · Codex · high</div>
-        <h3><svg class="logo"><use href="#logo-openai"/></svg>GPT-5</h3>
+        <h3><svg class="logo"><use href="#logo-openai"/></svg>GPT-5.5</h3>
         <div class="pr">PR #899 <span class="ar">↗</span></div>
         <div class="branch">codex/issue-879-regime-bundle</div>
       </a>
@@ -551,11 +550,11 @@ Failure policy — settled decision (b): if the regime subprocess fails, CLEAR t
           <td class="num big">11<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-composer);margin-top:8px"><i data-w="21"></i></div></td>
         </tr>
         <tr>
-          <td class="model"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>GPT-5</td>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>GPT-5.5 <span class="mono" style="font-size:.7em;color:var(--muted2)">high</span></td>
           <td class="num big">16<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-gpt5);margin-top:8px"><i data-w="30"></i></div></td>
         </tr>
         <tr>
-          <td class="model"><svg class="logo" style="color:var(--c-gpt55)"><use href="#logo-openai"/></svg>GPT-5.5</td>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt55)"><use href="#logo-openai"/></svg>GPT-5.5 <span class="mono" style="font-size:.7em;color:var(--muted2)">xhigh</span></td>
           <td class="num big">19.5<small style="font-size:.6rem"> min</small><div class="bar" style="--sig:var(--c-gpt55);margin-top:8px"><i data-w="37"></i></div></td>
         </tr>
         <tr>
@@ -601,11 +600,11 @@ Failure policy — settled decision (b): if the regime subprocess fails, CLEAR t
           <td class="num" style="color:var(--muted)">27% of a 5-hour window</td>
         </tr>
         <tr>
-          <td class="model"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>GPT-5</td>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>GPT-5.5 <span class="mono" style="font-size:.7em;color:var(--muted2)">high</span></td>
           <td class="num" style="color:var(--muted)">44% of a 5-hour window · 7% of weekly</td>
         </tr>
         <tr>
-          <td class="model"><svg class="logo" style="color:var(--c-gpt55)"><use href="#logo-openai"/></svg>GPT-5.5</td>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt55)"><use href="#logo-openai"/></svg>GPT-5.5 <span class="mono" style="font-size:.7em;color:var(--muted2)">xhigh</span></td>
           <td class="num" style="color:var(--muted)"><b style="color:var(--paper)">51% of a 5-hour window</b> · 8% of weekly — in 19.5 min</td>
         </tr>
       </tbody>
@@ -630,7 +629,7 @@ Failure policy — settled decision (b): if the regime subprocess fails, CLEAR t
           <td class="num">+1,241 / −46</td>
         </tr>
         <tr>
-          <td class="model"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>GPT-5 <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/899" target="_blank" rel="noopener">#899</a></td>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>GPT-5.5 <a class="pr" style="color:var(--muted2)" href="https://github.com/richkuo/go-trader/pull/899" target="_blank" rel="noopener">#899</a></td>
           <td><span class="pill">1</span></td>
           <td class="num">22</td>
           <td class="num">+1,070 / −68</td>
@@ -702,7 +701,7 @@ Failure policy — settled decision (b): if the regime subprocess fails, CLEAR t
       <div class="rankrow" style="--sig:var(--c-gpt5)">
         <div>
           <span class="ranklogo"><svg class="logo"><use href="#logo-openai"/></svg></span>
-          <div class="rankname">GPT-5<span class="eff">high</span>
+          <div class="rankname">GPT-5.5<span class="eff">high</span>
             <span class="sub">Honest description, clean build — but it <b>rebuilt the Python label classifiers in Go</b> instead of emitting them from Python, and the two copies disagree: a zero-ATR market maps to a different label family, and a 4-decimal rounding step flips labels exactly at thresholds. It shipped <b>zero Go-vs-Python parity tests</b> — the one safety net that redesign demanded. Stale window labels also leak through on bundle failure, and there's no dashboard surface at all.</span>
           </div>
         </div>
@@ -897,7 +896,7 @@ Failure policy — settled decision (b): if the regime subprocess fails, CLEAR t
         <div class="sbody">
           <div class="sbody-left">
             <div class="sco">OpenAI · high</div>
-            <div class="sname"><svg class="logo"><use href="#logo-openai"/></svg>GPT-5</div>
+            <div class="sname"><svg class="logo"><use href="#logo-openai"/></svg>GPT-5.5</div>
           </div>
           <div class="sbody-right">
             <div class="slbl">Score</div>
@@ -950,7 +949,7 @@ Failure policy — settled decision (b): if the regime subprocess fails, CLEAR t
     <a href="https://github.com/richkuo/go-trader/pull/901" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-opus-high)"><use href="#logo-anthropic"/></svg>PR #901 · Opus 4.8 high <span class="ar">↗</span></a>
     <a href="https://github.com/richkuo/go-trader/pull/903" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-opus-xhigh)"><use href="#logo-anthropic"/></svg>PR #903 · Opus 4.8 xhigh <span class="ar">↗</span></a>
     <a href="https://github.com/richkuo/go-trader/pull/902" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-gpt55)"><use href="#logo-openai"/></svg>PR #902 · GPT-5.5 <span class="ar">↗</span></a>
-    <a href="https://github.com/richkuo/go-trader/pull/899" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>PR #899 · GPT-5 <span class="ar">↗</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/899" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-gpt5)"><use href="#logo-openai"/></svg>PR #899 · GPT-5.5 <span class="ar">↗</span></a>
     <a href="https://github.com/richkuo/go-trader/pull/900" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-composer)"><use href="#logo-cursor"/></svg>PR #900 · Composer <span class="ar">↗</span></a>
   </div>
   <div class="byline">by <b>Rich Kuo</b> — product engineer building creative &amp; technical products</div>
