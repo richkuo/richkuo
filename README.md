@@ -6,15 +6,16 @@ Live at **https://www.richkuo.com**.
 
 ## What this site is
 
-A static, single-page-forward marketing site built with Astro. The homepage introduces Rich, links to social profiles, and surfaces three main content areas:
+A static, single-page-forward marketing site built with Astro. The homepage introduces Rich, links to social profiles, and surfaces four main content areas:
 
 - **Current projects** — products and tools (e.g. go-trader, SceneCutAI, Art Ping Pong) with optional external links or detail pages under `/projects/[slug]/`.
 - **Friend projects** — collaborations and side projects by others.
 - **OpenClaw** — YouTube videos and written guides (VPS setup, trading bots, MCP servers, bugfix notes) under `/openclaw/[slug]/` or external links.
+- **LLM Battles** — AI model bake-offs where several models build the same go-trader feature from one spec, scored on cost, speed, and code quality. Each episode links to a full HTML report under `/reports/issue-[n]/`.
 
 The homepage is a GSAP + ScrollTrigger single-page design: a floating glass nav capsule that assembles on scroll, glass project cards with 3D mouse-tilt and alternating slide-ins, drifting gradient blobs, letter-by-letter chat bubbles, and a scroll-scrubbed hero. A **Work with me** handshake icon links to email for inquiries.
 
-> **Note:** homepage content (projects, friend projects, videos, resources, social links) is **hardcoded as JS arrays** in `src/pages/index.astro` — adding or editing a Markdown file in `src/content/` does **not** update the homepage automatically. The content collections (`/projects/[slug]/`, `/openclaw/[slug]/`) still power the individual detail pages.
+> **Note:** homepage content (projects, friend projects, videos, resources, LLM Battles, social links) is **hardcoded as JS arrays** in `src/pages/index.astro` — adding or editing a Markdown file in `src/content/` does **not** update the homepage automatically. The content collections (`/projects/[slug]/`, `/openclaw/[slug]/`) still power the individual detail pages.
 
 ## Tech stack
 
@@ -76,7 +77,7 @@ Same shape as projects. Items whose `link` is a YouTube URL appear under **Video
 ## Customization
 
 - **Identity and socials** — edit [`src/site-config.yml`](src/site-config.yml).
-- **Homepage sections and hero** — all in [`src/pages/index.astro`](src/pages/index.astro); hardcoded JS arrays (`currentProjects`, `friendProjects`, `videos`, `resources`) near line 380. Profile image: [`src/assets/profile.jpg`](src/assets/profile.jpg).
+- **Homepage sections and hero** — all in [`src/pages/index.astro`](src/pages/index.astro); hardcoded JS arrays (`currentProjects`, `friendProjects`, `videos`, `resources`, `llmBattles`) near the top of the component frontmatter. Profile image: [`src/assets/profile.jpg`](src/assets/profile.jpg).
 - **Global styles and design tokens** — [`src/styles/global.css`](src/styles/global.css).
 - **Site URL** — [`astro.config.mjs`](astro.config.mjs) (`site` field).
 
