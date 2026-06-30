@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ===== SEO ===== -->
+<title>AI Coding Bake-off Ep. 6: Four Models, One Landmine — GPT-5.5 &amp; GLM 5.2 Tie at 94 (Issue #1134)</title>
+<meta name="description" content="Four AI coding models — OpenAI's GPT-5.5, Z.ai's GLM 5.2, Anthropic's Opus 4.8, and Cursor's new Composer 2.5 — each added one settings knob to a live trading bot without accidentally switching off a real-money safety net. A scored, code-checked head-to-head that ended in a tie: two winners at 94, a 3-point spread across the whole field. Explained for non-coders." />
+<meta name="keywords" content="AI coding comparison, GPT-5.5, GLM 5.2, Opus 4.8, Composer 2.5, Z.ai, Anthropic, OpenAI, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, stop loss, trading bot, Rich Kuo" />
+<meta name="author" content="Rich Kuo" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://www.richkuo.com/reports/issue-1134/" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0908" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3ecdd" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Rich Kuo" />
+<meta property="og:title" content="AI Coding Bake-off Ep. 6: Four Models, One Landmine — GPT-5.5 &amp; GLM 5.2 Tie at 94" />
+<meta property="og:description" content="Four AI models added one setting to a trading bot without switching off a real-money safety net. Two tied for first at 94 — the most code tied for the win, the least came last. The fastest model came last." />
+<meta property="og:url" content="https://www.richkuo.com/reports/issue-1134/" />
+<meta property="og:image" content="https://www.richkuo.com/reports/issue-1134/og-regime-atr-bakeoff.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="AI Coding Bake-off Episode 6 — four runs scored head-to-head on a safety-critical operator-override fix, ending in a tie" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:author" content="Rich Kuo" />
+<meta property="article:published_time" content="2026-06-29" />
+<meta property="article:modified_time" content="2026-06-29" />
+<meta property="article:section" content="AI &amp; Developer Tools" />
+<meta property="article:tag" content="GPT-5.5" />
+<meta property="article:tag" content="GLM 5.2" />
+<meta property="article:tag" content="Opus 4.8" />
+<meta property="article:tag" content="Composer 2.5" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@richkuo7" />
+<meta name="twitter:creator" content="@richkuo7" />
+<meta name="twitter:title" content="AI Coding Bake-off Ep. 6: Four Models, One Landmine — A Tie at 94" />
+<meta name="twitter:description" content="Four AI models took the same safety-critical job in a trading bot. Two tied for first at 94 — the model that wrote the most code tied for the win, the fastest came last." />
+<meta name="twitter:image" content="https://www.richkuo.com/reports/issue-1134/og-regime-atr-bakeoff.png" />
+<meta name="twitter:image:alt" content="AI Coding Bake-off Episode 6 — four runs scored head-to-head, ending in a tie" />
+<meta name="twitter:label1" content="Winner" />
+<meta name="twitter:data1" content="GPT-5.5 &amp; GLM 5.2 (tie)" />
+<meta name="twitter:label2" content="Field" />
+<meta name="twitter:data2" content="4 models — co-winners at 94, 3-point spread" />
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "AI Coding Bake-off Ep. 6: Four Models, One Landmine — GPT-5.5 & GLM 5.2 Tie at 94 (Issue #1134)",
+  "description": "Four AI coding models — OpenAI's GPT-5.5, Z.ai's GLM 5.2, Anthropic's Opus 4.8, and Cursor's new Composer 2.5 — each added one settings knob to a live trading bot to retune its automatic safety nets, without accidentally switching off a live real-money safety net on certain strategies. A scored, code-checked head-to-head that ended in a tie, explained for non-coders.",
+  "image": "https://www.richkuo.com/reports/issue-1134/og-regime-atr-bakeoff.png",
+  "url": "https://www.richkuo.com/reports/issue-1134/",
+  "datePublished": "2026-06-29",
+  "dateModified": "2026-06-29",
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true,
+  "author": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "publisher": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.richkuo.com/reports/issue-1134/" },
+  "keywords": "AI coding comparison, GPT-5.5, GLM 5.2, Opus 4.8, Composer 2.5, Z.ai, Anthropic, OpenAI, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, stop loss, trading bot",
+  "articleSection": "AI & Developer Tools",
+  "about": "A scored comparison of four AI coding runs adding one settings knob to a trading bot to retune its automatic safety nets, without accidentally switching off a live real-money safety net, with a disclosed judge conflict of interest that the result clears. Explained for non-coders.",
+  "mentions": [
+    { "@type": "SoftwareApplication", "name": "GPT-5.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
+    { "@type": "SoftwareApplication", "name": "GLM 5.2", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Z.ai", "url": "https://z.ai" } },
+    { "@type": "SoftwareApplication", "name": "Opus 4.8", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
+    { "@type": "SoftwareApplication", "name": "Composer 2.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Cursor", "url": "https://cursor.com" } }
+  ]
+}
+</script>
+<!-- ===== /SEO ===== -->
+<script>
+  /* set saved theme before paint to avoid a flash; 'auto' leaves it to the OS */
+  document.documentElement.classList.add('js');
+  (function(){ try { var p = localStorage.getItem('theme-pref');
+    if (p === 'light' || p === 'dark') document.documentElement.setAttribute('data-theme', p);
+  } catch(e){} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Hanken+Grotesk:wght@300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0a0908;
+    --char: #14110d;
+    --char2: #1d1812;
+    --gold: #e3b25a;
+    --gold-soft: #d4a24e;
+    --gold-glow: rgba(227, 178, 90, 0.5);
+    --paper: #f4ede0;
+    --muted: #8c8276;
+    --muted2: #5a544b;
+    --line: rgba(227, 178, 90, 0.16);
+    --track: rgba(255,255,255,0.06);
+    --hairline: rgba(255,255,255,0.05);
+    --grain-opacity: 0.045;
+    --hero-glow: rgba(227,178,90,0.16);
+    --finale-grad: linear-gradient(180deg, #fbecc8, var(--gold) 55%, #b9863a);
+    --scrim: rgba(6,5,4,0.72);
+    /* contestant signatures */
+    --c-opus: #cc785c;
+    --c-glm: #C9CDD4;
+    --c-gpt: #74AA9C;
+    --c-composer: #caa372;
+  }
+  :root[data-theme="light"] {
+    --black: #f3ecdd;
+    --char: #fbf6ec;
+    --char2: #fffdf7;
+    --gold: #a9762a;
+    --gold-soft: #b88534;
+    --gold-glow: rgba(169, 118, 42, 0.35);
+    --paper: #221c12;
+    --muted: #6a6253;
+    --muted2: #9d9486;
+    --line: rgba(169, 118, 42, 0.22);
+    --track: rgba(34,28,18,0.08);
+    --hairline: rgba(34,28,18,0.08);
+    --grain-opacity: 0.028;
+    --hero-glow: rgba(169,118,42,0.16);
+    --finale-grad: linear-gradient(180deg, #c79a45, #8a5f22 60%, #6d4a1a);
+    --scrim: rgba(60,50,32,0.4);
+    --c-opus: #b5664c;
+    --c-glm: #6f7176;
+    --c-gpt: #5f9486;
+    --c-composer: #9a7440;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --black: #f3ecdd;
+      --char: #fbf6ec;
+      --char2: #fffdf7;
+      --gold: #a9762a;
+      --gold-soft: #b88534;
+      --gold-glow: rgba(169, 118, 42, 0.35);
+      --paper: #221c12;
+      --muted: #6a6253;
+      --muted2: #9d9486;
+      --line: rgba(169, 118, 42, 0.22);
+      --track: rgba(34,28,18,0.08);
+      --hairline: rgba(34,28,18,0.08);
+      --grain-opacity: 0.028;
+      --hero-glow: rgba(169,118,42,0.16);
+      --finale-grad: linear-gradient(180deg, #c79a45, #8a5f22 60%, #6d4a1a);
+      --scrim: rgba(60,50,32,0.4);
+      --c-opus: #b5664c;
+      --c-glm: #6f7176;
+      --c-gpt: #5f9486;
+      --c-composer: #9a7440;
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    background: var(--black); color: var(--paper);
+    font-family: 'Hanken Grotesk', sans-serif; font-weight: 350; line-height: 1.65;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    transition: background-color .45s ease, color .45s ease;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection { background: var(--gold); color: var(--black); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .display { font-family: 'Fraunces', serif; font-weight: 600; line-height: 0.98; letter-spacing: -0.02em; }
+  .serif-it { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; top: -30%; left: 50%; width: 120vw; height: 120vh; transform: translateX(-50%); background: radial-gradient(ellipse 45% 40% at 50% 32%, var(--hero-glow), transparent 60%); pointer-events: none; }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero > .kicker { position: absolute; top: 40px; left: 28px; z-index: 3; }
+  .hero h1 { font-size: clamp(2.2rem, 7vw, 5.5rem); margin: 0.2em 0 0.1em; }
+  .hero h1 em { color: var(--gold); }
+  .hero .sub { max-width: none; font-size: clamp(1.05rem, 2.2vw, 1.4rem); color: var(--muted); margin-top: 1.4rem; }
+  .hero .sub b { color: var(--paper); font-weight: 600; }
+  .scrollcue { position: absolute; bottom: 38px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted2); z-index: 3; animation: bob 2.4s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{transform:translate(-50%,0);opacity:.5} 50%{transform:translate(-50%,8px);opacity:1} }
+
+  section { padding: clamp(80px, 13vh, 160px) 0; position: relative; }
+  .seclabel { display:flex; align-items:center; gap:18px; margin-bottom: 2.6rem; }
+  .seclabel .no { font-family:'Fraunces',serif; font-style:italic; font-size:1.1rem; color:var(--gold); }
+  .seclabel .ln { flex:1; height:1px; background:var(--line); }
+  h2.sec { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 1.4rem; }
+  .lead { font-size: 1.18rem; color: var(--muted); max-width: none; }
+  .lead b { color: var(--paper); font-weight: 600; }
+
+  /* GSAP drives reveals; only hide when JS is active so a no-JS visitor still sees everything */
+  .js .reveal { opacity: 0; transform: translateY(36px); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  .grid3 { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: linear-gradient(160deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 14px; padding: 28px 26px; position: relative; overflow: hidden; transition: border-color .25s, transform .25s, box-shadow .25s; }
+  .card .tape { position:absolute; top:0; left:0; right:0; height:3px; background: var(--sig, var(--gold)); opacity:.85; }
+  .card .pr { font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.18em; color:var(--muted); }
+  .card h3 { font-family:'Fraunces',serif; font-weight:600; font-size:1.7rem; margin:.3rem 0 .1rem; }
+  .card .label { color:var(--muted); font-size:.92rem; }
+  .card .branch { font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--muted2); margin-top:14px; word-break:break-all; }
+
+  .flow { display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin-top:2rem; }
+  .step { background:var(--char); border:1px solid var(--line); border-radius:12px; padding:22px 20px; position:relative; }
+  .step .n { font-family:'Fraunces',serif; font-style:italic; font-size:2.2rem; color:var(--gold); line-height:1; }
+  .step p { font-size:.92rem; color:var(--muted); margin-top:.6rem; }
+  .step b { color:var(--paper); font-weight:600; }
+  .loopnote { margin-top:1.8rem; padding:18px 22px; border-left:2px solid var(--gold); background: rgba(227,178,90,0.05); border-radius: 0 10px 10px 0; font-size:.98rem; color:var(--muted); }
+  .loopnote b { color:var(--paper); }
+
+  .tbl { width:100%; border-collapse:collapse; margin-top:1.6rem; font-size:.96rem; }
+  .tbl th { text-align:left; font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:500; padding:0 12px 14px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  .tbl td { padding:15px 12px; border-bottom:1px solid var(--hairline); vertical-align:middle; font-variant-numeric: tabular-nums; }
+  .tbl tr:last-child td { border-bottom:none; }
+  .tbl .model { font-weight:600; color:var(--paper); }
+  .tbl .big { font-family:'Fraunces',serif; font-size:1.3rem; }
+  .tbl .num { font-family:'JetBrains Mono',monospace; white-space:nowrap; font-variant-numeric: tabular-nums; }
+  .tbl a.pr { text-decoration: none; transition: color .2s; }
+  .tbl a.pr:hover { color: var(--gold) !important; }
+
+  .pill { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.72rem; padding:3px 9px; border-radius:999px; border:1px solid var(--line); color:var(--muted); }
+  .pill.good { color:var(--c-gpt); border-color: rgba(116,170,156,.4); }
+  .pill.warn { color:#cc785c; border-color: rgba(204,120,92,.4); }
+
+  .bar { height:8px; border-radius:999px; background:var(--track); overflow:hidden; min-width:90px; }
+  .bar i { display:block; height:100%; border-radius:999px; background: var(--sig, var(--gold)); width:0; transition: width 1.2s cubic-bezier(.16,1,.3,1); }
+
+  .verdict-intro { text-align:center; }
+  .verdict-intro h2 { font-size: clamp(2.4rem, 7vw, 5rem); }
+  .verdict-intro .lead { margin: 1.4rem auto 0; }
+
+  .rank { min-height: 78vh; display:flex; align-items:center; }
+  .rank .inner { width:100%; }
+  .placetag { font-family:'Fraunces',serif; font-style:italic; font-size: clamp(1rem,2.4vw,1.4rem); color: var(--muted); letter-spacing:.02em; }
+  .rankrow { display:grid; grid-template-columns: minmax(0,1fr) auto; gap:30px; align-items:center; margin-top:.4rem; }
+  .rankname { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(2.4rem, 8vw, 5.4rem); line-height:.96; letter-spacing:-.02em; }
+  .rankname .eff { display:inline-block; font-family:'JetBrains Mono',monospace; font-weight:400; font-size:.28em; letter-spacing:.18em; text-transform:uppercase; color:var(--sig,var(--muted)); vertical-align:.55em; margin-left:.5em; }
+  .rankname .sub { display:block; font-family:'Hanken Grotesk',sans-serif; font-style:normal; font-weight:400; font-size: clamp(.9rem,1.6vw,1.05rem); color:var(--muted); letter-spacing:0; margin-top:.7rem; max-width:54ch; line-height:1.55; }
+  .rankname .sub b { color:var(--paper); font-weight:600; }
+  .score { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(4rem, 16vw, 11rem); line-height:.8; letter-spacing:-.04em; color: var(--sig, var(--gold)); text-align:right; font-variant-numeric: tabular-nums; }
+  .score small { font-size:.28em; color:var(--muted); font-weight:400; letter-spacing:0; }
+  .rankrule { height:1px; background:var(--line); margin-top:2.4rem; }
+
+  .awards { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; margin-top:1rem; }
+  .award { background: linear-gradient(160deg,var(--char2),var(--char)); border:1px solid var(--line); border-radius:14px; padding:30px 28px; }
+  .award .crown { font-size:1.5rem; }
+  .award h4 { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin:.8rem 0 .5rem; }
+  .award .who { font-family:'Fraunces',serif; font-size:1.7rem; font-weight:600; }
+  .award p { color:var(--muted); font-size:.95rem; margin-top:.5rem; }
+  .award p b { color:var(--paper); font-weight:600; }
+
+  /* Tie finale — dual spotlight */
+  .finale { min-height: 100vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; padding: clamp(90px,13vh,160px) 0; }
+  .finale::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 50% 42%, rgba(227,178,90,0.22), rgba(227,178,90,0.04) 38%, transparent 64%); opacity:0; transition: opacity 1.6s ease; }
+  .finale.in::before { opacity:1; }
+  .finale .rays { position:absolute; top:42%; left:50%; width:160vmax; height:160vmax; transform: translate(-50%,-50%) scale(.4); opacity:0; background: repeating-conic-gradient(from 0deg, rgba(227,178,90,0.07) 0deg 6deg, transparent 6deg 12deg); transition: opacity 2s ease, transform 2.4s cubic-bezier(.16,1,.3,1); animation: spin 60s linear infinite; pointer-events:none; }
+  .finale.in .rays { opacity:1; transform: translate(-50%,-50%) scale(1); }
+  @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg) scale(1);} }
+  .finale .wrap { position:relative; z-index:2; }
+  .finale .trophy { font-size: clamp(2.4rem,6vw,3.8rem); transform: scale(.4); opacity:0; transition: all 1s cubic-bezier(.34,1.56,.64,1) .2s; }
+  .finale.in .trophy { transform:none; opacity:1; }
+  .finale .crowned { font-family:'JetBrains Mono',monospace; letter-spacing:.4em; text-transform:uppercase; font-size:.8rem; color:var(--gold); margin:1.4rem 0 .2rem; }
+  .finale .tieword { font-family:'Fraunces',serif; font-weight:700; font-size: clamp(3rem, 11vw, 7rem); line-height:.9; letter-spacing:-.03em; background: var(--finale-grad); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom: .2em; }
+  .tiegrid { display:grid; grid-template-columns: 1fr auto 1fr; gap: 26px; align-items:center; max-width: 920px; margin: 2.2rem auto 0; }
+  .tiecol { background: linear-gradient(160deg, rgba(227,178,90,0.08), transparent); border:1px solid var(--gold); border-radius:18px; padding: 30px 26px; box-shadow: 0 0 50px rgba(227,178,90,0.10); }
+  .tiecol .winlogo { display:flex; justify-content:center; margin: 2px 0 10px; }
+  .tiecol .winlogo .logo { width:48px; height:48px; color:var(--gold); filter: drop-shadow(0 0 24px var(--gold-glow)); }
+  .tiecol .who { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(1.8rem,4vw,2.4rem); color:var(--paper); }
+  .tiecol .org { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:.4rem; }
+  .tiecol .pr { font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.12em; margin-top:.5rem; }
+  .tiecol .pr a { color:var(--gold); text-decoration:none; border-bottom:1px solid var(--line); transition:border-color .2s; }
+  .tiecol .pr a:hover { border-color:var(--gold); }
+  .tiecol .badge { display:inline-block; margin-top:1.2rem; font-family:'Fraunces',serif; font-weight:600; font-size:2.4rem; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:.18em .7em; box-shadow: 0 0 36px var(--gold-glow); font-variant-numeric: tabular-nums; }
+  .tiecol .badge small { font-size:.36em; color:var(--muted); font-weight:400; }
+  .tiecol .descr { margin-top:1rem; color:var(--muted); font-size:.92rem; line-height:1.55; }
+  .tiecol .descr b { color:var(--paper); font-weight:600; }
+  .tievs { font-family:'Fraunces',serif; font-style:italic; font-size: clamp(1.4rem,4vw,2.2rem); color:var(--gold); }
+  .finale .why { max-width: 60ch; margin: 2.4rem auto 0; color: var(--muted); font-size:1.1rem; }
+  .finale .why b { color: var(--paper); font-weight:600; }
+  .caveat { margin-top:2.4rem; font-size:.95rem; color:var(--muted2); max-width:60ch; margin-left:auto; margin-right:auto; }
+  .caveat b { color: var(--muted); }
+  .coi { margin: 2.6rem auto 0; max-width: 64ch; text-align: left; padding: 22px 26px; border: 1px solid rgba(204,120,92,.45); border-left: 3px solid #cc785c; border-radius: 0 12px 12px 0; background: rgba(204,120,92,0.07); font-size: .98rem; color: var(--muted); }
+  .coi b { color: var(--paper); }
+  .coi .coik { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.26em; text-transform:uppercase; color:#cc785c; display:block; margin-bottom:.6rem; }
+
+  footer { padding: 80px 0 100px; text-align:center; color:var(--muted2); font-size:.84rem; }
+  footer .mono { color:var(--muted); }
+
+  .kicker a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .2s, color .2s; }
+  .kicker a:hover { color: var(--paper); border-color: var(--gold); }
+  a.card { text-decoration: none; color: inherit; display: block; }
+  a.card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 18px 50px rgba(0,0,0,.3); }
+  .card .pr { display: inline-flex; align-items: center; gap: 5px; }
+  .card .ar { font-size: .8em; opacity: .5; transition: opacity .2s, color .2s; }
+  a.card:hover .ar { opacity: 1; color: var(--gold); }
+  .srclinks { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; }
+  .srclinks a { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .06em; color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 8px 15px; transition: color .2s, border-color .2s, transform .2s; display: inline-flex; align-items: center; gap: 7px; }
+  .srclinks a:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-1px); }
+  .srclinks a .ar { opacity: .6; }
+
+  .logo { fill: currentColor; flex: 0 0 auto; display: inline-block; }
+  .card h3 { display: flex; align-items: center; gap: 11px; }
+  .card h3 .logo { width: 1.05em; height: 1.05em; color: var(--sig, var(--gold)); }
+  .tbl .model { white-space: nowrap; }
+  .tbl .model .logo { width: 1.05em; height: 1.05em; vertical-align: -0.18em; margin-right: 9px; }
+  .ranklogo { display: inline-flex; margin-bottom: 18px; }
+  .ranklogo .logo { width: 44px; height: 44px; color: var(--sig, var(--gold)); }
+  .award .who { display: inline-flex; align-items: center; gap: 11px; }
+  .award .who .logo { width: 1em; height: 1em; }
+  .srclinks a .logo { width: 1.05em; height: 1.05em; }
+
+  .controls { position: fixed; top: 16px; right: 16px; z-index: 1000; display: flex; gap: 8px; }
+  .ctrl { display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); background:var(--scrim); border:1px solid var(--line); border-radius:999px; padding:9px 14px; cursor:pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: color .2s, border-color .2s, background .2s, transform .2s; }
+  .ctrl:hover { color:var(--gold); border-color:var(--gold); transform: translateY(-1px); }
+  .ctrl .ico { font-size:.95rem; line-height:1; }
+
+  .modal { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 24px; background: var(--scrim); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s; }
+  .modal.open { opacity: 1; visibility: visible; }
+  .modal-card { width: min(760px, 100%); max-height: 86vh; overflow-y: auto; background: linear-gradient(165deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 18px; padding: 38px 40px 40px; position: relative; box-shadow: 0 40px 120px rgba(0,0,0,.45); transform: translateY(24px) scale(.98); transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .modal.open .modal-card { transform: none; }
+  .modal-card .x { position: absolute; top: 18px; right: 20px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 1.1rem; cursor: pointer; line-height: 1; transition: color .2s, border-color .2s, transform .2s; }
+  .modal-card .x:hover { color: var(--gold); border-color: var(--gold); transform: rotate(90deg); }
+  .modal-card .mkick { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); }
+  .modal-card h3 { font-family:'Fraunces',serif; font-weight:600; font-size:1.9rem; margin:.5rem 0 .3rem; }
+  .modal-card .msub { color: var(--muted); font-size:.95rem; margin-bottom: 1.6rem; }
+  .prompt-box { font-family:'JetBrains Mono',monospace; font-size:.84rem; line-height:1.75; color: var(--paper); white-space: pre-wrap; word-break: break-word; background: var(--track); border:1px solid var(--line); border-left:2px solid var(--gold); border-radius: 0 12px 12px 0; padding: 22px 24px; }
+  .prompt-box a { color: var(--gold); }
+  .modal-note { margin-top: 1.6rem; font-size:.84rem; color: var(--muted2); line-height:1.6; }
+  .modal-note .mono { color: var(--muted); }
+
+  .byline { font-family:'Fraunces',serif; font-style:italic; font-size:1.15rem; color:var(--paper); margin-top:42px; }
+  .byline b { font-style:normal; font-weight:600; }
+  .socials { display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin-top:18px; }
+  .socials a { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:8px 15px; transition:color .2s, border-color .2s, transform .2s, background .2s; }
+  .socials a:hover { color:var(--black); background:var(--gold); border-color:var(--gold); transform:translateY(-2px); }
+
+  .hero-title-row { display: flex; align-items: center; gap: 40px; margin-top: 0.2em; width: fit-content; margin-left: auto; margin-right: auto; }
+  .logo-battle { position: relative; width: 140px; height: 375px; flex-shrink: 0; overflow: visible; }
+  .logo-battle::before { content: ""; position: absolute; left: 50%; top: 49px; width: 160px; height: 160px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, var(--gold-glow), transparent 70%); opacity: .5; pointer-events: none; }
+  .lb { position: absolute; left: 29px; top: 0; width: 82px; height: 82px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--char2); border: 1px solid var(--line); will-change: transform; }
+  .lb svg { width: 50px; height: 50px; }
+  .lb-gpt      { color: var(--c-gpt); }
+  .lb-glm      { color: var(--c-glm);      top: 90px; }   /* static fallback stack (no JS) */
+  .lb-opus     { color: var(--c-opus);     top: 180px; }
+  .lb-composer { color: var(--c-composer); top: 270px; }
+  .js .lb { top: 0; }   /* with JS, GSAP positions all four from a common origin via transforms */
+
+  @media (max-width: 760px) {
+    .tiegrid { grid-template-columns: 1fr; }
+    .tievs { padding: 4px 0; }
+  }
+  @media (max-width: 720px) {
+    .grid3, .flow, .awards { grid-template-columns: 1fr; }
+    .rankrow { grid-template-columns: 1fr; gap: 8px; }
+    .score { text-align:left; }
+    .hero .sub { max-width: none; }
+    .hero-title-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .tbl, .tbl tbody { display: block; table-layout: auto; }
+    .tbl thead { display: none; }
+    .tbl tr { display: block; border: 1px solid var(--line); border-radius: 14px; padding: 6px 16px 14px; margin-bottom: 14px; }
+    .tbl td { display: block; border: none; border-top: 1px solid var(--hairline); padding: 9px 0; white-space: normal; width: auto !important; text-align: left; }
+    .tbl td:first-child { border-top: none; }
+    .tbl td::before { content: ""; display: block; color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
+    .difftbl td:nth-child(2)::before { content: "Diff"; }
+    .difftbl td:nth-child(3)::before { content: "Files"; }
+    .difftbl td:nth-child(4)::before { content: "First-pass time"; }
+    .difftbl td:nth-child(5)::before { content: "First-pass cost (native unit)"; }
+    .tbl td.model { font-size: 1.2rem; font-weight: 600; padding-top: 6px; }
+    .tbl td.model::before { content: none; }
+    .tbl .bar { display: none; }
+    .tbl td.num { white-space: normal; }
+    .tbl td.num.big { font-size: 1.1rem; }
+  }
+
+  .sumgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 2rem; }
+  .sumcard { background: linear-gradient(160deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .sumcard.cowin { border-color: var(--gold); box-shadow: 0 0 36px rgba(227,178,90,0.10); }
+  .sumcard .stape { height: 3px; background: var(--sig, var(--gold)); opacity: .85; }
+  .sumcard .sbody { padding: 18px 20px 12px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+  .sumcard .sbody-left { min-width: 0; }
+  .sumcard .sbody-right { text-align: right; flex-shrink: 0; }
+  .sumcard .sbody-right .slbl { text-align: right; }
+  .sumcard .sco { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--sig, var(--gold)); opacity: .7; }
+  .sumcard .sname { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.35rem; margin: .2rem 0 0; color: var(--paper); display: flex; align-items: center; gap: 8px; }
+  .sumcard .sname .logo { width: .85em; height: .85em; color: var(--sig, var(--gold)); flex-shrink: 0; }
+  .sumcard .stag { display:inline-block; margin-top:6px; font-family:'JetBrains Mono',monospace; font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:2px 8px; }
+  .sumcard .srow { border-top: 1px solid var(--hairline); padding: 9px 20px; }
+  .sumcard .srow-split { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .sumcard .slbl { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sig, var(--gold)); margin-bottom: 3px; }
+  .sumcard .sval { font-size: .94rem; color: var(--paper); font-variant-numeric: tabular-nums; }
+  .sumcard .sval.muted { color: var(--muted); font-size: .82rem; }
+  .sumcard .sval.big-score { font-family: 'Fraunces', serif; font-weight: 600; font-size: 2rem; color: var(--sig, var(--gold)); line-height: 1; padding-bottom: 4px; }
+  .sumcard .sval.big-score small { font-size: .38em; color: var(--muted); font-weight: 400; }
+  @media (max-width: 980px) { .sumgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 720px) { .sumgrid { grid-template-columns: 1fr; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1 !important; transform:none !important; transition:none; }
+    .finale .rays { animation:none; }
+    html { scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BRAND LOGO SPRITE -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="logo-openai" viewBox="0 0 24 24"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></symbol>
+  <symbol id="logo-anthropic" viewBox="0 0 24 24"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></symbol>
+  <symbol id="logo-zai" viewBox="0 0 30 30"><path d="M15.47,7.1l-1.3,1.85c-0.2,0.29-0.54,0.47-0.9,0.47h-7.1V7.09C6.16,7.1,15.47,7.1,15.47,7.1z"/><polygon points="24.3,7.1 13.14,22.91 5.7,22.91 16.86,7.1 "/><path d="M14.53,22.91l1.31-1.86c0.2-0.29,0.54-0.47,0.9-0.47h7.09v2.33H14.53z"/></symbol>
+  <symbol id="logo-cursor" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" d="M12 2.2 L20.8 7.1 L20.8 16.9 L12 21.8 L3.2 16.9 L3.2 7.1 Z M12 12 L12 2.2 M12 12 L3.2 7.1 M12 12 L20.8 7.1"/></symbol>
+</svg>
+
+<!-- FLOATING CONTROLS -->
+<div class="controls">
+  <button class="ctrl" id="promptBtn" aria-label="View the assignment"><span class="ico">&#10077;</span><span>The brief</span></button>
+  <button class="ctrl" id="themeToggle" aria-label="Toggle color theme"><span class="ico" id="themeIco">&#128421;&#65039;</span><span id="themeLbl">Auto</span></button>
+</div>
+
+<!-- BRIEF MODAL -->
+<div class="modal" id="promptModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="promptTitle">
+  <div class="modal-card">
+    <button class="x" id="promptClose" aria-label="Close">&#10005;</button>
+    <div class="mkick">The brief</div>
+    <h3 id="promptTitle">The assignment</h3>
+    <div class="msub">What each model had to do — issue #1134, in plain English.</div>
+    <div class="prompt-box">The job (<a href="https://github.com/richkuo/go-trader/issues/1134" target="_blank" rel="noopener">issue #1134</a>): my trading bot has automatic safety nets — "sell if the price drops too far so one bad trade doesn't wipe me out." How much room those nets give the price is tuned to the market, and right now those numbers are baked into the program.
+
+Add ONE knob the operator can turn once to retune those safety nets across the whole bot at once — instead of editing every strategy by hand. A specific strategy can still override the knob. Just an added setting; nothing else changes.
+
+But: check the new setting for typos and reject a bad one loudly. And the bot has two copies of this logic — the live trader and a "practice mode" that tests on old data — so both copies have to change together.
+
+The landmine: one kind of strategy ("manual") already gets its safety-net settings from a different place. To the computer, its safety net looks exactly like a normal one. The obvious way to build the knob would quietly reach in and OVERWRITE that live safety net with the wrong numbers — no error, real money. The fix has to SKIP those strategies, and prove it skipped them with a test.</div>
+    <p class="modal-note">&#9998; <b>Who's who.</b> Each model's entry is matched to it from its code branch + sign-off: <span class="mono">#1142</span> = GPT-5.5 (in Codex), <span class="mono">#1143</span> = GLM 5.2 (in Cursor — its sign-off wrongly says "Claude Code"; the operator and the usage meter confirm Cursor), <span class="mono">#1144</span> = Opus 4.8 (in Claude Code), <span class="mono">#1141</span> = Composer 2.5 (in Cursor). None of the four went through a back-and-forth review loop — each is a single first pass. Time/cost was reported in three different units, so it's flavor only and never moved the score.</p>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="kicker reveal in"><a href="https://github.com/richkuo/go-trader" target="_blank" rel="noopener">Go-Trader</a> · <a href="https://github.com/richkuo/go-trader/issues/1134" target="_blank" rel="noopener">Issue&nbsp;#1134</a> · Bake-off Episode&nbsp;6</div>
+  <div class="wrap">
+    <div class="hero-title-row reveal in d1">
+      <div class="logo-battle" aria-hidden="true">
+        <div class="lb lb-gpt"><svg class="logo"><use href="#logo-openai"/></svg></div>
+        <div class="lb lb-glm"><svg class="logo"><use href="#logo-zai"/></svg></div>
+        <div class="lb lb-opus"><svg class="logo"><use href="#logo-anthropic"/></svg></div>
+        <div class="lb lb-composer"><svg class="logo"><use href="#logo-cursor"/></svg></div>
+      </div>
+      <h1 class="display">Four models.<br />One landmine.<br /><em>One winner?</em></h1>
+    </div>
+    <p class="sub reveal in d2"><b>Four models. One safety-critical job.</b> OpenAI's GPT-5.5, Z.ai's GLM 5.2, Anthropic's Opus 4.8, and Cursor's new Composer 2.5 each took the same task: add one settings knob to my trading bot that retunes its automatic safety nets — without accidentally switching off a live, real-money safety net, a trap the task itself warned about. Four totally separate tries, same instructions. I checked every line: did each one dodge the trap, and prove it with a test?</p>
+    <p class="sub serif-it reveal in d3" style="color:var(--gold);font-size:1.15rem;margin-top:1.8rem;text-align:center;">You scroll expecting one winner. Keep scrolling — the result is at the bottom, and it isn't what you think.</p>
+  </div>
+  <div class="scrollcue">scroll &#8595;</div>
+</header>
+
+<main>
+
+<!-- THE ASSIGNMENT -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">i.</span><span>The assignment</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">A knob I couldn't reach.</h2>
+    <p class="lead reveal d1"><b style="color:var(--gold)">In plain English</b> — my bot decides when to bail out of a trade. Two of those exits are safety nets: a <b>stop-loss</b> ("sell if it drops past this line so I don't get wiped out") and a <b>trailing stop</b> (a net that follows the price up to lock in gains). How much room each net gives the price is tuned to the market — calm days get a tighter net, wild days a looser one. Right now those numbers are <b>baked into the program.</b> Fine, until I want to retune them across the whole bot at once — then I'd have to edit the setting in <i>every single strategy</i> by hand, or edit the code and rebuild the whole thing. <a href="https://github.com/richkuo/go-trader/issues/1134" target="_blank" rel="noopener" style="color:var(--gold)">Issue&nbsp;#1134</a> asked for the obvious fix: <b>one knob</b> I set once that every safety net picks up — unless a specific strategy wants to override it. Just an added setting. Sounds boring. It isn't — because of one strategy type.</p>
+    <div class="srclinks reveal d2" style="justify-content:center;margin-top:28px">
+      <a href="https://github.com/richkuo/go-trader/issues/1134" target="_blank" rel="noopener">Read the full issue #1134 on GitHub <span class="ar">&#8599;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- THE LANDMINE -->
+<section style="background:linear-gradient(180deg,transparent,rgba(204,120,92,0.04),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">ii.</span><span>The landmine</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">A lazy fix switches off a live safety net.</h2>
+    <p class="lead reveal d1">Here's the trap. Some of my strategies run in <b>"manual"</b> mode, and those already get their safety-net settings from a <i>different</i> place I built earlier. The new knob is only supposed to feed the <i>normal</i> strategies. The problem: to the computer, a manual strategy's safety net <b>looks exactly like a normal one.</b> So the obvious approach — "find every safety net on the default settings and feed it the new numbers" — would quietly reach into every manual strategy and <b>overwrite a live safety net with the wrong numbers.</b> No error. No failed test. The task calls this out by name and demands the fix <i>skip</i> manual strategies. So the real challenge wasn't "can you add a setting." It was <b>"can you add it without switching off a real-money safety net — and prove it with a test."</b></p>
+    <div class="loopnote reveal d1" style="border-left-color:#cc785c;background:rgba(204,120,92,0.06);">&#9888;&#65039; <b>The trap.</b> The bug doesn't crash. It doesn't fail a test. It just points a real-money safety net at the wrong settings, quietly, and waits. A green checkmark proves nothing here — the only thing that proves it is reading the code and confirming the fix skips those manual strategies.</div>
+  </div>
+</section>
+
+<!-- CONTESTANTS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">iii.</span><span>The contestants</span><span class="ln"></span></div>
+    <div class="grid3">
+      <a class="card reveal" href="https://github.com/richkuo/go-trader/pull/1142" target="_blank" rel="noopener" style="--sig:var(--c-gpt)">
+        <div class="tape"></div>
+        <div class="label">OpenAI · Codex · high</div>
+        <h3><svg class="logo"><use href="#logo-openai"/></svg>GPT-5.5</h3>
+        <div class="pr">PR #1142 <span class="ar">&#8599;</span></div>
+        <div class="branch">codex/issue-1134-regime-atr-defaults-pr</div>
+      </a>
+      <a class="card reveal d1" href="https://github.com/richkuo/go-trader/pull/1143" target="_blank" rel="noopener" style="--sig:var(--c-glm)">
+        <div class="tape"></div>
+        <div class="label">Z.ai · Cursor · high</div>
+        <h3><svg class="logo"><use href="#logo-zai"/></svg>GLM 5.2</h3>
+        <div class="pr">PR #1143 <span class="ar">&#8599;</span></div>
+        <div class="branch">issue-1134-regime-atr-user-defaults</div>
+      </a>
+      <a class="card reveal d2" href="https://github.com/richkuo/go-trader/pull/1144" target="_blank" rel="noopener" style="--sig:var(--c-opus)">
+        <div class="tape"></div>
+        <div class="label">Anthropic · Claude Code · high</div>
+        <h3><svg class="logo"><use href="#logo-anthropic"/></svg>Opus 4.8</h3>
+        <div class="pr">PR #1144 <span class="ar">&#8599;</span></div>
+        <div class="branch">claude/1134-regime-atr-user-defaults</div>
+      </a>
+      <a class="card reveal d3" href="https://github.com/richkuo/go-trader/pull/1141" target="_blank" rel="noopener" style="--sig:var(--c-composer)">
+        <div class="tape"></div>
+        <div class="label">Cursor · Cursor · high · debut</div>
+        <h3><svg class="logo"><use href="#logo-cursor"/></svg>Composer 2.5</h3>
+        <div class="pr">PR #1141 <span class="ar">&#8599;</span></div>
+        <div class="branch">issue-1134-regime-atr-defaults</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section style="background:linear-gradient(180deg,transparent,rgba(227,178,90,0.025),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">iv.</span><span>How they were judged</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Four separate reviews. Every test re-run.</h2>
+    <p class="lead reveal d1">Each entry got its <b>own reviewer</b>, walled off from the other three so nobody was swayed by another's work. Each one pulled up the actual code, went through the task's checklist item by item, <b>checked every promise against what the code really does</b> — pointing to the exact line as proof — and <b>re-ran all the automated tests itself</b> instead of trusting the "all passing" badge on the submission.</p>
+    <div class="flow">
+      <div class="step reveal"><div class="n">01</div><p><b>Read the task.</b> List exactly what the fix must do, and the safety trap it warned about.</p></div>
+      <div class="step reveal d1"><div class="n">02</div><p><b>Pull up the real code.</b> Check every claim against what the code actually does, line by line.</p></div>
+      <div class="step reveal d2"><div class="n">03</div><p><b>Re-run the tests.</b> Both copies of the bot — live and practice mode — from scratch.</p></div>
+      <div class="step reveal d3"><div class="n">04</div><p><b>Score out of 100</b> against the checklist. Report every miss, with proof.</p></div>
+    </div>
+    <div class="loopnote reveal">&#9881;&#65039; <b>A note on the judge.</b> The reviewing was all done by one model — <b>Opus 4.8 (Anthropic's)</b> — and one of the contestants is <b>also Opus 4.8</b>. Hold that thought. We'll come back to it at the bottom, next to the result it produced — because the result is what clears it.</div>
+  </div>
+</section>
+
+<!-- THE FLOOR + CONTEXT -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">v.</span><span>The highest floor yet</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Everyone cleared the bar — completely.</h2>
+    <p class="lead reveal d1">This was <b>not</b> a "spot the broken one" episode — it had the <b>highest floor of any episode yet</b>. <b>All four dodged the trap:</b> each one made the new knob skip manual strategies, and each shipped a test that sets up a manual strategy and checks its safety net is <i>left alone</i>. All four updated both copies of the bot (live + practice mode) to match, made a typo in the new setting <b>fail loudly</b> instead of doing nothing, updated the docs, and came with passing tests my reviewers re-ran themselves. Nobody broke the build, nobody touched the real-money safety nets, nobody faked a test. So it came down to <b>how thoroughly they proved it</b> — and the stats below are flavor, <b>never part of the score</b>.</p>
+    <table class="tbl difftbl reveal d1">
+      <thead><tr><th>Model</th><th>Lines changed</th><th>Files</th><th>Time</th><th>Cost (raw, mismatched units)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-gpt)"><use href="#logo-openai"/></svg>GPT-5.5</td>
+          <td class="num big">+690 / &#8722;14<div class="bar" style="--sig:var(--c-gpt);margin-top:8px"><i data-w="80"></i></div></td>
+          <td class="num">10</td>
+          <td class="num">~12 min</td>
+          <td class="num" style="color:var(--muted)">~37% of a 5-hour usage window (96%&#8594;59%)</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-glm)"><use href="#logo-zai"/></svg>GLM 5.2</td>
+          <td class="num big">+861 / &#8722;5<div class="bar" style="--sig:var(--c-glm);margin-top:8px"><i data-w="100"></i></div></td>
+          <td class="num">10</td>
+          <td class="num">~19 min</td>
+          <td class="num" style="color:var(--muted)">~13.3M tokens (Cursor)</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-opus)"><use href="#logo-anthropic"/></svg>Opus 4.8</td>
+          <td class="num big">+561 / &#8722;14<div class="bar" style="--sig:var(--c-opus);margin-top:8px"><i data-w="65"></i></div></td>
+          <td class="num">9</td>
+          <td class="num">~20 min <span style="color:var(--muted2)">(slowest)</span></td>
+          <td class="num" style="color:var(--muted)">22% of its 1M-token context window</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-composer)"><use href="#logo-cursor"/></svg>Composer 2.5</td>
+          <td class="num big">+503 / &#8722;14<div class="bar" style="--sig:var(--c-composer);margin-top:8px"><i data-w="58"></i></div></td>
+          <td class="num">9 <span style="color:var(--muted2)">(least)</span></td>
+          <td class="num">~6 min <span style="color:var(--muted2)">(fastest)</span></td>
+          <td class="num" style="color:var(--muted)">~5.1M tokens (Cursor)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="loopnote reveal">&#128208; <b>Side note — code volume and speed are not scored.</b> The contestant that wrote the <b>most</b> code tied for first; the one that wrote the <b>least</b> came last; and the <b>fastest</b> first-pass came last too. Hold those numbers in your head — the scores below ignore them on purpose, and that's exactly what makes the result strange.</div>
+  </div>
+</section>
+
+<!-- VERDICT INTRO -->
+<section class="verdict-intro">
+  <div class="wrap">
+    <div class="kicker reveal">The reckoning</div>
+    <h2 class="display reveal d1">So who<br /><span class="serif-it" style="color:var(--gold)">actually</span> won?</h2>
+    <p class="lead reveal d2">An "all tests passing" badge tells you nothing about <i>how</i> a real-money change was made. All four were scored against the task's checklist — every claim checked against the real code, all tests re-run. The gaps are tiny — three points across the whole field. The story is in them.</p>
+    <p class="lead serif-it reveal d3" style="margin-top:1.6rem;color:var(--muted2)">Counting down, from fourth place…</p>
+  </div>
+</section>
+
+<!-- RANK 4 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">— Fourth place —</div>
+      <div class="rankrow" style="--sig:var(--c-composer)">
+        <div>
+          <span class="ranklogo"><svg class="logo"><use href="#logo-cursor"/></svg></span>
+          <div class="rankname">Composer 2.5
+            <span class="sub">A <b>strong debut</b> from Cursor's brand-new model — and third place's near-twin. Smallest change, fastest run, fully correct, trap handled with a passing test, both copies of the bot updated. Two small things kept it last: it has <b>no test</b> for the case where the knob meets the bot's <i>fancier</i> way of labeling market conditions (only the simple labeling is tested), and it applies the new setting <b>before</b> double-checking it — safe in practice, because a later check still catches bad input, but not as careful as checking right away.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="91">91</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANK 3 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">— Third place —</div>
+      <div class="rankrow" style="--sig:var(--c-opus)">
+        <div>
+          <span class="ranklogo"><svg class="logo"><use href="#logo-anthropic"/></svg></span>
+          <div class="rankname">Opus 4.8
+            <span class="sub">Correct and careful, with a tidy cleanup the others skipped. Its test proves the manual safety net stays untouched in both copies of the bot. It placed third purely on missing tests: <b>no test</b> for the knob meeting the bot's <i>fancier</i> market-labeling system (only the standard labels), and <b>no test</b> for the "do-nothing" case — where setting the knob to match the existing defaults should change nothing at all.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="92">92</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE IRONIES — the payoff before the tie -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">&#10022;</span><span>Before the result — three things that shouldn't both be true</span><span class="ln"></span></div>
+    <div class="awards">
+      <div class="award reveal" style="--sig:var(--c-glm)">
+        <div class="crown">&#128202;</div>
+        <h4>Most code tied for first</h4>
+        <div class="who" style="color:var(--c-glm)">861 vs 503 lines</div>
+        <p>This <b>flips</b> last episode, where the shortest answer won. Here the model that wrote the <b>most</b> code (GLM, 861 lines) tied for first; the one that wrote the <b>least</b> (Composer, 503) came last. Not a "less is more" lesson — the extra lines are exactly the extra testing that <i>was</i> the difference.</p>
+      </div>
+      <div class="award reveal d1" style="--sig:var(--c-composer)">
+        <div class="crown">&#9201;&#65039;</div>
+        <h4>The fastest came last</h4>
+        <div class="who" style="color:var(--c-composer)"><svg class="logo"><use href="#logo-cursor"/></svg>Speed &#8800; rank</div>
+        <p>The <b>fastest</b> model (Composer 2.5, ~6 min) finished <b>last</b>. The <b>slowest</b> (Opus, ~20 min) came third. The two co-winners sat in the middle on time. For the second episode running, speed didn't predict rank.</p>
+      </div>
+      <div class="award reveal d2" style="--sig:var(--gold)">
+        <div class="crown">&#128300;</div>
+        <h4>One test was the whole gap</h4>
+        <div class="who" style="color:var(--gold)">94 vs 92 vs 91</div>
+        <p>Four models, three points apart — and the entire gap between the leaders and the rest was <b>one test</b>: a check that the new knob works with the bot's fancier way of labeling market conditions. The two winners wrote it; the other two didn't. That's the whole story.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIE FINALE -->
+<section class="finale" id="finale">
+  <div class="rays"></div>
+  <div class="wrap">
+    <div class="trophy">&#127942;</div>
+    <div class="crowned">— First place —</div>
+    <div class="tieword">It's a tie.</div>
+    <p class="lead" style="max-width:54ch;margin:.4rem auto 0;color:var(--muted)">You scrolled the whole way down expecting one winner. There are two — <b style="color:var(--paper)">94 each</b>, separated by nothing.</p>
+    <div class="tiegrid">
+      <div class="tiecol">
+        <div class="winlogo"><svg class="logo"><use href="#logo-openai"/></svg></div>
+        <div class="who">GPT-5.5</div>
+        <div class="org">OpenAI · Codex</div>
+        <div class="pr"><a href="https://github.com/richkuo/go-trader/pull/1142" target="_blank" rel="noopener">PR #1142 &#8599;</a></div>
+        <div class="badge"><span class="count" data-to="94">94</span><small>&nbsp;/100</small></div>
+        <p class="descr"><b>The cleanest run.</b> Trap handled and tested, both copies of the bot updated, double-checks the setting even where it technically didn't have to — stricter and safer. <b>690 lines across 10 files</b>; its only soft spot is a couple of requirements that lean on existing machinery without a brand-new test.</p>
+      </div>
+      <div class="tievs">tied with</div>
+      <div class="tiecol">
+        <div class="winlogo"><svg class="logo"><use href="#logo-zai"/></svg></div>
+        <div class="who">GLM 5.2</div>
+        <div class="org">Z.ai · Cursor</div>
+        <div class="pr"><a href="https://github.com/richkuo/go-trader/pull/1143" target="_blank" rel="noopener">PR #1143 &#8599;</a></div>
+        <div class="badge"><span class="count" data-to="94">94</span><small>&nbsp;/100</small></div>
+        <p class="descr"><b>The most thorough testing.</b> The only one with both the fancier-labeling test <i>and</i> a full end-to-end test that loads a real config and checks the manual safety net is safe. The price: the <b>most code, 861 lines</b> — and a write-up claiming "1,987 tests passed," a number we couldn't reproduce.</p>
+      </div>
+    </div>
+    <p class="why">Same correctness. Same trap dodged. Both handled a typo'd setting by failing loudly. <b>The entire gap to the top came down to one test</b> — the check that the new knob works with the bot's fancier market-labeling system — that GPT-5.5 and GLM both wrote and the other two skipped. Opus sits at 92 and Composer at 91 on that single missing test; the whole field is three points. The gaps are soft; the dead heat at the top is real.</p>
+    <div class="coi">
+      <span class="coik">&#9878;&#65039; About the judge — read before trusting the result</span>
+      <b>I judge with Opus 4.8 (Anthropic's). Opus 4.8 was also a contestant.</b> Here's why that runs <i>against</i> me this time: the Opus entry placed <b>third, at 92</b> — and <b>neither winner is mine</b> (OpenAI's GPT-5.5 and Z.ai's GLM 5.2). Whatever bias you'd worry about, it ran the wrong way to help. Extra safeguards: each entry got its own separate reviewer, and the Opus one was held to a harder standard. And none of this is a matter of taste — either an entry made the fix skip manual strategies and proved it with a test, or it didn't; either the missing test is in the code, or it isn't. Pull up the code and check.</div>
+    <p class="caveat">The headline isn't who won — it's that <b>four models finished three points apart</b>, the one that wrote the most code tied for first, the fastest came last, and the whole gap was a single test on a tricky case.</p>
+  </div>
+</section>
+
+<!-- SUMMARY CARDS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">&#10022;</span><span>Summary</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">All four, at a glance.</h2>
+    <div class="sumgrid">
+
+      <div class="sumcard cowin reveal" style="--sig:var(--c-gpt)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">OpenAI · Codex</div>
+            <div class="sname"><svg class="logo"><use href="#logo-openai"/></svg>GPT-5.5</div>
+            <span class="stag">Co-winner</span>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="94">94</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">Time</div><div class="sval">~12 min</div></div><div style="text-align:right"><div class="slbl">Cost (raw)</div><div class="sval">~37% of a 5-hr window</div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">The cleanest run · trap handled and tested, both copies updated, double-checks even where optional · <span style="color:var(--muted2)">+690 / &#8722;14 across 10 files</span></div></div>
+      </div>
+
+      <div class="sumcard cowin reveal d1" style="--sig:var(--c-glm)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Z.ai · Cursor</div>
+            <div class="sname"><svg class="logo"><use href="#logo-zai"/></svg>GLM 5.2</div>
+            <span class="stag">Co-winner</span>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="94">94</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">Time</div><div class="sval">~19 min</div></div><div style="text-align:right"><div class="slbl">Cost (raw)</div><div class="sval">~13.3M tokens</div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Most thorough testing · the fancier-labeling test + a full end-to-end check · oversold "1,987 passed" · <span style="color:var(--muted2)">+861 / &#8722;5 across 10 files</span></div></div>
+      </div>
+
+      <div class="sumcard reveal d2" style="--sig:var(--c-opus)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic · Claude Code</div>
+            <div class="sname"><svg class="logo"><use href="#logo-anthropic"/></svg>Opus 4.8</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="92">92</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">Time</div><div class="sval">~20 min</div></div><div style="text-align:right"><div class="slbl">Cost (raw)</div><div class="sval">22% of its memory</div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Correct + careful · tidy cleanup · skipped the fancier-labeling + "do-nothing" tests · <span style="color:var(--muted2)">+561 / &#8722;14 across 9 files</span></div></div>
+      </div>
+
+      <div class="sumcard reveal d3" style="--sig:var(--c-composer)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Cursor · Cursor · debut</div>
+            <div class="sname"><svg class="logo"><use href="#logo-cursor"/></svg>Composer 2.5</div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="91">91</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">Time</div><div class="sval">~6 min (fastest)</div></div><div style="text-align:right"><div class="slbl">Cost (raw)</div><div class="sval">~5.1M tokens</div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Smallest, fastest, fully correct · skipped the fancier-labeling test · applies the setting before double-checking it · <span style="color:var(--muted2)">+503 / &#8722;14 across 9 files</span></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EPILOGUE -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">&#10022;</span><span>Epilogue — what shipped</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Nothing's shipped — yet.</h2>
+    <p class="lead reveal d1">Last episode, I shipped a <b>blend</b> of the two winners and that closed it out. This one is still wide open. As of scoring, nothing has been merged in: all four entries (<a href="https://github.com/richkuo/go-trader/pull/1141" target="_blank" rel="noopener">#1141</a>, <a href="https://github.com/richkuo/go-trader/pull/1142" target="_blank" rel="noopener">#1142</a>, <a href="https://github.com/richkuo/go-trader/pull/1143" target="_blank" rel="noopener">#1143</a>, <a href="https://github.com/richkuo/go-trader/pull/1144" target="_blank" rel="noopener">#1144</a>) sit side by side, and I haven't started a combined "best-of" version.</p>
+    <p class="lead reveal d2">If I follow last episode's pattern, it'll probably take one winner's version as the base and graft the other's extra tests on top. But that hasn't happened. For now it's a clean four-way tie with nothing decided, and the verdict stands on the code review alone.</p>
+    <div class="srclinks reveal d3" style="justify-content:flex-start;margin-top:24px">
+      <a href="https://github.com/richkuo/go-trader/issues/1134" target="_blank" rel="noopener">Issue #1134 (open) <span class="ar">&#8599;</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="srclinks">
+    <a href="https://github.com/richkuo/go-trader" target="_blank" rel="noopener">go-trader repo <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/go-trader/issues/1134" target="_blank" rel="noopener">Issue #1134 <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/1142" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-gpt)"><use href="#logo-openai"/></svg>PR #1142 · GPT-5.5 <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/1143" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-glm)"><use href="#logo-zai"/></svg>PR #1143 · GLM 5.2 <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/1144" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-opus)"><use href="#logo-anthropic"/></svg>PR #1144 · Opus 4.8 <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/1141" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-composer)"><use href="#logo-cursor"/></svg>PR #1141 · Composer 2.5 <span class="ar">&#8599;</span></a>
+  </div>
+  <div class="byline">by <b>Rich Kuo</b> — product engineer building creative &amp; technical products</div>
+  <div class="socials">
+    <a href="https://www.richkuo.com" target="_blank" rel="noopener">Newsletter</a>
+    <a href="https://github.com/richkuo" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/richkuo" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://youtube.com/@richkuo7" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/richkuo7" target="_blank" rel="noopener">X</a>
+    <a href="https://tiktok.com/@rich_kuo1" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://instagram.com/richkuo7" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://discord.gg/44BykmWZsP" target="_blank" rel="noopener">Discord</a>
+  </div>
+  <div class="mono" style="margin-top:32px">Episode&nbsp;6 · Issue&nbsp;#1134 · Fleet Defaults for Standalone Regime-ATR Stops · Four-run bake-off</div>
+  <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px">
+    <span>Co-winners: GPT-5.5 (OpenAI) &amp; GLM 5.2 (Z.ai), tied at 94 · Opus 4.8 (Anthropic) 92 · Composer 2.5 (Cursor) 91</span>
+    <span>First-pass time/cost reported in three incompatible meters — flavor only, never a scoring input</span>
+    <span>Scoring/judging: Opus 4.8 (Anthropic) — also contestant #1144, which placed third (disclosed conflict of interest; it cut against the judge's model, neither winner is Anthropic)</span>
+    <span>Scores from independent, blind per-entry reviews of the real code, with line-by-line proof and all tests re-run</span>
+    <span>Created with LLM: Opus 4.8 | high | Harness: content-from-bakeoff</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+<script>
+  /* ---- Motion layer: GSAP + ScrollTrigger ---- */
+  gsap.registerPlugin(ScrollTrigger);
+  const mm = gsap.matchMedia();
+
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // Hero logo battle — four marks jostle for the top "crown" slot, then,
+    // fittingly for a tie, the contest SETTLES with TWO marks (GPT-5.5 + GLM)
+    // sharing the crown glow side by side while Opus and Composer drop below.
+    // One master timeline: a jostle, a takeover, then the tie tableau, then a
+    // gentle shared breathing so the two co-winners pulse together forever.
+    const gpt      = document.querySelector('.lb-gpt');
+    const glm      = document.querySelector('.lb-glm');
+    const opus     = document.querySelector('.lb-opus');
+    const composer = document.querySelector('.lb-composer');
+    const all  = [gpt, glm, opus, composer];
+
+    const crown = { y: 6,   scale: 1.14, autoAlpha: 1,   boxShadow: '0 0 30px rgba(227,178,90,0.60)' };
+    const p2    = { y: 92,  scale: 0.90, autoAlpha: 0.8, boxShadow: '0 0 0px rgba(227,178,90,0)' };
+    const p3    = { y: 176, scale: 0.78, autoAlpha: 0.5, boxShadow: '0 0 0px rgba(227,178,90,0)' };
+    const p4    = { y: 256, scale: 0.70, autoAlpha: 0.42, boxShadow: '0 0 0px rgba(227,178,90,0)' };
+    all.forEach((el) => gsap.set(el, { left: 29, x: 0 }));
+    gsap.set(opus, crown); gsap.set(gpt, p2); gsap.set(glm, p3); gsap.set(composer, p4);
+
+    // tie tableau positions: two co-winners in the gold pool, two below
+    const winL = { left: 29, x: -26, y: 4,   scale: 1.02, autoAlpha: 1,    boxShadow: '0 0 26px rgba(227,178,90,0.55)' };
+    const winR = { left: 29, x:  26, y: 4,   scale: 1.02, autoAlpha: 1,    boxShadow: '0 0 26px rgba(227,178,90,0.55)' };
+    const lo3  = { left: 29, x: 0,   y: 132, scale: 0.78, autoAlpha: 0.5,  boxShadow: '0 0 0px rgba(227,178,90,0)' };
+    const lo4  = { left: 29, x: 0,   y: 214, scale: 0.70, autoAlpha: 0.42, boxShadow: '0 0 0px rgba(227,178,90,0)' };
+
+    const tl = gsap.timeline();
+    // a brief four-way jostle
+    tl.to(all, { x: '+=10', duration: 0.1, yoyo: true, repeat: 5, ease: 'power1.inOut' }, 0.2);
+    // GPT crouches then pounces past Opus for the crown
+    tl.to(gpt,  { y: 110, scale: 0.84, duration: 0.16, ease: 'power2.in' }, 0.9)
+      .to(gpt,  { ...crown, duration: 0.55, ease: 'back.out(2.2)' }, 1.06)
+      .to(opus, { x: 28, duration: 0.12, ease: 'power3.out' }, 1.34)
+      .to(opus, { ...p2, x: 0, duration: 0.55, ease: 'bounce.out' }, 1.46)
+      .to(gpt,  { x: 6, duration: 0.09, yoyo: true, repeat: 5, ease: 'power2.inOut' }, 1.5)
+      .to(gpt,  { x: 0, duration: 0.12 }, 2.04);
+
+    // neither leader yields: the contest resolves to a TIE (GPT-5.5 + GLM)
+    tl.to(gpt,      { ...winL, duration: 0.7, ease: 'back.out(1.8)' }, 2.3)
+      .to(glm,      { ...winR, duration: 0.7, ease: 'back.out(1.8)' }, 2.35)
+      .to(opus,     { ...lo3, duration: 0.6, ease: 'power2.out' }, 2.4)
+      .to(composer, { ...lo4, duration: 0.6, ease: 'power2.out' }, 2.45);
+
+    // gentle shared breathing — the two co-winners pulse in lockstep, forever
+    tl.to([gpt, glm], { scale: 1.08, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }, '>-0.1');
+
+    // Hero intro on load.
+    gsap.from('.hero .reveal', { opacity: 0, y: 30, duration: 0.9, stagger: 0.12, ease: 'power3.out', delay: 0.15 });
+
+    // Scroll reveals below the hero — ScrollTrigger.batch.
+    const below = gsap.utils.toArray('.reveal').filter(el => !el.closest('.hero'));
+    gsap.set(below, { opacity: 0, y: 40 });
+    ScrollTrigger.batch(below, {
+      start: 'top 85%',
+      onEnter: (els) => {
+        gsap.to(els, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', overwrite: true });
+        els.forEach(el => el.querySelectorAll('.bar i[data-w]').forEach(b => { b.style.width = b.dataset.w + '%'; }));
+      },
+    });
+
+    // Count scores up as they enter view.
+    gsap.utils.toArray('.count').forEach((el) => {
+      const o = { v: 0 };
+      gsap.to(o, {
+        v: +el.dataset.to, duration: 1.3, ease: 'power1.out', snap: { v: 1 },
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+        onUpdate: () => { el.textContent = Math.round(o.v); },
+      });
+    });
+
+    // Tie finale — fire the CSS spotlight/glow when it scrolls in.
+    ScrollTrigger.create({
+      trigger: '#finale', start: 'top 60%', once: true,
+      onEnter: () => document.getElementById('finale').classList.add('in'),
+    });
+
+    window.addEventListener('load', () => ScrollTrigger.refresh()); // recalc after fonts/images settle
+  });
+
+  mm.add('(prefers-reduced-motion: reduce)', () => {
+    // Static, accessible end-state — no motion. (.reveal shown via the reduced-motion CSS override.)
+    document.getElementById('finale').classList.add('in');
+    const gpt      = document.querySelector('.lb-gpt');
+    const glm      = document.querySelector('.lb-glm');
+    const opus     = document.querySelector('.lb-opus');
+    const composer = document.querySelector('.lb-composer');
+    [gpt, glm, opus, composer].forEach((el) => gsap.set(el, { left: 29, x: 0 }));
+    // tie tableau: the two co-winners (GPT-5.5 + GLM) share the crown, Opus + Composer below
+    gsap.set(gpt,      { x: -26, y: 4,   scale: 1.02, autoAlpha: 1,    boxShadow: '0 0 26px rgba(227,178,90,0.55)' });
+    gsap.set(glm,      { x:  26, y: 4,   scale: 1.02, autoAlpha: 1,    boxShadow: '0 0 26px rgba(227,178,90,0.55)' });
+    gsap.set(opus,     { y: 132, scale: 0.78, autoAlpha: 0.5 });
+    gsap.set(composer, { y: 214, scale: 0.70, autoAlpha: 0.42 });
+    document.querySelectorAll('.bar i[data-w]').forEach(b => { b.style.width = b.dataset.w + '%'; });
+    document.querySelectorAll('.count').forEach(el => { el.textContent = el.dataset.to; });
+  });
+
+  (function () {
+    const root = document.documentElement, KEY = 'theme-pref';
+    const btn = document.getElementById('themeToggle');
+    const ico = document.getElementById('themeIco'), lbl = document.getElementById('themeLbl');
+    const meta = { auto: ['🖥️', 'Auto'], light: ['☀️', 'Light'], dark: ['🌙', 'Dark'] };
+    let pref;
+    try { pref = localStorage.getItem(KEY) || 'auto'; } catch (e) { pref = 'auto'; }
+    if (!meta[pref]) pref = 'auto';
+    function apply(p) {
+      if (p === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', p);
+      ico.textContent = meta[p][0]; lbl.textContent = meta[p][1];
+    }
+    apply(pref);
+    btn.addEventListener('click', () => {
+      pref = pref === 'auto' ? 'light' : pref === 'light' ? 'dark' : 'auto';
+      try { localStorage.setItem(KEY, pref); } catch (e) {}
+      apply(pref);
+    });
+  })();
+
+  (function () {
+    const modal = document.getElementById('promptModal');
+    const open = document.getElementById('promptBtn');
+    const close = document.getElementById('promptClose');
+    function show() { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); }
+    function hide() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); }
+    open.addEventListener('click', show);
+    close.addEventListener('click', hide);
+    modal.addEventListener('click', (e) => { if (e.target === modal) hide(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+  })();
+</script>
+</body>
+</html>
