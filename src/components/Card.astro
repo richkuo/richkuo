@@ -14,7 +14,8 @@ interface Props {
 	eyebrow?: string;
 }
 
-const { title, href, readMoreHref, description, date, image, imageAlt = '', eyebrow } = Astro.props as Props;
+const { title, href, readMoreHref, description, date, image, imageAlt, eyebrow } = Astro.props as Props;
+const altText = imageAlt || title;
 
 const baseDate = typeof date === 'string' ? new Date(date) : date;
 
@@ -38,14 +39,14 @@ const isExternal = /^https?:\/\//.test(href) || href.startsWith('//');
 			{typeof image === 'string' ? (
 				<img
 					src={image}
-					alt={imageAlt}
+					alt={altText}
 					loading="lazy"
 					class="lg:col-span-full aspect-12/7 object-cover object-top w-full transition duration-400 group-hover:scale-[1.02]"
 				/>
 			) : (
 				<Image
 					src={image}
-					alt={imageAlt}
+					alt={altText}
 					loading="lazy"
 					class="lg:col-span-full aspect-12/7 object-cover object-top w-full transition duration-400 group-hover:scale-[1.02]"
 				/>

@@ -43,8 +43,27 @@ export default defineConfig({
     sitemap({
       filter: (page) => !pageMeta[new URL(page).pathname]?.unlisted,
       serialize: (item) => {
-        const lastmod = pageMeta[new URL(item.url).pathname]?.lastmod;
+        const pathname = new URL(item.url).pathname;
+        const lastmod = pageMeta[pathname]?.lastmod;
         if (lastmod) item.lastmod = new Date(`${lastmod}T00:00:00Z`).toISOString();
+
+        if (pathname === "/") {
+          item.priority = 1.0;
+          item.changefreq = "monthly";
+        } else if (pathname === "/projects/") {
+          item.priority = 0.8;
+          item.changefreq = "monthly";
+        } else if (pathname.startsWith("/projects/")) {
+          item.priority = 0.7;
+          item.changefreq = "yearly";
+        } else if (pathname.startsWith("/openclaw/")) {
+          item.priority = 0.6;
+          item.changefreq = "yearly";
+        } else {
+          item.priority = 0.5;
+          item.changefreq = "yearly";
+        }
+
         return item;
       },
     }),

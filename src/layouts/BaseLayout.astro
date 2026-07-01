@@ -14,16 +14,17 @@ interface Props {
 	updatedDate?: Date;
 	tags?: string[];
 	noindex?: boolean;
+	videoUrl?: string;
 }
 
 const site = await getSite();
-const { title = site.author.name, description, image, type, pubDate, updatedDate, tags, noindex } = Astro.props;
+const { title = site.author.name, description, image, type, pubDate, updatedDate, tags, noindex, videoUrl } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={title} description={description} image={image} type={type} pubDate={pubDate} updatedDate={updatedDate} tags={tags} noindex={noindex} />
+        <BaseHead title={title} description={description} image={image} type={type} pubDate={pubDate} updatedDate={updatedDate} tags={tags} noindex={noindex} videoUrl={videoUrl} />
     </head>
     <body>
         <Header />

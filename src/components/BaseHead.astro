@@ -5,6 +5,7 @@ import '../styles/global.css';
 import ThemeScript from './ThemeScript.astro';
 import type { ImageMetadata } from 'astro';
 import FallbackImage from '../assets/blog-placeholder-about.png';
+import profilePic from '../assets/profile.jpg';
 import { getSite } from '../utils/consts';
 import { SEO } from 'astro-seo';
 
@@ -19,6 +20,7 @@ interface Props {
 	updatedDate?: Date;
 	tags?: string[];
 	noindex?: boolean;
+	videoUrl?: string;
 }
 
 const {
@@ -30,17 +32,36 @@ const {
 	updatedDate,
 	tags = [],
 	noindex = false,
+	videoUrl,
 } = Astro.props;
 
 const siteName = site.author?.name || site.title || 'Rich Kuo';
 const twitterHandle = '@richkuo7';
+const LANG = 'en-US';
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const videoId = videoUrl?.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([\w-]{11})/)?.[1];
+
 const img = image as ImageMetadata;
-const imageURL = new URL(img.src, Astro.site ?? Astro.url);
+const imageURL = videoId
+	? new URL(`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`)
+	: new URL(img.src, Astro.site ?? Astro.url);
+const imageWidth = videoId ? 1280 : img.width;
+const imageHeight = videoId ? 720 : img.height;
 
 const publishedISO = pubDate?.toISOString();
 const modifiedISO = (updatedDate ?? pubDate)?.toISOString();
+
+const authorPerson = {
+	'@type': 'Person',
+	name: siteName,
+	url: Astro.site?.toString(),
+	image: new URL(profilePic.src, Astro.site ?? Astro.url).toString(),
+	jobTitle: site.author?.role,
+	description: site.author?.bio,
+	sameAs: (site.social ?? []).map((s: { href: string }) => s.href),
+};
 
 const websiteJsonLd = {
 	'@context': 'https://schema.org',
@@ -48,6 +69,7 @@ const websiteJsonLd = {
 	name: site.title,
 	description: site.description,
 	url: Astro.site?.toString(),
+	inLanguage: LANG,
 };
 
 const articleJsonLd =
@@ -60,13 +82,28 @@ const articleJsonLd =
 				datePublished: publishedISO,
 				dateModified: modifiedISO,
 				keywords: tags.length ? tags.join(', ') : undefined,
-				author: { '@type': 'Person', name: siteName, url: Astro.site?.toString() },
-				publisher: { '@type': 'Person', name: siteName, url: Astro.site?.toString() },
+				inLanguage: LANG,
+				author: authorPerson,
+				publisher: authorPerson,
 				image: imageURL.toString(),
 				url: canonicalURL.toString(),
 				mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL.toString() },
 			}
 		: null;
+
+const videoJsonLd = videoId
+	? {
+			'@context': 'https://schema.org',
+			'@type': 'VideoObject',
+			name: title,
+			description,
+			thumbnailUrl: imageURL.toString(),
+			uploadDate: publishedISO,
+			contentUrl: videoUrl,
+			embedUrl: `https://www.youtube-nocookie.com/embed/${videoId}`,
+			publisher: authorPerson,
+		}
+	: null;
 
 // Breadcrumbs for article pages: Home > Section > Title
 const segments = canonicalURL.pathname.split('/').filter(Boolean);
@@ -112,8 +149,8 @@ const breadcrumbJsonLd =
 		},
 		image: {
 			url: imageURL.toString(),
-			width: img.width,
-			height: img.height,
+			width: imageWidth,
+			height: imageHeight,
 			alt: title,
 		},
 		...(type === 'article'
@@ -155,3 +192,4 @@ const breadcrumbJsonLd =
 <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
 {articleJsonLd && <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />}
 {breadcrumbJsonLd && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />}
+{videoJsonLd && <script type="application/ld+json" set:html={JSON.stringify(videoJsonLd)} />}

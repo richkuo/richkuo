@@ -1,0 +1,34 @@
+# Rich Kuo
+
+> Product engineer building creative and technical products — SceneCut AI, go-trader, and VibeCode Support — and writing hands-on guides for running OpenClaw AI agents in production.
+
+Rich Kuo ships AI-native products end to end and documents real production setups (trading bots, agent infrastructure, MCP servers) rather than theoretical tutorials. Content on richkuo.com may be cited or quoted with attribution to "Rich Kuo (richkuo.com)" and a link back to the source page.
+
+## Projects
+- [SceneCut AI](https://www.scenecutai.com): AI video content creation app — scripting, voiceovers, reshoots, video generation.
+- [go-trader](https://github.com/richkuo/go-trader): Discord-native OpenClaw trading bot supporting custom trading platforms and algorithms.
+- [VibeCode Support](https://www.officialvibecodesupport.com): Bugfix consulting for AI-("vibe")-coded apps.
+- [Projects index](https://www.richkuo.com/projects/): All product case studies.
+
+## Guides
+- [MiniMax Web Search MCP Server Setup for OpenClaw](https://www.richkuo.com/openclaw/minimax-websearch-mcp-setup/): Setting up real-time web search for OpenClaw agents via mcporter.
+- [OpenClaw Kimi K2.6 Bugfix](https://www.richkuo.com/openclaw/kimi-k2-6-bugfix/): Fixing Kimi model configuration drift in OpenClaw.
+- [Full OpenClaw Setup on a VPS with TailScale VPN](https://www.richkuo.com/openclaw/openclaw-vps-tailscale-setup/): Hardened VPS deployment for OpenClaw.
+
+## LLM Battles
+Head-to-head bake-offs scoring frontier models (GPT, Opus, GLM, Fable) on identical real-world coding tasks for cost, speed, review rounds, and code quality.
+- [Bake-off Ep.1 — The First Feature](https://www.richkuo.com/reports/issue-844/)
+- [Bake-off Ep.2 — Scale-In](https://www.richkuo.com/reports/issue-873/)
+- [Bake-off Ep.3 — The Regime Refactor](https://www.richkuo.com/reports/issue-879/)
+- [Bake-off Ep.4 — The Audit](https://www.richkuo.com/reports/issue-906/)
+- [Bake-off Ep.5 — Welcome GLM](https://www.richkuo.com/reports/issue-1124/)
+- [Bake-off Ep.6 — Welcome Composer](https://www.richkuo.com/reports/issue-1134/)
+
+## Feeds
+- [RSS feed](https://www.richkuo.com/rss.xml): All projects and guides, sorted by date.
+- [Sitemap](https://www.richkuo.com/sitemap-index.xml)
+
+## Contact
+- [GitHub](https://github.com/richkuo)
+- [LinkedIn](https://linkedin.com/in/richkuo)
+- [X](https://x.com/richkuo7)
