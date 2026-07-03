@@ -27,7 +27,7 @@ const faq = [
 	{
 		question: 'How do I install fableplan?',
 		answer:
-			'The repo is a Claude Code plugin marketplace. In a session, run /plugin marketplace add richkuo/fableplan then /plugin install fableplan@fableplan. A single-file install, the npx skills CLI, and a copy-paste prompt are also documented in the repo README.',
+			'The repo is a Claude Code plugin marketplace. In a session, run /plugin marketplace add richkuo/fableplan then /plugin install fableplan@fableplan. It is also published to npm as @fableplan/fableplan, installable with npx @fableplan/fableplan. A single-file install, the npx skills CLI, and a copy-paste prompt are also documented in the repo README.',
 	},
 ];
 
@@ -112,7 +112,11 @@ const faqJsonLd = {
 				<pre><code>/plugin marketplace add richkuo/fableplan
 /plugin install fableplan@fableplan</code></pre>
 				<p>
-					The skill is picked up automatically, and updates flow through the plugin system. Prefer a single-file install, the <code>npx skills</code> CLI, or a copy-paste prompt that lets Claude Code install it for you? All the alternatives are in the <a href={REPO} target="_blank" rel="noopener noreferrer">repo README</a>. Restart your session and invoke it with <code>/fableplan</code>.
+					Prefer npm? It's published as <a href="https://www.npmjs.com/package/@fableplan/fableplan" target="_blank" rel="noopener noreferrer"><code>@fableplan/fableplan</code></a> — one command copies the skill into <code>~/.claude/skills/</code>:
+				</p>
+				<pre><code>npx @fableplan/fableplan</code></pre>
+				<p>
+					Add <code>--project</code> to install into the current repo's <code>.claude/skills/</code> instead. The skill is picked up automatically either way, and plugin-marketplace installs also get updates through the plugin system. Prefer a single-file install, the <code>npx skills</code> CLI, or a copy-paste prompt that lets Claude Code install it for you? All the alternatives are in the <a href={REPO} target="_blank" rel="noopener noreferrer">repo README</a>. Restart your session and invoke it with <code>/fableplan</code>.
 				</p>
 			</Prose>
 		</section>
