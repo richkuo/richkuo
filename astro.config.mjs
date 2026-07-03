@@ -79,7 +79,7 @@ export default defineConfig({
         if (pathname === "/") {
           item.priority = 1.0;
           item.changefreq = "monthly";
-        } else if (pathname === "/projects/") {
+        } else if (pathname === "/projects/" || pathname === "/openclaw/") {
           item.priority = 0.8;
           item.changefreq = "monthly";
         } else if (pathname.startsWith("/reports/")) {

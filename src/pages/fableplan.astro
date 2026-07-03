@@ -6,9 +6,44 @@ const title = 'fableplan';
 const description =
 	'A Claude Code skill that plans with Fable 5 and builds with Opus or Sonnet — why the split works, and when it doesn\'t.';
 const REPO = 'https://github.com/richkuo/fableplan';
+const canonical = 'https://www.richkuo.com/fableplan/';
+
+const faq = [
+	{
+		question: 'What is fableplan?',
+		answer:
+			"A Claude Code skill that splits a coding task into two jobs: it plans with Fable 5, dispatched as a dedicated subagent, then builds the vetted plan with your main session's model — Opus or Sonnet — inside an isolated git worktree.",
+	},
+	{
+		question: 'Why plan with Fable 5 but build with Opus or Sonnet?',
+		answer:
+			'Planning is low-volume and high-stakes, so it is worth the best reasoning; building is high-volume and mostly mechanical execution, where a strong general-purpose model following a good plan rarely needs the top tier. Splitting the two avoids overpaying for the routine 90% and underpaying for the 10% that decides whether the feature is correct.',
+	},
+	{
+		question: 'How do I trigger fableplan?',
+		answer:
+			'Use /fableplan, "fableplan this," or "plan this with fable," plus a task description and, optionally, a GitHub issue to plan against.',
+	},
+	{
+		question: 'How do I install fableplan?',
+		answer:
+			'The repo is a Claude Code plugin marketplace. In a session, run /plugin marketplace add richkuo/fableplan then /plugin install fableplan@fableplan. A single-file install, the npx skills CLI, and a copy-paste prompt are also documented in the repo README.',
+	},
+];
+
+const faqJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	url: canonical,
+	mainEntity: faq.map((f) => ({
+		'@type': 'Question',
+		name: f.question,
+		acceptedAnswer: { '@type': 'Answer', text: f.answer },
+	})),
+};
 ---
 
-<BaseLayout title={title} description={description} type="article">
+<BaseLayout title={title} description={description} ogImage="/og/fableplan.png" type="article">
 	<div class="flex-1 flex flex-col py-12 md:py-16 lg:py-20 space-y-16 min-w-0">
 	<article class="post-page content-shell">
 		<header class="section-heading">
@@ -81,6 +116,20 @@ const REPO = 'https://github.com/richkuo/fableplan';
 				</p>
 			</Prose>
 		</section>
+
+		<section class="post-faq mt-16 border-t border-border pt-10" aria-labelledby="faq-heading">
+			<h2 id="faq-heading" class="text-2xl font-semibold text-ink">Frequently asked questions</h2>
+			<dl class="mt-6 space-y-6">
+				{faq.map((f) => (
+					<div>
+						<dt class="text-lg font-semibold text-ink">{f.question}</dt>
+						<dd class="mt-2 text-muted">{f.answer}</dd>
+					</div>
+				))}
+			</dl>
+		</section>
 	</article>
 	</div>
+
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 </BaseLayout>

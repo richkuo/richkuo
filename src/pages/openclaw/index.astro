@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+import { getSite } from '../../utils/consts';
+import { withBase } from '../../utils/slugify';
+
+const SITE_URL = 'https://www.richkuo.com';
+
+const guides = (await getCollection('openclaw'))
+	.filter((g) => !g.data.unlisted)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const site = await getSite();
+
+const title = `OpenClaw Guides · ${site.title}`;
+const description =
+	'Hands-on guides for running OpenClaw AI agents in production — hardened VPS and firewall setup, MCP servers, model configuration fixes, and automated trading bots.';
+
+const collectionJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	'@id': `${SITE_URL}/openclaw/#collection`,
+	url: `${SITE_URL}/openclaw/`,
+	name: 'OpenClaw Guides',
+	description,
+	isPartOf: { '@id': `${SITE_URL}/#website` },
+	mainEntity: {
+		'@type': 'ItemList',
+		numberOfItems: guides.length,
+		itemListElement: guides.map((g, i) => ({
+			'@type': 'ListItem',
+			position: i + 1,
+			name: g.data.title,
+			url: `${SITE_URL}/openclaw/${g.id}/`,
+		})),
+	},
+};
+---
+
+<PageLayout title={title} description={description}>
+	<section class="content-shell py-12 space-y-10">
+		<header class="space-y-2">
+			<p class="text-sm uppercase tracking-[0.35em] text-muted">Guides</p>
+			<h1 class="text-4xl font-semibold text-ink">OpenClaw guides</h1>
+			<p class="text-muted max-w-3xl">
+				Real production setups for OpenClaw AI agents — hardened VPS deployments, MCP server integrations,
+				model configuration fixes, and fully automated trading bots.
+			</p>
+		</header>
+		{guides.length === 0 ? (
+			<p class="text-muted">No guides published yet.</p>
+		) : (
+			<div class="space-y-6">
+				{guides.map((g) => (
+					<a
+						class="group block w-full overflow-hidden rounded-[28px] border-[5px] border-transparent bg-[color:var(--color-surface)] p-5 shadow-none transition duration-200 hover:-translate-y-[2px] hover:border-black hover:shadow-[0_18px_45px_color-mix(in_oklab,var(--color-ink)_25%,transparent)] md:flex md:items-center md:gap-6"
+						href={withBase(`/openclaw/${g.id}/`)}
+					>
+						<div class="flex flex-1 flex-col justify-center">
+							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-muted">Guide</p>
+							<h2 class="text-2xl font-semibold text-green-500 group-hover:text-green-500">{g.data.title}</h2>
+							<time class="mt-1 text-xs uppercase tracking-[0.4em] text-muted" datetime={g.data.pubDate.toISOString()}>
+								{g.data.pubDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+							</time>
+							<p class="mt-3 text-lg text-muted">{g.data.description}</p>
+						</div>
+					</a>
+				))}
+			</div>
+		)}
+	</section>
+	<script type="application/ld+json" set:html={JSON.stringify(collectionJsonLd)} />
+</PageLayout>

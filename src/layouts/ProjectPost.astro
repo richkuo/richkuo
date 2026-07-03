@@ -6,24 +6,71 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Prose from '../components/Prose.astro';
 import { slugify, withBase } from '../utils/slugify';
 
+interface FaqItem { question: string; answer: string }
+interface HowTo {
+	name?: string;
+	supply?: string[];
+	tool?: string[];
+	steps: { name: string; text: string }[];
+}
+
 interface Props {
 	title: string;
 	description: string;
 	pubDate: Date;
 	updatedDate?: Date;
 	heroImage?: ImageMetadata;
+	ogImage?: string;
 	Content?: any;
 	tags?: string[];
 	unlisted?: boolean;
 	link?: string;
+	faq?: FaqItem[];
+	howTo?: HowTo;
 }
 
-const { title, description, pubDate, updatedDate, heroImage, tags = [], unlisted = false, link, Content } = Astro.props as Props;
+const { title, description, pubDate, updatedDate, heroImage, ogImage, tags = [], unlisted = false, link, faq = [], howTo, Content } = Astro.props as Props;
 
 const videoId = link?.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([\w-]{11})/)?.[1];
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// FAQPage / HowTo structured data — lets answer engines lift a direct,
+// attributable answer straight from the page.
+const faqJsonLd =
+	faq.length > 0
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'FAQPage',
+				url: canonicalURL.toString(),
+				mainEntity: faq.map((f) => ({
+					'@type': 'Question',
+					name: f.question,
+					acceptedAnswer: { '@type': 'Answer', text: f.answer },
+				})),
+			}
+		: null;
+
+const howToJsonLd = howTo
+	? {
+			'@context': 'https://schema.org',
+			'@type': 'HowTo',
+			name: howTo.name ?? title,
+			description,
+			...(howTo.supply?.length ? { supply: howTo.supply.map((s) => ({ '@type': 'HowToSupply', name: s })) } : {}),
+			...(howTo.tool?.length ? { tool: howTo.tool.map((t) => ({ '@type': 'HowToTool', name: t })) } : {}),
+			step: howTo.steps.map((s, i) => ({
+				'@type': 'HowToStep',
+				position: i + 1,
+				name: s.name,
+				text: s.text,
+				url: `${canonicalURL.toString()}#step-${i + 1}`,
+			})),
+		}
+	: null;
 ---
 
-<BaseLayout title={title} description={description} image={heroImage} type="article" pubDate={pubDate} updatedDate={updatedDate} tags={tags} noindex={unlisted} videoUrl={videoId ? link : undefined}>
+<BaseLayout title={title} description={description} image={heroImage} ogImage={ogImage} type="article" pubDate={pubDate} updatedDate={updatedDate} tags={tags} noindex={unlisted} videoUrl={videoId ? link : undefined}>
 	<div class="flex-1 flex flex-col py-12 md:py-16 lg:py-20 space-y-16 min-w-0">
 	<article class="post-page content-shell">
 		<header class="section-heading">
@@ -77,8 +124,25 @@ const videoId = link?.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([\w-]{11})/)?.[1];
 				</button>
 			</div>
 		</section>
+
+		{faq.length > 0 && (
+			<section class="post-faq mt-16 border-t border-border pt-10" aria-labelledby="faq-heading">
+				<h2 id="faq-heading" class="text-2xl font-semibold text-ink">Frequently asked questions</h2>
+				<dl class="mt-6 space-y-6">
+					{faq.map((f) => (
+						<div>
+							<dt class="text-lg font-semibold text-ink">{f.question}</dt>
+							<dd class="mt-2 text-muted">{f.answer}</dd>
+						</div>
+					))}
+				</dl>
+			</section>
+		)}
 	</article>
 	</div>
+
+	{faqJsonLd && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
+	{howToJsonLd && <script type="application/ld+json" set:html={JSON.stringify(howToJsonLd)} />}
 
 <script>
 	const btn = document.getElementById('copy-text-btn');

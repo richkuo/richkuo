@@ -15,6 +15,7 @@ interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
+	ogImage?: string;
 	type?: 'website' | 'article';
 	pubDate?: Date;
 	updatedDate?: Date;
@@ -27,6 +28,7 @@ const {
 	title,
 	description,
 	image = FallbackImage,
+	ogImage,
 	type = 'website',
 	pubDate,
 	updatedDate,
@@ -44,11 +46,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const videoId = videoUrl?.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([\w-]{11})/)?.[1];
 
 const img = image as ImageMetadata;
+// Prefer a YouTube thumbnail, then a hand-authored social card (ogImage), then
+// the page's imported hero image. The first two are fixed 16:9 sizes.
 const imageURL = videoId
 	? new URL(`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`)
-	: new URL(img.src, Astro.site ?? Astro.url);
-const imageWidth = videoId ? 1280 : img.width;
-const imageHeight = videoId ? 720 : img.height;
+	: ogImage
+		? new URL(ogImage, Astro.site ?? Astro.url)
+		: new URL(img.src, Astro.site ?? Astro.url);
+const imageWidth = videoId ? 1280 : ogImage ? 1200 : img.width;
+const imageHeight = videoId ? 720 : ogImage ? 630 : img.height;
 
 const publishedISO = pubDate?.toISOString();
 const modifiedISO = (updatedDate ?? pubDate)?.toISOString();

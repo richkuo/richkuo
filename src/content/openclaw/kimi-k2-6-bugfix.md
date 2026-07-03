@@ -3,6 +3,27 @@ title: OpenClaw Kimi K2.6 Bugfix
 description: How to fix Kimi configuration drift in OpenClaw where sessions silently fall back to a different model instead of staying on kimi-k2.6.
 pubDate: 2026-04-22
 icon: tabler:bug
+ogImage: /og/kimi-k2-6-bugfix.png
+faq:
+  - question: What causes Kimi model drift in OpenClaw?
+    answer: >-
+      Conflicting Kimi settings spread across the global config, agent-local
+      config files, auth profiles, and saved session state. When they disagree,
+      OpenClaw fails over to a fallback model without surfacing the root cause,
+      and that fallback can persist across later turns.
+  - question: How do I stop OpenClaw from falling back off kimi-k2.6?
+    answer: >-
+      Normalize the whole Kimi path end to end: keep only the intended
+      moonshot/kimi-k2.6 configuration, point it at https://api.kimi.com/coding,
+      remove legacy kimi and kimi-coding entries and older Kimi variants, and
+      clear any stale fallback state so sessions stay on K2.6.
+  - question: Which files hold the conflicting Kimi settings?
+    answer: >-
+      The global /root/.openclaw/openclaw.json, plus every agent-local file
+      under ~/.openclaw/agents/*/agent/ — especially models.json,
+      auth-profiles.json, and auth-state.json.
+  - question: What base URL should kimi-k2.6 use?
+    answer: The base URL should be exactly https://api.kimi.com/coding.
 ---
 
 # OpenClaw Kimi K2.6 Bugfix

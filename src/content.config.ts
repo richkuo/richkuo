@@ -1,6 +1,20 @@
 import { defineCollection, z } from 'astro:content';
 import { glob, file } from 'astro/loaders';
 
+// Shared answer-engine (AEO) fields: a pre-rendered social card, a Q&A list
+// that becomes FAQPage schema, and ordered steps that become HowTo schema.
+const faqSchema = z
+	.array(z.object({ question: z.string(), answer: z.string() }))
+	.default([]);
+const howToSchema = z
+	.object({
+		name: z.string().optional(),
+		supply: z.array(z.string()).optional(),
+		tool: z.array(z.string()).optional(),
+		steps: z.array(z.object({ name: z.string(), text: z.string() })),
+	})
+	.optional();
+
 const projects = defineCollection({
 	// Load Markdown and MDX files in the `src/content/projects/` directory.
 	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
@@ -11,10 +25,13 @@ const projects = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: image().optional(),
+			ogImage: z.string().optional(),
 			tags: z.array(z.string()).default([]),
 			link: z.string().optional(),
 			friend: z.boolean().default(false),
 			icon: z.string().optional(),
+			faq: faqSchema,
+			howTo: howToSchema,
 		}),
 });
 
@@ -62,10 +79,13 @@ const openclaw = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: image().optional(),
+			ogImage: z.string().optional(),
 			tags: z.array(z.string()).default([]),
 			link: z.string().optional(),
 			icon: z.string().optional(),
 			unlisted: z.boolean().default(false),
+			faq: faqSchema,
+			howTo: howToSchema,
 		}),
 });
 

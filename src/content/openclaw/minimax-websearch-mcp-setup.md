@@ -4,6 +4,59 @@ description: Step-by-step guide to setting up MiniMax's web search MCP server wi
 pubDate: 2026-03-10
 tags: ["mcp", "minimax", "web-search", "setup"]
 icon: tabler:world-search
+ogImage: /og/minimax-websearch-mcp-setup.png
+howTo:
+  name: Set up the MiniMax web search MCP server for OpenClaw
+  tool:
+    - uv / uvx
+    - mcporter
+    - bun
+  supply:
+    - MiniMax API key
+  steps:
+    - name: Install uv
+      text: >-
+        Install Astral's uv/uvx Python package runner with
+        `curl -LsSf https://astral.sh/uv/install.sh | sh`, then confirm it is on
+        your PATH with `which uvx`.
+    - name: Install mcporter
+      text: >-
+        Install the mcporter MCP CLI with bun (`bun install -g mcporter`) and
+        verify it with `mcporter --help`.
+    - name: Register the MiniMax MCP server
+      text: >-
+        Add the server with `mcporter config add minimax-coding-plan-mcp`,
+        running it via `uvx minimax-coding-plan-mcp` and passing your
+        MINIMAX_API_KEY and MINIMAX_API_HOST=https://api.minimax.io as env vars.
+    - name: Verify the server is registered
+      text: >-
+        Run `mcporter list minimax-coding-plan-mcp --schema` to confirm the
+        server and its web_search tool are available.
+    - name: Test a search
+      text: >-
+        Run `mcporter call minimax-coding-plan-mcp.web_search query="openclaw ai agent"`;
+        a working setup returns JSON with an organic results array.
+    - name: Document it in the agent's TOOLS.md
+      text: >-
+        Add the web_search command and its optional parameters to the agent's
+        workspace TOOLS.md so the agent knows when and how to search.
+faq:
+  - question: Where is the mcporter config stored?
+    answer: >-
+      In each OpenClaw agent workspace at `config/mcporter.json`, which holds
+      every MCP server's command, args, description, and env — including
+      MINIMAX_API_KEY and MINIMAX_API_HOST.
+  - question: How do I filter MiniMax web search results by date or country?
+    answer: >-
+      Pass optional parameters to web_search: freshness (day, week, month, or
+      year), date_after and date_before (YYYY-MM-DD), country (2-letter code),
+      language (ISO 639-1), and count.
+  - question: Why does web_search say the MINIMAX_API_KEY environment variable is required?
+    answer: >-
+      The server was registered without the key. Re-run `mcporter config add`
+      with `--env MINIMAX_API_KEY="..."` (and
+      `--env MINIMAX_API_HOST="https://api.minimax.io"`); it updates the existing
+      entry.
 ---
 
 # MiniMax Web Search MCP Server Setup for OpenClaw
