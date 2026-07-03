@@ -73,10 +73,11 @@ const REPO = 'https://github.com/richkuo/fableplan';
 				</ol>
 
 				<h2>Install</h2>
-				<pre><code>git clone https://github.com/richkuo/fableplan.git
-cp -r fableplan/skills/fableplan ~/.claude/skills/fableplan</code></pre>
+				<p>The repo is a Claude Code plugin marketplace. Inside any Claude Code session, add the marketplace and install the plugin:</p>
+				<pre><code>/plugin marketplace add richkuo/fableplan
+/plugin install fableplan@fableplan</code></pre>
 				<p>
-					Restart your session and invoke it with <code>/fableplan</code>. Full details, requirements, and notes are in the <a href={REPO} target="_blank" rel="noopener noreferrer">repo README</a>.
+					The skill is picked up automatically, and updates flow through the plugin system. Prefer a single-file install, the <code>npx skills</code> CLI, or a copy-paste prompt that lets Claude Code install it for you? All the alternatives are in the <a href={REPO} target="_blank" rel="noopener noreferrer">repo README</a>. Restart your session and invoke it with <code>/fableplan</code>.
 				</p>
 			</Prose>
 		</section>
