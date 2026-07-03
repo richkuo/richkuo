@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Prose from '../components/Prose.astro';
+
+const title = 'fableplan';
+const description =
+	'A Claude Code skill that plans with Fable 5 and builds with Opus or Sonnet — why the split works, and when it doesn\'t.';
+const REPO = 'https://github.com/richkuo/fableplan';
+---
+
+<BaseLayout title={title} description={description} type="article">
+	<div class="flex-1 flex flex-col py-12 md:py-16 lg:py-20 space-y-16 min-w-0">
+	<article class="post-page content-shell">
+		<header class="section-heading">
+			<p class="eyebrow">Claude Code Skill</p>
+			<h1>fableplan</h1>
+			<p class="post-meta">Plan with Fable 5. Build with whatever's actually good at building.</p>
+		</header>
+
+		<div class="page-nav">
+			<a class="button primary" href={REPO} target="_blank" rel="noopener noreferrer">View on GitHub</a>
+			<a class="button secondary" href={`${REPO}#install`} target="_blank" rel="noopener noreferrer">Install instructions</a>
+		</div>
+
+		<section class="post-article">
+			<Prose>
+				<p>
+					<code>fableplan</code> is a Claude Code skill I built to fix a specific, recurring waste in how I use agentic coding tools: paying premium-model prices for premium-model <em>tokens</em>, most of which are spent on work that doesn't need premium reasoning at all.
+				</p>
+
+				<h2>The split</h2>
+				<p>
+					Every coding task really has two different jobs in it. There's the <strong>planning</strong> job — reading the real codebase, figuring out what actually needs to change, ordering the steps, catching the edge case that breaks the naive approach before a single line is written. And there's the <strong>building</strong> job — executing that plan: editing files, following existing conventions, wiring things together, running tests, iterating.
+				</p>
+				<p>
+					Those two jobs have almost opposite cost profiles. Planning is low-volume and high-stakes — a bad plan compounds into every line built on top of it, so it's worth spending your best reasoning there. Building is high-volume and comparatively low-stakes per token — most of it is mechanical, and a strong general-purpose model executing a good plan rarely needs the top reasoning tier to get it right.
+				</p>
+				<p>
+					Most agentic workflows don't make that split. They run one model, at one cost, for both jobs — which means either you're overpaying for the boring 90% (building), or underpaying for the 10% that actually determines whether the feature is correct (planning).
+				</p>
+
+				<h2>Why Fable 5 for planning</h2>
+				<p>
+					Fable 5 is the model in fableplan's planning seat, dispatched as a dedicated subagent regardless of what model is running your main session. For planning specifically — reading a real codebase, surfacing the non-obvious constraint, producing a concrete and correctly ordered implementation plan — it's the best reasoning I've thrown at the job. That's exactly the kind of work where paying for the top tier is worth it: it happens once per task, and its output is the thing everything else depends on.
+				</p>
+				<p>
+					It's also exactly the kind of work where that cost is easy to justify, because the volume is small. One plan, reviewed once, before any code exists.
+				</p>
+
+				<h2>Why not Fable 5 for building</h2>
+				<p>
+					Running that same model through an entire build — every file edit, every test run, every back-and-forth fix — is a different story. Building is high-token-volume by nature, and once the planning is done, most of what's left is disciplined execution, not novel reasoning. Paying top-tier prices for that volume doesn't buy you much the plan hasn't already bought you, and it shows up directly in cost and latency across a long build.
+				</p>
+
+				<h2>The handoff</h2>
+				<p>
+					This is why fableplan builds from the vetted plan using your main session's model — Opus or Sonnet, whatever you're already running — instead of staying on Fable 5 for the whole task. Once the ambiguity is gone and the plan is checked against the real codebase, the remaining risk is execution fidelity: does the model follow the plan, match conventions, and not silently drop a step. Opus and Sonnet are good enough at that job, most of the time, to make finishing the build on the cheaper, faster model the correct call rather than a compromise.
+				</p>
+				<p>
+					The plan is also where a human — or a GitHub issue — gets a cheap checkpoint. It's a lot easier to catch a structurally wrong approach by reading a plan than by reviewing a finished diff.
+				</p>
+
+				<h2>How it works</h2>
+				<p>Trigger it with <code>/fableplan</code>, "fableplan this," or "plan this with fable," plus a task description and optionally a GitHub issue.</p>
+				<ol>
+					<li>Resolves the referenced GitHub issue, if any, so planning works from the real requirements.</li>
+					<li>Dispatches the Fable 5 Plan subagent, confirms it made no edits, and saves the plan verbatim.</li>
+					<li>Sanity-checks the plan against the actual codebase — files, symbols, conventions — and stops to ask if it's structurally wrong rather than silently re-planning.</li>
+					<li>Posts the vetted plan to the GitHub issue as a comment, if one was referenced.</li>
+					<li>Presents the plan for review.</li>
+					<li>Sets up an isolated git worktree so the build never touches the current workspace.</li>
+					<li>Builds the task from the plan, inside that worktree, on the main session's model.</li>
+				</ol>
+
+				<h2>Install</h2>
+				<pre><code>git clone https://github.com/richkuo/fableplan.git
+cp -r fableplan/skills/fableplan ~/.claude/skills/fableplan</code></pre>
+				<p>
+					Restart your session and invoke it with <code>/fableplan</code>. Full details, requirements, and notes are in the <a href={REPO} target="_blank" rel="noopener noreferrer">repo README</a>.
+				</p>
+			</Prose>
+		</section>
+	</article>
+	</div>
+</BaseLayout>
