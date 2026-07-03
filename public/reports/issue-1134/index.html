@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- ===== SEO ===== -->
-<title>AI Coding Bake-off Ep. 6: Four Models, One Landmine — GPT-5.5 &amp; GLM 5.2 Tie at 94 (Issue #1134)</title>
-<meta name="description" content="Four AI coding models — OpenAI's GPT-5.5, Z.ai's GLM 5.2, Anthropic's Opus 4.8, and Cursor's new Composer 2.5 — each added one settings knob to a live trading bot without accidentally switching off a real-money safety net. A scored, code-checked head-to-head that ended in a tie: two winners at 94, a 3-point spread across the whole field. Explained for non-coders." />
+<title>AI Coding Bake-off Ep. 6: Four Models, One Landmine, One Winner? (Issue #1134)</title>
+<meta name="description" content="Four AI coding models — OpenAI's GPT-5.5, Z.ai's GLM 5.2, Anthropic's Opus 4.8, and Cursor's new Composer 2.5 — each added one settings knob to a live trading bot without accidentally overwriting a real-money safety net with the wrong numbers. A scored, code-checked head-to-head that ended in a tie: two winners at 94, a 3-point spread across the whole field. Explained for non-coders." />
 <meta name="keywords" content="AI coding comparison, GPT-5.5, GLM 5.2, Opus 4.8, Composer 2.5, Z.ai, Anthropic, OpenAI, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, stop loss, trading bot, Rich Kuo" />
 <meta name="author" content="Rich Kuo" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -18,7 +18,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Rich Kuo" />
 <meta property="og:title" content="AI Coding Bake-off Ep. 6: Four Models, One Landmine — GPT-5.5 &amp; GLM 5.2 Tie at 94" />
-<meta property="og:description" content="Four AI models added one setting to a trading bot without switching off a real-money safety net. Two tied for first at 94 — the most code tied for the win, the least came last. The fastest model came last." />
+<meta property="og:description" content="Four AI models added one setting to a trading bot without overwriting a real-money safety net with the wrong numbers. Two tied for first at 94 — the most code tied for the win, the least came last. The fastest model came last." />
 <meta property="og:url" content="https://www.richkuo.com/reports/issue-1134/" />
 <meta property="og:image" content="https://www.richkuo.com/reports/issue-1134/og-regime-atr-bakeoff.png" />
 <meta property="og:image:width" content="1200" />
@@ -54,7 +54,7 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "AI Coding Bake-off Ep. 6: Four Models, One Landmine — GPT-5.5 & GLM 5.2 Tie at 94 (Issue #1134)",
-  "description": "Four AI coding models — OpenAI's GPT-5.5, Z.ai's GLM 5.2, Anthropic's Opus 4.8, and Cursor's new Composer 2.5 — each added one settings knob to a live trading bot to retune its automatic safety nets, without accidentally switching off a live real-money safety net on certain strategies. A scored, code-checked head-to-head that ended in a tie, explained for non-coders.",
+  "description": "Four AI coding models — OpenAI's GPT-5.5, Z.ai's GLM 5.2, Anthropic's Opus 4.8, and Cursor's new Composer 2.5 — each added one settings knob to a live trading bot to retune its automatic safety nets, without accidentally overwriting a live real-money safety net with the wrong numbers on certain strategies. A scored, code-checked head-to-head that ended in a tie, explained for non-coders.",
   "image": "https://www.richkuo.com/reports/issue-1134/og-regime-atr-bakeoff.png",
   "url": "https://www.richkuo.com/reports/issue-1134/",
   "datePublished": "2026-06-29",
@@ -66,7 +66,7 @@
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.richkuo.com/reports/issue-1134/" },
   "keywords": "AI coding comparison, GPT-5.5, GLM 5.2, Opus 4.8, Composer 2.5, Z.ai, Anthropic, OpenAI, Cursor, Claude Code, Codex, LLM benchmark, agentic coding, AI code review, stop loss, trading bot",
   "articleSection": "AI & Developer Tools",
-  "about": "A scored comparison of four AI coding runs adding one settings knob to a trading bot to retune its automatic safety nets, without accidentally switching off a live real-money safety net, with a disclosed judge conflict of interest that the result clears. Explained for non-coders.",
+  "about": "A scored comparison of four AI coding runs adding one settings knob to a trading bot to retune its automatic safety nets, without accidentally overwriting a live real-money safety net with the wrong numbers, with a disclosed judge conflict of interest that the result clears. Explained for non-coders.",
   "mentions": [
     { "@type": "SoftwareApplication", "name": "GPT-5.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
     { "@type": "SoftwareApplication", "name": "GLM 5.2", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Z.ai", "url": "https://z.ai" } },
@@ -440,7 +440,7 @@ Add ONE knob the operator can turn once to retune those safety nets across the w
 But: check the new setting for typos and reject a bad one loudly. And the bot has two copies of this logic — the live trader and a "practice mode" that tests on old data — so both copies have to change together.
 
 The landmine: one kind of strategy ("manual") already gets its safety-net settings from a different place. To the computer, its safety net looks exactly like a normal one. The obvious way to build the knob would quietly reach in and OVERWRITE that live safety net with the wrong numbers — no error, real money. The fix has to SKIP those strategies, and prove it skipped them with a test.</div>
-    <p class="modal-note">&#9998; <b>Who's who.</b> Each model's entry is matched to it from its code branch + sign-off: <span class="mono">#1142</span> = GPT-5.5 (in Codex), <span class="mono">#1143</span> = GLM 5.2 (in Cursor — its sign-off wrongly says "Claude Code"; the operator and the usage meter confirm Cursor), <span class="mono">#1144</span> = Opus 4.8 (in Claude Code), <span class="mono">#1141</span> = Composer 2.5 (in Cursor). None of the four went through a back-and-forth review loop — each is a single first pass. Time/cost was reported in three different units, so it's flavor only and never moved the score.</p>
+    <p class="modal-note">&#9998; <b>Who's who.</b> Each model ran inside a coding app (its "harness"): <span class="mono">#1142</span> = GPT-5.5 in Codex (OpenAI's app), <span class="mono">#1143</span> = GLM 5.2 in Cursor — its automatic credit line wrongly says "Claude Code," but I ran it and Cursor's own usage meter confirms Cursor — <span class="mono">#1144</span> = Opus 4.8 in Claude Code (Anthropic's app), <span class="mono">#1141</span> = Composer 2.5 in Cursor. None of the four went through a back-and-forth review loop — each is a single first pass. Time/cost was reported in three different units (a "token" is a chunk of text a model reads or writes), so it's flavor only and never moved the score.</p>
   </div>
 </div>
 
@@ -457,7 +457,7 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
       </div>
       <h1 class="display">Four models.<br />One landmine.<br /><em>One winner?</em></h1>
     </div>
-    <p class="sub reveal in d2"><b>Four models. One safety-critical job.</b> OpenAI's GPT-5.5, Z.ai's GLM 5.2, Anthropic's Opus 4.8, and Cursor's new Composer 2.5 each took the same task: add one settings knob to my trading bot that retunes its automatic safety nets — without accidentally switching off a live, real-money safety net, a trap the task itself warned about. Four totally separate tries, same instructions. I checked every line: did each one dodge the trap, and prove it with a test?</p>
+    <p class="sub reveal in d2"><b>Four models. One safety-critical job.</b> OpenAI's GPT-5.5, Z.ai's GLM 5.2, Anthropic's Opus 4.8, and Cursor's new Composer 2.5 each took the same task: add one settings knob to my trading bot that retunes its automatic safety nets. The trap, named in the task itself: the obvious build quietly overwrites a live, real-money safety net with the wrong numbers. Four separate tries, same instructions. I checked every line: did each one dodge the trap, and prove it with a test?</p>
     <p class="sub serif-it reveal in d3" style="color:var(--gold);font-size:1.15rem;margin-top:1.8rem;text-align:center;">You scroll expecting one winner. Keep scrolling — the result is at the bottom, and it isn't what you think.</p>
   </div>
   <div class="scrollcue">scroll &#8595;</div>
@@ -481,8 +481,8 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
 <section style="background:linear-gradient(180deg,transparent,rgba(204,120,92,0.04),transparent);">
   <div class="wrap">
     <div class="seclabel reveal"><span class="no">ii.</span><span>The landmine</span><span class="ln"></span></div>
-    <h2 class="sec display reveal">A lazy fix switches off a live safety net.</h2>
-    <p class="lead reveal d1">Here's the trap. Some of my strategies run in <b>"manual"</b> mode, and those already get their safety-net settings from a <i>different</i> place I built earlier. The new knob is only supposed to feed the <i>normal</i> strategies. The problem: to the computer, a manual strategy's safety net <b>looks exactly like a normal one.</b> So the obvious approach — "find every safety net on the default settings and feed it the new numbers" — would quietly reach into every manual strategy and <b>overwrite a live safety net with the wrong numbers.</b> No error. No failed test. The task calls this out by name and demands the fix <i>skip</i> manual strategies. So the real challenge wasn't "can you add a setting." It was <b>"can you add it without switching off a real-money safety net — and prove it with a test."</b></p>
+    <h2 class="sec display reveal">A lazy fix overwrites a live safety net.</h2>
+    <p class="lead reveal d1">Here's the trap. Some of my strategies run in <b>"manual"</b> mode, and those already get their safety-net settings from a <i>different</i> place I built earlier. The new knob is only supposed to feed the <i>normal</i> strategies. The problem: to the computer, a manual strategy's safety net <b>looks exactly like a normal one.</b> So the obvious approach — "find every safety net on the default settings and feed it the new numbers" — would quietly reach into every manual strategy and <b>overwrite a live safety net with the wrong numbers.</b> No error. No failed test. The task calls this out by name and demands the fix <i>skip</i> manual strategies. So the real challenge wasn't "can you add a setting." It was <b>"can you add it without pointing a real-money safety net at the wrong numbers — and prove it with a test."</b></p>
     <div class="loopnote reveal d1" style="border-left-color:#cc785c;background:rgba(204,120,92,0.06);">&#9888;&#65039; <b>The trap.</b> The bug doesn't crash. It doesn't fail a test. It just points a real-money safety net at the wrong settings, quietly, and waits. A green checkmark proves nothing here — the only thing that proves it is reading the code and confirming the fix skips those manual strategies.</div>
   </div>
 </section>
@@ -491,6 +491,7 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
 <section>
   <div class="wrap">
     <div class="seclabel reveal"><span class="no">iii.</span><span>The contestants</span><span class="ln"></span></div>
+    <p class="lead reveal">Four models, four separate tries. Each entry is a <b>"PR"</b> — short for pull request, a proposed batch of code changes submitted for review. Click a card to see the real one.</p>
     <div class="grid3">
       <a class="card reveal" href="https://github.com/richkuo/go-trader/pull/1142" target="_blank" rel="noopener" style="--sig:var(--c-gpt)">
         <div class="tape"></div>
@@ -536,7 +537,7 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
       <div class="step reveal d2"><div class="n">03</div><p><b>Re-run the tests.</b> Both copies of the bot — live and practice mode — from scratch.</p></div>
       <div class="step reveal d3"><div class="n">04</div><p><b>Score out of 100</b> against the checklist. Report every miss, with proof.</p></div>
     </div>
-    <div class="loopnote reveal">&#9881;&#65039; <b>A note on the judge.</b> The reviewing was all done by one model — <b>Opus 4.8 (Anthropic's)</b> — and one of the contestants is <b>also Opus 4.8</b>. Hold that thought. We'll come back to it at the bottom, next to the result it produced — because the result is what clears it.</div>
+    <div class="loopnote reveal">&#9881;&#65039; <b>A note on the judge.</b> The reviewing was all done by one model — <b>Opus 4.8 (Anthropic's)</b> — and one of the contestants is <b>also Opus 4.8</b>. Hold that thought. I'll come back to it at the bottom, next to the result — judge for yourself then.</div>
   </div>
 </section>
 
@@ -545,7 +546,7 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
   <div class="wrap">
     <div class="seclabel reveal"><span class="no">v.</span><span>The highest floor yet</span><span class="ln"></span></div>
     <h2 class="sec display reveal">Everyone cleared the bar — completely.</h2>
-    <p class="lead reveal d1">This was <b>not</b> a "spot the broken one" episode — it had the <b>highest floor of any episode yet</b>. <b>All four dodged the trap:</b> each one made the new knob skip manual strategies, and each shipped a test that sets up a manual strategy and checks its safety net is <i>left alone</i>. All four updated both copies of the bot (live + practice mode) to match, made a typo in the new setting <b>fail loudly</b> instead of doing nothing, updated the docs, and came with passing tests my reviewers re-ran themselves. Nobody broke the build, nobody touched the real-money safety nets, nobody faked a test. So it came down to <b>how thoroughly they proved it</b> — and the stats below are flavor, <b>never part of the score</b>.</p>
+    <p class="lead reveal d1">This was <b>not</b> a "spot the broken one" episode — it had the <b>highest floor of any episode yet</b>. <b>All four dodged the trap:</b> each one made the new knob skip manual strategies, and each shipped a test that sets up a manual strategy and checks its safety net is <i>left alone</i>. All four updated both copies of the bot — live and practice mode — to match. All four made a typo'd setting <b>fail loudly</b> instead of doing nothing. Docs updated, tests passing, and my reviewers re-ran every test themselves. Nobody broke the build, nobody touched the real-money safety nets, nobody faked a test. So it came down to <b>how thoroughly they proved it</b> — and the stats below are flavor, <b>never part of the score</b>.</p>
     <table class="tbl difftbl reveal d1">
       <thead><tr><th>Model</th><th>Lines changed</th><th>Files</th><th>Time</th><th>Cost (raw, mismatched units)</th></tr></thead>
       <tbody>
@@ -561,14 +562,14 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
           <td class="num big">+861 / &#8722;5<div class="bar" style="--sig:var(--c-glm);margin-top:8px"><i data-w="100"></i></div></td>
           <td class="num">10</td>
           <td class="num">~19 min</td>
-          <td class="num" style="color:var(--muted)">~13.3M tokens (Cursor)</td>
+          <td class="num" style="color:var(--muted)">~13.3M tokens (Cursor's meter)</td>
         </tr>
         <tr>
           <td class="model"><svg class="logo" style="color:var(--c-opus)"><use href="#logo-anthropic"/></svg>Opus 4.8</td>
           <td class="num big">+561 / &#8722;14<div class="bar" style="--sig:var(--c-opus);margin-top:8px"><i data-w="65"></i></div></td>
           <td class="num">9</td>
           <td class="num">~20 min <span style="color:var(--muted2)">(slowest)</span></td>
-          <td class="num" style="color:var(--muted)">22% of its 1M-token context window</td>
+          <td class="num" style="color:var(--muted)">22% of its working memory (1M-token window)</td>
         </tr>
         <tr>
           <td class="model"><svg class="logo" style="color:var(--c-composer)"><use href="#logo-cursor"/></svg>Composer 2.5</td>
@@ -579,7 +580,7 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
         </tr>
       </tbody>
     </table>
-    <div class="loopnote reveal">&#128208; <b>Side note — code volume and speed are not scored.</b> The contestant that wrote the <b>most</b> code tied for first; the one that wrote the <b>least</b> came last; and the <b>fastest</b> first-pass came last too. Hold those numbers in your head — the scores below ignore them on purpose, and that's exactly what makes the result strange.</div>
+    <div class="loopnote reveal">&#128208; <b>Side note — code volume and speed are not scored.</b> But hold these numbers in your head: the spread from most to least code is <b>358 lines</b>, and the fastest run finished in about a third of the slowest's time. The scores below ignore all of it on purpose — and that's exactly what makes the result strange.</div>
   </div>
 </section>
 
@@ -602,7 +603,7 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
         <div>
           <span class="ranklogo"><svg class="logo"><use href="#logo-cursor"/></svg></span>
           <div class="rankname">Composer 2.5
-            <span class="sub">A <b>strong debut</b> from Cursor's brand-new model — and third place's near-twin. Smallest change, fastest run, fully correct, trap handled with a passing test, both copies of the bot updated. Two small things kept it last: it has <b>no test</b> for the case where the knob meets the bot's <i>fancier</i> way of labeling market conditions (only the simple labeling is tested), and it applies the new setting <b>before</b> double-checking it — safe in practice, because a later check still catches bad input, but not as careful as checking right away.</span>
+            <span class="sub">A <b>strong debut</b> from Cursor's brand-new model. Smallest change, fastest run, fully correct, trap handled with a passing test, both copies of the bot updated. Two small things kept it last: it has <b>no test</b> for the case where the knob meets the bot's <i>fancier</i> way of labeling market conditions (only the simple labeling is tested), and it applies the new setting <b>before</b> double-checking it — safe in practice, because a later check still catches bad input, but not as careful as checking right away.</span>
           </div>
         </div>
         <div class="score"><span class="count" data-to="91">91</span><small>/100</small></div>
@@ -638,21 +639,21 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
     <div class="awards">
       <div class="award reveal" style="--sig:var(--c-glm)">
         <div class="crown">&#128202;</div>
-        <h4>Most code tied for first</h4>
+        <h4>The most code beat the least</h4>
         <div class="who" style="color:var(--c-glm)">861 vs 503 lines</div>
-        <p>This <b>flips</b> last episode, where the shortest answer won. Here the model that wrote the <b>most</b> code (GLM, 861 lines) tied for first; the one that wrote the <b>least</b> (Composer, 503) came last. Not a "less is more" lesson — the extra lines are exactly the extra testing that <i>was</i> the difference.</p>
+        <p>This <b>flips</b> last episode, where the shortest answer won. Here the model that wrote the <b>most</b> code (861 lines) beat the one that wrote the <b>least</b> (503). Not a "less is more" lesson — the extra lines are exactly the extra testing that <i>was</i> the difference.</p>
       </div>
       <div class="award reveal d1" style="--sig:var(--c-composer)">
         <div class="crown">&#9201;&#65039;</div>
         <h4>The fastest came last</h4>
         <div class="who" style="color:var(--c-composer)"><svg class="logo"><use href="#logo-cursor"/></svg>Speed &#8800; rank</div>
-        <p>The <b>fastest</b> model (Composer 2.5, ~6 min) finished <b>last</b>. The <b>slowest</b> (Opus, ~20 min) came third. The two co-winners sat in the middle on time. For the second episode running, speed didn't predict rank.</p>
+        <p>The <b>fastest</b> model (Composer 2.5, ~6 min) finished <b>last</b>. The <b>slowest</b> (Opus, ~20 min) came third. For the second episode running, speed didn't predict rank.</p>
       </div>
       <div class="award reveal d2" style="--sig:var(--gold)">
         <div class="crown">&#128300;</div>
         <h4>One test was the whole gap</h4>
-        <div class="who" style="color:var(--gold)">94 vs 92 vs 91</div>
-        <p>Four models, three points apart — and the entire gap between the leaders and the rest was <b>one test</b>: a check that the new knob works with the bot's fancier way of labeling market conditions. The two winners wrote it; the other two didn't. That's the whole story.</p>
+        <div class="who" style="color:var(--gold)">Three points, four models</div>
+        <p>Four models, three points apart — and the entire gap between the top and the rest was <b>one test</b>: a check that the new knob works with the bot's fancier way of labeling market conditions. Two entries wrote it; two didn't. That's the whole story.</p>
       </div>
     </div>
   </div>
@@ -673,7 +674,7 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
         <div class="org">OpenAI · Codex</div>
         <div class="pr"><a href="https://github.com/richkuo/go-trader/pull/1142" target="_blank" rel="noopener">PR #1142 &#8599;</a></div>
         <div class="badge"><span class="count" data-to="94">94</span><small>&nbsp;/100</small></div>
-        <p class="descr"><b>The cleanest run.</b> Trap handled and tested, both copies of the bot updated, double-checks the setting even where it technically didn't have to — stricter and safer. <b>690 lines across 10 files</b>; its only soft spot is a couple of requirements that lean on existing machinery without a brand-new test.</p>
+        <p class="descr"><b>The cleanest run.</b> Trap handled and tested, both copies of the bot updated, and it double-checks the new setting even when it's not being used — stricter and safer. <b>690 lines across 10 files</b>; its only soft spot is a couple of requirements that rely on checks that already existed, without a brand-new test proving them.</p>
       </div>
       <div class="tievs">tied with</div>
       <div class="tiecol">
@@ -682,7 +683,7 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
         <div class="org">Z.ai · Cursor</div>
         <div class="pr"><a href="https://github.com/richkuo/go-trader/pull/1143" target="_blank" rel="noopener">PR #1143 &#8599;</a></div>
         <div class="badge"><span class="count" data-to="94">94</span><small>&nbsp;/100</small></div>
-        <p class="descr"><b>The most thorough testing.</b> The only one with both the fancier-labeling test <i>and</i> a full end-to-end test that loads a real config and checks the manual safety net is safe. The price: the <b>most code, 861 lines</b> — and a write-up claiming "1,987 tests passed," a number we couldn't reproduce.</p>
+        <p class="descr"><b>The most thorough testing.</b> The only one with both the fancier-labeling test <i>and</i> a test that runs the whole path start to finish — loading a real settings file and checking the manual safety net stays safe. The price: the <b>most code, 861 lines</b> — and a write-up claiming "1,987 tests passed," a number I couldn't reproduce.</p>
       </div>
     </div>
     <p class="why">Same correctness. Same trap dodged. Both handled a typo'd setting by failing loudly. <b>The entire gap to the top came down to one test</b> — the check that the new knob works with the bot's fancier market-labeling system — that GPT-5.5 and GLM both wrote and the other two skipped. Opus sits at 92 and Composer at 91 on that single missing test; the whole field is three points. The gaps are soft; the dead heat at the top is real.</p>
@@ -776,7 +777,7 @@ The landmine: one kind of strategy ("manual") already gets its safety-net settin
     <div class="seclabel reveal"><span class="no">&#10022;</span><span>Epilogue — what shipped</span><span class="ln"></span></div>
     <h2 class="sec display reveal">Nothing's shipped — yet.</h2>
     <p class="lead reveal d1">Last episode, I shipped a <b>blend</b> of the two winners and that closed it out. This one is still wide open. As of scoring, nothing has been merged in: all four entries (<a href="https://github.com/richkuo/go-trader/pull/1141" target="_blank" rel="noopener">#1141</a>, <a href="https://github.com/richkuo/go-trader/pull/1142" target="_blank" rel="noopener">#1142</a>, <a href="https://github.com/richkuo/go-trader/pull/1143" target="_blank" rel="noopener">#1143</a>, <a href="https://github.com/richkuo/go-trader/pull/1144" target="_blank" rel="noopener">#1144</a>) sit side by side, and I haven't started a combined "best-of" version.</p>
-    <p class="lead reveal d2">If I follow last episode's pattern, it'll probably take one winner's version as the base and graft the other's extra tests on top. But that hasn't happened. For now it's a clean four-way tie with nothing decided, and the verdict stands on the code review alone.</p>
+    <p class="lead reveal d2">If I follow last episode's pattern, it'll probably take one winner's version as the base and graft the other's extra tests on top. But that hasn't happened. For now all four entries sit unmerged with nothing decided, and the verdict stands on the code review alone.</p>
     <div class="srclinks reveal d3" style="justify-content:flex-start;margin-top:24px">
       <a href="https://github.com/richkuo/go-trader/issues/1134" target="_blank" rel="noopener">Issue #1134 (open) <span class="ar">&#8599;</span></a>
     </div>
