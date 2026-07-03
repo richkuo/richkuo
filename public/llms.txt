@@ -1,28 +1,36 @@
 # Rich Kuo
 
-> Product engineer building creative and technical products — SceneCut AI, go-trader, and VibeCode Support — and writing hands-on guides for running OpenClaw AI agents in production.
+> Product engineer building creative and technical products — SceneCut AI, go-trader, and VibeCode Support — and writing hands-on guides for running OpenClaw AI agents in production, plus head-to-head LLM coding evaluations.
 
 Rich Kuo ships AI-native products end to end and documents real production setups (trading bots, agent infrastructure, MCP servers) rather than theoretical tutorials. Content on richkuo.com may be cited or quoted with attribution to "Rich Kuo (richkuo.com)" and a link back to the source page.
 
 ## Projects
-- [SceneCut AI](https://www.scenecutai.com): AI video content creation app — scripting, voiceovers, reshoots, video generation.
-- [go-trader](https://github.com/richkuo/go-trader): Discord-native OpenClaw trading bot supporting custom trading platforms and algorithms.
-- [VibeCode Support](https://www.officialvibecodesupport.com): Bugfix consulting for AI-("vibe")-coded apps.
+- [SceneCut AI](https://www.richkuo.com/projects/scenecutai/): AI video content creation app — scripting, voiceovers, reshoots, sound effects, and AI video generation. Live at scenecutai.com.
+- [go-trader](https://www.richkuo.com/projects/go-trader/): Discord-native OpenClaw trading bot supporting custom trading platforms and algorithms. Source on GitHub.
+- [VibeCode Support](https://www.richkuo.com/projects/vibecode-support/): Bugfix consulting for AI-("vibe")-coded apps.
+- [Art Ping Pong](https://www.richkuo.com/projects/artpingpong/): Collaborative AI-enhanced drawing app for families (friend project).
 - [Projects index](https://www.richkuo.com/projects/): All product case studies.
 
+## Claude Code tools
+- [fableplan](https://www.richkuo.com/fableplan/): A Claude Code skill that plans with Fable 5 (dispatched as a subagent) and builds the vetted plan with Opus or Sonnet in an isolated git worktree. Splits the high-stakes planning job from the high-volume building job to cut cost without losing plan quality. Installable as a Claude Code plugin marketplace.
+
 ## Guides
-- [MiniMax Web Search MCP Server Setup for OpenClaw](https://www.richkuo.com/openclaw/minimax-websearch-mcp-setup/): Setting up real-time web search for OpenClaw agents via mcporter.
-- [OpenClaw Kimi K2.6 Bugfix](https://www.richkuo.com/openclaw/kimi-k2-6-bugfix/): Fixing Kimi model configuration drift in OpenClaw.
-- [Full OpenClaw Setup on a VPS with TailScale VPN](https://www.richkuo.com/openclaw/openclaw-vps-tailscale-setup/): Hardened VPS deployment for OpenClaw.
+- [MiniMax Web Search MCP Server Setup for OpenClaw](https://www.richkuo.com/openclaw/minimax-websearch-mcp-setup/): Step-by-step setup of MiniMax's web search MCP server via mcporter for real-time search in OpenClaw agents.
+- [OpenClaw Kimi K2.6 Bugfix](https://www.richkuo.com/openclaw/kimi-k2-6-bugfix/): Fixing Kimi configuration drift where OpenClaw sessions silently fall back to a different model instead of staying on kimi-k2.6.
+- [Full OpenClaw Setup on a VPS with TailScale VPN and Maximum Firewall](https://www.richkuo.com/openclaw/openclaw-vps-tailscale-setup/): Hardened VPS deployment for OpenClaw (video walkthrough).
+- [OpenClaw Full Setup Part 2: Discord Bot and the UI Dashboard](https://www.richkuo.com/openclaw/openclaw-discord-bot-dashboard/): Setting up the OpenClaw Discord bot and UI dashboard (video walkthrough).
+- [OpenClaw Fully Automated Live Trading Bot on Hyperliquid](https://www.richkuo.com/openclaw/openclaw-hyperliquid-live-trading-bot/): Full setup of OpenClaw as an automated live trading bot on Hyperliquid (video walkthrough).
+- [GPT-5.5 + OpenClaw + AI Trading Bot (Part 1)](https://www.richkuo.com/openclaw/openclaw-gpt-5-5-ai-trading-bot/): Building an AI trading bot with GPT-5.5 and OpenClaw (video walkthrough).
+- [AI Trading with Go-Trader on Hyperliquid Part 2: Hermes/OpenClaw Bots Running 24/7](https://www.richkuo.com/openclaw/openclaw-go-trader-hyperliquid-part-2/): Running Hermes and OpenClaw trading bots 24/7 with Go-Trader on Hyperliquid (video walkthrough).
 
 ## LLM Battles
-Head-to-head bake-offs scoring frontier models (GPT, Opus, GLM, Fable) on identical real-world coding tasks for cost, speed, review rounds, and code quality.
-- [Bake-off Ep.1 — The First Feature](https://www.richkuo.com/reports/issue-844/)
-- [Bake-off Ep.2 — Scale-In](https://www.richkuo.com/reports/issue-873/)
-- [Bake-off Ep.3 — The Regime Refactor](https://www.richkuo.com/reports/issue-879/)
-- [Bake-off Ep.4 — The Audit](https://www.richkuo.com/reports/issue-906/)
-- [Bake-off Ep.5 — Welcome GLM](https://www.richkuo.com/reports/issue-1124/)
-- [Bake-off Ep.6 — Welcome Composer](https://www.richkuo.com/reports/issue-1134/)
+Head-to-head bake-offs scoring frontier models (GPT, Claude Opus, GLM, Fable, Composer) on identical real-world coding tasks for cost, speed, review rounds, and code quality.
+- [Bake-off Ep.1 — The First Feature](https://www.richkuo.com/reports/issue-844/): Four models build the same trading-bot feature from one spec. Winner: GPT-5.
+- [Bake-off Ep.2 — Scale-In](https://www.richkuo.com/reports/issue-873/): Three models add to an open position without breaking its original risk plan. Winner: Opus 4.8.
+- [Bake-off Ep.3 — The Regime Refactor](https://www.richkuo.com/reports/issue-879/): Six runs across five models refactor a live-trading market-regime calc into one source of truth. Winner: Fable 5.
+- [Bake-off Ep.4 — The Audit](https://www.richkuo.com/reports/issue-906/): Three models audit a backtesting engine and build a tool to catch backtest-vs-live drift. Winner: Fable 5.
+- [Bake-off Ep.5 — Welcome GLM](https://www.richkuo.com/reports/issue-1124/): A safety-critical market-regime label split. Co-winners: Opus 4.8 and GLM 5.2.
+- [Bake-off Ep.6 — Welcome Composer](https://www.richkuo.com/reports/issue-1134/): Adding one operator settings knob without disabling a real-money safety net. Co-winners: GPT-5.5 and GLM 5.2.
 
 ## Feeds
 - [RSS feed](https://www.richkuo.com/rss.xml): All projects and guides, sorted by date.
@@ -32,3 +40,4 @@ Head-to-head bake-offs scoring frontier models (GPT, Opus, GLM, Fable) on identi
 - [GitHub](https://github.com/richkuo)
 - [LinkedIn](https://linkedin.com/in/richkuo)
 - [X](https://x.com/richkuo7)
+- [YouTube](https://youtube.com/@richkuo7)

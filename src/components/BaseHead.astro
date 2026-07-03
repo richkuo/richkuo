@@ -55,11 +55,13 @@ const modifiedISO = (updatedDate ?? pubDate)?.toISOString();
 
 const authorPerson = {
 	'@type': 'Person',
+	'@id': new URL('/#person', Astro.site ?? Astro.url).toString(),
 	name: siteName,
 	url: Astro.site?.toString(),
 	image: new URL(profilePic.src, Astro.site ?? Astro.url).toString(),
 	jobTitle: site.author?.role,
 	description: site.author?.bio,
+	knowsAbout: site.author?.knowsAbout,
 	sameAs: (site.social ?? []).map((s: { href: string }) => s.href),
 };
 

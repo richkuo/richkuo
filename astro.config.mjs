@@ -12,6 +12,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import icon from "astro-icon";
 
+const SITE = "https://www.richkuo.com";
+
 // Read content frontmatter so the sitemap can drop `unlisted` pages and stamp
 // each remaining URL with an accurate `lastmod` (updatedDate, else pubDate).
 function collectPageMeta(dir, urlPrefix) {
@@ -29,18 +31,45 @@ function collectPageMeta(dir, urlPrefix) {
   return meta;
 }
 
+// The bake-off reports are hand-authored static HTML under public/reports/, so
+// Astro's sitemap never sees them. Discover each one, read its own OG metadata
+// for an accurate lastmod, and feed the clean URLs in as sitemap customPages.
+function collectReportMeta(dir, urlPrefix) {
+  const meta = {};
+  const customPages = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    let html;
+    try {
+      html = readFileSync(`${dir}/${entry.name}/index.html`, "utf-8");
+    } catch {
+      continue; // directory without an index.html (e.g. assets) — skip
+    }
+    const pub = html.match(/article:published_time"\s+content="([\d-]+)"/)?.[1];
+    const mod = html.match(/article:modified_time"\s+content="([\d-]+)"/)?.[1];
+    const path = `/${urlPrefix}/${entry.name}/`;
+    meta[path] = { lastmod: mod ?? pub };
+    customPages.push(`${SITE}${path}`);
+  }
+  return { meta, customPages };
+}
+
+const reports = collectReportMeta(fileURLToPath(new URL("./public/reports", import.meta.url)), "reports");
+
 const pageMeta = {
   ...collectPageMeta(fileURLToPath(new URL("./src/content/openclaw", import.meta.url)), "openclaw"),
   ...collectPageMeta(fileURLToPath(new URL("./src/content/projects", import.meta.url)), "projects"),
+  ...reports.meta,
 };
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://www.richkuo.com",
+  site: SITE,
   compressHTML: true,
   integrations: [
     mdx(),
     sitemap({
+      customPages: reports.customPages,
       filter: (page) => !pageMeta[new URL(page).pathname]?.unlisted,
       serialize: (item) => {
         const pathname = new URL(item.url).pathname;
@@ -53,6 +82,9 @@ export default defineConfig({
         } else if (pathname === "/projects/") {
           item.priority = 0.8;
           item.changefreq = "monthly";
+        } else if (pathname.startsWith("/reports/")) {
+          item.priority = 0.8;
+          item.changefreq = "yearly";
         } else if (pathname.startsWith("/projects/")) {
           item.priority = 0.7;
           item.changefreq = "yearly";

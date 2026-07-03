@@ -76,22 +76,59 @@ const llmBattles: Card[] = [
 const sameAs = socials.filter((s) => s.href.startsWith('http')).map((s) => s.href);
 
 const personJsonLd = {
-	'@context': 'https://schema.org',
 	'@type': 'Person',
+	'@id': `${SITE_URL}/#person`,
 	name: 'Rich Kuo',
 	url: `${SITE_URL}/`,
 	image: profileURL,
 	jobTitle: 'Product Engineer',
-	description: site.description,
+	description: site.author?.bio ?? site.description,
+	knowsAbout: site.author?.knowsAbout ?? [],
 	sameAs,
 };
 
 const websiteJsonLd = {
-	'@context': 'https://schema.org',
 	'@type': 'WebSite',
+	'@id': `${SITE_URL}/#website`,
 	name: 'Rich Kuo',
 	url: `${SITE_URL}/`,
 	description: site.description,
+	inLanguage: 'en-US',
+	publisher: { '@id': `${SITE_URL}/#person` },
+};
+
+const profilePageJsonLd = {
+	'@type': 'ProfilePage',
+	'@id': `${SITE_URL}/#profilepage`,
+	url: `${SITE_URL}/`,
+	name: 'Rich Kuo — Product Engineer',
+	isPartOf: { '@id': `${SITE_URL}/#website` },
+	about: { '@id': `${SITE_URL}/#person` },
+	mainEntity: { '@id': `${SITE_URL}/#person` },
+	inLanguage: 'en-US',
+};
+
+// Enumerate the LLM Battles series so answer/generative engines can list the
+// full set of bake-offs and cite the individual reports.
+const llmBattlesItemList = {
+	'@type': 'ItemList',
+	'@id': `${SITE_URL}/#llm-battles`,
+	name: 'LLM Battles — AI coding bake-offs',
+	description:
+		'Head-to-head bake-offs scoring frontier AI models (GPT, Claude Opus, GLM, Fable, Composer) on identical real-world coding tasks — cost, speed, review rounds, and code quality.',
+	itemListOrder: 'https://schema.org/ItemListOrderAscending',
+	numberOfItems: llmBattles.length,
+	itemListElement: llmBattles.map((b, i) => ({
+		'@type': 'ListItem',
+		position: i + 1,
+		name: b.title,
+		url: `${SITE_URL}${(b.href ?? '').replace(/index\.html$/, '')}`,
+	})),
+};
+
+const graphJsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [personJsonLd, websiteJsonLd, profilePageJsonLd, llmBattlesItemList],
 };
 ---
 <!DOCTYPE html>
@@ -112,7 +149,7 @@ const websiteJsonLd = {
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Rich Kuo" />
 <meta property="og:title" content={pageTitle} />
-<meta property="og:description" content="Product engineer building creative and technical products." />
+<meta property="og:description" content={metaDescription} />
 <meta property="og:url" content="https://www.richkuo.com/" />
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:width" content="1200" />
@@ -123,11 +160,10 @@ const websiteJsonLd = {
 <meta name="twitter:site" content="@richkuo7" />
 <meta name="twitter:creator" content="@richkuo7" />
 <meta name="twitter:title" content={pageTitle} />
-<meta name="twitter:description" content="Product engineer building creative and technical products." />
+<meta name="twitter:description" content={metaDescription} />
 <meta name="twitter:image" content={ogImage} />
 <meta name="twitter:image:alt" content="Rich Kuo — Product Engineer" />
-<script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
-<script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(graphJsonLd)} />
 
 <script is:inline>
   /* set theme before paint to avoid a flash */

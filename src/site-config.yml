@@ -4,8 +4,22 @@ description: Product engineer building creative and technical products.
 author:
   name: Rich Kuo
   role: Product Engineer
-  bio: I build products.
+  bio: >-
+    Product engineer who ships AI-native products end to end — AI video tooling,
+    autonomous trading bots, and agent infrastructure — and publishes hands-on
+    production guides and head-to-head LLM coding evaluations.
   location: ""
+  knowsAbout:
+    - Artificial intelligence
+    - AI agents
+    - Large language models
+    - LLM evaluation and benchmarking
+    - Agentic coding
+    - Claude Code
+    - Model Context Protocol (MCP)
+    - Autonomous trading bots
+    - AI video generation
+    - Product engineering
 
 social:
   - id: "github"
