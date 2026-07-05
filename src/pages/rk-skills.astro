@@ -1,0 +1,473 @@
+---
+const title = 'rk-skills — Claude Code workflow skills. Idea to reviewed PR, one command.';
+const description =
+	'rk-skills is a set of Claude Code workflow skills that automate GitHub issues, PR review loops, docs syncing, and releases — with loop variants that drive a PR through review until it is approved.';
+const canonical = 'https://www.richkuo.com/rk-skills/';
+const REPO = 'https://github.com/richkuo/rk-skills';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='0' fill='%23141414'/%3E%3Ctext x='50' y='73' font-size='58' font-weight='800' text-anchor='middle' fill='%23d92d0f' font-family='system-ui,sans-serif'%3Erk%3C/text%3E%3C/svg%3E" />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph / Twitter share card -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Rich Kuo" />
+<meta property="og:title" content="rk-skills — Claude Code workflow skills" />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="rk-skills — Claude Code workflow skills" />
+<meta name="twitter:description" content={description} />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&display=swap" rel="stylesheet" />
+
+<style>
+	/* Poster style. One face (Archivo), one red, hard black rules, radius 0. */
+	:root {
+		--bg: #f5f4ef;
+		--ink: #141414;
+		--muted: #55534e;
+		--accent: #d92d0f;
+		--line: #141414;
+		--hairline: #dedcd4;
+		--maxw: 1200px;
+	}
+
+	* { box-sizing: border-box; }
+	html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+
+	body {
+		margin: 0;
+		background: var(--bg);
+		color: var(--ink);
+		font-family: "Archivo", system-ui, -apple-system, sans-serif;
+		font-size: 18px;
+		line-height: 1.55;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+	a { color: var(--ink); }
+	a:focus-visible, button:focus-visible {
+		outline: 3px solid var(--accent);
+		outline-offset: 3px;
+	}
+	code {
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.92em;
+		background: #eceae2;
+		padding: 0.08em 0.35em;
+	}
+
+	/* ---------- Nav ---------- */
+	.nav {
+		position: sticky; top: 0; z-index: 50;
+		background: var(--bg);
+		border-bottom: 2px solid var(--line);
+	}
+	.nav-inner {
+		max-width: var(--maxw); margin: 0 auto; padding: 0 24px;
+		height: 64px; display: flex; align-items: center; gap: 24px;
+	}
+	.brand { font-weight: 900; font-size: 1.15rem; letter-spacing: -0.01em; text-decoration: none; }
+	.brand span { color: var(--accent); }
+	.nav-links { margin-left: auto; display: flex; gap: 24px; }
+	.nav-links a { text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--muted); }
+	.nav-links a:hover { color: var(--ink); }
+	.nav-cta {
+		display: inline-flex; align-items: center; min-height: 42px;
+		background: var(--ink); color: #fff; text-decoration: none;
+		font-weight: 700; font-size: 0.92rem; padding: 8px 20px;
+		transition: background 0.15s ease;
+	}
+	.nav-cta:hover { background: var(--accent); }
+	@media (max-width: 760px) { .nav-links { display: none; } .nav-cta { margin-left: auto; } }
+
+	/* ---------- Hero ---------- */
+	.hero {
+		min-height: calc(100dvh - 66px);
+		display: flex; align-items: center;
+		padding: 48px 0 72px;
+	}
+	.hero h1 {
+		margin: 0 0 30px;
+		font-weight: 800;
+		font-size: clamp(2.2rem, 5.2vw, 4.3rem);
+		line-height: 1.16;
+		letter-spacing: -0.02em;
+	}
+	.hero .period { color: var(--accent); }
+	#skill-word {
+		color: var(--accent);
+		display: inline-block;
+		border-bottom: 4px solid var(--ink);
+		padding-bottom: 0.04em;
+		min-width: 2ch;
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.86em;
+	}
+	.sub {
+		margin: 0 0 40px;
+		font-size: clamp(1.1rem, 1.85vw, 1.32rem);
+		color: var(--muted);
+		max-width: 54ch;
+	}
+	.sub strong { color: var(--ink); font-weight: 600; }
+
+	.cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+	.btn {
+		display: inline-flex; align-items: center; justify-content: center;
+		font-weight: 700; font-size: 1.02rem; text-decoration: none;
+		padding: 15px 30px; border: 2px solid var(--ink);
+		transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease;
+	}
+	.btn:active { transform: translateY(1px); }
+	.btn-primary { background: var(--ink); color: #fff; }
+	.btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+	.btn-ghost { background: transparent; color: var(--ink); }
+	.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+	/* ---------- Sections ---------- */
+	section { padding: 110px 0; border-top: 2px solid var(--line); }
+	.sec-title {
+		margin: 0 0 18px;
+		font-weight: 800;
+		font-size: clamp(1.8rem, 4vw, 3rem);
+		letter-spacing: -0.02em;
+		line-height: 1.05;
+		max-width: 22ch;
+	}
+	.sec-title em { font-style: normal; color: var(--accent); }
+	.sec-sub { margin: 0 0 48px; color: var(--muted); max-width: 58ch; font-size: 1.05rem; }
+
+	/* ---------- Loop diagram ---------- */
+	.loop-strip {
+		display: flex; flex-wrap: wrap; align-items: stretch;
+		border: 2px solid var(--line);
+	}
+	.loop-step {
+		flex: 1 1 0; min-width: 150px;
+		padding: 26px 22px;
+		display: flex; flex-direction: column; gap: 8px;
+	}
+	.loop-step + .loop-step { border-left: 2px solid var(--line); }
+	.loop-step .k {
+		font-size: 0.8rem; font-weight: 800; letter-spacing: 0.18em;
+		text-transform: uppercase; color: var(--accent);
+	}
+	.loop-step .t { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; }
+	.loop-step .d { margin: 0; color: var(--muted); font-size: 0.92rem; }
+	.loop-note { margin: 26px 0 0; color: var(--muted); font-size: 0.95rem; max-width: 60ch; }
+	.loop-note strong { color: var(--ink); }
+	@media (max-width: 900px) {
+		.loop-strip { flex-direction: column; }
+		.loop-step + .loop-step { border-left: 0; border-top: 2px solid var(--line); }
+	}
+
+	/* ---------- Skill rows on hard rules ---------- */
+	.rows { border-top: 2px solid var(--line); }
+	.row {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+		gap: 40px;
+		padding: 44px 0;
+		border-bottom: 2px solid var(--line);
+		align-items: baseline;
+	}
+	.row h3 {
+		margin: 0;
+		font-weight: 800;
+		font-size: clamp(1.4rem, 3vw, 2.2rem);
+		letter-spacing: -0.02em;
+		line-height: 1.1;
+	}
+	.row h3 em { font-style: italic; color: var(--accent); line-height: 1.1; padding-bottom: 2px; }
+	.row p { margin: 0; color: var(--muted); font-size: 1.02rem; max-width: 52ch; }
+	.row p strong { color: var(--ink); font-weight: 600; }
+	.row .skill-list { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+	.skill-pill {
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.82rem; font-weight: 600;
+		border: 2px solid var(--line);
+		padding: 4px 10px;
+		white-space: nowrap;
+	}
+
+	/* ---------- Install grid ---------- */
+	.install-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0;
+		border: 2px solid var(--line);
+	}
+	.way {
+		display: flex; flex-direction: column;
+		padding: 36px 30px;
+		background: var(--bg);
+	}
+	.way + .way { border-left: 2px solid var(--line); }
+	.way--featured { background: var(--ink); color: #f5f4ef; }
+	.way--featured p, .way.way--featured li { color: #cfccc3; }
+	.way--featured p strong, .way.way--featured li strong { color: #f5f4ef; }
+	.way-name {
+		margin: 0 0 14px;
+		font-size: 0.85rem; font-weight: 800;
+		letter-spacing: 0.18em; text-transform: uppercase;
+	}
+	.way--featured .way-name { color: var(--accent); }
+	.way pre {
+		margin: 0 0 18px;
+		padding: 16px;
+		background: #171512; color: #f5f4ef;
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.85rem; line-height: 1.5;
+		overflow-x: auto;
+		white-space: pre;
+	}
+	.way--featured pre { border: 2px solid #3a3835; }
+	.way p { margin: 0 0 18px; color: var(--muted); font-size: 0.95rem; }
+	.way .btn { margin-top: auto; }
+	.way--featured .btn-ghost { color: #f5f4ef; border-color: #f5f4ef; }
+	.way--featured .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+	.install-note { margin: 34px 0 0; color: var(--muted); font-size: 0.95rem; max-width: 62ch; }
+	.install-note strong { color: var(--ink); }
+	.install-note a { font-weight: 600; }
+
+	/* ---------- Footer ---------- */
+	footer { border-top: 2px solid var(--line); padding: 56px 0 64px; }
+	.foot-links { display: flex; flex-wrap: wrap; gap: 22px; margin: 0 0 26px; }
+	.foot-links a { font-weight: 600; font-size: 0.95rem; }
+	.foot-note { margin: 6px 0 0; font-size: 0.85rem; color: var(--muted); max-width: 75ch; }
+
+	/* ---------- Reveal ---------- */
+	.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+	.reveal.is-in { opacity: 1; transform: none; }
+
+	@media (max-width: 760px) {
+		body { font-size: 17px; }
+		section { padding: 80px 0; }
+		.row { grid-template-columns: 1fr; gap: 14px; padding: 34px 0; }
+		.install-grid { grid-template-columns: 1fr; }
+		.way + .way { border-left: 0; border-top: 2px solid var(--line); }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html { scroll-behavior: auto; }
+		.reveal { opacity: 1; transform: none; transition: none; }
+		.btn, .nav-cta { transition: none; }
+	}
+</style>
+</head>
+
+<body>
+	<nav class="nav" aria-label="Primary">
+		<div class="nav-inner">
+			<a class="brand" href="#top">rk<span>-skills</span></a>
+			<div class="nav-links">
+				<a href="#loop">The loop</a>
+				<a href="#skills">The skills</a>
+				<a href="#install">Install</a>
+			</div>
+			<a class="nav-cta" href={REPO} target="_blank" rel="noopener noreferrer">View on GitHub</a>
+		</div>
+	</nav>
+
+	<!-- ============ HERO ============ -->
+	<header class="hero" id="top">
+		<div class="wrap">
+			<h1>
+				From idea to reviewed PR.<br>
+				<span id="skill-word">/new-issue-loop</span><br>
+				<span class="period">Zero babysitting.</span>
+			</h1>
+			<p class="sub">
+				<strong>rk-skills</strong> is a set of workflow skills for Claude Code: file complete GitHub issues, fact-check them against real code, implement them in isolated worktrees, and keep fixing review findings until the pull request is <strong>approved</strong>.
+			</p>
+			<div class="cta-row">
+				<a class="btn btn-primary" href="#install">Install in one command</a>
+				<a class="btn btn-ghost" href={REPO} target="_blank" rel="noopener noreferrer">View on GitHub</a>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<!-- ============ THE LOOP ============ -->
+		<section id="loop">
+			<div class="wrap">
+				<h2 class="sec-title reveal">Every skill does one job. The <em>-loop</em> variants chain them.</h2>
+				<p class="sec-sub reveal">A skill is a reusable instruction file that teaches Claude Code how to do one job well. Base skills do one step and stop. Loop variants keep going on their own — through code review and re-review — until the PR gets an LGTM.</p>
+				<div class="loop-strip reveal">
+					<div class="loop-step">
+						<span class="k">01</span>
+						<span class="t">Validate</span>
+						<p class="d">Fact-check the issue against the real code, with file and line references.</p>
+					</div>
+					<div class="loop-step">
+						<span class="k">02</span>
+						<span class="t">Implement</span>
+						<p class="d">Build the fix in an isolated git worktree; your main checkout stays untouched.</p>
+					</div>
+					<div class="loop-step">
+						<span class="k">03</span>
+						<span class="t">PR + review</span>
+						<p class="d">Open a PR that closes the issue and request an automated review.</p>
+					</div>
+					<div class="loop-step">
+						<span class="k">04</span>
+						<span class="t">Fix findings</span>
+						<p class="d">Re-check each finding against the code — never blind-apply — fix, push, reply point-by-point.</p>
+					</div>
+					<div class="loop-step">
+						<span class="k">05</span>
+						<span class="t">LGTM</span>
+						<p class="d">Repeat until approved. Issue complete.</p>
+					</div>
+				</div>
+				<p class="loop-note">Issues carry a <strong>complexity score</strong> (<code>C0</code>–<code>C100</code>) right in the title — a rough rating of how hard the work is, used to decide when planning gets escalated.</p>
+			</div>
+		</section>
+
+		<!-- ============ SKILLS ============ -->
+		<section id="skills">
+			<div class="wrap">
+				<h2 class="sec-title reveal">Seventeen skills. Four jobs.</h2>
+				<p class="sec-sub reveal">Issues, PR reviews, docs and releases, and Fable-driven planning — each with a base skill and, where it makes sense, a loop that runs to completion.</p>
+				<div class="rows">
+					<div class="row reveal">
+						<div>
+							<h3>Issues that are never <em>stubs</em>.</h3>
+							<div class="skill-list">
+								<span class="skill-pill">new-issue</span>
+								<span class="skill-pill">validate-issue</span>
+								<span class="skill-pill">work-on-issue</span>
+								<span class="skill-pill">+ loop variants</span>
+							</div>
+						</div>
+						<p>Turn a bug, idea, or conversation into a complete GitHub issue — claims checked against the actual code first, complexity-scored, never half-empty. Then validate it, implement it end-to-end, and open the PR.</p>
+					</div>
+					<div class="row reveal">
+						<div>
+							<h3>Reviews get <em>re-checked</em>, not rubber-stamped.</h3>
+							<div class="skill-list">
+								<span class="skill-pill">fix-pr-review</span>
+								<span class="skill-pill">fix-pr-review-loop</span>
+							</div>
+						</div>
+						<p>Reads all unaddressed PR feedback, re-validates every finding against the code — <strong>never blindly applies a suggestion</strong> — fixes what holds up, replies point-by-point, and requests a fresh review. The loop repeats until approval.</p>
+					</div>
+					<div class="row reveal">
+						<div>
+							<h3>Docs and releases that <em>match reality</em>.</h3>
+							<div class="skill-list">
+								<span class="skill-pill">sync-docs</span>
+								<span class="skill-pill">create-release</span>
+								<span class="skill-pill">sync-docs-release</span>
+							</div>
+						</div>
+						<p>Update <code>CLAUDE.md</code>, <code>AGENTS.md</code>, <code>SKILL.md</code>, and <code>README.md</code> to match what recent commits actually changed, then cut a version tag and publish a GitHub release with generated notes — or both in sequence.</p>
+					</div>
+					<div class="row reveal">
+						<div>
+							<h3>Plan with <em>Fable 5</em>. Build with anything.</h3>
+							<div class="skill-list">
+								<span class="skill-pill">fableplan</span>
+								<span class="skill-pill">fable-new-issue</span>
+								<span class="skill-pill">fable-validate</span>
+								<span class="skill-pill">+ loop variants</span>
+							</div>
+						</div>
+						<p>Fable skills hand the high-stakes work — planning, drafting, fact-checking — to a subagent running on the Fable 5 model, while your main session does the building. Loops bring Fable in automatically for issues scored C50+ or touching safety-critical code.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ INSTALL ============ -->
+		<section id="install">
+			<div class="wrap">
+				<h2 class="sec-title reveal">Install in one command.</h2>
+				<p class="sec-sub reveal">Three ways in — pick one. Each skill is just a directory with a <code>SKILL.md</code>, so you can also copy a single one straight from the repo.</p>
+				<div class="install-grid reveal">
+					<div class="way">
+						<p class="way-name">npx</p>
+						<pre>npx rk-skills</pre>
+						<p>Copies every skill into your personal <code>~/.claude/skills/</code>. Add <code>--project</code> to install into the current repo instead. Copy-based — re-run it to update.</p>
+						<a class="btn btn-ghost" href="https://www.npmjs.com/package/rk-skills" target="_blank" rel="noopener noreferrer">View on npm</a>
+					</div>
+					<div class="way way--featured">
+						<p class="way-name">Plugin · Auto-updates</p>
+						<pre>/plugin marketplace add richkuo/rk-skills
+/plugin install rk-skills@rk-skills</pre>
+						<p>The repo is a Claude Code plugin marketplace. Claude Code auto-discovers everything under <code>skills/</code> and keeps it up to date. Restart the session, then trigger any skill by name.</p>
+						<a class="btn btn-ghost" href={REPO} target="_blank" rel="noopener noreferrer">View on GitHub</a>
+					</div>
+					<div class="way">
+						<p class="way-name">Single skill</p>
+						<pre>mkdir -p ~/.claude/skills/work-on-issue &&
+curl -fsSL .../work-on-issue/SKILL.md
+-o ~/.claude/skills/work-on-issue/SKILL.md</pre>
+						<p>Want just one? Copy its <code>SKILL.md</code> directly from the repo — no marketplace, no clone, no dependencies.</p>
+						<a class="btn btn-ghost" href={`${REPO}/tree/main/skills`} target="_blank" rel="noopener noreferrer">Browse the skills</a>
+					</div>
+				</div>
+				<p class="install-note"><strong>Review bot prerequisite:</strong> the PR-review loops need an automated reviewer that answers <code>@claude review</code> comments. The repo ships a ready-made GitHub Actions workflow — copy <a href={`${REPO}/blob/main/templates/claude-review.yml`} target="_blank" rel="noopener noreferrer">templates/claude-review.yml</a> into <code>.github/workflows/</code>, add an <code>ANTHROPIC_API_KEY</code> secret, and the bot and skills speak the same format out of the box.</p>
+			</div>
+		</section>
+	</main>
+
+	<!-- ============ FOOTER ============ -->
+	<footer>
+		<div class="wrap">
+			<div class="foot-links">
+				<a href={REPO} target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href="https://www.npmjs.com/package/rk-skills" target="_blank" rel="noopener noreferrer">npm</a>
+				<a href="/">richkuo.com</a>
+			</div>
+			<p class="foot-note">rk-skills is MIT-licensed and built for Claude Code. It is not affiliated with Anthropic.</p>
+		</div>
+	</footer>
+
+	<script is:inline>
+		(function () {
+			// Rotate the hero skill name through the loop entry points.
+			var SKILLS = [
+				"/new-issue-loop", "/validate-issue-loop", "/work-on-issue-loop",
+				"/fix-pr-review-loop", "/fable-new-issue-loop", "/fableplan",
+				"/sync-docs-release"
+			];
+			var el = document.getElementById("skill-word");
+			var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+			if (el && !reduced) {
+				var i = 0;
+				setInterval(function () {
+					i = (i + 1) % SKILLS.length;
+					el.textContent = SKILLS[i];
+				}, 3000);
+			}
+
+			// Scroll reveals (no library; IntersectionObserver only).
+			if (!reduced && "IntersectionObserver" in window) {
+				var io = new IntersectionObserver(function (entries) {
+					entries.forEach(function (e) {
+						if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+					});
+				}, { threshold: 0.18 });
+				document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+			} else {
+				document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("is-in"); });
+			}
+		})();
+	</script>
+</body>
+</html>

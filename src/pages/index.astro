@@ -28,6 +28,7 @@ const ICONS: Record<string, string> = {
 	search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>',
 	bug: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="6" width="8" height="12" rx="4"/><path d="M8 10H4M8 14H4M16 10h4M16 14h4M9 6l-1-2M15 6l1-2M9 18l-1 2M15 18l1 2"/></svg>',
 	trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/></svg>',
+	skills: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>',
 	plan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M9 3a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H9z"/><path d="M9 12l2 2 4-4"/></svg>',
 };
 
@@ -63,6 +64,7 @@ const resources: Card[] = [
 	{ title: 'MiniMax Web Search MCP Server Setup for OpenClaw', icon: 'search', href: '/openclaw/minimax-websearch-mcp-setup/', desc: "Step-by-step guide to setting up MiniMax's web search MCP server with mcporter for real-time search in OpenClaw agents." },
 	{ title: 'OpenClaw Kimi K2.6 Bugfix', icon: 'bug', href: '/openclaw/kimi-k2-6-bugfix/', desc: 'How to fix Kimi configuration drift in OpenClaw where sessions silently fall back to a different model instead of staying on kimi-k2.6.' },
 	{ title: '/fableplan', icon: 'plan', href: '/fableplan', link: 'https://github.com/richkuo/fableplan', desc: 'Why I plan with Fable 5 and build with Opus or Sonnet: a Claude Code skill that delegates implementation planning to a Fable 5 subagent, then builds from the vetted plan in an isolated git worktree.' },
+	{ title: '/rk-skills', icon: 'skills', href: '/rk-skills', link: 'https://github.com/richkuo/rk-skills', desc: 'Claude Code workflow skills — GitHub issue, PR, and release automation plus Fable-driven planning. Install via npx or as a Claude Code plugin.' },
 ];
 const llmBattles: Card[] = [
 	{ title: 'Bake-off Ep.1 — The First Feature', icon: 'trophy', href: '/reports/issue-844/index.html', img: '/reports/issue-844/og-ai-model-bakeoff.png', desc: 'Four models each build the same trading-bot feature from one spec, scored on cost, speed, review rounds, and code quality. Winner: GPT-5.' },
