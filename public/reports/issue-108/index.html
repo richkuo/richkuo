@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ===== SEO ===== -->
+<title>AI Coding Bake-off Ep. 7: Same Model, Four Brains — Does Thinking Harder Help? (Issue #108)</title>
+<meta name="description" content="One AI model wrote the same video-app feature at three thinking settings — plus a wildcard model set to barely think. Four attempts, one feature: a one-tap Premium button that captions a scene and pops a picture of each spoken noun on screen, with sound effects mixed into the real exported file. Scored, code-checked, and the whole field finished three points apart — with the settings out of order. Explained for non-coders." />
+<meta name="keywords" content="AI coding comparison, Opus 4.8, Fable 5, Anthropic, Claude Code, reasoning effort, thinking budget, extended thinking, LLM benchmark, agentic coding, AI code review, video editing app, SceneCut, Rich Kuo" />
+<meta name="author" content="Rich Kuo" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://www.richkuo.com/reports/issue-108/" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0908" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3ecdd" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Rich Kuo" />
+<meta property="og:title" content="AI Coding Bake-off Ep. 7: Same Model, Four Brains — Does Thinking Harder Help?" />
+<meta property="og:description" content="One model, three thinking settings, plus a wildcard set to barely think — same feature, four attempts, scored head-to-head. The whole field finished three points apart, and the dial did not sort the leaderboard. Who won is at the bottom." />
+<meta property="og:url" content="https://www.richkuo.com/reports/issue-108/" />
+<meta property="og:image" content="https://www.richkuo.com/reports/issue-108/og-issue-108-premium-enhance.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="AI Coding Bake-off Episode 7 — one model at three thinking settings plus a wildcard, scored head-to-head on the same video-app feature" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:author" content="Rich Kuo" />
+<meta property="article:published_time" content="2026-07-05" />
+<meta property="article:modified_time" content="2026-07-05" />
+<meta property="article:section" content="AI &amp; Developer Tools" />
+<meta property="article:tag" content="Opus 4.8" />
+<meta property="article:tag" content="Fable 5" />
+<meta property="article:tag" content="Anthropic" />
+<meta property="article:tag" content="reasoning effort" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@richkuo7" />
+<meta name="twitter:creator" content="@richkuo7" />
+<meta name="twitter:title" content="AI Coding Bake-off Ep. 7: Same Model, Four Brains — Does Thinking Harder Help?" />
+<meta name="twitter:description" content="One model at three thinking settings, plus a wildcard barely trying. Same feature, four attempts, three points across the whole field — and the settings came out of order. The result is at the bottom." />
+<meta name="twitter:image" content="https://www.richkuo.com/reports/issue-108/og-issue-108-premium-enhance.png" />
+<meta name="twitter:image:alt" content="AI Coding Bake-off Episode 7 — one model at three thinking settings plus a wildcard, scored head-to-head" />
+<meta name="twitter:label1" content="Field" />
+<meta name="twitter:data1" content="One model &#215; 3 thinking settings + a wildcard" />
+<meta name="twitter:label2" content="Spread" />
+<meta name="twitter:data2" content="3 points across all four entries" />
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "AI Coding Bake-off Ep. 7: Same Model, Four Brains — Does Thinking Harder Help? (Issue #108)",
+  "description": "One AI model wrote the same video-app feature at three thinking settings — plus a wildcard model set to barely think. Four attempts at a one-tap Premium button that captions a scene and pops a picture of each spoken noun on screen, with sound effects mixed into the real exported file. A scored, code-checked head-to-head where the whole field finished three points apart and the settings came out of order. Explained for non-coders.",
+  "image": "https://www.richkuo.com/reports/issue-108/og-issue-108-premium-enhance.png",
+  "url": "https://www.richkuo.com/reports/issue-108/",
+  "datePublished": "2026-07-05",
+  "dateModified": "2026-07-05",
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true,
+  "author": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "publisher": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.richkuo.com/reports/issue-108/" },
+  "keywords": "AI coding comparison, Opus 4.8, Fable 5, Anthropic, Claude Code, reasoning effort, thinking budget, LLM benchmark, agentic coding, AI code review, video editing app",
+  "articleSection": "AI & Developer Tools",
+  "about": "A scored comparison of four AI coding runs — one model at three reasoning-effort settings plus a second model on its lowest setting — building the same one-tap enhancement feature in a video-editing app, with a disclosed judge conflict of interest that the result clears. Explained for non-coders.",
+  "mentions": [
+    { "@type": "SoftwareApplication", "name": "Opus 4.8", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
+    { "@type": "SoftwareApplication", "name": "Fable 5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } }
+  ]
+}
+</script>
+<!-- ===== /SEO ===== -->
+<script>
+  /* set saved theme before paint to avoid a flash; 'auto' leaves it to the OS */
+  document.documentElement.classList.add('js');
+  (function(){ try { var p = localStorage.getItem('theme-pref');
+    if (p === 'light' || p === 'dark') document.documentElement.setAttribute('data-theme', p);
+  } catch(e){} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Hanken+Grotesk:wght@300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0a0908;
+    --char: #14110d;
+    --char2: #1d1812;
+    --gold: #e3b25a;
+    --gold-soft: #d4a24e;
+    --gold-glow: rgba(227, 178, 90, 0.5);
+    --paper: #f4ede0;
+    --muted: #8c8276;
+    --muted2: #5a544b;
+    --line: rgba(227, 178, 90, 0.16);
+    --track: rgba(255,255,255,0.06);
+    --hairline: rgba(255,255,255,0.05);
+    --grain-opacity: 0.045;
+    --hero-glow: rgba(227,178,90,0.16);
+    --finale-grad: linear-gradient(180deg, #fbecc8, var(--gold) 55%, #b9863a);
+    --scrim: rgba(6,5,4,0.72);
+    /* contestant signatures — an effort ramp inside Anthropic's clay/earth family, plus Fable ivory */
+    --c-xhigh: #cc785c;
+    --c-high: #a95f3f;
+    --c-medium: #d4a27f;
+    --c-fable: #f0eee6;
+  }
+  :root[data-theme="light"] {
+    --black: #f3ecdd;
+    --char: #fbf6ec;
+    --char2: #fffdf7;
+    --gold: #a9762a;
+    --gold-soft: #b88534;
+    --gold-glow: rgba(169, 118, 42, 0.35);
+    --paper: #221c12;
+    --muted: #6a6253;
+    --muted2: #9d9486;
+    --line: rgba(169, 118, 42, 0.22);
+    --track: rgba(34,28,18,0.08);
+    --hairline: rgba(34,28,18,0.08);
+    --grain-opacity: 0.028;
+    --hero-glow: rgba(169,118,42,0.16);
+    --finale-grad: linear-gradient(180deg, #c79a45, #8a5f22 60%, #6d4a1a);
+    --scrim: rgba(60,50,32,0.4);
+    --c-xhigh: #b5664c;
+    --c-high: #8f4e33;
+    --c-medium: #a97a52;
+    --c-fable: #6f6a5f;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --black: #f3ecdd;
+      --char: #fbf6ec;
+      --char2: #fffdf7;
+      --gold: #a9762a;
+      --gold-soft: #b88534;
+      --gold-glow: rgba(169, 118, 42, 0.35);
+      --paper: #221c12;
+      --muted: #6a6253;
+      --muted2: #9d9486;
+      --line: rgba(169, 118, 42, 0.22);
+      --track: rgba(34,28,18,0.08);
+      --hairline: rgba(34,28,18,0.08);
+      --grain-opacity: 0.028;
+      --hero-glow: rgba(169,118,42,0.16);
+      --finale-grad: linear-gradient(180deg, #c79a45, #8a5f22 60%, #6d4a1a);
+      --scrim: rgba(60,50,32,0.4);
+      --c-xhigh: #b5664c;
+      --c-high: #8f4e33;
+      --c-medium: #a97a52;
+      --c-fable: #6f6a5f;
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    background: var(--black); color: var(--paper);
+    font-family: 'Hanken Grotesk', sans-serif; font-weight: 350; line-height: 1.65;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    transition: background-color .45s ease, color .45s ease;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection { background: var(--gold); color: var(--black); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .display { font-family: 'Fraunces', serif; font-weight: 600; line-height: 0.98; letter-spacing: -0.02em; }
+  .serif-it { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; top: -30%; left: 50%; width: 120vw; height: 120vh; transform: translateX(-50%); background: radial-gradient(ellipse 45% 40% at 50% 32%, var(--hero-glow), transparent 60%); pointer-events: none; }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero > .kicker { position: absolute; top: 40px; left: 28px; z-index: 3; }
+  .hero h1 { font-size: clamp(2.2rem, 7vw, 5.5rem); margin: 0.2em 0 0.1em; }
+  .hero h1 em { color: var(--gold); }
+  .hero .sub { max-width: none; font-size: clamp(1.05rem, 2.2vw, 1.4rem); color: var(--muted); margin-top: 1.4rem; }
+  .hero .sub b { color: var(--paper); font-weight: 600; }
+  .scrollcue { position: absolute; bottom: 38px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted2); z-index: 3; animation: bob 2.4s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{transform:translate(-50%,0);opacity:.5} 50%{transform:translate(-50%,8px);opacity:1} }
+
+  section { padding: clamp(80px, 13vh, 160px) 0; position: relative; }
+  .seclabel { display:flex; align-items:center; gap:18px; margin-bottom: 2.6rem; }
+  .seclabel .no { font-family:'Fraunces',serif; font-style:italic; font-size:1.1rem; color:var(--gold); }
+  .seclabel .ln { flex:1; height:1px; background:var(--line); }
+  h2.sec { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 1.4rem; }
+  .lead { font-size: 1.18rem; color: var(--muted); max-width: none; }
+  .lead b { color: var(--paper); font-weight: 600; }
+
+  /* GSAP drives reveals; only hide when JS is active so a no-JS visitor still sees everything */
+  .js .reveal { opacity: 0; transform: translateY(36px); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  .grid3 { display:grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 2rem; }
+  .card { background: linear-gradient(160deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 14px; padding: 28px 26px; position: relative; overflow: hidden; transition: border-color .25s, transform .25s, box-shadow .25s; }
+  .card .tape { position:absolute; top:0; left:0; right:0; height:3px; background: var(--sig, var(--gold)); opacity:.85; }
+  .card .pr { font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.18em; color:var(--muted); }
+  .card h3 { font-family:'Fraunces',serif; font-weight:600; font-size:1.7rem; margin:.3rem 0 .1rem; }
+  .card .label { color:var(--muted); font-size:.92rem; }
+  .card .branch { font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--muted2); margin-top:14px; word-break:break-all; }
+  .card .cdesc { color:var(--muted); font-size:.92rem; margin-top:10px; }
+  .card .cdesc b { color: var(--paper); font-weight: 600; }
+
+  .dial { width: 1em; height: 1em; flex: 0 0 auto; }
+
+  .flow { display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin-top:2rem; }
+  .step { background:var(--char); border:1px solid var(--line); border-radius:12px; padding:22px 20px; position:relative; }
+  .step .n { font-family:'Fraunces',serif; font-style:italic; font-size:2.2rem; color:var(--gold); line-height:1; }
+  .step p { font-size:.92rem; color:var(--muted); margin-top:.6rem; }
+  .step b { color:var(--paper); font-weight:600; }
+  .loopnote { margin-top:1.8rem; padding:18px 22px; border-left:2px solid var(--gold); background: rgba(227,178,90,0.05); border-radius: 0 10px 10px 0; font-size:.98rem; color:var(--muted); }
+  .loopnote b { color:var(--paper); }
+
+  .tbl { width:100%; border-collapse:collapse; margin-top:1.6rem; font-size:.96rem; }
+  .tbl th { text-align:left; font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:500; padding:0 12px 14px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  .tbl td { padding:15px 12px; border-bottom:1px solid var(--hairline); vertical-align:middle; font-variant-numeric: tabular-nums; }
+  .tbl tr:last-child td { border-bottom:none; }
+  .tbl .model { font-weight:600; color:var(--paper); white-space: nowrap; }
+  .tbl .big { font-family:'Fraunces',serif; font-size:1.3rem; }
+  .tbl .num { font-family:'JetBrains Mono',monospace; white-space:nowrap; font-variant-numeric: tabular-nums; }
+
+  .bar { height:8px; border-radius:999px; background:var(--track); overflow:hidden; min-width:90px; }
+  .bar i { display:block; height:100%; border-radius:999px; background: var(--sig, var(--gold)); width:0; transition: width 1.2s cubic-bezier(.16,1,.3,1); }
+
+  .verdict-intro { text-align:center; }
+  .verdict-intro h2 { font-size: clamp(2.4rem, 7vw, 5rem); }
+  .verdict-intro .lead { margin: 1.4rem auto 0; }
+
+  .rank { min-height: 78vh; display:flex; align-items:center; }
+  .rank .inner { width:100%; }
+  .placetag { font-family:'Fraunces',serif; font-style:italic; font-size: clamp(1rem,2.4vw,1.4rem); color: var(--muted); letter-spacing:.02em; }
+  .rankrow { display:grid; grid-template-columns: minmax(0,1fr) auto; gap:30px; align-items:center; margin-top:.4rem; }
+  .rankname { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(2.2rem, 7vw, 4.8rem); line-height:.96; letter-spacing:-.02em; }
+  .rankname .eff { display:inline-block; font-family:'JetBrains Mono',monospace; font-weight:400; font-size:.3em; letter-spacing:.18em; text-transform:uppercase; color:var(--sig,var(--muted)); vertical-align:.55em; margin-left:.5em; white-space:nowrap; }
+  .rankname .sub { display:block; font-family:'Hanken Grotesk',sans-serif; font-style:normal; font-weight:400; font-size: clamp(.9rem,1.6vw,1.05rem); color:var(--muted); letter-spacing:0; margin-top:.7rem; max-width:54ch; line-height:1.55; }
+  .rankname .sub b { color:var(--paper); font-weight:600; }
+  .score { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(4rem, 16vw, 11rem); line-height:.8; letter-spacing:-.04em; color: var(--sig, var(--gold)); text-align:right; font-variant-numeric: tabular-nums; }
+  .score small { font-size:.28em; color:var(--muted); font-weight:400; letter-spacing:0; }
+  .rankrule { height:1px; background:var(--line); margin-top:2.4rem; }
+  .ranklogo { display: inline-flex; align-items:center; gap:10px; margin-bottom: 18px; }
+  .ranklogo .logo { width: 44px; height: 44px; color: var(--sig, var(--gold)); }
+  .ranklogo .dial { width: 30px; height: 30px; color: var(--sig, var(--gold)); opacity:.8; }
+
+  /* Single-winner finale */
+  .finale { min-height: 100vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; padding: clamp(90px,13vh,160px) 0; }
+  .finale::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 50% 42%, rgba(227,178,90,0.22), rgba(227,178,90,0.04) 38%, transparent 64%); opacity:0; transition: opacity 1.6s ease; }
+  .finale.in::before { opacity:1; }
+  .finale .rays { position:absolute; top:42%; left:50%; width:160vmax; height:160vmax; transform: translate(-50%,-50%) scale(.4); opacity:0; background: repeating-conic-gradient(from 0deg, rgba(227,178,90,0.07) 0deg 6deg, transparent 6deg 12deg); transition: opacity 2s ease, transform 2.4s cubic-bezier(.16,1,.3,1); animation: spin 60s linear infinite; pointer-events:none; }
+  .finale.in .rays { opacity:1; transform: translate(-50%,-50%) scale(1); }
+  @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg) scale(1);} }
+  .finale .wrap { position:relative; z-index:2; }
+  .finale .trophy { font-size: clamp(2.4rem,6vw,3.8rem); transform: scale(.4); opacity:0; transition: all 1s cubic-bezier(.34,1.56,.64,1) .2s; }
+  .finale.in .trophy { transform:none; opacity:1; }
+  .finale .crowned { font-family:'JetBrains Mono',monospace; letter-spacing:.4em; text-transform:uppercase; font-size:.8rem; color:var(--gold); margin:1.4rem 0 .2rem; }
+  .finale .winword { font-family:'Fraunces',serif; font-weight:700; font-size: clamp(2.6rem, 9vw, 6rem); line-height:.92; letter-spacing:-.03em; background: var(--finale-grad); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom: .2em; }
+  .wincol { background: linear-gradient(160deg, rgba(227,178,90,0.08), transparent); border:1px solid var(--gold); border-radius:18px; padding: 34px 30px; box-shadow: 0 0 50px rgba(227,178,90,0.10); max-width: 560px; margin: 2.2rem auto 0; }
+  .wincol .winlogo { display:flex; justify-content:center; align-items:center; gap:12px; margin: 2px 0 10px; }
+  .wincol .winlogo .logo { width:48px; height:48px; color:var(--gold); filter: drop-shadow(0 0 24px var(--gold-glow)); }
+  .wincol .winlogo .dial { width:34px; height:34px; color:var(--gold); }
+  .wincol .who { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(1.8rem,4vw,2.4rem); color:var(--paper); }
+  .wincol .org { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:.4rem; }
+  .wincol .pr { font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.12em; margin-top:.5rem; }
+  .wincol .pr a { color:var(--gold); text-decoration:none; border-bottom:1px solid var(--line); transition:border-color .2s; }
+  .wincol .pr a:hover { border-color:var(--gold); }
+  .wincol .badge { display:inline-block; margin-top:1.2rem; font-family:'Fraunces',serif; font-weight:600; font-size:2.4rem; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:.18em .7em; box-shadow: 0 0 36px var(--gold-glow); font-variant-numeric: tabular-nums; }
+  .wincol .badge small { font-size:.36em; color:var(--muted); font-weight:400; }
+  .wincol .descr { margin-top:1rem; color:var(--muted); font-size:.95rem; line-height:1.6; text-align:left; }
+  .wincol .descr b { color:var(--paper); font-weight:600; }
+  .finale .why { max-width: 60ch; margin: 2.4rem auto 0; color: var(--muted); font-size:1.1rem; }
+  .finale .why b { color: var(--paper); font-weight:600; }
+  .caveat { margin-top:2.4rem; font-size:.95rem; color:var(--muted2); max-width:60ch; margin-left:auto; margin-right:auto; }
+  .caveat b { color: var(--muted); }
+  .coi { margin: 2.6rem auto 0; max-width: 64ch; text-align: left; padding: 22px 26px; border: 1px solid rgba(204,120,92,.45); border-left: 3px solid #cc785c; border-radius: 0 12px 12px 0; background: rgba(204,120,92,0.07); font-size: .98rem; color: var(--muted); }
+  .coi b { color: var(--paper); }
+  .coi .coik { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.26em; text-transform:uppercase; color:#cc785c; display:block; margin-bottom:.6rem; }
+
+  footer { padding: 80px 0 100px; text-align:center; color:var(--muted2); font-size:.84rem; }
+  footer .mono { color:var(--muted); }
+
+  .kicker a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .2s, color .2s; }
+  .kicker a:hover { color: var(--paper); border-color: var(--gold); }
+  a.card { text-decoration: none; color: inherit; display: block; }
+  a.card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 18px 50px rgba(0,0,0,.3); }
+  .card .pr { display: inline-flex; align-items: center; gap: 5px; }
+  .card .ar { font-size: .8em; opacity: .5; transition: opacity .2s, color .2s; }
+  a.card:hover .ar { opacity: 1; color: var(--gold); }
+  .srclinks { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; }
+  .srclinks a { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .06em; color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 8px 15px; transition: color .2s, border-color .2s, transform .2s; display: inline-flex; align-items: center; gap: 7px; }
+  .srclinks a:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-1px); }
+  .srclinks a .ar { opacity: .6; }
+
+  .logo { fill: currentColor; flex: 0 0 auto; display: inline-block; }
+  .card h3 { display: flex; align-items: center; gap: 11px; }
+  .card h3 .logo { width: 1.05em; height: 1.05em; color: var(--sig, var(--gold)); }
+  .card h3 .dial { width: .9em; height: .9em; color: var(--sig, var(--gold)); opacity:.85; }
+  .tbl .model .logo { width: 1.05em; height: 1.05em; vertical-align: -0.18em; margin-right: 9px; }
+  .srclinks a .logo { width: 1.05em; height: 1.05em; }
+
+  .controls { position: fixed; top: 16px; right: 16px; z-index: 1000; display: flex; gap: 8px; }
+  .ctrl { display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); background:var(--scrim); border:1px solid var(--line); border-radius:999px; padding:9px 14px; cursor:pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: color .2s, border-color .2s, background .2s, transform .2s; }
+  .ctrl:hover { color:var(--gold); border-color:var(--gold); transform: translateY(-1px); }
+  .ctrl .ico { font-size:.95rem; line-height:1; }
+
+  .modal { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 24px; background: var(--scrim); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s; }
+  .modal.open { opacity: 1; visibility: visible; }
+  .modal-card { width: min(760px, 100%); max-height: 86vh; overflow-y: auto; background: linear-gradient(165deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 18px; padding: 38px 40px 40px; position: relative; box-shadow: 0 40px 120px rgba(0,0,0,.45); transform: translateY(24px) scale(.98); transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .modal.open .modal-card { transform: none; }
+  .modal-card .x { position: absolute; top: 18px; right: 20px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 1.1rem; cursor: pointer; line-height: 1; transition: color .2s, border-color .2s, transform .2s; }
+  .modal-card .x:hover { color: var(--gold); border-color: var(--gold); transform: rotate(90deg); }
+  .modal-card .mkick { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); }
+  .modal-card h3 { font-family:'Fraunces',serif; font-weight:600; font-size:1.9rem; margin:.5rem 0 .3rem; }
+  .modal-card .msub { color: var(--muted); font-size:.95rem; margin-bottom: 1.6rem; }
+  .prompt-box { font-family:'JetBrains Mono',monospace; font-size:.84rem; line-height:1.75; color: var(--paper); white-space: pre-wrap; word-break: break-word; background: var(--track); border:1px solid var(--line); border-left:2px solid var(--gold); border-radius: 0 12px 12px 0; padding: 22px 24px; }
+  .prompt-box a { color: var(--gold); }
+  .modal-note { margin-top: 1.6rem; font-size:.84rem; color: var(--muted2); line-height:1.6; }
+  .modal-note .mono { color: var(--muted); }
+
+  .byline { font-family:'Fraunces',serif; font-style:italic; font-size:1.15rem; color:var(--paper); margin-top:42px; }
+  .byline b { font-style:normal; font-weight:600; }
+  .socials { display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin-top:18px; }
+  .socials a { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:8px 15px; transition:color .2s, border-color .2s, transform .2s, background .2s; }
+  .socials a:hover { color:var(--black); background:var(--gold); border-color:var(--gold); transform:translateY(-2px); }
+
+  .hero-title-row { display: flex; align-items: center; gap: 40px; margin-top: 0.2em; width: fit-content; margin-left: auto; margin-right: auto; }
+  .logo-battle { position: relative; width: 140px; height: 375px; flex-shrink: 0; overflow: visible; }
+  .logo-battle::before { content: ""; position: absolute; left: 50%; top: 49px; width: 160px; height: 160px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, var(--gold-glow), transparent 70%); opacity: .5; pointer-events: none; }
+  .lb { position: absolute; left: 29px; top: 0; width: 82px; height: 82px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: var(--char2); border: 1px solid var(--line); will-change: transform; }
+  .lb svg.logo { width: 40px; height: 40px; }
+  .lb svg.dial { width: 18px; height: 18px; opacity: .85; }
+  .lb-xhigh  { color: var(--c-xhigh); }
+  .lb-high   { color: var(--c-high);   top: 90px; }   /* static fallback stack (no JS) */
+  .lb-medium { color: var(--c-medium); top: 180px; }
+  .lb-fable  { color: var(--c-fable);  top: 270px; }
+  .js .lb { top: 0; }   /* with JS, GSAP positions all four from a common origin via transforms */
+
+  @media (max-width: 720px) {
+    .grid3, .flow { grid-template-columns: 1fr; }
+    .rankrow { grid-template-columns: 1fr; gap: 8px; }
+    .score { text-align:left; }
+    .hero .sub { max-width: none; }
+    .hero-title-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .tbl, .tbl tbody { display: block; table-layout: auto; }
+    .tbl thead { display: none; }
+    .tbl tr { display: block; border: 1px solid var(--line); border-radius: 14px; padding: 6px 16px 14px; margin-bottom: 14px; }
+    .tbl td { display: block; border: none; border-top: 1px solid var(--hairline); padding: 9px 0; white-space: normal; width: auto !important; text-align: left; }
+    .tbl td:first-child { border-top: none; }
+    .tbl td::before { content: ""; display: block; color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
+    .difftbl td:nth-child(2)::before { content: "Lines changed"; }
+    .difftbl td:nth-child(3)::before { content: "Files"; }
+    .difftbl td:nth-child(4)::before { content: "First review"; }
+    .tbl td.model { font-size: 1.2rem; font-weight: 600; padding-top: 6px; }
+    .tbl td.model::before { content: none; }
+    .tbl .bar { display: none; }
+    .tbl td.num { white-space: normal; }
+    .tbl td.num.big { font-size: 1.1rem; }
+  }
+
+  .sumgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 2rem; }
+  .sumcard { background: linear-gradient(160deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .sumcard.win { border-color: var(--gold); box-shadow: 0 0 36px rgba(227,178,90,0.10); }
+  .sumcard .stape { height: 3px; background: var(--sig, var(--gold)); opacity: .85; }
+  .sumcard .sbody { padding: 18px 20px 12px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+  .sumcard .sbody-left { min-width: 0; }
+  .sumcard .sbody-right { text-align: right; flex-shrink: 0; }
+  .sumcard .sbody-right .slbl { text-align: right; }
+  .sumcard .sco { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--sig, var(--gold)); opacity: .7; }
+  .sumcard .sname { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.35rem; margin: .2rem 0 0; color: var(--paper); display: flex; align-items: center; gap: 8px; }
+  .sumcard .sname .logo { width: .85em; height: .85em; color: var(--sig, var(--gold)); flex-shrink: 0; }
+  .sumcard .sname .dial { width: .8em; height: .8em; color: var(--sig, var(--gold)); flex-shrink: 0; opacity:.85; }
+  .sumcard .stag { display:inline-block; margin-top:6px; font-family:'JetBrains Mono',monospace; font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:2px 8px; }
+  .sumcard .srow { border-top: 1px solid var(--hairline); padding: 9px 20px; }
+  .sumcard .srow-split { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .sumcard .slbl { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sig, var(--gold)); margin-bottom: 3px; }
+  .sumcard .sval { font-size: .94rem; color: var(--paper); font-variant-numeric: tabular-nums; }
+  .sumcard .sval.muted { color: var(--muted); font-size: .82rem; }
+  .sumcard .sval.big-score { font-family: 'Fraunces', serif; font-weight: 600; font-size: 2rem; color: var(--sig, var(--gold)); line-height: 1; padding-bottom: 4px; }
+  .sumcard .sval.big-score small { font-size: .38em; color: var(--muted); font-weight: 400; }
+  @media (max-width: 720px) { .sumgrid { grid-template-columns: 1fr; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1 !important; transform:none !important; transition:none; }
+    .finale .rays { animation:none; }
+    .scrollcue { animation:none; }
+    html { scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BRAND LOGO SPRITE -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="logo-anthropic" viewBox="0 0 24 24"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></symbol>
+  <symbol id="dial-low" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 16 A 8.5 8.5 0 1 1 20 16"/><line x1="12" y1="14.5" x2="12" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" transform="rotate(-60 12 14.5)"/></symbol>
+  <symbol id="dial-medium" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 16 A 8.5 8.5 0 1 1 20 16"/><line x1="12" y1="14.5" x2="12" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" transform="rotate(-20 12 14.5)"/></symbol>
+  <symbol id="dial-high" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 16 A 8.5 8.5 0 1 1 20 16"/><line x1="12" y1="14.5" x2="12" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" transform="rotate(20 12 14.5)"/></symbol>
+  <symbol id="dial-xhigh" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 16 A 8.5 8.5 0 1 1 20 16"/><line x1="12" y1="14.5" x2="12" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" transform="rotate(60 12 14.5)"/></symbol>
+</svg>
+
+<!-- FLOATING CONTROLS -->
+<div class="controls">
+  <button class="ctrl" id="promptBtn" aria-label="View the assignment"><span class="ico">&#10077;</span><span>The brief</span></button>
+  <button class="ctrl" id="themeToggle" aria-label="Toggle color theme"><span class="ico" id="themeIco">&#128421;&#65039;</span><span id="themeLbl">Auto</span></button>
+</div>
+
+<!-- BRIEF MODAL -->
+<div class="modal" id="promptModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="promptTitle">
+  <div class="modal-card">
+    <button class="x" id="promptClose" aria-label="Close">&#10005;</button>
+    <div class="mkick">The brief</div>
+    <h3 id="promptTitle">The assignment</h3>
+    <div class="msub">What each run had to build — issue #108, in plain English.</div>
+    <div class="prompt-box">The job (<a href="https://github.com/richkuo/scene-cut-ai/issues/108" target="_blank" rel="noopener">issue #108</a>): SceneCut is a video-editing app. Build a one-tap "Premium" button: press it once and the app captions your scene, finds the nouns in what's being said, and pops a picture of each noun on screen exactly while that word is spoken. Each picture lands at a random spot in the prime area of the frame — the upper two-thirds, away from the edges — and gets a sound effect when it appears (and, optionally, when it disappears).
+
+The trap: those sound effects have to be mixed into the REAL exported video — the file you actually share — not just the in-app preview. The export pipeline is the most delicate machinery in the app, with caching rules that decide when old rendered footage can be reused. Wire a sound through the wrong path and it plays in the preview, then silently vanishes from the exported file. The task spelled this out and demanded the real path.
+
+Eight requirements total, checked one by one against the code.</div>
+    <p class="modal-note">&#9998; <b>Who's who.</b> Four separate runs from the same starting code: <span class="mono">#110</span> = Opus 4.8 with its thinking dial at maximum ("xhigh"), <span class="mono">#112</span> = Opus 4.8 on high, <span class="mono">#111</span> = Opus 4.8 on medium (run through a plan-first workflow), <span class="mono">#109</span> = Fable 5 — Anthropic's newest model — deliberately set to barely think ("low"). More thinking costs more time and money; this episode tests what it actually buys.</p>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="kicker reveal in"><a href="https://github.com/richkuo/scene-cut-ai/issues/108" target="_blank" rel="noopener">SceneCut&nbsp;AI · Issue&nbsp;#108</a> · Bake-off Episode&nbsp;7</div>
+  <div class="wrap">
+    <div class="hero-title-row reveal in d1">
+      <div class="logo-battle" aria-hidden="true">
+        <div class="lb lb-xhigh"><svg class="logo"><use href="#logo-anthropic"/></svg><svg class="dial"><use href="#dial-xhigh"/></svg></div>
+        <div class="lb lb-high"><svg class="logo"><use href="#logo-anthropic"/></svg><svg class="dial"><use href="#dial-high"/></svg></div>
+        <div class="lb lb-medium"><svg class="logo"><use href="#logo-anthropic"/></svg><svg class="dial"><use href="#dial-medium"/></svg></div>
+        <div class="lb lb-fable"><svg class="logo"><use href="#logo-anthropic"/></svg><svg class="dial"><use href="#dial-low"/></svg></div>
+      </div>
+      <h1 class="display">Same model.<br />Four brains.<br /><em>Does thinking harder help?</em></h1>
+    </div>
+    <p class="sub reveal in d2"><b>One feature, written four times.</b> AI coding models have a dial for how long they think before they write — and that thinking costs time and money. I ran the same job through <b>Opus 4.8 at three thinking settings</b>, plus a wildcard: <b>Fable 5, Anthropic's newest model, deliberately set to barely think.</b> Same starting code, same checklist of eight requirements. I checked every line of all four.</p>
+    <p class="sub serif-it reveal in d3" style="color:var(--gold);font-size:1.15rem;margin-top:1.8rem;text-align:center;">The scores are at the bottom. So is the part I didn't expect.</p>
+  </div>
+  <div class="scrollcue">scroll &#8595;</div>
+</header>
+
+<main>
+
+<!-- i. THE ASSIGNMENT -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">i.</span><span>The assignment</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">One tap, and the video decorates itself.</h2>
+    <p class="lead reveal d1"><b style="color:var(--gold)">In plain English</b> — SceneCut is a video-editing app I'm building. The feature I asked for is a one-tap <b>"Premium" button</b>: press it once and the app captions your scene, finds the <b>nouns</b> in what's being said, and pops a <b>picture of each noun</b> on screen exactly while that word is spoken. Each picture lands at a random spot in the prime area of the frame — the upper two-thirds, away from the edges — and gets a <b>sound effect</b> when it appears (and, optionally, when it disappears). Say "I bought a guitar in Tokyo" and a guitar and a skyline pop up, right on cue, with a little <i>fwip</i>. Eight requirements, checked one by one. Easy on paper. There's a reason it isn't.</p>
+    <div class="srclinks reveal d2" style="justify-content:center;margin-top:28px">
+      <a href="https://github.com/richkuo/scene-cut-ai/issues/108" target="_blank" rel="noopener">Read the full issue #108 on GitHub <span class="ar">&#8599;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ii. THE EXPORT TRAP -->
+<section style="background:linear-gradient(180deg,transparent,rgba(204,120,92,0.04),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">ii.</span><span>The export trap</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">It plays in the preview. Then it vanishes.</h2>
+    <p class="lead reveal d1">Here's the trap. Those sound effects have to be mixed into the <b>real exported video</b> — the file you actually share — not just the in-app preview. The export pipeline is the most delicate machinery in the app, with <b>caching rules</b> that decide when old rendered footage can be reused instead of rebuilt (rendering video is the slow part, so the app avoids redoing it). Wire a sound effect through the wrong path and it plays fine in the preview, then <b>silently disappears from the exported file.</b> No crash. No error. Your viewer just never hears it. The task named this trap out loud and demanded the real path — plus one subtle rule: swapping a <i>sound</i> (an audio change) must never trick the app into re-rendering the <i>picture</i>. So the real question wasn't "can you build the button." It was <b>"can you push audio through the app's most delicate machinery without breaking what makes it fast."</b></p>
+    <div class="loopnote reveal d1" style="border-left-color:#cc785c;background:rgba(204,120,92,0.06);">&#9888;&#65039; <b>The trap.</b> The failure mode makes no noise — literally. The sound plays in preview, the export looks done, and the shared file is missing audio. The only proof is reading the code and confirming the sound goes through the real export mix.</div>
+  </div>
+</section>
+
+<!-- iii. THE CONTENDERS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">iii.</span><span>The contenders</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Three dials of Opus. One lazy wildcard.</h2>
+    <p class="lead reveal d1">This episode is mostly <b>one model racing itself.</b> Each entry is a <b>"PR"</b> — short for pull request, a proposed batch of code changes submitted for review. Four separate runs, same starting code, same instructions; the only thing that changes is the thinking dial. Click a card to see the real one.</p>
+    <div class="grid3">
+      <a class="card reveal" href="https://github.com/richkuo/scene-cut-ai/pull/110" target="_blank" rel="noopener" style="--sig:var(--c-xhigh)">
+        <div class="tape"></div>
+        <div class="label">Anthropic · Claude Code · dial at maximum</div>
+        <h3><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <svg class="dial" aria-hidden="true"><use href="#dial-xhigh"/></svg></h3>
+        <div class="cdesc"><b>Thinking hardest.</b> The "xhigh" setting — maximum reasoning budget, the most expensive way to run the model.</div>
+        <div class="pr">PR #110 <span class="ar">&#8599;</span></div>
+        <div class="branch">cc/issue-108-premium-opus</div>
+      </a>
+      <a class="card reveal d1" href="https://github.com/richkuo/scene-cut-ai/pull/112" target="_blank" rel="noopener" style="--sig:var(--c-high)">
+        <div class="tape"></div>
+        <div class="label">Anthropic · Claude Code · dial at high</div>
+        <h3><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <svg class="dial" aria-hidden="true"><use href="#dial-high"/></svg></h3>
+        <div class="cdesc"><b>Thinking hard.</b> One notch down from maximum — still a heavyweight setting.</div>
+        <div class="pr">PR #112 <span class="ar">&#8599;</span></div>
+        <div class="branch">cc/issue-108-premium-enhance-flow</div>
+      </a>
+      <a class="card reveal d2" href="https://github.com/richkuo/scene-cut-ai/pull/111" target="_blank" rel="noopener" style="--sig:var(--c-medium)">
+        <div class="tape"></div>
+        <div class="label">Anthropic · plan-first workflow · dial at medium</div>
+        <h3><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <svg class="dial" aria-hidden="true"><use href="#dial-medium"/></svg></h3>
+        <div class="cdesc"><b>The everyday setting.</b> Standard thinking, run through a plan-first workflow that designs before it writes.</div>
+        <div class="pr">PR #111 <span class="ar">&#8599;</span></div>
+        <div class="branch">cc/issue-108-premium-noun-images</div>
+      </a>
+      <a class="card reveal d3" href="https://github.com/richkuo/scene-cut-ai/pull/109" target="_blank" rel="noopener" style="--sig:var(--c-fable)">
+        <div class="tape"></div>
+        <div class="label">Anthropic · Claude Code · dial at low · debut &#9733;</div>
+        <h3><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Fable 5 <svg class="dial" aria-hidden="true"><use href="#dial-low"/></svg></h3>
+        <div class="cdesc"><b>Barely trying.</b> Anthropic's newest, most capable model, deliberately set to its lowest thinking setting. The wildcard.</div>
+        <div class="pr">PR #109 <span class="ar">&#8599;</span></div>
+        <div class="branch">cc/issue-108-premium-auto-enhance</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- iv. METHODOLOGY -->
+<section style="background:linear-gradient(180deg,transparent,rgba(227,178,90,0.025),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">iv.</span><span>How they were judged</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Four separate reviews. Every claim checked.</h2>
+    <p class="lead reveal d1">Each entry got its <b>own blind reviewer</b>, walled off from the other three so nobody was swayed by a rival's work. Each reviewer pulled up the actual code, checked all <b>eight requirements</b> against what the code really does — pointing to the exact lines as proof — <b>re-ran the automated tests</b> itself, and fact-checked every claim in the entry's own write-up. Claiming something the code doesn't do is a major penalty. Score out of 100.</p>
+    <div class="flow">
+      <div class="step reveal"><div class="n">01</div><p><b>Read the task.</b> List the eight requirements, and the export trap it warned about.</p></div>
+      <div class="step reveal d1"><div class="n">02</div><p><b>Pull up the real code.</b> Check every claim against what the code actually does, line by line.</p></div>
+      <div class="step reveal d2"><div class="n">03</div><p><b>Re-run the tests.</b> From scratch — never trust the "all passing" badge on the submission.</p></div>
+      <div class="step reveal d3"><div class="n">04</div><p><b>Score out of 100</b> against the checklist. Report every miss, with proof.</p></div>
+    </div>
+    <div class="loopnote reveal">&#9881;&#65039; <b>A note on the judge — said out loud.</b> The reviewers all ran on <b>Fable 5</b> — and Fable 5 is <b>also a contestant</b> in this bake-off. Hold that thought. I'll put the receipts next to the result at the bottom — judge for yourself there.</div>
+  </div>
+</section>
+
+<!-- v. REVIEW ROUNDS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">v.</span><span>The review rounds</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Three passed on the first try. One was sent back.</h2>
+    <p class="lead reveal d1">Before any scoring, each entry went through a standard code review — the same gate any human engineer's work goes through. <b>Three of the four were approved on their first pass.</b> One was rejected and <b>sent back for fixes</b>, needing a repair round before it got through. I'm not telling you which one yet. What I can tell you: everyone cleared the hard parts. <b>All four wired the sound effects through the real export mix</b> — the exact trap the task warned about. All four got the placement math right, down to accounting for each image's width so it never pokes past the frame's safe zone. All four protected the caching rules, so an audio swap never forces a picture re-render. And all four wrote honest write-ups — my reviewers went hunting for inflated claims and found <b>zero fabrications</b> across the field. Which entry got sent back, and whether it recovered? That's at the bottom. It's the strangest part of the whole result.</p>
+  </div>
+</section>
+
+<!-- vi. THE PAPER TRAIL -->
+<section style="background:linear-gradient(180deg,transparent,rgba(227,178,90,0.025),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">vi.</span><span>The paper trail</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">How much code did each brain write?</h2>
+    <p class="lead reveal d1">A quiet aside before the verdict — <b>code volume is never part of the score</b>, but hold these numbers in your head. The run set to think the <i>least</i> shipped the <b>smallest</b> change of the field. The everyday setting shipped the <b>biggest</b> — 354 lines more than the smallest.</p>
+    <table class="tbl difftbl reveal d1">
+      <thead><tr><th>Entry</th><th>Lines changed</th><th>Files</th><th>First review</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-fable)" aria-hidden="true"><use href="#logo-anthropic"/></svg>Fable 5 · low</td>
+          <td class="num big">+1011 / &#8722;3<div class="bar" style="--sig:var(--c-fable);margin-top:8px"><i data-w="74"></i></div></td>
+          <td class="num">11</td>
+          <td class="num" style="color:var(--muted)">&#8212;</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-xhigh)" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 · xhigh</td>
+          <td class="num big">+1078 / &#8722;3<div class="bar" style="--sig:var(--c-xhigh);margin-top:8px"><i data-w="79"></i></div></td>
+          <td class="num">11</td>
+          <td class="num" style="color:var(--muted)">&#8212;</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-high)" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 · high</td>
+          <td class="num big">+1127 / &#8722;0<div class="bar" style="--sig:var(--c-high);margin-top:8px"><i data-w="83"></i></div></td>
+          <td class="num">11</td>
+          <td class="num" style="color:var(--muted)">&#8212;</td>
+        </tr>
+        <tr>
+          <td class="model"><svg class="logo" style="color:var(--c-medium)" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 · medium</td>
+          <td class="num big">+1365 / &#8722;8<div class="bar" style="--sig:var(--c-medium);margin-top:8px"><i data-w="100"></i></div></td>
+          <td class="num">15 <span style="color:var(--muted2)">(most)</span></td>
+          <td class="num" style="color:var(--muted)">&#8212;</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="loopnote reveal">&#128208; <b>Side note.</b> Who got approved first pass — and who didn't — lands at the bottom, next to the scores.</div>
+  </div>
+</section>
+
+<!-- VERDICT INTRO -->
+<section class="verdict-intro">
+  <div class="wrap">
+    <div class="kicker reveal">The reckoning</div>
+    <h2 class="display reveal d1">So what did<br /><span class="serif-it" style="color:var(--gold)">thinking harder</span> buy?</h2>
+    <p class="lead reveal d2">All four were scored against the task's eight requirements — every claim checked against the real code, all tests re-run. Three points cover the whole field, and the order is the story.</p>
+    <p class="lead serif-it reveal d3" style="margin-top:1.6rem;color:var(--muted2)">Counting down, from fourth place&#8230;</p>
+  </div>
+</section>
+
+<!-- RANK 4 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">&#8212; Fourth place &#8212;</div>
+      <div class="rankrow" style="--sig:var(--c-high)">
+        <div>
+          <span class="ranklogo"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg><svg class="dial" aria-hidden="true"><use href="#dial-high"/></svg></span>
+          <div class="rankname">Opus 4.8<span class="eff">high</span>
+            <span class="sub">Yes — <b>high effort came last.</b> The run itself is solid: sound wired through the real export mix, placement math correct, honest write-up. Three things kept it here. On scenes with <b>multiple clips it only reads the first one</b>, so later nouns never get pictures. A half-second minimum keeps each picture up <b>past short words</b> instead of matching the word exactly. And the picture-sourcing piece shipped as a <b>placeholder</b> — a colored square where the real image should be.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="90">90</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANK 3 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">&#8212; Third place &#8212;</div>
+      <div class="rankrow" style="--sig:var(--c-fable)">
+        <div>
+          <span class="ranklogo"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg><svg class="dial" aria-hidden="true"><use href="#dial-low"/></svg></span>
+          <div class="rankname">Fable 5<span class="eff">low &#9733;</span>
+            <span class="sub">The wildcard, <b>barely trying, beat Opus on high</b> — in the smallest change of the whole field. Full transcription, real export mix, clean placement. What kept it here: a 1.2-second minimum display time <b>stretches pictures past the word</b> being spoken (a soft bend of one requirement, not a break), and on multi-clip scenes the appear-sound <b>fires only once</b>. Its write-up also miscounted one small check result — the only smudge my reviewers found on it.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="91">91</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANK 2 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">&#8212; Second place &#8212;</div>
+      <div class="rankrow" style="--sig:var(--c-medium)">
+        <div>
+          <span class="ranklogo"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg><svg class="dial" aria-hidden="true"><use href="#dial-medium"/></svg></span>
+          <div class="rankname">Opus 4.8<span class="eff">medium</span>
+            <span class="sub"><b>The everyday setting beat the high one.</b> All eight requirements met, and the field's <b>best work on the caching rules</b> — the machinery that keeps exports fast — bought with the biggest change of the bake-off. What kept it from the top: it never <b>verified the export on a real device</b>, and it rebuilt the sound-picker from scratch instead of reusing the one the app already had.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="92">92</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINALE -->
+<section class="finale" id="finale">
+  <div class="rays" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="trophy" aria-hidden="true">&#127942;</div>
+    <div class="crowned">&#8212; First place &#8212;</div>
+    <div class="winword">Maximum thinking wins.<br />Barely.</div>
+    <p class="lead" style="max-width:54ch;margin:.4rem auto 0;color:var(--muted)">The dial's top setting takes it at <b style="color:var(--paper)">93</b> — two points above the wildcard that barely tried.</p>
+    <div class="wincol">
+      <div class="winlogo"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg><svg class="dial" aria-hidden="true"><use href="#dial-xhigh"/></svg></div>
+      <div class="who">Opus 4.8 &#183; xhigh</div>
+      <div class="org">Anthropic &#183; Claude Code &#183; dial at maximum</div>
+      <div class="pr"><a href="https://github.com/richkuo/scene-cut-ai/pull/110" target="_blank" rel="noopener">PR #110 &#8599;</a></div>
+      <div class="badge"><span class="count" data-to="93">93</span><small>&nbsp;/100</small></div>
+      <p class="descr"><b>The deepest correctness work in the field.</b> All eight requirements met, plus the things nobody asked for by name: handling a cancelled run cleanly mid-generation, checking the user's credit balance <i>before</i> spending it, surviving a partial failure without corrupting the scene. <b>Twelve new automated tests.</b> Its soft spots are small — a simplified sound-timing model on multi-clip scenes, and no verification on a physical device.</p>
+    </div>
+    <p class="why">And now the twist from section v: the winner was <b>the only entry sent back for fixes.</b> The other three — including the wildcard that barely tried — sailed through review on their first pass. Maximum thinking produced the best final code <i>and</i> the only first-draft rejection. The review caught real problems, the repair round fixed them, and the repaired version is what won — the 93 is earned. But on first drafts, the laziest run shipped the cleaner one.</p>
+    <div class="coi">
+      <span class="coik">&#9878;&#65039; About the judge &#8212; read before trusting the result</span>
+      <b>I judge with Fable 5. Fable 5 was also a contestant.</b> Here's why that runs <i>against</i> me this time: Fable 5's entry placed <b>third, at 91</b> — the judge did not crown itself. Extra safeguards: each entry got its own separate blind reviewer, so no reviewer ever compared its own model's work against a rival's. And little of this is a matter of taste — either the sound goes through the real export mix, or it doesn't; either the tests pass when re-run, or they don't. Pull up the code and check.
+    </div>
+    <p class="caveat">The headline isn't who won — it's that <b>four brains finished three points apart</b>, with the settings out of order: medium beat high, high came last, and maximum thinking beat barely-trying by two points. If you're paying for the top of the dial on every task, this test says the everyday setting gets you within a couple points of the same answer.</p>
+  </div>
+</section>
+
+<!-- SUMMARY CARDS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">&#10022;</span><span>Summary</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">All four, at a glance.</h2>
+    <div class="sumgrid">
+
+      <div class="sumcard win reveal" style="--sig:var(--c-xhigh)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic &#183; Claude Code</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <svg class="dial" aria-hidden="true"><use href="#dial-xhigh"/></svg></div>
+            <span class="stag">Winner</span>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="93">93</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">Thinking</div><div class="sval">xhigh (maximum)</div></div><div style="text-align:right"><div class="slbl">Review rounds</div><div class="sval">1 &#8212; the only one sent back</div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Deepest correctness work &#183; 12 new tests &#183; only first-draft rejection &#183; <span style="color:var(--muted2)">+1078 / &#8722;3 across 11 files</span></div></div>
+      </div>
+
+      <div class="sumcard reveal d1" style="--sig:var(--c-medium)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic &#183; plan-first workflow</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <svg class="dial" aria-hidden="true"><use href="#dial-medium"/></svg></div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="92">92</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">Thinking</div><div class="sval">medium (everyday)</div></div><div style="text-align:right"><div class="slbl">Review rounds</div><div class="sval">0 &#8212; first-pass approval</div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Best caching work &#183; biggest change of the field &#183; no on-device export check &#183; <span style="color:var(--muted2)">+1365 / &#8722;8 across 15 files</span></div></div>
+      </div>
+
+      <div class="sumcard reveal d2" style="--sig:var(--c-fable)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic &#183; Claude Code &#183; debut &#9733;</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Fable 5 <svg class="dial" aria-hidden="true"><use href="#dial-low"/></svg></div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="91">91</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">Thinking</div><div class="sval">low (barely trying)</div></div><div style="text-align:right"><div class="slbl">Review rounds</div><div class="sval">0 &#8212; first-pass approval</div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Smallest change &#183; beat Opus-high &#183; pictures linger past their word &#183; single-fire sound on multi-clip scenes &#183; <span style="color:var(--muted2)">+1011 / &#8722;3 across 11 files</span></div></div>
+      </div>
+
+      <div class="sumcard reveal d3" style="--sig:var(--c-high)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic &#183; Claude Code</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <svg class="dial" aria-hidden="true"><use href="#dial-high"/></svg></div>
+          </div>
+          <div class="sbody-right">
+            <div class="slbl">Score</div>
+            <div class="sval big-score"><span class="count" data-to="90">90</span><small> /100</small></div>
+          </div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">Thinking</div><div class="sval">high</div></div><div style="text-align:right"><div class="slbl">Review rounds</div><div class="sval">0 &#8212; first-pass approval</div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Last place at high effort &#183; first-clip-only transcription &#183; picture sourcing left as a placeholder &#183; <span style="color:var(--muted2)">+1127 / &#8722;0 across 11 files</span></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EPILOGUE -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">&#10022;</span><span>Epilogue &#8212; what shipped</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Nothing's merged &#8212; yet.</h2>
+    <p class="lead reveal d1">As of scoring, none of the four entries has been merged in. All four (<a href="https://github.com/richkuo/scene-cut-ai/pull/109" target="_blank" rel="noopener" style="color:var(--gold)">#109</a>, <a href="https://github.com/richkuo/scene-cut-ai/pull/110" target="_blank" rel="noopener" style="color:var(--gold)">#110</a>, <a href="https://github.com/richkuo/scene-cut-ai/pull/111" target="_blank" rel="noopener" style="color:var(--gold)">#111</a>, <a href="https://github.com/richkuo/scene-cut-ai/pull/112" target="_blank" rel="noopener" style="color:var(--gold)">#112</a>) sit side by side on the open issue. The one genuinely unresolved question is a product decision, not a code one: <b>where should the noun pictures come from</b> — AI-generated images, or a stock-photo search? That call is still pending, and every entry built the feature so either answer can plug in later.</p>
+    <div class="srclinks reveal d2" style="justify-content:flex-start;margin-top:24px">
+      <a href="https://github.com/richkuo/scene-cut-ai/issues/108" target="_blank" rel="noopener">Issue #108 (open) <span class="ar">&#8599;</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="srclinks">
+    <a href="https://github.com/richkuo/scene-cut-ai" target="_blank" rel="noopener">scene-cut-ai repo <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/scene-cut-ai/issues/108" target="_blank" rel="noopener">Issue #108 <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/scene-cut-ai/pull/110" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-xhigh)" aria-hidden="true"><use href="#logo-anthropic"/></svg>PR #110 &#183; Opus 4.8 xhigh <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/scene-cut-ai/pull/111" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-medium)" aria-hidden="true"><use href="#logo-anthropic"/></svg>PR #111 &#183; Opus 4.8 medium <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/scene-cut-ai/pull/109" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-fable)" aria-hidden="true"><use href="#logo-anthropic"/></svg>PR #109 &#183; Fable 5 low <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/scene-cut-ai/pull/112" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-high)" aria-hidden="true"><use href="#logo-anthropic"/></svg>PR #112 &#183; Opus 4.8 high <span class="ar">&#8599;</span></a>
+  </div>
+  <div class="byline">by <b>Rich Kuo</b> &#8212; product engineer building creative &amp; technical products</div>
+  <div class="socials">
+    <a href="https://www.richkuo.com" target="_blank" rel="noopener">Newsletter</a>
+    <a href="https://github.com/richkuo" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/richkuo" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://youtube.com/@richkuo7" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/richkuo7" target="_blank" rel="noopener">X</a>
+    <a href="https://tiktok.com/@rich_kuo1" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://instagram.com/richkuo7" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://discord.gg/44BykmWZsP" target="_blank" rel="noopener">Discord</a>
+  </div>
+  <div class="mono" style="margin-top:32px">Episode&nbsp;7 &#183; Issue&nbsp;#108 &#183; One-tap Premium enhancement &#183; Four-run effort-dial bake-off</div>
+  <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px">
+    <span>Winner: Opus 4.8 at xhigh (93) &#183; Opus 4.8 medium 92 &#183; Fable 5 low 91 &#183; Opus 4.8 high 90 &#8212; three points across the field</span>
+    <span>Review rounds: the winner was the only entry sent back for fixes; the other three got first-pass approvals</span>
+    <span>Scoring/judging: Fable 5 (Anthropic) &#8212; also contestant #109, which placed third at 91 (disclosed conflict of interest; the judge did not crown itself)</span>
+    <span>Scores from independent, blind per-entry reviews of the real code, with line-by-line proof and all tests re-run</span>
+    <span>Created with LLM: Fable 5 | high | Harness: content-from-bakeoff</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+<script>
+  /* ---- Motion layer: GSAP + ScrollTrigger ---- */
+  gsap.registerPlugin(ScrollTrigger);
+  const mm = gsap.matchMedia();
+
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // Hero logo battle — four dial-marked Anthropic marks fight for the top
+    // "crown" slot. The crown rotates through ALL FOUR marks and returns to the
+    // start, so the loop is loops cleanly and never settles on a winner (the page
+    // withholds the result until the bottom).
+    const lbs = gsap.utils.toArray('.lb');
+
+    const crown = { y: 6,   scale: 1.14, autoAlpha: 1,    boxShadow: '0 0 30px rgba(227,178,90,0.60)' };
+    const p2    = { y: 92,  scale: 0.90, autoAlpha: 0.8,  boxShadow: '0 0 0px rgba(227,178,90,0)' };
+    const p3    = { y: 176, scale: 0.78, autoAlpha: 0.5,  boxShadow: '0 0 0px rgba(227,178,90,0)' };
+    const p4    = { y: 256, scale: 0.70, autoAlpha: 0.42, boxShadow: '0 0 0px rgba(227,178,90,0)' };
+    const slots = [crown, p2, p3, p4];
+    lbs.forEach((el) => gsap.set(el, { left: 29, x: 0 }));
+    lbs.forEach((el, i) => gsap.set(el, slots[i]));
+
+    const fight = gsap.timeline({ repeat: -1 });
+    let order = [...lbs];               // [champ, 2nd, 3rd, last]
+    const STEP = 2.4;
+    for (let s = 0; s < 4; s++) {       // one takeover per mark; identity after 4 restores the start, so it loops cleanly
+      const at = s * STEP;
+      const [champ, second, third, fourth] = order;
+      fight
+        .to(fourth, { y: 286, scale: 0.65, duration: 0.18, ease: 'power2.in' }, at)                     // crouch (gather)
+        .to(fourth, { ...crown, duration: 0.6, ease: 'back.out(2.6)' }, at + 0.18)                      // explode up, seize crown
+        .to(champ,  { x: 34, duration: 0.12, ease: 'power3.out' }, at + 0.52)                           // shouldered aside on impact
+        .to(champ,  { ...p2, x: 0, duration: 0.6, ease: 'bounce.out' }, at + 0.64)                      // tumbles to 2nd
+        .to(second, { ...p3, duration: 0.55, ease: 'power2.inOut' }, at + 0.22)                         // bumped down
+        .to(third,  { ...p4, duration: 0.55, ease: 'power2.inOut' }, at + 0.26)                         // bumped to last
+        .to(fourth, { x: 7, duration: 0.09, yoyo: true, repeat: 5, ease: 'power2.inOut' }, at + 0.74)   // triumphant wobble
+        .to(fourth, { x: 0, duration: 0.12 }, at + 1.36)
+        .to(third,  { y: 240, duration: 0.22, yoyo: true, repeat: 1, ease: 'power2.inOut' }, at + 1.7); // new last twitches, eager
+      order = [fourth, champ, second, third];   // crown rotates
+    }
+
+    // Hero intro on load.
+    gsap.from('.hero .reveal', { opacity: 0, y: 30, duration: 0.9, stagger: 0.12, ease: 'power3.out', delay: 0.15 });
+
+    // Scroll reveals below the hero — ScrollTrigger.batch.
+    const below = gsap.utils.toArray('.reveal').filter(el => !el.closest('.hero'));
+    gsap.set(below, { opacity: 0, y: 40 });
+    ScrollTrigger.batch(below, {
+      start: 'top 85%',
+      onEnter: (els) => {
+        gsap.to(els, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', overwrite: true });
+        els.forEach(el => el.querySelectorAll('.bar i[data-w]').forEach(b => { b.style.width = b.dataset.w + '%'; }));
+      },
+    });
+
+    // Count scores up as they enter view.
+    gsap.utils.toArray('.count').forEach((el) => {
+      const o = { v: 0 };
+      gsap.to(o, {
+        v: +el.dataset.to, duration: 1.3, ease: 'power1.out', snap: { v: 1 },
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+        onUpdate: () => { el.textContent = Math.round(o.v); },
+      });
+    });
+
+    // Finale — fire the CSS spotlight/glow when it scrolls in.
+    ScrollTrigger.create({
+      trigger: '#finale', start: 'top 60%', once: true,
+      onEnter: () => document.getElementById('finale').classList.add('in'),
+    });
+
+    window.addEventListener('load', () => ScrollTrigger.refresh()); // recalc after fonts/images settle
+  });
+
+  mm.add('(prefers-reduced-motion: reduce)', () => {
+    // Static, accessible end-state — no motion, and a neutral stack that
+    // doesn't hint at the ranking (.reveal shown via the reduced-motion CSS override).
+    document.getElementById('finale').classList.add('in');
+    gsap.utils.toArray('.lb').forEach((el, i) => gsap.set(el, { left: 29, x: 0, y: i * 92, scale: 0.9, autoAlpha: 0.85 }));
+    document.querySelectorAll('.bar i[data-w]').forEach(b => { b.style.width = b.dataset.w + '%'; });
+    document.querySelectorAll('.count').forEach(el => { el.textContent = el.dataset.to; });
+  });
+
+  (function () {
+    const root = document.documentElement, KEY = 'theme-pref';
+    const btn = document.getElementById('themeToggle');
+    const ico = document.getElementById('themeIco'), lbl = document.getElementById('themeLbl');
+    const meta = { auto: ['🖥️', 'Auto'], light: ['☀️', 'Light'], dark: ['🌙', 'Dark'] };
+    let pref;
+    try { pref = localStorage.getItem(KEY) || 'auto'; } catch (e) { pref = 'auto'; }
+    if (!meta[pref]) pref = 'auto';
+    function apply(p) {
+      if (p === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', p);
+      ico.textContent = meta[p][0]; lbl.textContent = meta[p][1];
+    }
+    apply(pref);
+    btn.addEventListener('click', () => {
+      pref = pref === 'auto' ? 'light' : pref === 'light' ? 'dark' : 'auto';
+      try { localStorage.setItem(KEY, pref); } catch (e) {}
+      apply(pref);
+    });
+  })();
+
+  (function () {
+    const modal = document.getElementById('promptModal');
+    const open = document.getElementById('promptBtn');
+    const close = document.getElementById('promptClose');
+    function show() { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); }
+    function hide() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); }
+    open.addEventListener('click', show);
+    close.addEventListener('click', hide);
+    modal.addEventListener('click', (e) => { if (e.target === modal) hide(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+  })();
+</script>
+</body>
+</html>
