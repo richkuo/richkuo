@@ -245,6 +245,9 @@
   .score { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(4rem, 16vw, 11rem); line-height:.8; letter-spacing:-.04em; color: var(--sig, var(--gold)); text-align:right; font-variant-numeric: tabular-nums; }
   .score small { font-size:.28em; color:var(--muted); font-weight:400; letter-spacing:0; }
   .rankrule { height:1px; background:var(--line); margin-top:2.4rem; }
+  .uishot { margin: 2.2rem auto 0; max-width: 290px; }
+  .uishot img { width:100%; display:block; border-radius:28px; border:1px solid var(--line); box-shadow: 0 18px 50px rgba(0,0,0,.45); }
+  .uishot figcaption { font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted2); text-align:center; margin-top:.9rem; }
   .ranklogo { display: inline-flex; align-items:center; gap:10px; margin-bottom: 18px; }
   .ranklogo .logo { width: 44px; height: 44px; color: var(--sig, var(--gold)); }
   .ranklogo .dial { width: 30px; height: 30px; color: var(--sig, var(--gold)); opacity:.8; }
@@ -600,6 +603,7 @@ Eight requirements total, checked one by one against the code.</div>
         </div>
         <div class="score"><span class="count" data-to="90">90</span><small>/100</small></div>
       </div>
+      <figure class="uishot"><img src="ui-opus-high.png" loading="lazy" alt="The Enhance screen Opus 4.8 on high effort built: a sheet with checkboxes for sound when an image appears or disappears, each with a sound picker and preview button, and an Enhance Scene button." /><figcaption>The screen this entry shipped</figcaption></figure>
       <div class="rankrule"></div>
     </div>
   </div>
@@ -619,6 +623,7 @@ Eight requirements total, checked one by one against the code.</div>
         </div>
         <div class="score"><span class="count" data-to="91">91</span><small>/100</small></div>
       </div>
+      <figure class="uishot"><img src="ui-fable-low.png" loading="lazy" alt="The Enhance screen Fable 5 on low effort built: the scene video with play controls, a one-line description, compact sound-toggle checkboxes with sound pickers, and an Enhance button." /><figcaption>The screen this entry shipped</figcaption></figure>
       <div class="rankrule"></div>
     </div>
   </div>
@@ -638,6 +643,7 @@ Eight requirements total, checked one by one against the code.</div>
         </div>
         <div class="score"><span class="count" data-to="92">92</span><small>/100</small></div>
       </div>
+      <figure class="uishot"><img src="ui-opus-medium.png" loading="lazy" alt="The Enhance screen Opus 4.8 on medium effort built: a full-screen sheet with a plain-language description, switch toggles for appear and disappear sounds with named sound choices, and an Enhance button." /><figcaption>The screen this entry shipped</figcaption></figure>
       <div class="rankrule"></div>
     </div>
   </div>
@@ -657,6 +663,7 @@ Eight requirements total, checked one by one against the code.</div>
       <div class="org">Anthropic &#183; Claude Code &#183; dial at maximum</div>
       <div class="pr"><a href="https://github.com/richkuo/scene-cut-ai/pull/110" target="_blank" rel="noopener">PR #110 &#8599;</a></div>
       <div class="badge"><span class="count" data-to="93">93</span><small>&nbsp;/100</small></div>
+      <figure class="uishot"><img src="ui-opus-xhigh.png" loading="lazy" alt="The Enhance screen the winner, Opus 4.8 on extra-high effort, built: the scene video with play controls, a one-line description, sound-toggle checkboxes with sound pickers, and an Enhance button." /><figcaption>The screen the winner shipped</figcaption></figure>
       <p class="descr"><b>The deepest correctness work in the field.</b> All eight requirements met, plus the things nobody asked for by name: handling a cancelled run cleanly mid-generation, checking the user's credit balance <i>before</i> spending it, surviving a partial failure without corrupting the scene. <b>Twelve new automated tests.</b> Its soft spots are small — a simplified sound-timing model on multi-clip scenes, and no verification on a physical device.</p>
     </div>
     <p class="why">And now the twist from section v: the winner was <b>the only entry sent back for fixes.</b> The other three — including the wildcard that barely tried — sailed through review on their first pass. Maximum thinking produced the best final code <i>and</i> the only first-draft rejection. So I went back and blind-scored the pre-fix first draft on its own: <b>90/100 — a tie for last place.</b> The repair round (a spending pre-check, clean cancellation mid-run, and the review's other findings) is worth the full three points between last and first. The 93 is earned — but on first drafts alone, <b>the laziest run's 91 wins the whole thing.</b></p>
