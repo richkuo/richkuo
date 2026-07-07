@@ -332,27 +332,31 @@
 	}
 }
 
-/* ---- section pin: shareable "#" anchor, revealed on hover ---- */
+/* ---- section pin: shareable "#" prefix, whole label clickable, revealed on hover ---- */
 /* element-qualified so it beats the typography plugin's link styling */
 a.section-anchor {
-	color: var(--color-muted);
+	color: inherit;
 	font-weight: inherit;
 	text-decoration: none;
-	margin-left: 0.35em;
+}
+a.section-anchor::before {
+	content: "#";
+	margin-right: 0.3em;
+	color: var(--color-muted);
 	opacity: 0;
 	transition: opacity 0.2s ease, color 0.2s ease;
 }
-h1:hover > .section-anchor,
-h2:hover > .section-anchor,
-h3:hover > .section-anchor,
-.section-anchor:focus-visible {
+h1:hover > .section-anchor::before,
+h2:hover > .section-anchor::before,
+h3:hover > .section-anchor::before,
+.section-anchor:focus-visible::before {
 	opacity: 1;
 }
-a.section-anchor:hover {
+a.section-anchor:hover::before {
 	color: var(--color-ink);
 }
 @media (hover: none) {
-	a.section-anchor {
+	a.section-anchor::before {
 		opacity: 0.45;
 	}
 }

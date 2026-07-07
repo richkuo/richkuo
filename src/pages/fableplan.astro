@@ -63,7 +63,7 @@ const faqJsonLd = {
 					<code>fableplan</code> is a Claude Code skill I built to fix a specific, recurring waste in how I use agentic coding tools: paying premium-model prices for premium-model <em>tokens</em>, most of which are spent on work that doesn't need premium reasoning at all.
 				</p>
 
-				<h2 id="the-split">The split<a class="section-anchor" href="#the-split" aria-label="Link to this section">#</a></h2>
+				<h2 id="the-split"><a class="section-anchor" href="#the-split" aria-label="Link to this section">The split</a></h2>
 				<p>
 					Every coding task really has two different jobs in it. There's the <strong>planning</strong> job — reading the real codebase, figuring out what actually needs to change, ordering the steps, catching the edge case that breaks the naive approach before a single line is written. And there's the <strong>building</strong> job — executing that plan: editing files, following existing conventions, wiring things together, running tests, iterating.
 				</p>
@@ -74,7 +74,7 @@ const faqJsonLd = {
 					Most agentic workflows don't make that split. They run one model, at one cost, for both jobs — which means either you're overpaying for the boring 90% (building), or underpaying for the 10% that actually determines whether the feature is correct (planning).
 				</p>
 
-				<h2 id="why-fable-5-for-planning">Why Fable 5 for planning<a class="section-anchor" href="#why-fable-5-for-planning" aria-label="Link to this section">#</a></h2>
+				<h2 id="why-fable-5-for-planning"><a class="section-anchor" href="#why-fable-5-for-planning" aria-label="Link to this section">Why Fable 5 for planning</a></h2>
 				<p>
 					Fable 5 is the model in fableplan's planning seat, dispatched as a dedicated subagent regardless of what model is running your main session. For planning specifically — reading a real codebase, surfacing the non-obvious constraint, producing a concrete and correctly ordered implementation plan — it's the best reasoning I've thrown at the job. That's exactly the kind of work where paying for the top tier is worth it: it happens once per task, and its output is the thing everything else depends on.
 				</p>
@@ -82,12 +82,12 @@ const faqJsonLd = {
 					It's also exactly the kind of work where that cost is easy to justify, because the volume is small. One plan, reviewed once, before any code exists.
 				</p>
 
-				<h2 id="why-not-fable-5-for-building">Why not Fable 5 for building<a class="section-anchor" href="#why-not-fable-5-for-building" aria-label="Link to this section">#</a></h2>
+				<h2 id="why-not-fable-5-for-building"><a class="section-anchor" href="#why-not-fable-5-for-building" aria-label="Link to this section">Why not Fable 5 for building</a></h2>
 				<p>
 					Running that same model through an entire build — every file edit, every test run, every back-and-forth fix — is a different story. Building is high-token-volume by nature, and once the planning is done, most of what's left is disciplined execution, not novel reasoning. Paying top-tier prices for that volume doesn't buy you much the plan hasn't already bought you, and it shows up directly in cost and latency across a long build.
 				</p>
 
-				<h2 id="the-handoff">The handoff<a class="section-anchor" href="#the-handoff" aria-label="Link to this section">#</a></h2>
+				<h2 id="the-handoff"><a class="section-anchor" href="#the-handoff" aria-label="Link to this section">The handoff</a></h2>
 				<p>
 					This is why fableplan builds from the vetted plan using your main session's model — Opus or Sonnet, whatever you're already running — instead of staying on Fable 5 for the whole task. Once the ambiguity is gone and the plan is checked against the real codebase, the remaining risk is execution fidelity: does the model follow the plan, match conventions, and not silently drop a step. Opus and Sonnet are good enough at that job, most of the time, to make finishing the build on the cheaper, faster model the correct call rather than a compromise.
 				</p>
@@ -95,7 +95,7 @@ const faqJsonLd = {
 					The plan is also where a human — or a GitHub issue — gets a cheap checkpoint. It's a lot easier to catch a structurally wrong approach by reading a plan than by reviewing a finished diff.
 				</p>
 
-				<h2 id="how-it-works">How it works<a class="section-anchor" href="#how-it-works" aria-label="Link to this section">#</a></h2>
+				<h2 id="how-it-works"><a class="section-anchor" href="#how-it-works" aria-label="Link to this section">How it works</a></h2>
 				<p>Trigger it with <code>/fableplan</code>, "fableplan this," or "plan this with fable," plus a task description and optionally a GitHub issue.</p>
 				<ol>
 					<li>Resolves the referenced GitHub issue, if any, so planning works from the real requirements.</li>
@@ -107,7 +107,7 @@ const faqJsonLd = {
 					<li>Builds the task from the plan, inside that worktree, on the main session's model.</li>
 				</ol>
 
-				<h2 id="install">Install<a class="section-anchor" href="#install" aria-label="Link to this section">#</a></h2>
+				<h2 id="install"><a class="section-anchor" href="#install" aria-label="Link to this section">Install</a></h2>
 				<p>The repo is a Claude Code plugin marketplace. Inside any Claude Code session, add the marketplace and install the plugin:</p>
 				<pre><code>/plugin marketplace add richkuo/fableplan
 /plugin install fableplan@fableplan</code></pre>
@@ -122,7 +122,7 @@ const faqJsonLd = {
 		</section>
 
 		<section class="post-faq mt-16 border-t border-border pt-10" aria-labelledby="faq-heading">
-			<h2 id="faq-heading" class="text-2xl font-semibold text-ink">Frequently asked questions<a class="section-anchor" href="#faq-heading" aria-label="Link to this section">#</a></h2>
+			<h2 id="faq-heading" class="text-2xl font-semibold text-ink"><a class="section-anchor" href="#faq-heading" aria-label="Link to this section">Frequently asked questions</a></h2>
 			<dl class="mt-6 space-y-6">
 				{faq.map((f) => (
 					<div>
