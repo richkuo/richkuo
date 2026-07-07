@@ -324,4 +324,35 @@
 		margin: 0.25rem 0;
 		line-height: 1.2;
 	}
+
+	.post-article h2,
+	.post-article h3,
+	.post-faq h2 {
+		scroll-margin-top: 40px;
+	}
+}
+
+/* ---- section pin: shareable "#" anchor, revealed on hover ---- */
+/* element-qualified so it beats the typography plugin's link styling */
+a.section-anchor {
+	color: var(--color-muted);
+	font-weight: inherit;
+	text-decoration: none;
+	margin-left: 0.35em;
+	opacity: 0;
+	transition: opacity 0.2s ease, color 0.2s ease;
+}
+h1:hover > .section-anchor,
+h2:hover > .section-anchor,
+h3:hover > .section-anchor,
+.section-anchor:focus-visible {
+	opacity: 1;
+}
+a.section-anchor:hover {
+	color: var(--color-ink);
+}
+@media (hover: none) {
+	a.section-anchor {
+		opacity: 0.45;
+	}
 }

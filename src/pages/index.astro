@@ -361,8 +361,18 @@ const graphJsonLd = {
     display: flex; align-items: center; gap: 12px;
     font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--ink); margin: 30px 0 16px; overflow: hidden;
+    scroll-margin-top: 88px; /* clear the floating top bar when jumped to */
   }
   .eyebrow > span { display: inline-block; will-change: transform; }
+  /* ---- section pin: shareable "#" anchor, revealed on hover ---- */
+  .section-anchor {
+    color: var(--muted); letter-spacing: 0; line-height: 1;
+    opacity: 0; transition: opacity .2s ease, color .2s ease;
+  }
+  .eyebrow:hover .section-anchor,
+  .section-anchor:focus-visible { opacity: 1; }
+  .section-anchor:hover { color: var(--accent); }
+  @media (hover: none) { .section-anchor { opacity: .5; } }
   .eyebrow-rule {
     flex: 1; height: 2px; transform: scaleX(0); transform-origin: left center;
     background: linear-gradient(90deg, color-mix(in oklab, var(--ink) 32%, transparent), transparent);
@@ -481,7 +491,7 @@ const graphJsonLd = {
   <div class="bubble-row them"><div class="bubble them">It's time for your next adventure</div></div>
 
   <!-- CURRENT PROJECTS -->
-  <h2 class="eyebrow reveal-text"><span>Current Projects</span></h2>
+  <h2 id="current-projects" class="eyebrow reveal-text"><span>Current Projects</span><a class="section-anchor" href="#current-projects" aria-label="Link to Current Projects">#</a></h2>
   <div id="currentProjects">
     {currentProjects.map((p) => {
       const href = p.href ?? p.link ?? '#';
@@ -506,7 +516,7 @@ const graphJsonLd = {
   <div class="bubble-row me"><div class="bubble me">I have no idea what I'm going to do tomorrow</div></div>
 
   <!-- FRIEND PROJECTS -->
-  <h2 class="eyebrow reveal-text"><span>Friend Projects</span></h2>
+  <h2 id="friend-projects" class="eyebrow reveal-text"><span>Friend Projects</span><a class="section-anchor" href="#friend-projects" aria-label="Link to Friend Projects">#</a></h2>
   <div id="friendProjects">
     {friendProjects.map((p) => {
       const href = p.href ?? p.link ?? '#';
@@ -531,7 +541,7 @@ const graphJsonLd = {
   <div class="bubble-row them"><div class="bubble them">How exciting</div></div>
 
   <!-- LLM BATTLES -->
-  <h2 class="eyebrow reveal-text"><span>LLM Battles</span></h2>
+  <h2 id="llm-battles" class="eyebrow reveal-text"><span>LLM Battles</span><a class="section-anchor" href="#llm-battles" aria-label="Link to LLM Battles">#</a></h2>
   <div id="llmBattles">
     {llmBattles.map((p) => {
       const href = p.href ?? p.link ?? '#';
@@ -553,7 +563,7 @@ const graphJsonLd = {
   </div>
 
   <!-- VIDEOS -->
-  <h2 class="eyebrow reveal-text"><span>Videos</span></h2>
+  <h2 id="videos" class="eyebrow reveal-text"><span>Videos</span><a class="section-anchor" href="#videos" aria-label="Link to Videos">#</a></h2>
   <div id="videos">
     {videos.map((p) => {
       const href = p.href ?? p.link ?? '#';
@@ -576,7 +586,7 @@ const graphJsonLd = {
   </div>
 
   <!-- RESOURCES -->
-  <h2 class="eyebrow reveal-text"><span>Resources</span></h2>
+  <h2 id="resources" class="eyebrow reveal-text"><span>Resources</span><a class="section-anchor" href="#resources" aria-label="Link to Resources">#</a></h2>
   <div id="resources">
     {resources.map((p) => {
       const href = p.href ?? p.link ?? '#';

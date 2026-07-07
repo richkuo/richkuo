@@ -149,6 +149,15 @@ const REPO = 'https://github.com/richkuo/rk-skills';
 		max-width: 22ch;
 	}
 	.sec-title em { font-style: normal; color: var(--accent); }
+	/* ---- section pin: shareable "#" anchor, revealed on hover ---- */
+	.section-anchor {
+		color: var(--muted); font-weight: 800; text-decoration: none;
+		margin-left: .35em; opacity: 0; transition: opacity .2s ease, color .2s ease;
+	}
+	.sec-title:hover .section-anchor,
+	.section-anchor:focus-visible { opacity: 1; }
+	.section-anchor:hover { color: var(--accent); }
+	@media (hover: none) { .section-anchor { opacity: .45; } }
 	.sec-sub { margin: 0 0 48px; color: var(--muted); max-width: 58ch; font-size: 1.05rem; }
 
 	/* ---------- Loop diagram ---------- */
@@ -305,7 +314,7 @@ const REPO = 'https://github.com/richkuo/rk-skills';
 		<!-- ============ THE LOOP ============ -->
 		<section id="loop">
 			<div class="wrap">
-				<h2 class="sec-title reveal">Every skill does one job. The <em>-loop</em> variants chain them.</h2>
+				<h2 class="sec-title reveal">Every skill does one job. The <em>-loop</em> variants chain them.<a class="section-anchor" href="#loop" aria-label="Link to this section">#</a></h2>
 				<p class="sec-sub reveal">A skill is a reusable instruction file that teaches Claude Code how to do one job well. Base skills do one step and stop. Loop variants keep going on their own — through code review and re-review — until the PR gets an LGTM.</p>
 				<div class="loop-strip reveal">
 					<div class="loop-step">
@@ -341,7 +350,7 @@ const REPO = 'https://github.com/richkuo/rk-skills';
 		<!-- ============ SKILLS ============ -->
 		<section id="skills">
 			<div class="wrap">
-				<h2 class="sec-title reveal">Seventeen skills. Four jobs.</h2>
+				<h2 class="sec-title reveal">Seventeen skills. Four jobs.<a class="section-anchor" href="#skills" aria-label="Link to this section">#</a></h2>
 				<p class="sec-sub reveal">Issues, PR reviews, docs and releases, and Fable-driven planning — each with a base skill and, where it makes sense, a loop that runs to completion.</p>
 				<div class="rows">
 					<div class="row reveal">
@@ -396,7 +405,7 @@ const REPO = 'https://github.com/richkuo/rk-skills';
 		<!-- ============ INSTALL ============ -->
 		<section id="install">
 			<div class="wrap">
-				<h2 class="sec-title reveal">Install in one command.</h2>
+				<h2 class="sec-title reveal">Install in one command.<a class="section-anchor" href="#install" aria-label="Link to this section">#</a></h2>
 				<p class="sec-sub reveal">Three ways in — pick one. Each skill is just a directory with a <code>SKILL.md</code>, so you can also copy a single one straight from the repo.</p>
 				<div class="install-grid reveal">
 					<div class="way">
