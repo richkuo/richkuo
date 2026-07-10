@@ -6,12 +6,13 @@ Live at **https://www.richkuo.com**.
 
 ## What this site is
 
-A static, single-page-forward marketing site built with Astro. The homepage introduces Rich, links to social profiles, and surfaces four main content areas:
+A static, single-page-forward marketing site built with Astro. The homepage introduces Rich, links to social profiles, and surfaces five main content areas:
 
 - **Current projects** — products and tools (e.g. go-trader, SceneCutAI, Art Ping Pong) with optional external links or detail pages under `/projects/[slug]/`.
 - **Friend projects** — collaborations and side projects by others.
 - **OpenClaw** — YouTube videos and written guides (VPS setup, trading bots, MCP servers, bugfix notes) under `/openclaw/[slug]/` or external links.
-- **LLM Battles** — AI model bake-offs where several models build the same go-trader feature from one spec, scored on cost, speed, and code quality. Each episode links to a full HTML report under `/reports/issue-[n]/`.
+- **Resources** — standalone articles and tool pages (e.g. `/fableplan`, `/rk-skills`) on AI coding workflows, alongside the OpenClaw written guides.
+- **LLM Battles** — AI model bake-offs where several models build the same feature from one shared spec, scored on cost, speed, and code quality. Each episode links to a full HTML report under `/reports/issue-[n]/`.
 
 The homepage is a GSAP + ScrollTrigger single-page design: a floating glass nav capsule that assembles on scroll, glass project cards with 3D mouse-tilt and alternating slide-ins, drifting gradient blobs, letter-by-letter chat bubbles, and a scroll-scrubbed hero. A **Work with me** handshake icon links to email for inquiries.
 
