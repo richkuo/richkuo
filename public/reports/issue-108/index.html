@@ -425,7 +425,7 @@
 The trap: those sound effects have to be mixed into the REAL exported video — the file you actually share — not just the in-app preview. The export pipeline is the most delicate machinery in the app, with caching rules that decide when old rendered footage can be reused. Wire a sound through the wrong path and it plays in the preview, then silently vanishes from the exported file. The task spelled this out and demanded the real path.
 
 Eight requirements total, checked one by one against the code.</div>
-    <p class="modal-note">&#9998; <b>Who's who.</b> Four separate runs from the same starting code: <span class="mono">#110</span> = Opus 4.8 with its thinking dial at maximum ("xhigh"), <span class="mono">#112</span> = Opus 4.8 on high, <span class="mono">#111</span> = Opus 4.8 on medium (run through a plan-first workflow), <span class="mono">#109</span> = Fable 5 — Anthropic's newest model — deliberately set to barely think ("low"). More thinking costs more time and money; this episode tests what it actually buys.</p>
+    <p class="modal-note">&#9998; <b>Who's who.</b> Four separate runs from the same starting code: <span class="mono">#110</span> = Opus 4.8 with its thinking dial at maximum ("xhigh"), <span class="mono">#112</span> = Opus 4.8 on high, <span class="mono">#111</span> = Opus 4.8 on medium (run through fableplan, a plan-first workflow), <span class="mono">#109</span> = Fable 5 — Anthropic's newest model — deliberately set to barely think ("low"). More thinking costs more time and money; this episode tests what it actually buys.</p>
   </div>
 </div>
 
@@ -497,9 +497,9 @@ Eight requirements total, checked one by one against the code.</div>
       </a>
       <a class="card reveal d2" href="https://github.com/richkuo/scene-cut-ai/pull/111" target="_blank" rel="noopener" style="--sig:var(--c-medium)">
         <div class="tape"></div>
-        <div class="label">Anthropic · plan-first workflow · dial at medium</div>
+        <div class="label">Anthropic · fableplan · dial at medium</div>
         <h3><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <svg class="dial" aria-hidden="true"><use href="#dial-medium"/></svg></h3>
-        <div class="cdesc"><b>The everyday setting.</b> Standard thinking, run through a plan-first workflow that designs before it writes.</div>
+        <div class="cdesc"><b>The everyday setting.</b> Standard thinking, run through fableplan — a plan-first workflow that designs before it writes.</div>
         <div class="pr">PR #111 <span class="ar">&#8599;</span></div>
         <div class="branch">cc/issue-108-premium-noun-images</div>
       </a>
@@ -703,7 +703,7 @@ Eight requirements total, checked one by one against the code.</div>
         <div class="stape"></div>
         <div class="sbody">
           <div class="sbody-left">
-            <div class="sco">Anthropic &#183; plan-first workflow</div>
+            <div class="sco">Anthropic &#183; fableplan</div>
             <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <svg class="dial" aria-hidden="true"><use href="#dial-medium"/></svg></div>
           </div>
           <div class="sbody-right">
