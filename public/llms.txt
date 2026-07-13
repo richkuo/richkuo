@@ -31,6 +31,7 @@ Head-to-head bake-offs scoring frontier models (GPT, Claude Opus, GLM, Fable, Co
 - [Bake-off Ep.4 — The Audit](https://www.richkuo.com/reports/issue-906/): Three models audit a backtesting engine and build a tool to catch backtest-vs-live drift. Winner: Fable 5.
 - [Bake-off Ep.5 — Welcome GLM](https://www.richkuo.com/reports/issue-1124/): A safety-critical market-regime label split. Co-winners: Opus 4.8 and GLM 5.2.
 - [Bake-off Ep.6 — Welcome Composer](https://www.richkuo.com/reports/issue-1134/): Adding one operator settings knob without disabling a real-money safety net. Co-winners: GPT-5.5 and GLM 5.2.
+- [Bake-off Ep.8.5 — Same Code, Second Judge](https://www.richkuo.com/reports/issue-1159-codex/): Codex independently re-scores the five Episode 8 auto-hedge builds. Fable 5 stays first, while every entry exposes a partial-order safety gap.
 
 ## Feeds
 - [RSS feed](https://www.richkuo.com/rss.xml): All projects and guides, sorted by date.

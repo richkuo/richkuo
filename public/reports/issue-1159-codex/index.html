@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Coding Bake-off Ep. 8.5: Same Code, Second Judge — Does the Verdict Survive?</title>
+<meta name="description" content="I gave the same five auto-hedge implementations to Codex for a second independent score. Every entry passed targeted tests. Every entry still exposed a partial-fill safety gap. Scroll for the new ranking.">
+<link rel="canonical" href="https://www.richkuo.com/reports/issue-1159-codex/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Rich Kuo">
+<meta property="og:title" content="AI Coding Bake-off Ep. 8.5 — Same Code, Second Judge">
+<meta property="og:description" content="Five green test suites. Five reproduced partial-order safety gaps. Codex re-scored the same Episode 8 code; the second verdict is sealed at the bottom.">
+<meta property="og:url" content="https://www.richkuo.com/reports/issue-1159-codex/">
+<meta property="og:image" content="https://www.richkuo.com/reports/issue-1159-codex/og-issue-1159-codex-hedge-legs.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AI Coding Bake-off Episode 8.5 cover: same code, second judge, five contestants, with the verdict sealed.">
+<meta property="article:published_time" content="2026-07-13T00:00:00-04:00">
+<meta property="article:modified_time" content="2026-07-13T00:00:00-04:00">
+<meta property="article:section" content="AI Coding Bake-off">
+<meta property="article:tag" content="Fable 5">
+<meta property="article:tag" content="GPT-5">
+<meta property="article:tag" content="Opus 4.8">
+<meta property="article:tag" content="Grok 4.5">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@richkuo7">
+<meta name="twitter:creator" content="@richkuo7">
+<meta name="twitter:title" content="AI Coding Bake-off Ep. 8.5 — Same Code, Second Judge">
+<meta name="twitter:description" content="Codex re-scored the same five auto-hedge builds. Every focused test suite was green. Every entry still exposed a partial-order safety gap.">
+<meta name="twitter:image" content="https://www.richkuo.com/reports/issue-1159-codex/og-issue-1159-codex-hedge-legs.png">
+<meta name="twitter:image:alt" content="Episode 8.5 cover: same code, second judge, five contestants, and a sealed verdict.">
+<meta name="twitter:label1" content="Field"><meta name="twitter:data1" content="5 entries · same code">
+<meta name="twitter:label2" content="Shared finding"><meta name="twitter:data2" content="5 partial-order gaps">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "@id": "https://www.richkuo.com/reports/issue-1159-codex/",
+  "url": "https://www.richkuo.com/reports/issue-1159-codex/",
+  "headline": "AI Coding Bake-off Episode 8.5: Same Code, Second Judge — Does the Verdict Survive?",
+  "description": "Codex independently re-scored five implementations of automatic correlated hedge legs in a live crypto trading scheduler. All five focused test suites passed; each entry still exposed a partial-order safety gap. The verdict is sealed until the bottom of the report.",
+  "image": "https://www.richkuo.com/reports/issue-1159-codex/og-issue-1159-codex-hedge-legs.png",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true,
+  "articleSection": "AI Coding Bake-off",
+  "author": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "publisher": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.richkuo.com/reports/issue-1159-codex/" },
+  "mentions": [
+    { "@type": "SoftwareApplication", "name": "Fable 5", "applicationCategory": "DeveloperApplication", "creator": { "@type": "Organization", "name": "Anthropic" } },
+    { "@type": "SoftwareApplication", "name": "GPT-5", "applicationCategory": "DeveloperApplication", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
+    { "@type": "SoftwareApplication", "name": "Claude Opus 4.8", "applicationCategory": "DeveloperApplication", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
+    { "@type": "SoftwareApplication", "name": "Grok 4.5", "applicationCategory": "DeveloperApplication", "creator": { "@type": "Organization", "name": "xAI", "url": "https://x.ai" } }
+  ]
+}
+</script>
+<script>document.documentElement.classList.add("js");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0908; --surface: #14110d; --surface2: #1d1812;
+    --fg: #f4ede0; --muted: #8c8276; --muted2: #5a544b;
+    --gold: #e3b25a; --line: rgba(227,178,90,0.16);
+    --ink: #211a13; /* redaction ink */
+    --c-gpt: #74AA9C; --c-fable: #f0eee6; --c-high: #a95f3f; --c-xhigh: #cc785c; --c-grok: #aab2bd;
+    --paper-edge: rgba(244,237,224,0.09);
+  }
+  [data-theme="light"] {
+    --bg: #f1eadd; --surface: #faf5ea; --surface2: #fffdf6;
+    --fg: #211a13; --muted: #6e6357; --muted2: #a3968a;
+    --gold: #9a6f1f; --line: rgba(120,90,30,0.25);
+    --ink: #2a2119;
+    --c-fable: #7a6f5c; --c-grok: #5d6570;
+    --paper-edge: rgba(33,26,19,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--fg); font-family: 'Hanken Grotesk', system-ui, sans-serif; line-height: 1.6; overflow-x: hidden; }
+  ::selection { background: var(--gold); color: var(--bg); }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 96px 0; border-bottom: 1px dashed var(--line); }
+
+  /* file furniture */
+  .filetab { display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--line); border-radius: 4px 4px 0 0; border-bottom: none; padding: 8px 16px 6px; background: var(--surface); }
+  .exhibit { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .26em; text-transform: uppercase; color: var(--muted2); margin-bottom: 18px; }
+  .exhibit b { color: var(--gold); font-weight: 500; }
+  h1, h2, h3 { font-family: 'Fraunces', serif; letter-spacing: -.02em; line-height: 1.06; }
+  h2 { font-size: clamp(1.9rem, 4.4vw, 2.9rem); font-weight: 700; margin-bottom: 22px; }
+  p.lead { font-size: 1.12rem; color: var(--fg); max-width: 62ch; }
+  p.body, .body p { font-size: 1.02rem; color: var(--muted); max-width: 62ch; margin-top: 16px; }
+  .body em, p.lead em { font-style: normal; font-weight: 600; color: var(--fg); }
+  .plain { display: block; font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+
+  /* stamps */
+  .stamp { display: inline-block; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: .78rem; letter-spacing: .3em; text-transform: uppercase; color: var(--c-xhigh); border: 2.5px solid var(--c-xhigh); border-radius: 6px; padding: 8px 18px; transform: rotate(-6deg); opacity: .85; mix-blend-mode: screen; }
+  [data-theme="light"] .stamp { mix-blend-mode: multiply; }
+  .stamp.gold { color: var(--gold); border-color: var(--gold); }
+
+  /* redaction — static text, no JS dependency for the withhold */
+  .redact { font-family: 'JetBrains Mono', monospace; background: var(--ink); color: var(--ink); border-radius: 3px; padding: 0 10px; letter-spacing: .1em; user-select: none; box-shadow: inset 0 0 0 1px var(--paper-edge); }
+
+  /* hero */
+  .hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; padding: 110px 0 80px; border-bottom: 1px dashed var(--line); position: relative; overflow: hidden; }
+  .hero::before { content: '#1159'; position: absolute; right: -2%; top: 6%; font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(9rem, 24vw, 20rem); color: var(--fg); opacity: .04; pointer-events: none; }
+  .hero h1 { font-size: clamp(2.6rem, 6.4vw, 4.6rem); font-weight: 900; margin: 26px 0 20px; }
+  .hero h1 .q { font-style: italic; font-weight: 600; color: var(--gold); }
+  .hero .sub { font-size: 1.14rem; color: var(--muted); max-width: 56ch; }
+  .hero .cue { margin-top: 40px; font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .28em; text-transform: uppercase; color: var(--muted2); display: flex; align-items: center; gap: 14px; }
+  .hero .cue::after { content: ''; width: 1px; height: 44px; background: var(--gold); animation: drip 1.6s ease-in-out infinite; }
+  @keyframes drip { 0%,100% { transform: scaleY(.35); opacity: .4; } 50% { transform: scaleY(1); opacity: 1; } }
+  .stamps-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 34px; }
+
+  /* scorecard video exhibit (declassified — lives in the finale) */
+  .exhibit-a { position: relative; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); padding: 14px; max-width: 300px; margin: 54px auto 0; }
+  .exhibit-a video { width: 100%; border-radius: 10px; display: block; }
+  .exhibit-a .tag { position: absolute; top: -13px; left: 18px; background: var(--bg); font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); padding: 3px 10px; border: 1px solid var(--line); border-radius: 4px; }
+
+  /* balance beam (hero motion, decorative) */
+  .beam-box { margin-top: 44px; height: 120px; position: relative; max-width: 420px; }
+  .beam { position: absolute; left: 0; right: 0; top: 52px; height: 2px; background: var(--gold); opacity: .55; transform-origin: 50% 50%; }
+  .beam::after { content: ''; position: absolute; left: 50%; top: -7px; width: 14px; height: 14px; border: 2px solid var(--gold); border-radius: 50%; transform: translateX(-50%); background: var(--bg); }
+  .pan { position: absolute; width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--line); background: var(--surface); }
+  .pan svg { width: 30px; height: 30px; }
+  .pan.left { left: 6px; top: 26px; color: var(--c-gpt); }
+  .pan.right { right: 6px; top: 26px; color: var(--c-xhigh); }
+
+  /* contenders — personnel files */
+  .files { display: grid; gap: 14px; margin-top: 40px; }
+  .file { display: grid; grid-template-columns: 52px 1fr auto; gap: 18px; align-items: center; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 18px 22px; }
+  .file .mark { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; }
+  .file .mark svg { width: 34px; height: 34px; }
+  .file h3 { font-size: 1.25rem; }
+  .file .role { font-family: 'JetBrains Mono', monospace; font-size: .56rem; letter-spacing: .22em; text-transform: uppercase; opacity: .8; margin-top: 5px; }
+  .file .status { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted2); text-align: right; }
+
+  /* evidence bars */
+  .evi { margin-top: 42px; display: grid; gap: 26px; }
+  .evi-row { display: grid; gap: 8px; }
+  .evi-lbl { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; }
+  .evi-lbl .val { color: var(--fg); }
+  .bar { height: 12px; border-radius: 4px; background: var(--paper-edge); overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; border-radius: 0 4px 4px 0; transition: width 1.1s cubic-bezier(.22,1,.36,1); }
+  .no-js .bar i, .static .bar i { transition: none; }
+  .foot-note { margin-top: 22px; font-size: .86rem; color: var(--muted2); }
+
+  /* declassified verdict rows */
+  #verdict { border-bottom: none; }
+  .dec-rows { display: grid; gap: 18px; margin-top: 48px; }
+  .dec { position: relative; display: grid; grid-template-columns: 64px 1fr auto; gap: 20px; align-items: center; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 24px 28px; overflow: hidden; }
+  .dec .mark { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
+  .dec .mark svg { width: 38px; height: 38px; }
+  .dec h3 { font-size: 1.5rem; }
+  .dec .who { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .22em; text-transform: uppercase; opacity: .8; margin-top: 6px; }
+  .dec .score { font-family: 'Fraunces', serif; font-weight: 700; font-size: 2.6rem; letter-spacing: -.03em; }
+  .dec .score small { font-size: .34em; color: var(--muted2); font-weight: 400; }
+  .dec .was { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted2); text-align: right; margin-top: 4px; }
+  .dec .blurb { grid-column: 1 / -1; font-size: .96rem; color: var(--muted); max-width: 68ch; }
+  .js .dec::after { content: 'SEALED'; position: absolute; inset: 0; background: var(--ink); color: var(--muted2); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .5em; text-transform: uppercase; transform: translateX(0); transition: transform .9s cubic-bezier(.7,0,.2,1); }
+  .js .dec.open::after { transform: translateX(101%); }
+  @media (prefers-reduced-motion: reduce) { .dec::after { display: none !important; } }
+
+  /* winner finale */
+  .dec.winner { grid-template-columns: 84px 1fr auto; padding: 40px 34px; border-width: 2px; }
+  .dec.winner .mark svg { width: 58px; height: 58px; }
+  .dec.winner h3 { font-size: 2.2rem; }
+  .dec.winner .score { font-size: 4rem; }
+  .dec.winner.in { border-color: var(--c-fable); box-shadow: 0 0 90px rgba(227,178,90,.20), inset 0 0 60px rgba(227,178,90,.05); }
+  .dec.winner.in .score, .dec.winner.in h3 { color: var(--c-fable); }
+
+  /* conflict-of-interest disclosure (at the reveal) */
+  .coi { border: 1.5px solid var(--gold); border-radius: 14px; padding: 30px 32px; margin-top: 28px; background: var(--surface); }
+  .coi .plain { margin-bottom: 10px; }
+  .coi p { font-size: 1rem; color: var(--muted); max-width: 68ch; margin-top: 12px; }
+  .coi p:first-of-type { margin-top: 0; color: var(--fg); font-weight: 600; }
+
+  /* flip table */
+  .flip-wrap { overflow-x: auto; margin-top: 42px; border: 1px solid var(--line); border-radius: 14px; }
+  table.flip { width: 100%; border-collapse: collapse; font-size: .9rem; min-width: 560px; }
+  table.flip th, table.flip td { text-align: left; padding: 13px 18px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  table.flip th { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted2); font-weight: 500; }
+  table.flip tr:last-child td { border-bottom: none; }
+  table.flip td.num { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.1rem; }
+  table.flip .up { color: var(--c-gpt); } table.flip .down { color: var(--c-xhigh); }
+
+  /* summary cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 42px; }
+  .scard { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 22px; border-top: 3px solid var(--acc, var(--gold)); }
+  .scard h3 { font-size: 1.12rem; }
+  .scard .who { font-family: 'JetBrains Mono', monospace; font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; color: var(--acc, var(--gold)); margin-top: 4px; }
+  .scard .num { font-family: 'Fraunces', serif; font-weight: 700; font-size: 2.5rem; color: var(--acc, var(--gold)); margin: 14px 0 4px; }
+  .scard .row { display: flex; justify-content: space-between; font-size: .82rem; color: var(--muted); border-top: 1px solid var(--line); padding: 7px 0; }
+  .scard .aside { font-size: .72rem; color: var(--muted2); margin-top: 10px; }
+
+  /* epilogue + footer */
+  .epi { border: 1px dashed var(--line); border-radius: 14px; padding: 28px 32px; margin-top: 42px; }
+  .epi .plain { margin-bottom: 10px; }
+  footer { padding: 64px 0 80px; }
+  footer .links { display: flex; gap: 26px; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .12em; }
+  footer a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer .meta { margin-top: 30px; font-size: .74rem; color: var(--muted2); }
+  .cta { margin-top: 54px; border: 1.5px solid var(--gold); border-radius: 14px; padding: 34px; text-align: center; }
+  .cta h3 { font-size: 1.7rem; margin-bottom: 10px; }
+  .cta a { color: var(--gold); font-family: 'Fraunces', serif; font-size: 1.3rem; text-decoration: none; border-bottom: 2px solid var(--gold); }
+
+  /* theme toggle */
+  .toggle { position: fixed; top: 18px; right: 18px; z-index: 50; background: var(--surface); border: 1px solid var(--line); color: var(--muted); border-radius: 999px; padding: 8px 16px; font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; }
+
+  /* reveal states */
+  .js .reveal { opacity: 0; transform: translateY(36px); }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; } }
+</style>
+</head>
+<body>
+<button class="toggle" id="themeToggle" aria-label="Toggle color theme">Theme</button>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo-openai" viewBox="0 0 24 24"><path fill="currentColor" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654 2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></symbol>
+    <symbol id="logo-anthropic" viewBox="0 0 24 24"><path fill="currentColor" d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></symbol>
+    <symbol id="logo-xai" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M4.2 4.2 L19.8 19.8 M19.8 4.2 L13.4 10.6 M10.6 13.4 L4.2 19.8"/></symbol>
+  </defs>
+</svg>
+
+<!-- ─── HERO / FILE COVER — SECOND OPINION ─────────────────────── -->
+<header class="hero">
+  <div class="wrap">
+    <span class="filetab reveal">Case file #1159 · AI bake-off · Episode 8.5 · Second opinion</span>
+    <h1 class="reveal">Same five models.<br>A second judge.<br><span class="q">Does the verdict survive?</span></h1>
+    <p class="sub reveal">I gave the same five auto-hedge builds from Episode 8 to Codex and asked it to score from scratch. Same code. Same requirements. A different judge, stricter full-or-half scoring, and break-it-on-purpose tests at the exchange boundary. The result stays sealed until the bottom.</p>
+    <div class="stamps-row reveal" aria-hidden="true">
+      <span class="stamp gold">Second opinion</span>
+      <span class="stamp">Same five PRs</span>
+      <span class="stamp">Verdict sealed</span>
+    </div>
+    <div class="beam-box reveal" aria-hidden="true">
+      <div class="beam" id="beam"></div>
+      <div class="pan left" id="panL"><span style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700">Ξ</span></div>
+      <div class="pan right" id="panR"><span style="font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700">₿</span></div>
+    </div>
+    <p class="cue reveal">Scroll to open the second verdict</p>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap">
+    <p class="exhibit reveal"><b>Exhibit A</b> · the job</p>
+    <h2 class="reveal">Open one trade. Protect it with another.</h2>
+    <div class="body reveal">
+      <p class="lead"><span class="plain">In plain English —</span> my bot trades crypto with real money. If it opens a large bet on Ethereum, the whole market can drag that bet down. A <em>hedge</em> is a smaller opposite bet on a related coin, such as Bitcoin, that softens a market-wide move.</p>
+      <p><a href="https://github.com/richkuo/go-trader/issues/1159" target="_blank" rel="noopener">Issue #1159</a> asked the bot to open that counter-bet automatically, size it correctly, and keep both trades synchronized through partial closes, emergency shutdowns, and a full restart.</p>
+      <p>The safety rule is simple: if the counter-bet cannot be confirmed, cancel the main trade. Never leave real money exposed while the bot reports everything is protected. Easy to say. The exchange makes it harder.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="exhibit reveal"><b>Exhibit B</b> · the exchange trap</p>
+    <h2 class="reveal">Half an order is not a whole order.</h2>
+    <div class="body reveal">
+      <p class="lead"><span class="plain">In plain English —</span> an exchange can fill only part of an order. Ask for ten units and get five. The bot must track the five that remain instead of pretending all ten finished.</p>
+      <p>That one boundary touches every money path: opening the hedge, shrinking it, closing it, and canceling the main trade after a failure. Get it wrong and the bot's records can say “flat” while money is still live on the exchange.</p>
+      <p>Codex's fault injections found a version of that mistake in <em>all five entries</em>. Five targeted suites passed. Five partial-fill gaps survived. So the question was no longer “who wrote working code?” It was “whose proof and failure handling held up the longest?”</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="exhibit reveal"><b>Exhibit C</b> · the contenders</p>
+    <h2 class="reveal">Five entries. Three model families.</h2>
+    <p class="lead reveal">Each entry is a PR — a proposed batch of code changes. Opus entered twice at two effort settings, so the same model appears in two separate builds.</p>
+    <div class="files">
+      <a class="file reveal" href="https://github.com/richkuo/go-trader/pull/1331" target="_blank" rel="noopener" style="color:var(--c-grok);text-decoration:none">
+        <span class="mark" aria-hidden="true"><svg><use href="#logo-xai"/></svg></span><div><h3 style="color:var(--fg)">Grok 4.5</h3><div class="role">xAI · Cursor · high</div></div><span class="status">PR #1331</span>
+      </a>
+      <a class="file reveal" href="https://github.com/richkuo/go-trader/pull/1332" target="_blank" rel="noopener" style="color:var(--c-gpt);text-decoration:none">
+        <span class="mark" aria-hidden="true"><svg><use href="#logo-openai"/></svg></span><div><h3 style="color:var(--fg)">GPT-5</h3><div class="role">OpenAI · Codex · high</div></div><span class="status">PR #1332</span>
+      </a>
+      <a class="file reveal" href="https://github.com/richkuo/go-trader/pull/1333" target="_blank" rel="noopener" style="color:var(--c-fable);text-decoration:none">
+        <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span><div><h3 style="color:var(--fg)">Fable 5</h3><div class="role">Anthropic · Claude Code · high</div></div><span class="status">PR #1333</span>
+      </a>
+      <a class="file reveal" href="https://github.com/richkuo/go-trader/pull/1336" target="_blank" rel="noopener" style="color:var(--c-high);text-decoration:none">
+        <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span><div><h3 style="color:var(--fg)">Opus 4.8 · high</h3><div class="role">Anthropic · Claude Code · high effort</div></div><span class="status">PR #1336</span>
+      </a>
+      <a class="file reveal" href="https://github.com/richkuo/go-trader/pull/1337" target="_blank" rel="noopener" style="color:var(--c-xhigh);text-decoration:none">
+        <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span><div><h3 style="color:var(--fg)">Opus 4.8 · xhigh</h3><div class="role">Anthropic · Claude Code · maximum effort</div></div><span class="status">PR #1337</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="exhibit reveal"><b>Exhibit D</b> · how I judged</p>
+    <h2 class="reveal">Arithmetic first. Then try to break it.</h2>
+    <div class="body reveal">
+      <p class="lead"><span class="plain">In plain English —</span> I split the score into fixed boxes: the five implementation requirements, eight required safety tests, an accuracy check on each write-up, extra correctness, and reuse of the bot's existing machinery.</p>
+      <p>Reviewers checked the code at the final PR version, ran builds and tests, then changed one safety-critical behavior on purpose. If the entry's tests stayed green after sabotage, that safety claim lost credit. Every claimed defect went to a skeptic whose job was to disprove it.</p>
+      <p><em>Fairness note, said out loud:</em> Codex / GPT-5 ran this score, and GPT-5 is one of the contestants. Model names stayed out of review prompts.</p>
+      <p>Only the first two entries received the ideal panel of three reviewers who had seen no other entry. Limited review slots made the final three panels less independent. The scoring file records the exact compromise for each one.</p>
+      <p>The method is stricter than a normal code review. A score in the 50s or 60s does not mean the entry was useless. It means a live-money promise received half credit when one reproduced boundary case broke it.</p>
+    </div>
+    <div style="margin-top:30px" class="reveal" aria-hidden="true"><span class="stamp">Conflict disclosed</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="exhibit reveal"><b>Exhibit E</b> · pre-verdict evidence</p>
+    <h2 class="reveal">Green tests were the starting line.</h2>
+    <div class="body reveal">
+      <p class="lead">Every entry sized the smaller counter-bet correctly. Every entry remembered which two trades belonged together after a restart, handled ordinary opening and closing, and passed tests focused on this hedge feature.</p>
+      <p>The separation came from three questions: Does a partial order stay visible? Can the bot prove a recovered trade belongs to this strategy before touching it? Do the eight required safety tests exercise the exact failures named in the issue?</p>
+      <p>One entry supplied all eight required tests. One supplied seven. The other three supplied five each. The names stay sealed for one more section.</p>
+    </div>
+    <div class="body reveal" style="margin-top:34px">
+      <p><em>Code volume was context, never score.</em> The five entries added between 1,472 and 2,760 lines. Their exact diffs appear only after the ranking.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="exhibit reveal"><b>The countdown</b> · second verdict</p>
+    <h2 class="reveal">Five green suites. One ranking.</h2>
+    <p class="lead reveal">Compliments first, deductions second. Counting up from fifth place.</p>
+  </div>
+</section>
+
+<section class="rank">
+  <div class="wrap">
+    <div class="dec reveal" style="color:var(--c-xhigh)">
+      <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span>
+      <div><h3 style="color:var(--fg)">Opus 4.8 · xhigh</h3><div class="who">Fifth place · maximum effort</div></div>
+      <div class="score" style="color:var(--c-xhigh)"><span class="count" data-to="50">50</span><small>/100</small></div>
+      <p class="blurb">The biggest build reused the bot's existing systems and handled ordinary opening and closing. What kept it fifth: a half-filled hedge can remain permanently too small because the bot refuses to add the missing amount. After a restart, it can also mistake an unrelated trade for its own and close it. Three of the eight required safety tests were missing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rank">
+  <div class="wrap">
+    <div class="dec reveal" style="color:var(--c-grok)">
+      <span class="mark" aria-hidden="true"><svg><use href="#logo-xai"/></svg></span>
+      <div><h3 style="color:var(--fg)">Grok 4.5</h3><div class="who">Fourth place · smallest build</div></div>
+      <div class="score" style="color:var(--c-grok)"><span class="count" data-to="54.5">54.5</span><small>/100</small></div>
+      <p class="blurb">The smallest change got the requested sizing and conflict checks right. One reviewer also ran the bot's full test set without a failure. What kept it here: a half-filled hedge is accepted as complete, and a partly filled close can erase the bot's entire record while money remains live. Three required safety tests were not meaningfully present.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rank">
+  <div class="wrap">
+    <div class="dec reveal" style="color:var(--c-high)">
+      <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span>
+      <div><h3 style="color:var(--fg)">Opus 4.8 · high</h3><div class="who">Third place</div></div>
+      <div class="score" style="color:var(--c-high)"><span class="count" data-to="55.5">55.5</span><small>/100</small></div>
+      <p class="blurb">The second-smallest build had one clear place that kept the two trades synchronized, plus stronger restart recovery than the entries below it. What kept it third: an unrelated trade on the hedge coin can block protection without canceling the fresh main trade. A partial reduction can also hide the amount left over. Three required safety tests were missing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rank">
+  <div class="wrap">
+    <div class="dec reveal" style="color:var(--c-gpt)">
+      <span class="mark" aria-hidden="true"><svg><use href="#logo-openai"/></svg></span>
+      <div><h3 style="color:var(--fg)">GPT-5</h3><div class="who">Second place · the judge's own model</div></div>
+      <div class="score" style="color:var(--c-gpt)"><span class="count" data-to="60.5">60.5</span><small>/100</small></div>
+      <p class="blurb">The runner-up supplied seven of eight required safety tests, the second-best proof set in the field. It also recorded hedge profits, losses, and fees in the right account. What kept it second: partial opens and closes can make the exchange disagree with the bot's records. After a restart, it can mistake an old opening receipt for proof that a hedge closed.</p>
+    </div>
+  </div>
+</section>
+
+<section id="verdict">
+  <div class="wrap">
+    <p class="exhibit reveal"><b>Final page</b> · verdict declassified</p>
+    <h2 class="reveal">The winner stayed. Its score fell from 96 to 64.</h2>
+    <div class="dec winner reveal" id="finale" style="color:var(--c-fable)">
+      <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span>
+      <div><h3>Fable 5</h3><div class="who">First place · 3.5-point margin</div></div>
+      <div class="score"><span class="count" data-to="64">64</span><small>/100</small></div>
+      <p class="blurb">Fable 5 wins because it is the only entry with all eight required safety tests. One central routine also keeps ordinary opens, reductions, and closes synchronized.</p>
+      <p class="blurb">The win is not a clean bill of health. The bot accepts a hedge that falls less than 1% short as complete. A partial reduction can hide money left over. After a restart, it can also invent a closing price when the exchange receipt is missing.</p>
+    </div>
+
+    <div class="coi reveal">
+      <span class="plain">⚖ About the judge — read before trusting the result</span>
+      <p><em>Codex / GPT-5 ran the scoring, and GPT-5 was a contestant.</em> Its own entry placed second at 60.5, behind Fable 5 at 64.</p>
+      <p>That does not erase the conflict. The safeguards were blinded model names, fixed arithmetic sheets, code citations, and reproduced fault injections. The method limitation is also on the record: the environment's fresh-agent cap prevented the ideal fifteen-fresh-reviewer protocol for the final three PRs. Read the receipts before treating a half-point as physics.</p>
+    </div>
+
+    <div class="body reveal" style="margin-top:44px">
+      <p class="lead">Same winner as Episode 8. A different lesson. The prior strict pass rewarded the entry whose eight required tests caught its chosen sabotage. Codex pressed harder on partial exchange orders and proof of ownership after a restart. Every entry broke somewhere, so 14 points covered the field: 50 to 64.</p>
+      <p>The winner's edge is still proof: eight required safety tests versus seven for second and five for everyone else. But the headline is the shared miss. Five models wrote thousands of lines around a live-money feature, and none handled every form of “the exchange only did half” safely.</p>
+    </div>
+
+    <div class="cards">
+      <div class="scard reveal" style="--acc:var(--c-fable)"><h3>Fable 5</h3><div class="who">Winner</div><div class="num"><span class="count" data-to="64">64</span></div><div class="row"><span>Required tests</span><span>8/8</span></div><div class="aside">+2,641 / −44 across 24 files</div></div>
+      <div class="scard reveal" style="--acc:var(--c-gpt)"><h3>GPT-5</h3><div class="who">Second</div><div class="num"><span class="count" data-to="60.5">60.5</span></div><div class="row"><span>Required tests</span><span>7/8</span></div><div class="aside">+2,200 / −95 across 25 files</div></div>
+      <div class="scard reveal" style="--acc:var(--c-high)"><h3>Opus 4.8 · high</h3><div class="who">Third</div><div class="num"><span class="count" data-to="55.5">55.5</span></div><div class="row"><span>Required tests</span><span>5/8</span></div><div class="aside">+1,893 / −21 across 21 files</div></div>
+      <div class="scard reveal" style="--acc:var(--c-grok)"><h3>Grok 4.5</h3><div class="who">Fourth</div><div class="num"><span class="count" data-to="54.5">54.5</span></div><div class="row"><span>Required tests</span><span>5/8</span></div><div class="aside">+1,472 / −61 across 19 files</div></div>
+      <div class="scard reveal" style="--acc:var(--c-xhigh)"><h3>Opus 4.8 · xhigh</h3><div class="who">Fifth</div><div class="num"><span class="count" data-to="50">50</span></div><div class="row"><span>Required tests</span><span>5/8</span></div><div class="aside">+2,760 / −60 across 24 files</div></div>
+    </div>
+
+    <div class="epi reveal">
+      <span class="plain">✦ Case status</span>
+      <p class="body" style="margin-top:0">As of this filing, issue #1159 and all five candidate PRs remain open. Nothing has merged. The second opinion changes no production code; it changes the questions I would require a final combined build to answer before real money touches it.</p>
+    </div>
+
+    <div class="cta reveal">
+      <h3>Check the receipts.</h3>
+      <p class="body" style="margin:0 auto 18px;max-width:48ch">Every score box, code citation, fault injection, panel disagreement, and calibration decision is preserved in the source comparison.</p>
+      <a href="https://www.richkuo.com">Read the full scoring receipts at www.richkuo.com</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links reveal">
+      <a href="https://github.com/richkuo/go-trader/issues/1159">Issue #1159</a>
+      <a href="https://github.com/richkuo/go-trader/pull/1333">PR #1333 · Fable 5</a>
+      <a href="https://github.com/richkuo/go-trader/pull/1332">PR #1332 · GPT-5</a>
+      <a href="https://github.com/richkuo/go-trader/pull/1336">PR #1336 · Opus high</a>
+      <a href="https://github.com/richkuo/go-trader/pull/1331">PR #1331 · Grok 4.5</a>
+      <a href="https://github.com/richkuo/go-trader/pull/1337">PR #1337 · Opus xhigh</a>
+    </div>
+    <p class="meta">AI Coding Bake-off · Episode 8.5 — The Hedge, a Codex second opinion · Issue #1159.<br>Winner: Fable 5 at 64 · Judge: Codex / GPT-5, whose own entry placed second at 60.5 · conflict and panel limitations disclosed above.<br>Created with LLM: Codex | high | Harness: content-from-bakeoff</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+<script>
+(function () {
+  // theme toggle
+  var root = document.documentElement;
+  var btn = document.getElementById("themeToggle");
+  try {
+    var saved = localStorage.getItem("theme");
+    if (saved) root.setAttribute("data-theme", saved);
+    else if (window.matchMedia("(prefers-color-scheme: light)").matches) root.setAttribute("data-theme", "light");
+  } catch (e) {}
+  btn.addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+  });
+
+  function fmt(v) { return v % 1 ? v.toFixed(1) : String(Math.round(v)); }
+
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    document.documentElement.classList.remove("js");
+    document.querySelectorAll(".dec").forEach(function (d) { d.classList.add("open"); });
+    document.getElementById("finale").classList.add("in");
+    document.querySelectorAll(".bar i[data-w]").forEach(function (b) { b.style.width = b.dataset.w + "%"; });
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  var mm = gsap.matchMedia();
+
+  mm.add("(prefers-reduced-motion: no-preference)", function () {
+    // hero entrance
+    gsap.to(".hero .reveal", { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: "power3.out", delay: 0.15 });
+
+    // counterweight beam — mirrored opposition, continuous loop
+    var tilt = gsap.timeline({ repeat: -1, yoyo: true, defaults: { duration: 1.9, ease: "sine.inOut" } });
+    tilt.to("#beam", { rotation: 7 }, 0)
+        .to("#panL", { y: 16 }, 0)
+        .to("#panR", { y: -16 }, 0);
+
+    // scroll reveals
+    var below = gsap.utils.toArray(".reveal").filter(function (el) { return !el.closest(".hero"); });
+    gsap.set(below, { opacity: 0, y: 40 });
+    ScrollTrigger.batch(below, {
+      start: "top 85%",
+      onEnter: function (els) {
+        gsap.to(els, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: "power3.out", overwrite: true });
+        els.forEach(function (el) {
+          el.querySelectorAll(".bar i[data-w]").forEach(function (b) { b.style.width = b.dataset.w + "%"; });
+          if (el.classList.contains("dec")) el.classList.add("open");
+        });
+      },
+    });
+
+    // count-ups (0.5-step preserves decimal scores exactly)
+    gsap.utils.toArray(".count").forEach(function (el) {
+      var o = { v: 0 };
+      gsap.to(o, { v: +el.dataset.to, duration: 1.3, ease: "power1.out", snap: { v: 0.5 },
+        scrollTrigger: { trigger: el, start: "top 88%" },
+        onUpdate: function () { el.textContent = fmt(o.v); } });
+    });
+
+    // finale spotlight
+    ScrollTrigger.create({ trigger: "#finale", start: "top 60%", once: true,
+      onEnter: function () { document.getElementById("finale").classList.add("in"); } });
+
+    window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+  });
+
+  mm.add("(prefers-reduced-motion: reduce)", function () {
+    document.querySelectorAll(".bar i[data-w]").forEach(function (b) { b.style.width = b.dataset.w + "%"; });
+    document.querySelectorAll(".count").forEach(function (el) { el.textContent = el.dataset.to; });
+    document.querySelectorAll(".dec").forEach(function (d) { d.classList.add("open"); });
+    document.getElementById("finale").classList.add("in");
+  });
+})();
+</script>
+</body>
+</html>
