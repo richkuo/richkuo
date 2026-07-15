@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Coding Bake-off Ep. 8.5: Same Code, Second Judge — Does the Verdict Survive?</title>
-<meta name="description" content="I gave the same five auto-hedge implementations to Codex for a second independent score. Every entry passed targeted tests. Every entry still exposed a partial-fill safety gap. Scroll for the new ranking.">
+<title>AI Coding Bake-off Ep. 8.5: Same Code, Second Judge. Does the Verdict Survive?</title>
+<meta name="description" content="I gave the same five auto-hedge builds to Codex for a second, independent score. Every entry passed its own tests. Every entry still had a gap when the exchange only filled part of an order. Scroll for the new ranking.">
 <link rel="canonical" href="https://www.richkuo.com/reports/issue-1159-codex/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Rich Kuo">
-<meta property="og:title" content="AI Coding Bake-off Ep. 8.5 — Same Code, Second Judge">
-<meta property="og:description" content="Five green test suites. Five reproduced partial-order safety gaps. Codex re-scored the same Episode 8 code; the second verdict is sealed at the bottom.">
+<meta property="og:title" content="AI Coding Bake-off Ep. 8.5: Same Code, Second Judge">
+<meta property="og:description" content="Five green test suites. Five reproduced safety gaps. Codex re-scored the same Episode 8 code. The second verdict is sealed at the bottom.">
 <meta property="og:url" content="https://www.richkuo.com/reports/issue-1159-codex/">
 <meta property="og:image" content="https://www.richkuo.com/reports/issue-1159-codex/og-issue-1159-codex-hedge-legs.png">
 <meta property="og:image:type" content="image/png">
@@ -20,26 +20,26 @@
 <meta property="article:modified_time" content="2026-07-13T00:00:00-04:00">
 <meta property="article:section" content="AI Coding Bake-off">
 <meta property="article:tag" content="Fable 5">
-<meta property="article:tag" content="GPT-5">
+<meta property="article:tag" content="GPT-5.6 Sol">
 <meta property="article:tag" content="Opus 4.8">
 <meta property="article:tag" content="Grok 4.5">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@richkuo7">
 <meta name="twitter:creator" content="@richkuo7">
-<meta name="twitter:title" content="AI Coding Bake-off Ep. 8.5 — Same Code, Second Judge">
-<meta name="twitter:description" content="Codex re-scored the same five auto-hedge builds. Every focused test suite was green. Every entry still exposed a partial-order safety gap.">
+<meta name="twitter:title" content="AI Coding Bake-off Ep. 8.5: Same Code, Second Judge">
+<meta name="twitter:description" content="Codex re-scored the same five auto-hedge builds. Every focused test suite was green. Every entry still had a gap in how it handled a partly filled order.">
 <meta name="twitter:image" content="https://www.richkuo.com/reports/issue-1159-codex/og-issue-1159-codex-hedge-legs.png">
 <meta name="twitter:image:alt" content="Episode 8.5 cover: same code, second judge, five contestants, and a sealed verdict.">
 <meta name="twitter:label1" content="Field"><meta name="twitter:data1" content="5 entries · same code">
-<meta name="twitter:label2" content="Shared finding"><meta name="twitter:data2" content="5 partial-order gaps">
+<meta name="twitter:label2" content="Shared finding"><meta name="twitter:data2" content="5 partial-fill gaps">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "@id": "https://www.richkuo.com/reports/issue-1159-codex/",
   "url": "https://www.richkuo.com/reports/issue-1159-codex/",
-  "headline": "AI Coding Bake-off Episode 8.5: Same Code, Second Judge — Does the Verdict Survive?",
-  "description": "Codex independently re-scored five implementations of automatic correlated hedge legs in a live crypto trading scheduler. All five focused test suites passed; each entry still exposed a partial-order safety gap. The verdict is sealed until the bottom of the report.",
+  "headline": "AI Coding Bake-off Episode 8.5: Same Code, Second Judge. Does the Verdict Survive?",
+  "description": "Codex independently re-scored five implementations of an automatic hedge trade in a live crypto trading bot. All five focused test suites passed. Each entry still had a safety gap when the exchange only filled part of an order. The verdict is sealed until the bottom of the report.",
   "image": "https://www.richkuo.com/reports/issue-1159-codex/og-issue-1159-codex-hedge-legs.png",
   "datePublished": "2026-07-13",
   "dateModified": "2026-07-13",
@@ -51,7 +51,7 @@
   "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.richkuo.com/reports/issue-1159-codex/" },
   "mentions": [
     { "@type": "SoftwareApplication", "name": "Fable 5", "applicationCategory": "DeveloperApplication", "creator": { "@type": "Organization", "name": "Anthropic" } },
-    { "@type": "SoftwareApplication", "name": "GPT-5", "applicationCategory": "DeveloperApplication", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
+    { "@type": "SoftwareApplication", "name": "GPT-5.6 Sol", "applicationCategory": "DeveloperApplication", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
     { "@type": "SoftwareApplication", "name": "Claude Opus 4.8", "applicationCategory": "DeveloperApplication", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
     { "@type": "SoftwareApplication", "name": "Grok 4.5", "applicationCategory": "DeveloperApplication", "creator": { "@type": "Organization", "name": "xAI", "url": "https://x.ai" } }
   ]
@@ -102,7 +102,7 @@
   [data-theme="light"] .stamp { mix-blend-mode: multiply; }
   .stamp.gold { color: var(--gold); border-color: var(--gold); }
 
-  /* redaction — static text, no JS dependency for the withhold */
+  /* redaction: static text, no JS dependency for the withhold */
   .redact { font-family: 'JetBrains Mono', monospace; background: var(--ink); color: var(--ink); border-radius: 3px; padding: 0 10px; letter-spacing: .1em; user-select: none; box-shadow: inset 0 0 0 1px var(--paper-edge); }
 
   /* hero */
@@ -116,7 +116,7 @@
   @keyframes drip { 0%,100% { transform: scaleY(.35); opacity: .4; } 50% { transform: scaleY(1); opacity: 1; } }
   .stamps-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 34px; }
 
-  /* scorecard video exhibit (declassified — lives in the finale) */
+  /* scorecard video exhibit (declassified: lives in the finale) */
   .exhibit-a { position: relative; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); padding: 14px; max-width: 300px; margin: 54px auto 0; }
   .exhibit-a video { width: 100%; border-radius: 10px; display: block; }
   .exhibit-a .tag { position: absolute; top: -13px; left: 18px; background: var(--bg); font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); padding: 3px 10px; border: 1px solid var(--line); border-radius: 4px; }
@@ -130,7 +130,7 @@
   .pan.left { left: 6px; top: 26px; color: var(--c-gpt); }
   .pan.right { right: 6px; top: 26px; color: var(--c-xhigh); }
 
-  /* contenders — personnel files */
+  /* contenders: personnel files */
   .files { display: grid; gap: 14px; margin-top: 40px; }
   .file { display: grid; grid-template-columns: 52px 1fr auto; gap: 18px; align-items: center; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 18px 22px; }
   .file .mark { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; }
@@ -227,12 +227,12 @@
   </defs>
 </svg>
 
-<!-- ─── HERO / FILE COVER — SECOND OPINION ─────────────────────── -->
+<!-- HERO / FILE COVER: SECOND OPINION -->
 <header class="hero">
   <div class="wrap">
     <span class="filetab reveal">Case file #1159 · AI bake-off · Episode 8.5 · Second opinion</span>
     <h1 class="reveal">Same five models.<br>A second judge.<br><span class="q">Does the verdict survive?</span></h1>
-    <p class="sub reveal">I gave the same five auto-hedge builds from Episode 8 to Codex and asked it to score from scratch. Same code. Same requirements. A different judge, stricter full-or-half scoring, and break-it-on-purpose tests at the exchange boundary. The result stays sealed until the bottom.</p>
+    <p class="sub reveal">I gave the same five auto-hedge builds from Episode 8 to Codex and asked it to score them from scratch. Same code, same requirements, a different judge, stricter full-credit-or-half-credit scoring, and tests built to break the code right at the exchange boundary. The result stays sealed until the bottom.</p>
     <div class="stamps-row reveal" aria-hidden="true">
       <span class="stamp gold">Second opinion</span>
       <span class="stamp">Same five PRs</span>
@@ -253,9 +253,9 @@
     <p class="exhibit reveal"><b>Exhibit A</b> · the job</p>
     <h2 class="reveal">Open one trade. Protect it with another.</h2>
     <div class="body reveal">
-      <p class="lead"><span class="plain">In plain English —</span> my bot trades crypto with real money. If it opens a large bet on Ethereum, the whole market can drag that bet down. A <em>hedge</em> is a smaller opposite bet on a related coin, such as Bitcoin, that softens a market-wide move.</p>
-      <p><a href="https://github.com/richkuo/go-trader/issues/1159" target="_blank" rel="noopener">Issue #1159</a> asked the bot to open that counter-bet automatically, size it correctly, and keep both trades synchronized through partial closes, emergency shutdowns, and a full restart.</p>
-      <p>The safety rule is simple: if the counter-bet cannot be confirmed, cancel the main trade. Never leave real money exposed while the bot reports everything is protected. Easy to say. The exchange makes it harder.</p>
+      <p class="lead"><span class="plain">In plain English:</span> my bot trades crypto with real money, on its own. If it opens a large bet on Ethereum, the whole market can drag that bet down with it. A <em>hedge</em> is a smaller opposite bet on a related coin, such as Bitcoin, that softens a market-wide move.</p>
+      <p><a href="https://github.com/richkuo/go-trader/issues/1159" target="_blank" rel="noopener">Issue #1159</a> asked the bot to open that counter-bet automatically, size it correctly, and keep both trades in sync through partial closes, emergency shutdowns, and a full restart.</p>
+      <p>The safety rule is simple: if the counter-bet cannot be confirmed, cancel the main trade. Never leave real money exposed while the bot reports that everything is protected. Easy to say. The exchange makes it harder.</p>
     </div>
   </div>
 </section>
@@ -265,9 +265,9 @@
     <p class="exhibit reveal"><b>Exhibit B</b> · the exchange trap</p>
     <h2 class="reveal">Half an order is not a whole order.</h2>
     <div class="body reveal">
-      <p class="lead"><span class="plain">In plain English —</span> an exchange can fill only part of an order. Ask for ten units and get five. The bot must track the five that remain instead of pretending all ten finished.</p>
-      <p>That one boundary touches every money path: opening the hedge, shrinking it, closing it, and canceling the main trade after a failure. Get it wrong and the bot's records can say “flat” while money is still live on the exchange.</p>
-      <p>Codex's fault injections found a version of that mistake in <em>all five entries</em>. Five targeted suites passed. Five partial-fill gaps survived. So the question was no longer “who wrote working code?” It was “whose proof and failure handling held up the longest?”</p>
+      <p class="lead"><span class="plain">In plain English:</span> an exchange can fill only part of an order. Ask for ten units and get five. The bot has to track the five that are left over instead of pretending all ten went through.</p>
+      <p>That one edge case touches every money path: opening the hedge, shrinking it, closing it, and canceling the main trade after a failure. Get it wrong, and the bot's own records can say "all clear" while real money is still exposed on the exchange.</p>
+      <p>Codex's fault-injection tests, which deliberately simulate a broken order, found a version of that same mistake in <em>all five entries</em>. Five focused test suites passed. Five partial-fill gaps survived anyway. So the real question was no longer "who wrote working code?" It was "whose proof and failure handling held up the longest?"</p>
     </div>
   </div>
 </section>
@@ -276,37 +276,56 @@
   <div class="wrap">
     <p class="exhibit reveal"><b>Exhibit C</b> · the contenders</p>
     <h2 class="reveal">Five entries. Three model families.</h2>
-    <p class="lead reveal">Each entry is a PR — a proposed batch of code changes. Opus entered twice at two effort settings, so the same model appears in two separate builds.</p>
+    <p class="lead reveal">Each entry is a PR, short for pull request, a proposed batch of code changes. Opus entered twice at two different effort settings, so the same model appears in two separate builds. Both Opus entries were also planned in advance by Fable 5 before Claude Code wrote the code, a two-step process called <em>fableplan</em>.</p>
     <div class="files">
       <a class="file reveal" href="https://github.com/richkuo/go-trader/pull/1331" target="_blank" rel="noopener" style="color:var(--c-grok);text-decoration:none">
         <span class="mark" aria-hidden="true"><svg><use href="#logo-xai"/></svg></span><div><h3 style="color:var(--fg)">Grok 4.5</h3><div class="role">xAI · Cursor · high</div></div><span class="status">PR #1331</span>
       </a>
       <a class="file reveal" href="https://github.com/richkuo/go-trader/pull/1332" target="_blank" rel="noopener" style="color:var(--c-gpt);text-decoration:none">
-        <span class="mark" aria-hidden="true"><svg><use href="#logo-openai"/></svg></span><div><h3 style="color:var(--fg)">GPT-5</h3><div class="role">OpenAI · Codex · high</div></div><span class="status">PR #1332</span>
+        <span class="mark" aria-hidden="true"><svg><use href="#logo-openai"/></svg></span><div><h3 style="color:var(--fg)">GPT-5.6 Sol</h3><div class="role">OpenAI · Codex · high</div></div><span class="status">PR #1332</span>
       </a>
       <a class="file reveal" href="https://github.com/richkuo/go-trader/pull/1333" target="_blank" rel="noopener" style="color:var(--c-fable);text-decoration:none">
         <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span><div><h3 style="color:var(--fg)">Fable 5</h3><div class="role">Anthropic · Claude Code · high</div></div><span class="status">PR #1333</span>
       </a>
       <a class="file reveal" href="https://github.com/richkuo/go-trader/pull/1336" target="_blank" rel="noopener" style="color:var(--c-high);text-decoration:none">
-        <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span><div><h3 style="color:var(--fg)">Opus 4.8 · high</h3><div class="role">Anthropic · Claude Code · high effort</div></div><span class="status">PR #1336</span>
+        <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span><div><h3 style="color:var(--fg)">Opus 4.8 · high</h3><div class="role">Anthropic · Claude Code · fableplan · high effort</div></div><span class="status">PR #1336</span>
       </a>
       <a class="file reveal" href="https://github.com/richkuo/go-trader/pull/1337" target="_blank" rel="noopener" style="color:var(--c-xhigh);text-decoration:none">
-        <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span><div><h3 style="color:var(--fg)">Opus 4.8 · xhigh</h3><div class="role">Anthropic · Claude Code · maximum effort</div></div><span class="status">PR #1337</span>
+        <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span><div><h3 style="color:var(--fg)">Opus 4.8 · xhigh</h3><div class="role">Anthropic · Claude Code · fableplan · maximum effort</div></div><span class="status">PR #1337</span>
       </a>
     </div>
   </div>
 </section>
 
+<!-- EXHIBIT C.5: REVIEW ATTEMPTS TO FIRST LGTM -->
 <section>
   <div class="wrap">
-    <p class="exhibit reveal"><b>Exhibit D</b> · how I judged</p>
-    <h2 class="reveal">Arithmetic first. Then try to break it.</h2>
+    <p class="exhibit reveal"><b>Exhibit D</b> · getting to yes</p>
+    <h2 class="reveal">How many tries did it take to pass review?</h2>
     <div class="body reveal">
-      <p class="lead"><span class="plain">In plain English —</span> I split the score into fixed boxes: the five implementation requirements, eight required safety tests, an accuracy check on each write-up, extra correctness, and reuse of the bot's existing machinery.</p>
-      <p>Reviewers checked the code at the final PR version, ran builds and tests, then changed one safety-critical behavior on purpose. If the entry's tests stayed green after sabotage, that safety claim lost credit. Every claimed defect went to a skeptic whose job was to disprove it.</p>
-      <p><em>Fairness note, said out loud:</em> Codex / GPT-5 ran this score, and GPT-5 is one of the contestants. Model names stayed out of review prompts.</p>
-      <p>Only the first two entries received the ideal panel of three reviewers who had seen no other entry. Limited review slots made the final three panels less independent. The scoring file records the exact compromise for each one.</p>
-      <p>The method is stricter than a normal code review. A score in the 50s or 60s does not mean the entry was useless. It means a live-money promise received half credit when one reproduced boundary case broke it.</p>
+      <p class="lead">Before any of these five builds was finished, it had to pass an automated code review, the same review process for all five, run back in Episode 8. An AI reviewer read the code and listed problems. The developer fixed them and asked for another look. That cycle repeated until the reviewer came back clean, what programmers call an <em>LGTM</em> (short for "looks good to me"). This is not part of Codex's re-score. It is unchanged public record from when the code was written, shown here because it says something about how hard each build was to finish.</p>
+    </div>
+    <div class="evi reveal" role="img" aria-label="Review rounds needed before the first clean pass: Opus high 2, Grok 4, Fable 4, GPT-5.6 Sol 5, Opus xhigh 5.">
+      <div class="evi-row"><div class="evi-lbl"><span style="color:var(--c-high)">Opus 4.8 · high</span><span class="val">2 rounds</span></div><div class="bar"><i data-w="40" style="background:var(--c-high)"></i></div></div>
+      <div class="evi-row"><div class="evi-lbl"><span style="color:var(--c-grok)">Grok 4.5</span><span class="val">4 rounds</span></div><div class="bar"><i data-w="80" style="background:var(--c-grok)"></i></div></div>
+      <div class="evi-row"><div class="evi-lbl"><span style="color:var(--c-fable)">Fable 5</span><span class="val">4 rounds</span></div><div class="bar"><i data-w="80" style="background:var(--c-fable)"></i></div></div>
+      <div class="evi-row"><div class="evi-lbl"><span style="color:var(--c-gpt)">GPT-5.6 Sol</span><span class="val">5 rounds</span></div><div class="bar"><i data-w="100" style="background:var(--c-gpt)"></i></div></div>
+      <div class="evi-row"><div class="evi-lbl"><span style="color:var(--c-xhigh)">Opus 4.8 · xhigh</span><span class="val">5 rounds</span></div><div class="bar"><i data-w="100" style="background:var(--c-xhigh)"></i></div></div>
+    </div>
+    <p class="foot-note reveal">Filed as an aside, never scored: how much code each entry added. Grok +1,472 lines · Opus high +1,893 · GPT-5.6 Sol +2,200 · Fable +2,641 · Opus xhigh +2,760.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="exhibit reveal"><b>Exhibit E</b> · how I judged</p>
+    <h2 class="reveal">Simple math first. Then try to break it.</h2>
+    <div class="body reveal">
+      <p class="lead"><span class="plain">In plain English:</span> I split the score into fixed boxes: the five implementation requirements, eight required safety tests, an accuracy check on each write-up, extra points for correctness beyond the basics, and points for reusing the bot's existing code instead of duplicating it.</p>
+      <p>Reviewers checked the final version of the code, ran the builds and tests, then changed one safety-critical behavior on purpose to see what would happen. If the entry's tests stayed green after that sabotage, the safety claim lost credit. Every claimed problem also went to a separate skeptic whose only job was to try to disprove it.</p>
+      <p><em>Fairness note, said out loud:</em> Codex, running on GPT-5.6 Sol, ran this scoring, and GPT-5.6 Sol is also one of the five contestants. Model names were kept out of the review prompts.</p>
+      <p>Only the first two entries reviewed got the ideal panel of three reviewers who had not seen any other entry. Limited review capacity made the final three panels less independent. The scoring file records exactly what compromise was made for each one.</p>
+      <p>This method is stricter than a normal code review. A score in the 50s or 60s does not mean an entry was useless. It means a promise involving real money got only half credit once one reproduced edge case broke it.</p>
     </div>
     <div style="margin-top:30px" class="reveal" aria-hidden="true"><span class="stamp">Conflict disclosed</span></div>
   </div>
@@ -314,15 +333,15 @@
 
 <section>
   <div class="wrap">
-    <p class="exhibit reveal"><b>Exhibit E</b> · pre-verdict evidence</p>
-    <h2 class="reveal">Green tests were the starting line.</h2>
+    <p class="exhibit reveal"><b>Exhibit F</b> · evidence before the verdict</p>
+    <h2 class="reveal">Green tests were only the starting line.</h2>
     <div class="body reveal">
-      <p class="lead">Every entry sized the smaller counter-bet correctly. Every entry remembered which two trades belonged together after a restart, handled ordinary opening and closing, and passed tests focused on this hedge feature.</p>
-      <p>The separation came from three questions: Does a partial order stay visible? Can the bot prove a recovered trade belongs to this strategy before touching it? Do the eight required safety tests exercise the exact failures named in the issue?</p>
+      <p class="lead">Every entry sized the smaller counter-bet correctly. Every entry remembered which two trades belonged together after a restart, handled ordinary opening and closing, and passed the tests focused on this one feature.</p>
+      <p>What actually separated them came down to three questions. Does a partly filled order stay visible instead of being treated as done? Can the bot prove a recovered trade belongs to this strategy before it touches it? Do the eight required safety tests actually exercise the exact failures named in the issue?</p>
       <p>One entry supplied all eight required tests. One supplied seven. The other three supplied five each. The names stay sealed for one more section.</p>
     </div>
     <div class="body reveal" style="margin-top:34px">
-      <p><em>Code volume was context, never score.</em> The five entries added between 1,472 and 2,760 lines. Their exact diffs appear only after the ranking.</p>
+      <p><em>How much code each entry added was context, never part of the score.</em> The five entries added between 1,472 and 2,760 lines. Their exact numbers appear again after the ranking.</p>
     </div>
   </div>
 </section>
@@ -331,7 +350,7 @@
   <div class="wrap">
     <p class="exhibit reveal"><b>The countdown</b> · second verdict</p>
     <h2 class="reveal">Five green suites. One ranking.</h2>
-    <p class="lead reveal">Compliments first, deductions second. Counting up from fifth place.</p>
+    <p class="lead reveal">Good points first, then the deductions. Counting up from fifth place.</p>
   </div>
 </section>
 
@@ -341,7 +360,7 @@
       <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span>
       <div><h3 style="color:var(--fg)">Opus 4.8 · xhigh</h3><div class="who">Fifth place · maximum effort</div></div>
       <div class="score" style="color:var(--c-xhigh)"><span class="count" data-to="50">50</span><small>/100</small></div>
-      <p class="blurb">The biggest build reused the bot's existing systems and handled ordinary opening and closing. What kept it fifth: a half-filled hedge can remain permanently too small because the bot refuses to add the missing amount. After a restart, it can also mistake an unrelated trade for its own and close it. Three of the eight required safety tests were missing.</p>
+      <p class="blurb">The biggest build reused the bot's existing systems well and handled ordinary opening and closing without trouble. What kept it fifth: a half-filled hedge can stay permanently too small, because the bot refuses to add the missing amount. After a restart, it can also mistake an unrelated trade for its own and close it by mistake. Three of the eight required safety tests were missing.</p>
     </div>
   </div>
 </section>
@@ -352,7 +371,7 @@
       <span class="mark" aria-hidden="true"><svg><use href="#logo-xai"/></svg></span>
       <div><h3 style="color:var(--fg)">Grok 4.5</h3><div class="who">Fourth place · smallest build</div></div>
       <div class="score" style="color:var(--c-grok)"><span class="count" data-to="54.5">54.5</span><small>/100</small></div>
-      <p class="blurb">The smallest change got the requested sizing and conflict checks right. One reviewer also ran the bot's full test set without a failure. What kept it here: a half-filled hedge is accepted as complete, and a partly filled close can erase the bot's entire record while money remains live. Three required safety tests were not meaningfully present.</p>
+      <p class="blurb">The smallest change got the requested sizing and conflict checks right. One reviewer also ran the bot's full test set with no failures. What kept it here: a half-filled hedge is treated as complete when it should not be, and a partly filled close can erase the bot's entire record of the trade while real money stays live. Three required safety tests were not meaningfully present.</p>
     </div>
   </div>
 </section>
@@ -363,7 +382,7 @@
       <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span>
       <div><h3 style="color:var(--fg)">Opus 4.8 · high</h3><div class="who">Third place</div></div>
       <div class="score" style="color:var(--c-high)"><span class="count" data-to="55.5">55.5</span><small>/100</small></div>
-      <p class="blurb">The second-smallest build had one clear place that kept the two trades synchronized, plus stronger restart recovery than the entries below it. What kept it third: an unrelated trade on the hedge coin can block protection without canceling the fresh main trade. A partial reduction can also hide the amount left over. Three required safety tests were missing.</p>
+      <p class="blurb">The second-smallest build had one clear, single place in the code that kept the two trades in sync, plus stronger restart recovery than the entries below it. What kept it third: an unrelated trade on the hedge coin can block protection without canceling the fresh main trade. A partial reduction can also hide how much is left over. Three required safety tests were missing.</p>
     </div>
   </div>
 </section>
@@ -372,9 +391,9 @@
   <div class="wrap">
     <div class="dec reveal" style="color:var(--c-gpt)">
       <span class="mark" aria-hidden="true"><svg><use href="#logo-openai"/></svg></span>
-      <div><h3 style="color:var(--fg)">GPT-5</h3><div class="who">Second place · the judge's own model</div></div>
+      <div><h3 style="color:var(--fg)">GPT-5.6 Sol</h3><div class="who">Second place · the judge's own model</div></div>
       <div class="score" style="color:var(--c-gpt)"><span class="count" data-to="60.5">60.5</span><small>/100</small></div>
-      <p class="blurb">The runner-up supplied seven of eight required safety tests, the second-best proof set in the field. It also recorded hedge profits, losses, and fees in the right account. What kept it second: partial opens and closes can make the exchange disagree with the bot's records. After a restart, it can mistake an old opening receipt for proof that a hedge closed.</p>
+      <p class="blurb">The runner-up supplied seven of eight required safety tests, the second-best proof in the field. It also recorded hedge profits, losses, and fees correctly. What kept it second: partial opens and closes can make the exchange disagree with the bot's own records. After a restart, it can also mistake an old opening receipt for proof that a hedge already closed.</p>
     </div>
   </div>
 </section>
@@ -382,29 +401,29 @@
 <section id="verdict">
   <div class="wrap">
     <p class="exhibit reveal"><b>Final page</b> · verdict declassified</p>
-    <h2 class="reveal">The winner stayed. Its score fell from 96 to 64.</h2>
+    <h2 class="reveal">The winner stayed the same. Its score fell from 96 to 64.</h2>
     <div class="dec winner reveal" id="finale" style="color:var(--c-fable)">
       <span class="mark" aria-hidden="true"><svg><use href="#logo-anthropic"/></svg></span>
       <div><h3>Fable 5</h3><div class="who">First place · 3.5-point margin</div></div>
       <div class="score"><span class="count" data-to="64">64</span><small>/100</small></div>
-      <p class="blurb">Fable 5 wins because it is the only entry with all eight required safety tests. One central routine also keeps ordinary opens, reductions, and closes synchronized.</p>
-      <p class="blurb">The win is not a clean bill of health. The bot accepts a hedge that falls less than 1% short as complete. A partial reduction can hide money left over. After a restart, it can also invent a closing price when the exchange receipt is missing.</p>
+      <p class="blurb">Fable 5 wins because it is the only entry with all eight required safety tests. One central routine also keeps ordinary opens, reductions, and closes in sync with each other.</p>
+      <p class="blurb">The win is not a clean bill of health. The bot treats a hedge that falls just under 1% short as complete. A partial reduction can hide money left over. After a restart, it can also invent a closing price when the exchange receipt for that trade is missing.</p>
     </div>
 
     <div class="coi reveal">
-      <span class="plain">⚖ About the judge — read before trusting the result</span>
-      <p><em>Codex / GPT-5 ran the scoring, and GPT-5 was a contestant.</em> Its own entry placed second at 60.5, behind Fable 5 at 64.</p>
-      <p>That does not erase the conflict. The safeguards were blinded model names, fixed arithmetic sheets, code citations, and reproduced fault injections. The method limitation is also on the record: the environment's fresh-agent cap prevented the ideal fifteen-fresh-reviewer protocol for the final three PRs. Read the receipts before treating a half-point as physics.</p>
+      <span class="plain">⚖ About the judge: read this before trusting the result</span>
+      <p><em>Codex, running on GPT-5.6 Sol, ran the scoring, and GPT-5.6 Sol was also a contestant.</em> Its own entry placed second at 60.5, behind Fable 5 at 64.</p>
+      <p>That does not erase the conflict of interest. The safeguards were blinded model names, a fixed scoring sheet, code citations for every claim, and reproduced fault injections anyone can re-run. The method's limits are also on the record: the review system's cap on fresh reviewer sessions meant the final three PRs did not get the full fifteen-fresh-reviewer setup the first two got. Read the receipts before you treat a half-point difference as an exact science.</p>
     </div>
 
     <div class="body reveal" style="margin-top:44px">
-      <p class="lead">Same winner as Episode 8. A different lesson. The prior strict pass rewarded the entry whose eight required tests caught its chosen sabotage. Codex pressed harder on partial exchange orders and proof of ownership after a restart. Every entry broke somewhere, so 14 points covered the field: 50 to 64.</p>
-      <p>The winner's edge is still proof: eight required safety tests versus seven for second and five for everyone else. But the headline is the shared miss. Five models wrote thousands of lines around a live-money feature, and none handled every form of “the exchange only did half” safely.</p>
+      <p class="lead">Same winner as Episode 8, but a different lesson. The earlier, stricter pass rewarded the entry whose eight required tests caught the sabotage it chose to test. Codex pressed harder on partly filled exchange orders and on proving trade ownership after a restart. Every entry broke somewhere, so 14 points covered the whole field, from 50 to 64.</p>
+      <p>The winner's edge is still proof: eight required safety tests, against seven for second place and five for everyone else. But the real headline is the shared miss. Five models wrote thousands of lines of code around a feature that moves real money, and not one of them safely handled every version of "the exchange only did half the job."</p>
     </div>
 
     <div class="cards">
       <div class="scard reveal" style="--acc:var(--c-fable)"><h3>Fable 5</h3><div class="who">Winner</div><div class="num"><span class="count" data-to="64">64</span></div><div class="row"><span>Required tests</span><span>8/8</span></div><div class="aside">+2,641 / −44 across 24 files</div></div>
-      <div class="scard reveal" style="--acc:var(--c-gpt)"><h3>GPT-5</h3><div class="who">Second</div><div class="num"><span class="count" data-to="60.5">60.5</span></div><div class="row"><span>Required tests</span><span>7/8</span></div><div class="aside">+2,200 / −95 across 25 files</div></div>
+      <div class="scard reveal" style="--acc:var(--c-gpt)"><h3>GPT-5.6 Sol</h3><div class="who">Second</div><div class="num"><span class="count" data-to="60.5">60.5</span></div><div class="row"><span>Required tests</span><span>7/8</span></div><div class="aside">+2,200 / −95 across 25 files</div></div>
       <div class="scard reveal" style="--acc:var(--c-high)"><h3>Opus 4.8 · high</h3><div class="who">Third</div><div class="num"><span class="count" data-to="55.5">55.5</span></div><div class="row"><span>Required tests</span><span>5/8</span></div><div class="aside">+1,893 / −21 across 21 files</div></div>
       <div class="scard reveal" style="--acc:var(--c-grok)"><h3>Grok 4.5</h3><div class="who">Fourth</div><div class="num"><span class="count" data-to="54.5">54.5</span></div><div class="row"><span>Required tests</span><span>5/8</span></div><div class="aside">+1,472 / −61 across 19 files</div></div>
       <div class="scard reveal" style="--acc:var(--c-xhigh)"><h3>Opus 4.8 · xhigh</h3><div class="who">Fifth</div><div class="num"><span class="count" data-to="50">50</span></div><div class="row"><span>Required tests</span><span>5/8</span></div><div class="aside">+2,760 / −60 across 24 files</div></div>
@@ -412,7 +431,7 @@
 
     <div class="epi reveal">
       <span class="plain">✦ Case status</span>
-      <p class="body" style="margin-top:0">As of this filing, issue #1159 and all five candidate PRs remain open. Nothing has merged. The second opinion changes no production code; it changes the questions I would require a final combined build to answer before real money touches it.</p>
+      <p class="body" style="margin-top:0">As of this filing, issue #1159 and all five candidate PRs are still open. Nothing has merged. This second opinion changes no production code. It changes the questions I would want a final, combined build to answer before real money touches it.</p>
     </div>
 
     <div class="cta reveal">
@@ -429,12 +448,12 @@
     <div class="links reveal">
       <a href="https://github.com/richkuo/go-trader/issues/1159">Issue #1159</a>
       <a href="https://github.com/richkuo/go-trader/pull/1333">PR #1333 · Fable 5</a>
-      <a href="https://github.com/richkuo/go-trader/pull/1332">PR #1332 · GPT-5</a>
+      <a href="https://github.com/richkuo/go-trader/pull/1332">PR #1332 · GPT-5.6 Sol</a>
       <a href="https://github.com/richkuo/go-trader/pull/1336">PR #1336 · Opus high</a>
       <a href="https://github.com/richkuo/go-trader/pull/1331">PR #1331 · Grok 4.5</a>
       <a href="https://github.com/richkuo/go-trader/pull/1337">PR #1337 · Opus xhigh</a>
     </div>
-    <p class="meta">AI Coding Bake-off · Episode 8.5 — The Hedge, a Codex second opinion · Issue #1159.<br>Winner: Fable 5 at 64 · Judge: Codex / GPT-5, whose own entry placed second at 60.5 · conflict and panel limitations disclosed above.<br>Created with LLM: Codex | high | Harness: content-from-bakeoff</p>
+    <p class="meta">AI Coding Bake-off · Episode 8.5, The Hedge, a Codex second opinion · Issue #1159.<br>Winner: Fable 5 at 64 · Judge: Codex, running on GPT-5.6 Sol, whose own entry placed second at 60.5 · conflict of interest and panel limits disclosed above.<br>Updated with LLM: Opus 4.8 | high | Harness: Claude Code</p>
   </div>
 </footer>
 
@@ -472,7 +491,7 @@
     // hero entrance
     gsap.to(".hero .reveal", { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: "power3.out", delay: 0.15 });
 
-    // counterweight beam — mirrored opposition, continuous loop
+    // counterweight beam, mirrored opposition, continuous loop
     var tilt = gsap.timeline({ repeat: -1, yoyo: true, defaults: { duration: 1.9, ease: "sine.inOut" } });
     tilt.to("#beam", { rotation: 7 }, 0)
         .to("#panL", { y: 16 }, 0)
