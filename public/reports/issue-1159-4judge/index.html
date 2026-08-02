@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ===== SEO ===== -->
+<title>AI Coding Bake-off Ep. 9: Twenty-Five Entries, Four Judges, One Winner? (Issue #1159, Re-judged)</title>
+<meta name="description" content="Four entries arrived after grading closed, so all twenty-five entries from nine AI coding models were re-judged from scratch by a blind four-judge panel (Fable 5, GPT-5.6 Sol, Grok 4.5, Opus 5). Opus 5 at xhigh won its series debut at 97.00, the only entry every judge put in its own top three. Full 25-row scorecard, self-score disclosure, and the no-self podium flip. Explained for non-coders." />
+<meta name="keywords" content="AI coding comparison, Opus 5, Fable 5, Kimi, GPT-5.6, Grok 4.5, Sonnet 5, Opus 4.8, Anthropic, OpenAI, xAI, Moonshot AI, LLM judge panel, blind judging, self-score bias, LLM benchmark, agentic coding, hedge, trading bot, Rich Kuo" />
+<meta name="author" content="Rich Kuo" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://www.richkuo.com/reports/issue-1159-4judge/" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0908" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbf6ed" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Rich Kuo" />
+<meta property="og:title" content="AI Coding Bake-off Ep. 9: Four Late Entries Forced a Re-grade. A First-Timer Won." />
+<meta property="og:description" content="Twenty-five entries from nine AI models, re-judged blind by a four-judge panel. Opus 5's very first entry won at 97.00, the only entry every judge put in its own top three. The full scorecard, the self-score disclosure, and the podium that moves when self-scores leave." />
+<meta property="og:url" content="https://www.richkuo.com/reports/issue-1159-4judge/" />
+<meta property="og:image" content="https://www.richkuo.com/reports/issue-1159-4judge/og-ep-9.png" />
+<meta property="og:image:width" content="3600" />
+<meta property="og:image:height" content="1890" />
+<meta property="og:image:alt" content="AI Coding Bake-off Episode 9: twenty-five entries from nine models re-judged by four blind AI judges; Opus 5 xhigh wins its debut at 97.00" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:author" content="Rich Kuo" />
+<meta property="article:published_time" content="2026-08-02" />
+<meta property="article:modified_time" content="2026-08-02" />
+<meta property="article:section" content="AI &amp; Developer Tools" />
+<meta property="article:tag" content="Opus 5" />
+<meta property="article:tag" content="Fable 5" />
+<meta property="article:tag" content="Kimi" />
+<meta property="article:tag" content="GPT-5.6 Sol" />
+<meta property="article:tag" content="GPT-5.6 Terra" />
+<meta property="article:tag" content="GPT-5.6 Luna" />
+<meta property="article:tag" content="Grok 4.5" />
+<meta property="article:tag" content="Sonnet 5" />
+<meta property="article:tag" content="Opus 4.8" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@richkuo7" />
+<meta name="twitter:creator" content="@richkuo7" />
+<meta name="twitter:title" content="AI Coding Bake-off Ep. 9: Four Late Entries Forced a Re-grade. A First-Timer Won." />
+<meta name="twitter:description" content="Twenty-five entries, nine models, four blind AI judges. Opus 5's series debut won at 97.00. The podium changes when you strip the judges' self-scores, and the mechanism is the opposite of what you'd guess." />
+<meta name="twitter:image" content="https://www.richkuo.com/reports/issue-1159-4judge/og-ep-9.png" />
+<meta name="twitter:image:alt" content="AI Coding Bake-off Episode 9: twenty-five entries re-judged by four blind AI judges; Opus 5 xhigh wins its debut at 97.00" />
+<meta name="twitter:label1" content="Winner" />
+<meta name="twitter:data1" content="Opus 5 (xhigh, debut) at 97.00" />
+<meta name="twitter:label2" content="Field" />
+<meta name="twitter:data2" content="25 entries, 9 models, 4 judges, blind" />
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "AI Coding Bake-off Ep. 9: Four Late Entries Forced a Re-grade. A First-Timer Won. (Issue #1159, Re-judged)",
+  "description": "Four entries arrived after grading closed, so all twenty-five entries from nine AI coding models were re-judged from scratch by a blind four-judge panel (Fable 5, GPT-5.6 Sol, Grok 4.5, Opus 5), all at high effort, labels A to Y. Opus 5 at xhigh won its series debut at 97.00. Includes the full 25-row scorecard, the self-score disclosure, the no-verification disclosure, and the no-self podium flip. Explained for non-coders.",
+  "image": "https://www.richkuo.com/reports/issue-1159-4judge/og-ep-9.png",
+  "url": "https://www.richkuo.com/reports/issue-1159-4judge/",
+  "datePublished": "2026-08-02",
+  "dateModified": "2026-08-02",
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true,
+  "author": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "publisher": { "@type": "Person", "name": "Rich Kuo", "url": "https://www.richkuo.com" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.richkuo.com/reports/issue-1159-4judge/" },
+  "keywords": "AI coding comparison, Opus 5, Fable 5, Kimi, GPT-5.6 Sol, Grok 4.5, Sonnet 5, Opus 4.8, blind LLM judging, self-score bias, hedge, trading bot",
+  "articleSection": "AI & Developer Tools",
+  "about": "A twenty-five-entry AI coding bake-off on a live trading bot's auto-hedging feature, re-judged from scratch by a blind four-judge panel after four late entries arrived. Scores are the mean of four judge opinions as submitted, with self-scores flagged and a no-self column; no verification pass ran.",
+  "mentions": [
+    { "@type": "SoftwareApplication", "name": "Opus 5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
+    { "@type": "SoftwareApplication", "name": "Fable 5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
+    { "@type": "SoftwareApplication", "name": "Kimi", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Moonshot AI", "url": "https://moonshot.ai" } },
+    { "@type": "SoftwareApplication", "name": "GPT-5.6 Sol", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
+    { "@type": "SoftwareApplication", "name": "GPT-5.6 Terra", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
+    { "@type": "SoftwareApplication", "name": "GPT-5.6 Luna", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "OpenAI", "url": "https://openai.com" } },
+    { "@type": "SoftwareApplication", "name": "Grok 4.5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "xAI", "url": "https://x.ai" } },
+    { "@type": "SoftwareApplication", "name": "Sonnet 5", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } },
+    { "@type": "SoftwareApplication", "name": "Opus 4.8", "applicationCategory": "DeveloperApplication", "operatingSystem": "Web", "creator": { "@type": "Organization", "name": "Anthropic", "url": "https://anthropic.com" } }
+  ]
+}
+</script>
+<!-- ===== /SEO ===== -->
+<script>
+  /* set saved theme before paint to avoid a flash; 'auto' leaves it to the OS */
+  document.documentElement.classList.add('js');
+  (function(){ try { var p = localStorage.getItem('theme-pref');
+    if (p === 'light' || p === 'dark') document.documentElement.setAttribute('data-theme', p);
+  } catch(e){} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Hanken+Grotesk:wght@300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0a0908;
+    --char: #14110d;
+    --char2: #1d1812;
+    --gold: #e3b25a;
+    --gold-glow: rgba(227, 178, 90, 0.5);
+    --paper: #f4ede0;
+    --muted: #8c8276;
+    --muted2: #5a544b;
+    --line: rgba(227, 178, 90, 0.16);
+    --track: rgba(255,255,255,0.06);
+    --hairline: rgba(255,255,255,0.05);
+    --grain-opacity: 0.045;
+    --hero-glow: rgba(227,178,90,0.16);
+    --finale-grad: linear-gradient(180deg, #fbecc8, var(--gold) 55%, #b9863a);
+    --scrim: rgba(6,5,4,0.72);
+    --danger: #d4735e;
+    --danger-bg: rgba(212,115,94,0.07);
+    --flag: #d9a83f;
+    --flag-bg: rgba(217,168,63,0.10);
+    /* contestant signatures (dark ground) */
+    --c-opus5: #d98a6d;
+    --c-fable: #c2a284;
+    --c-kimi: #d7dae0;
+    --c-sol: #74AA9C;
+    --c-terra: #7fbb8f;
+    --c-luna: #8fa9c9;
+    --c-grok: #a4b2bd;
+    --c-sonnet: #c98f57;
+    --c-opus48: #cc7a54;
+  }
+  :root[data-theme="light"] {
+    --black: #fbf6ed;
+    --char: #f2e7d7;
+    --char2: #fffdf8;
+    --gold: #9a6510;
+    --gold-glow: rgba(154, 101, 16, 0.35);
+    --paper: #26211b;
+    --muted: #71675c;
+    --muted2: #a6998a;
+    --line: rgba(154, 101, 16, 0.24);
+    --track: rgba(38,33,27,0.08);
+    --hairline: rgba(38,33,27,0.08);
+    --grain-opacity: 0.028;
+    --hero-glow: rgba(154,101,16,0.14);
+    --finale-grad: linear-gradient(180deg, #c79a45, #8a5f22 60%, #6d4a1a);
+    --scrim: rgba(60,50,32,0.4);
+    --danger: #ae4e3c;
+    --danger-bg: rgba(174,78,60,0.07);
+    --flag: #b3801f;
+    --flag-bg: rgba(179,128,31,0.10);
+    --c-opus5: #b85e45;
+    --c-fable: #5c4636;
+    --c-kimi: #141414;
+    --c-sol: #31786f;
+    --c-terra: #3f7d4e;
+    --c-luna: #4e6b8a;
+    --c-grok: #596671;
+    --c-sonnet: #8a5a2e;
+    --c-opus48: #9f5234;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --black: #fbf6ed;
+      --char: #f2e7d7;
+      --char2: #fffdf8;
+      --gold: #9a6510;
+      --gold-glow: rgba(154, 101, 16, 0.35);
+      --paper: #26211b;
+      --muted: #71675c;
+      --muted2: #a6998a;
+      --line: rgba(154, 101, 16, 0.24);
+      --track: rgba(38,33,27,0.08);
+      --hairline: rgba(38,33,27,0.08);
+      --grain-opacity: 0.028;
+      --hero-glow: rgba(154,101,16,0.14);
+      --finale-grad: linear-gradient(180deg, #c79a45, #8a5f22 60%, #6d4a1a);
+      --scrim: rgba(60,50,32,0.4);
+      --danger: #ae4e3c;
+      --danger-bg: rgba(174,78,60,0.07);
+      --flag: #b3801f;
+      --flag-bg: rgba(179,128,31,0.10);
+      --c-opus5: #b85e45;
+      --c-fable: #5c4636;
+      --c-kimi: #141414;
+      --c-sol: #31786f;
+      --c-terra: #3f7d4e;
+      --c-luna: #4e6b8a;
+      --c-grok: #596671;
+      --c-sonnet: #8a5a2e;
+      --c-opus48: #9f5234;
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    background: var(--black); color: var(--paper);
+    font-family: 'Hanken Grotesk', sans-serif; font-weight: 350; line-height: 1.65;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    transition: background-color .45s ease, color .45s ease;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection { background: var(--gold); color: var(--black); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .display { font-family: 'Fraunces', serif; font-weight: 600; line-height: 0.98; letter-spacing: -0.02em; font-optical-sizing: auto; }
+  .serif-it { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; padding: 90px 0 80px; }
+  .hero::before { content: ""; position: absolute; top: -30%; left: 50%; width: 120vw; height: 120vh; transform: translateX(-50%); background: radial-gradient(ellipse 45% 40% at 50% 32%, var(--hero-glow), transparent 60%); pointer-events: none; }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero > .kicker { position: absolute; top: 40px; left: 28px; z-index: 3; }
+  .hero h1 { font-size: clamp(2.2rem, 7vw, 5.2rem); margin: 0.2em 0 0.1em; }
+  .hero h1 em { color: var(--gold); }
+  .hero .sub { font-size: clamp(1.02rem, 2.2vw, 1.32rem); color: var(--muted); margin-top: 1.4rem; max-width: 68ch; }
+  .hero .sub b { color: var(--paper); font-weight: 600; }
+  .scrollcue { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted2); z-index: 3; animation: bob 2.4s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{transform:translate(-50%,0);opacity:.5} 50%{transform:translate(-50%,8px);opacity:1} }
+
+  .hero-title-row { display: flex; align-items: center; gap: 40px; width: fit-content; margin: 0 auto; }
+  .logo-battle { position: relative; width: 140px; height: 375px; flex-shrink: 0; overflow: visible; }
+  .logo-battle::before { content: ""; position: absolute; left: 50%; top: 49px; width: 160px; height: 160px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, var(--gold-glow), transparent 70%); opacity: .5; pointer-events: none; }
+  .lb { position: absolute; left: 29px; top: 0; width: 82px; height: 82px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--char2); border: 1px solid var(--line); will-change: transform; }
+  .lb svg { width: 46px; height: 46px; }
+  .lb-anthropic { color: var(--c-opus5); }
+  .lb-openai    { color: var(--c-sol);  top: 92px; }  /* static fallback stack (no JS) */
+  .lb-xai       { color: var(--c-grok); top: 184px; }
+  .lb-kimi      { color: var(--c-kimi); top: 276px; }
+  .js .lb { top: 0; }  /* with JS, GSAP positions all four from a common origin via transforms */
+
+  .hero-phone { flex-shrink: 0; width: min(230px, 56vw); border: 1px solid var(--line); border-radius: 26px; padding: 10px; background: var(--char); box-shadow: 0 24px 70px rgba(0,0,0,.35); }
+  .hero-phone video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 18px; display: block; background: var(--char2); }
+  .hero-phone .cap { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted2); text-align: center; padding: 8px 4px 2px; }
+
+  section { padding: clamp(80px, 13vh, 160px) 0; position: relative; }
+  .seclabel { display:flex; align-items:center; gap:18px; margin-bottom: 2.6rem; }
+  .seclabel .no { font-family:'Fraunces',serif; font-style:italic; font-size:1.1rem; color:var(--gold); }
+  .seclabel .ln { flex:1; height:1px; background:var(--line); }
+  h2.sec { font-size: clamp(1.9rem, 5vw, 3.3rem); margin-bottom: 1.4rem; }
+  .lead { font-size: 1.16rem; color: var(--muted); max-width: 70ch; }
+  .lead b { color: var(--paper); font-weight: 600; }
+  .lead + .lead { margin-top: 1.2rem; }
+
+  /* GSAP drives reveals; only hide when JS is active so a no-JS visitor still sees everything */
+  .js .reveal { opacity: 0; transform: translateY(36px); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  .loopnote { margin-top:1.8rem; padding:18px 22px; border-left:2px solid var(--gold); background: rgba(227,178,90,0.05); border-radius: 0 10px 10px 0; font-size:.98rem; color:var(--muted); max-width: 78ch; }
+  .loopnote b { color:var(--paper); }
+  .honest { margin-top:1.8rem; padding:22px 26px; border:1px solid rgba(212,115,94,.45); border-left:3px solid var(--danger); border-radius:0 12px 12px 0; background:var(--danger-bg); font-size:1rem; color:var(--muted); max-width:78ch; }
+  .honest b { color:var(--paper); }
+  .honest .hk { font-family:'JetBrains Mono',monospace; font-size:.64rem; letter-spacing:.26em; text-transform:uppercase; color:var(--danger); display:block; margin-bottom:.6rem; }
+  .flagnote { margin-top:1.8rem; padding:22px 26px; border:1px solid rgba(217,168,63,.45); border-left:3px solid var(--flag); border-radius:0 12px 12px 0; background:var(--flag-bg); font-size:1rem; color:var(--muted); max-width:78ch; }
+  .flagnote b { color:var(--paper); }
+  .flagnote .hk { font-family:'JetBrains Mono',monospace; font-size:.64rem; letter-spacing:.26em; text-transform:uppercase; color:var(--flag); display:block; margin-bottom:.6rem; }
+
+  .chip { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; padding:3px 9px; border-radius:999px; border:1px solid var(--flag); color:var(--flag); background:var(--flag-bg); white-space:nowrap; }
+  .chip.star { border-color: var(--line); color: var(--gold); background: transparent; }
+  .chip.debut { border-color: var(--line); color: var(--muted); background: transparent; }
+
+  /* the field: model grid */
+  .fieldgrid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 2rem; }
+  .mcard { background: linear-gradient(160deg, var(--char2), var(--char)); border:1px solid var(--line); border-radius:14px; padding:20px 20px 16px; position:relative; overflow:hidden; }
+  .mcard.late { border-color: var(--gold); box-shadow: 0 0 30px rgba(227,178,90,0.08); }
+  .mcard .tape { position:absolute; top:0; left:0; right:0; height:3px; background: var(--sig, var(--gold)); opacity:.85; }
+  .mcard h3 { font-family:'Fraunces',serif; font-weight:600; font-size:1.3rem; display:flex; align-items:center; gap:9px; }
+  .mcard h3 .logo { width:1.05em; height:1.05em; color: var(--sig, var(--gold)); }
+  .mcard .lab { font-family:'JetBrains Mono',monospace; font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-top:4px; }
+  .mcard .cnt { color:var(--muted); font-size:.9rem; margin-top:10px; }
+  .mcard .cnt b { color:var(--paper); font-weight:600; }
+
+  /* full table (spoiler) */
+  details.spoiler { margin-top: 2.2rem; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(160deg, var(--char2), var(--char)); overflow: hidden; }
+  details.spoiler summary { list-style: none; cursor: pointer; padding: 24px 28px; display: flex; align-items: center; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); min-height: 44px; }
+  details.spoiler summary::-webkit-details-marker { display: none; }
+  details.spoiler summary .tri { transition: transform .25s; }
+  details.spoiler[open] summary .tri { transform: rotate(90deg); }
+  details.spoiler summary .hint { color: var(--muted2); letter-spacing: .08em; text-transform: none; font-size: .72rem; margin-left: auto; text-align: right; }
+  details.spoiler .tblwrap { padding: 0 18px 22px; }
+  .tblwrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tbl { width:100%; border-collapse:collapse; margin-top:.4rem; font-size:.9rem; min-width: 780px; }
+  .tbl th { text-align:left; font-family:'JetBrains Mono',monospace; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); font-weight:500; padding:0 10px 12px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  .tbl th.r, .tbl td.r { text-align: right; }
+  .tbl td { padding:11px 10px; border-bottom:1px solid var(--hairline); vertical-align:middle; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tbl tr:last-child td { border-bottom:none; }
+  .tbl .model { font-weight:600; color:var(--paper); }
+  .tbl .model .logo { width:1em; height:1em; vertical-align:-0.16em; margin-right:8px; }
+  .tbl .num { font-family:'JetBrains Mono',monospace; }
+  .tbl .mean { font-family:'Fraunces',serif; font-size:1.08rem; font-weight:600; }
+  .tbl .self { color: var(--gold); font-weight: 700; }
+  .tbl tr.lc td { background: var(--flag-bg); }
+  .tbl a.pr { color: var(--muted); text-decoration: none; transition: color .2s; }
+  .tbl a.pr:hover { color: var(--gold); }
+  .tbl .eff { color: var(--muted); font-weight: 400; font-size: .82em; }
+  .tbl-legend { margin-top: 1rem; font-size: .84rem; color: var(--muted2); max-width: 78ch; }
+  .tbl-legend b { color: var(--muted); }
+
+  /* verdict + countdown */
+  .verdict-intro { text-align:center; }
+  .verdict-intro h2 { font-size: clamp(2.4rem, 7vw, 5rem); }
+  .verdict-intro .lead { margin: 1.4rem auto 0; }
+
+  .fastlist { margin-top: 2rem; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: linear-gradient(160deg, var(--char2), var(--char)); }
+  .fl-row { display: grid; grid-template-columns: 56px minmax(0,1fr) auto auto; gap: 14px; align-items: center; padding: 13px 22px; border-bottom: 1px solid var(--hairline); }
+  .fl-row:last-child { border-bottom: none; }
+  .fl-rank { font-family:'Fraunces',serif; font-style:italic; font-size:1.15rem; color:var(--muted2); text-align:right; font-variant-numeric: tabular-nums; }
+  .fl-name { font-weight:600; color:var(--paper); display:flex; align-items:center; gap:9px; min-width:0; flex-wrap:wrap; }
+  .fl-name .logo { width:1em; height:1em; color: var(--sig, var(--muted)); flex:0 0 auto; }
+  .fl-name .eff { font-family:'JetBrains Mono',monospace; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:400; }
+  .fl-pr { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--muted2); }
+  .fl-pr a { color: inherit; text-decoration: none; }
+  .fl-pr a:hover { color: var(--gold); }
+  .fl-score { font-family:'Fraunces',serif; font-weight:600; font-size:1.2rem; color:var(--sig, var(--paper)); text-align:right; font-variant-numeric: tabular-nums; }
+
+  .rank { min-height: 100svh; display:flex; align-items:center; }
+  .rank .inner { width:100%; }
+  .placetag { font-family:'Fraunces',serif; font-style:italic; font-size: clamp(1rem,2.4vw,1.4rem); color: var(--muted); letter-spacing:.02em; }
+  .rankrow { display:grid; grid-template-columns: minmax(0,1fr) auto; gap:30px; align-items:center; margin-top:.4rem; }
+  .rankname { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(2.4rem, 8vw, 5.2rem); line-height:.96; letter-spacing:-.02em; }
+  .rankname .eff { display:inline-block; font-family:'JetBrains Mono',monospace; font-weight:400; font-size:.28em; letter-spacing:.18em; text-transform:uppercase; color:var(--sig,var(--muted)); vertical-align:.55em; margin-left:.5em; }
+  .rankname .sub { display:block; font-family:'Hanken Grotesk',sans-serif; font-style:normal; font-weight:400; font-size: clamp(.9rem,1.6vw,1.05rem); color:var(--muted); letter-spacing:0; margin-top:.9rem; max-width:56ch; line-height:1.55; }
+  .rankname .sub b { color:var(--paper); font-weight:600; }
+  .score { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(3.6rem, 15vw, 10rem); line-height:.8; letter-spacing:-.04em; color: var(--sig, var(--gold)); text-align:right; font-variant-numeric: tabular-nums; }
+  .score small { font-size:.24em; color:var(--muted); font-weight:400; letter-spacing:0; }
+  .rankrule { height:1px; background:var(--line); margin-top:2.4rem; }
+  .ranklogo { display:inline-flex; margin-bottom:18px; }
+  .ranklogo .logo { width:44px; height:44px; color: var(--sig, var(--gold)); }
+
+  .awards { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; margin-top:1rem; }
+  .award { background: linear-gradient(160deg,var(--char2),var(--char)); border:1px solid var(--line); border-radius:14px; padding:30px 28px; }
+  .award .crown { font-size:1.5rem; }
+  .award h4 { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin:.8rem 0 .5rem; }
+  .award .who { font-family:'Fraunces',serif; font-size:1.6rem; font-weight:600; color: var(--sig, var(--paper)); }
+  .award p { color:var(--muted); font-size:.95rem; margin-top:.5rem; }
+  .award p b { color:var(--paper); font-weight:600; }
+
+  /* winner finale */
+  .finale { min-height: 100svh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; padding: clamp(90px,13vh,160px) 0; }
+  .finale::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 50% 42%, rgba(227,178,90,0.22), rgba(227,178,90,0.04) 38%, transparent 64%); opacity:0; transition: opacity 1.6s ease; }
+  .finale.in::before { opacity:1; }
+  .finale .rays { position:absolute; top:42%; left:50%; width:160vmax; height:160vmax; transform: translate(-50%,-50%) scale(.4); opacity:0; background: repeating-conic-gradient(from 0deg, rgba(227,178,90,0.07) 0deg 6deg, transparent 6deg 12deg); transition: opacity 2s ease, transform 2.4s cubic-bezier(.16,1,.3,1); animation: spin 60s linear infinite; pointer-events:none; }
+  .finale.in .rays { opacity:1; transform: translate(-50%,-50%) scale(1); }
+  @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg) scale(1);} }
+  .finale .wrap { position:relative; z-index:2; }
+  .finale .trophy { font-size: clamp(2.4rem,6vw,3.8rem); transform: scale(.4); opacity:0; transition: all 1s cubic-bezier(.34,1.56,.64,1) .2s; }
+  .finale.in .trophy { transform:none; opacity:1; }
+  .finale .crowned { font-family:'JetBrains Mono',monospace; letter-spacing:.4em; text-transform:uppercase; font-size:.8rem; color:var(--gold); margin:1.4rem 0 .2rem; }
+  .finale .winword { font-family:'Fraunces',serif; font-weight:700; font-size: clamp(2.8rem, 10vw, 6.4rem); line-height:.92; letter-spacing:-.03em; background: var(--finale-grad); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom: .1em; }
+  .wincol { background: linear-gradient(160deg, rgba(227,178,90,0.08), transparent); border:1px solid var(--gold); border-radius:18px; padding: 34px 30px; box-shadow: 0 0 50px rgba(227,178,90,0.10); max-width: 560px; margin: 2rem auto 0; }
+  .wincol .winlogo { display:flex; justify-content:center; margin: 2px 0 10px; }
+  .wincol .winlogo .logo { width:48px; height:48px; color:var(--gold); filter: drop-shadow(0 0 24px var(--gold-glow)); }
+  .wincol .who { font-family:'Fraunces',serif; font-weight:600; font-size: clamp(2rem,5vw,2.8rem); color:var(--paper); }
+  .wincol .org { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:.4rem; }
+  .wincol .pr { font-family:'JetBrains Mono',monospace; font-size:.74rem; letter-spacing:.12em; margin-top:.5rem; }
+  .wincol .pr a { color:var(--gold); text-decoration:none; border-bottom:1px solid var(--line); transition:border-color .2s; }
+  .wincol .pr a:hover { border-color:var(--gold); }
+  .wincol .badge { display:inline-block; margin-top:1.2rem; font-family:'Fraunces',serif; font-weight:600; font-size:2.6rem; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:.18em .7em; box-shadow: 0 0 36px var(--gold-glow); font-variant-numeric: tabular-nums; }
+  .wincol .badge small { font-size:.34em; color:var(--muted); font-weight:400; }
+  .wincol .descr { margin-top:1rem; color:var(--muted); font-size:.95rem; line-height:1.6; text-align:left; }
+  .wincol .descr b { color:var(--paper); font-weight:600; }
+  .finale .why { max-width: 62ch; margin: 2.4rem auto 0; color: var(--muted); font-size:1.08rem; }
+  .finale .why b { color: var(--paper); font-weight:600; }
+  .caveat { margin-top:2.4rem; font-size:.95rem; color:var(--muted2); max-width:62ch; margin-left:auto; margin-right:auto; }
+  .caveat b { color: var(--muted); }
+
+  /* summary cards */
+  .sumgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 2rem; }
+  .sumcard { background: linear-gradient(160deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .sumcard.win { border-color: var(--gold); box-shadow: 0 0 36px rgba(227,178,90,0.10); }
+  .sumcard .stape { height: 3px; background: var(--sig, var(--gold)); opacity: .85; }
+  .sumcard .sbody { padding: 18px 20px 12px; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
+  .sumcard .sbody-left { min-width: 0; }
+  .sumcard .sbody-right { text-align: right; flex-shrink: 0; }
+  .sumcard .sco { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--sig, var(--gold)); opacity: .75; }
+  .sumcard .sname { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.3rem; margin: .2rem 0 0; color: var(--paper); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .sumcard .sname .logo { width: .85em; height: .85em; color: var(--sig, var(--gold)); flex-shrink: 0; }
+  .sumcard .stag { display:inline-block; margin-top:6px; font-family:'JetBrains Mono',monospace; font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); border-radius:999px; padding:2px 8px; }
+  .sumcard .srow { border-top: 1px solid var(--hairline); padding: 9px 20px; }
+  .sumcard .slbl { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sig, var(--gold)); margin-bottom: 3px; }
+  .sumcard .sval { font-size: .93rem; color: var(--paper); font-variant-numeric: tabular-nums; }
+  .sumcard .sval.muted { color: var(--muted); font-size: .84rem; }
+  .sumcard .srow-split { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .sumcard .sval.big-score { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.9rem; color: var(--sig, var(--gold)); line-height: 1; padding-bottom: 4px; }
+  .sumcard .sval.big-score small { font-size: .4em; color: var(--muted); font-weight: 400; }
+
+  footer { padding: 80px 0 100px; text-align:center; color:var(--muted2); font-size:.84rem; }
+  footer .mono { color:var(--muted); }
+  .kicker a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .2s, color .2s; }
+  .kicker a:hover { color: var(--paper); border-color: var(--gold); }
+  .srclinks { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; }
+  .srclinks a { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .06em; color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 10px 15px; transition: color .2s, border-color .2s, transform .2s; display: inline-flex; align-items: center; gap: 7px; min-height: 24px; }
+  .srclinks a:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-1px); }
+  .srclinks a .ar { opacity: .6; }
+  .srclinks a .logo { width: 1.05em; height: 1.05em; }
+  .logo { fill: currentColor; flex: 0 0 auto; display: inline-block; }
+  .byline { font-family:'Fraunces',serif; font-style:italic; font-size:1.15rem; color:var(--paper); margin-top:42px; }
+  .byline b { font-style:normal; font-weight:600; }
+  .socials { display:flex; flex-wrap:wrap; gap:9px; justify-content:center; margin-top:18px; }
+  .socials a { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:10px 15px; transition:color .2s, border-color .2s, transform .2s, background .2s; }
+  .socials a:hover { color:var(--black); background:var(--gold); border-color:var(--gold); transform:translateY(-2px); }
+
+  .controls { position: fixed; top: 16px; right: 16px; z-index: 1000; display: flex; gap: 8px; }
+  .ctrl { display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); background:var(--scrim); border:1px solid var(--line); border-radius:999px; padding:12px 16px; cursor:pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: color .2s, border-color .2s, background .2s, transform .2s; min-height: 44px; }
+  .ctrl:hover { color:var(--gold); border-color:var(--gold); transform: translateY(-1px); }
+  .ctrl .ico { font-size:.95rem; line-height:1; }
+
+  .modal { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 24px; background: var(--scrim); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s; }
+  .modal.open { opacity: 1; visibility: visible; }
+  .modal-card { width: min(760px, 100%); max-height: 86vh; overflow-y: auto; background: linear-gradient(165deg, var(--char2), var(--char)); border: 1px solid var(--line); border-radius: 18px; padding: 38px 40px 40px; position: relative; box-shadow: 0 40px 120px rgba(0,0,0,.45); transform: translateY(24px) scale(.98); transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .modal.open .modal-card { transform: none; }
+  .modal-card .x { position: absolute; top: 18px; right: 20px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 1.1rem; cursor: pointer; line-height: 1; transition: color .2s, border-color .2s, transform .2s; }
+  .modal-card .x:hover { color: var(--gold); border-color: var(--gold); transform: rotate(90deg); }
+  .modal-card .mkick { font-family:'JetBrains Mono',monospace; font-size:.66rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); }
+  .modal-card h3 { font-family:'Fraunces',serif; font-weight:600; font-size:1.9rem; margin:.5rem 0 .3rem; }
+  .modal-card .msub { color: var(--muted); font-size:.95rem; margin-bottom: 1.6rem; }
+  .prompt-box { font-family:'JetBrains Mono',monospace; font-size:.84rem; line-height:1.75; color: var(--paper); white-space: pre-wrap; word-break: break-word; background: var(--track); border:1px solid var(--line); border-left:2px solid var(--gold); border-radius: 0 12px 12px 0; padding: 22px 24px; }
+  .prompt-box a { color: var(--gold); }
+
+  @media (max-width: 980px) {
+    .sumgrid { grid-template-columns: repeat(2, 1fr); }
+    .fieldgrid { grid-template-columns: repeat(2, 1fr); }
+    .fl-name .chip, .sname .chip { white-space: normal; }
+  }
+  @media (max-width: 760px) {
+    .hero-title-row { flex-direction: column; align-items: center; gap: 24px; }
+    .logo-battle { display: none; }
+    .awards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .fieldgrid, .sumgrid { grid-template-columns: 1fr; }
+    .rankrow { grid-template-columns: 1fr; gap: 8px; }
+    .score { text-align: left; }
+    .fl-row { grid-template-columns: 40px minmax(0,1fr) auto; }
+    .fl-pr { display: none; }
+    details.spoiler summary { flex-wrap: wrap; }
+    details.spoiler summary .hint { margin-left: 0; text-align: left; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1 !important; transform:none !important; transition:none; }
+    .finale .rays { animation:none; }
+    .scrollcue { animation:none; }
+    html { scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BRAND LOGO SPRITE -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="logo-openai" viewBox="0 0 24 24"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></symbol>
+  <symbol id="logo-anthropic" viewBox="0 0 24 24"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></symbol>
+  <symbol id="logo-xai" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M4.2 4.2 L19.8 19.8 M19.8 4.2 L13.4 10.6 M10.6 13.4 L4.2 19.8"/></symbol>
+  <symbol id="logo-kimi" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm2.5 3.2a7.6 7.6 0 0 1 0 13.6A9.4 9.4 0 0 0 14.5 5.2z"/></symbol>
+</svg>
+
+<!-- FLOATING CONTROLS -->
+<div class="controls">
+  <button class="ctrl" id="promptBtn" aria-label="View the assignment"><span class="ico">&#10077;</span><span>The job</span></button>
+  <button class="ctrl" id="themeToggle" aria-label="Toggle color theme"><span class="ico" id="themeIco">&#128421;&#65039;</span><span id="themeLbl">Auto</span></button>
+</div>
+
+<!-- JOB MODAL -->
+<div class="modal" id="promptModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="promptTitle">
+  <div class="modal-card">
+    <button class="x" id="promptClose" aria-label="Close">&#10005;</button>
+    <div class="mkick">The job</div>
+    <h3 id="promptTitle">The assignment</h3>
+    <div class="msub">What each entry had to build (issue #1159), in plain English.</div>
+    <div class="prompt-box">The job (<a href="https://github.com/richkuo/go-trader/issues/1159" target="_blank" rel="noopener">issue #1159</a>): my trading bot buys and sells on its own. Teach it to hedge. When the bot bets on one coin going up, it should automatically place a smaller opposite bet on a closely related coin. The two coins tend to move together, so if the whole market dives, the second bet cushions the first.
+
+The hedge has to open when the main bet opens, grow when it grows, shrink when it shrinks, and close when it closes, including the emergency cases where the bot slams everything shut.
+
+My own write-up rates this 90 out of 100 in difficulty. It touches live orders, shared account balances, and the emergency shutoffs. Get it wrong and the "protection" becomes a second way to lose money.</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="kicker reveal in"><a href="https://github.com/richkuo/go-trader" target="_blank" rel="noopener">Go-Trader</a> &middot; <a href="https://github.com/richkuo/go-trader/issues/1159" target="_blank" rel="noopener">Issue&nbsp;#1159</a> &middot; Bake-off Episode&nbsp;9</div>
+  <div class="wrap">
+    <div class="hero-title-row reveal in">
+      <div class="logo-battle" aria-hidden="true">
+        <div class="lb lb-anthropic"><svg class="logo"><use href="#logo-anthropic"/></svg></div>
+        <div class="lb lb-openai"><svg class="logo"><use href="#logo-openai"/></svg></div>
+        <div class="lb lb-xai"><svg class="logo"><use href="#logo-xai"/></svg></div>
+        <div class="lb lb-kimi"><svg class="logo"><use href="#logo-kimi"/></svg></div>
+      </div>
+      <h1 class="display">Twenty-five entries.<br />Four judges.<br /><em>One winner?</em></h1>
+      <div class="hero-phone">
+        <video autoplay muted loop playsinline preload="metadata" src="infographic-vertical.mp4" aria-label="Animated 3D scorecard teaser for Episode 9; the full result is at the bottom of this page."></video>
+        <div class="cap">The teaser</div>
+      </div>
+    </div>
+    <p class="sub reveal in"><b>This episode was finished. Then four more entries showed up.</b> Twenty-five tries at the same dangerous job inside my live trading bot: teach it to hedge its own bets. Four entries landed after grading had already closed, from two models that had never competed here, so the old scores went in a drawer and everything got re-graded from scratch: every entry renamed to a blind label, read by four AI judges, scored to the same rubric. No coding background needed; I'll explain everything as we go.</p>
+    <p class="sub serif-it reveal in" style="color:var(--gold);font-size:1.12rem;margin-top:1.6rem;text-align:center;">The result is at the bottom. The re-grade did more than pick a winner.</p>
+  </div>
+  <div class="scrollcue">scroll &#8595;</div>
+</header>
+
+<main>
+
+<!-- i. THE JOB -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">i.</span><span>The job</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Teach a trading bot to hedge.</h2>
+    <p class="lead reveal"><b style="color:var(--gold)">In plain English:</b> my bot buys and sells on its own. This episode's task was to teach it to <b>hedge</b>. When the bot bets on one coin going up, it should automatically place a smaller <b>opposite</b> bet on a closely related coin. The two coins tend to move together, so if the whole market dives, the second bet cushions the first. The hedge has to open when the main bet opens, grow when it grows, shrink when it shrinks, and close when it closes, including the emergency cases where the bot slams everything shut.</p>
+    <p class="lead reveal">My own write-up rates this <b>90 out of 100</b> in difficulty. It touches live orders, shared account balances, and the emergency shutoffs. Get it wrong and the "protection" becomes a second way to lose money. Twenty-five entries tried it. Four of them were not supposed to be here at all.</p>
+    <div class="srclinks reveal" style="justify-content:center;margin-top:28px">
+      <a href="https://github.com/richkuo/go-trader/issues/1159" target="_blank" rel="noopener">Read the full issue #1159 on GitHub <span class="ar">&#8599;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ii. THE FIELD -->
+<section style="background:linear-gradient(180deg,transparent,rgba(227,178,90,0.025),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">ii.</span><span>The field, and the four that came late</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Twenty-five entries. Nine models. Four labs.</h2>
+    <p class="lead reveal">Each entry is a <b>"PR,"</b> short for pull request: a proposed batch of code changes. Most models entered several times at different <b>effort</b> settings, the dial for how much thinking time a model gets (low, medium, high, xhigh). Then the twist: <b>four entries landed after grading had already closed</b>. Three from <b>Opus 5</b> and one from <b>Kimi</b>, two models that had never appeared in this series. Grafting late entries onto finished scores would mix grading conditions, so the old round went in a drawer and all twenty-five were graded fresh, together, under identical conditions. Nothing in this episode uses the old numbers.</p>
+    <div class="fieldgrid">
+      <div class="mcard late reveal" style="--sig:var(--c-opus5)"><div class="tape"></div><h3><svg class="logo" role="img" aria-label="Anthropic"><use href="#logo-anthropic"/></svg>Opus 5</h3><div class="lab">Anthropic &middot; debut &middot; late arrival</div><div class="cnt"><b>3 entries</b> &middot; xhigh, high, medium</div></div>
+      <div class="mcard late reveal" style="--sig:var(--c-kimi)"><div class="tape"></div><h3><svg class="logo" role="img" aria-label="Moonshot AI"><use href="#logo-kimi"/></svg>Kimi</h3><div class="lab">Moonshot AI &middot; debut &middot; late arrival</div><div class="cnt"><b>1 entry</b> &middot; high</div></div>
+      <div class="mcard reveal" style="--sig:var(--c-fable)"><div class="tape"></div><h3><svg class="logo" role="img" aria-label="Anthropic"><use href="#logo-anthropic"/></svg>Fable 5</h3><div class="lab">Anthropic</div><div class="cnt"><b>3 entries</b> &middot; high, medium, low</div></div>
+      <div class="mcard reveal" style="--sig:var(--c-sol)"><div class="tape"></div><h3><svg class="logo" role="img" aria-label="OpenAI"><use href="#logo-openai"/></svg>GPT-5.6 Sol</h3><div class="lab">OpenAI</div><div class="cnt"><b>3 entries</b> &middot; xhigh, high, medium</div></div>
+      <div class="mcard reveal" style="--sig:var(--c-terra)"><div class="tape"></div><h3><svg class="logo" role="img" aria-label="OpenAI"><use href="#logo-openai"/></svg>GPT-5.6 Terra</h3><div class="lab">OpenAI</div><div class="cnt"><b>2 entries</b> &middot; xhigh, high</div></div>
+      <div class="mcard reveal" style="--sig:var(--c-luna)"><div class="tape"></div><h3><svg class="logo" role="img" aria-label="OpenAI"><use href="#logo-openai"/></svg>GPT-5.6 Luna</h3><div class="lab">OpenAI</div><div class="cnt"><b>2 entries</b> &middot; high, xhigh</div></div>
+      <div class="mcard reveal" style="--sig:var(--c-grok)"><div class="tape"></div><h3><svg class="logo" role="img" aria-label="xAI"><use href="#logo-xai"/></svg>Grok 4.5</h3><div class="lab">xAI</div><div class="cnt"><b>3 entries</b> &middot; high, medium, low</div></div>
+      <div class="mcard reveal" style="--sig:var(--c-sonnet)"><div class="tape"></div><h3><svg class="logo" role="img" aria-label="Anthropic"><use href="#logo-anthropic"/></svg>Sonnet 5</h3><div class="lab">Anthropic</div><div class="cnt"><b>4 entries</b> &middot; 2&times; xhigh, 2&times; high</div></div>
+      <div class="mcard reveal" style="--sig:var(--c-opus48)"><div class="tape"></div><h3><svg class="logo" role="img" aria-label="Anthropic"><use href="#logo-anthropic"/></svg>Opus 4.8</h3><div class="lab">Anthropic</div><div class="cnt"><b>4 entries</b> &middot; 2&times; xhigh, 2&times; high</div></div>
+    </div>
+    <p class="lead reveal" style="margin-top:2rem">A finished contest plus four uninvited entries is a problem with exactly one honest fix: grade everyone again, blind, at the same time. So that's what happened. How, exactly, matters more this episode than any other.</p>
+  </div>
+</section>
+
+<!-- iii. THE JUDGING -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">iii.</span><span>How it was judged</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Four judges. Blind labels. One round.</h2>
+    <p class="lead reveal"><b style="color:var(--gold)">In plain English:</b> four AI judges (<b>Fable 5, GPT-5.6 Sol, Grok 4.5, and Opus 5</b>), every one at high effort, in a single round. Every entry was renamed to a blind label, <b>A through Y</b>, so no judge knew whose code it was reading. Each judge read the actual code of all twenty-five entries and scored it to a fixed rubric. The published score for each entry is the <b>average of its four scores</b>. Simple. Two things about that average are anything but simple, and you should read both before you trust a single number below.</p>
+    <div class="honest reveal">
+      <span class="hk">&#9878;&#65039; Honesty block 1 of 2: all four judges are also contestants</span>
+      <b>Fable 5, Sol, Grok 4.5, and Opus 5 all have entries in the field they graded.</b> Twelve of the hundred grades below are a judge scoring its own model's work. Those grades stay in at full weight, marked with a star, and a <b>no-self column</b> beside the average strips them back out. Any fairness claim on this page quotes that column. This time it changed the podium; the how and who comes after the reveal.
+    </div>
+    <div class="honest reveal">
+      <span class="hk">&#9878;&#65039; Honesty block 2 of 2: nobody checked the judges</span>
+      <b>No verification pass ran this round.</b> Every score is exactly what the judge submitted, averaged. What you are reading is four opinions, never audited, never fact-checked against the code by a fifth party. Where the judges split wildly, the table says so instead of pretending the number is precise.
+    </div>
+    <div class="flagnote reveal">
+      <span class="hk">&#9873; The low-confidence flags</span>
+      Three entries carry a <b>low-confidence flag</b> <span class="chip">panel split</span>: their four blind scores were <b>34.5 to 41 points apart</b>. One judge read a near-perfect entry; another read a broken one; it was the same code. Read a flagged score as a shrug, never as a measurement.
+    </div>
+  </div>
+</section>
+
+<!-- iv. THE FULL TABLE (spoiler) -->
+<section style="background:linear-gradient(180deg,transparent,rgba(227,178,90,0.02),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">iv.</span><span>The full table</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">One hundred grades, nothing hidden.</h2>
+    <p class="lead reveal">Every judge's score for every entry, as submitted. Star = a judge grading its own model's entry. Amber rows = the low-confidence flags. The <b>no-self</b> column is the average with self-scores removed: <b>fifteen of the twenty-five entries shift at least one place</b> between the two columns. The biggest movers: Sol's high entry climbs five places, Fable's low entry drops five, Grok's high entry drops three. The rest of this page counts the ranking down in order, so the table sits behind a click.</p>
+    <details class="spoiler reveal">
+      <summary><span class="tri">&#9656;</span><span>The full table &middot; spoilers inside</span><span class="hint">all 25 rows, all four judges, ranked. Skip it to keep the countdown.</span></summary>
+      <div class="tblwrap">
+        <table class="tbl">
+          <thead><tr><th class="r">Rank</th><th>PR</th><th>Model (effort)</th><th class="r">Fable</th><th class="r">Sol</th><th class="r">Grok</th><th class="r">Opus 5</th><th class="r">Mean</th><th class="r">No-self</th><th>Flag</th></tr></thead>
+          <tbody>
+            <tr><td class="r num">1</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1404" target="_blank" rel="noopener">#1404</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-opus5)"><use href="#logo-anthropic"/></svg>Opus 5 <span class="eff">xhigh</span></td><td class="r num">96</td><td class="r num">97</td><td class="r num">100</td><td class="r num self">95&#9733;</td><td class="r mean">97.00</td><td class="r num">97.67</td><td></td></tr>
+            <tr><td class="r num">2</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1333" target="_blank" rel="noopener">#1333</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-fable)"><use href="#logo-anthropic"/></svg>Fable 5 <span class="eff">high</span></td><td class="r num self">97&#9733;</td><td class="r num">92.5</td><td class="r num">94</td><td class="r num">88</td><td class="r mean">92.88</td><td class="r num">91.50</td><td></td></tr>
+            <tr><td class="r num">3</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1405" target="_blank" rel="noopener">#1405</a></td><td class="model"><svg class="logo" role="img" aria-label="Moonshot AI" style="color:var(--c-kimi)"><use href="#logo-kimi"/></svg>Kimi <span class="eff">high</span></td><td class="r num">100</td><td class="r num">73</td><td class="r num">97</td><td class="r num">91</td><td class="r mean">90.25</td><td class="r num">90.25</td><td></td></tr>
+            <tr><td class="r num">4</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1367" target="_blank" rel="noopener">#1367</a></td><td class="model"><svg class="logo" role="img" aria-label="OpenAI" style="color:var(--c-sol)"><use href="#logo-openai"/></svg>GPT-5.6 Sol <span class="eff">xhigh</span></td><td class="r num">94.5</td><td class="r num self">75.5&#9733;</td><td class="r num">97.5</td><td class="r num">91.5</td><td class="r mean">89.75</td><td class="r num">94.50</td><td></td></tr>
+            <tr><td class="r num">5</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1406" target="_blank" rel="noopener">#1406</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-opus5)"><use href="#logo-anthropic"/></svg>Opus 5 <span class="eff">high</span></td><td class="r num">95</td><td class="r num">74.5</td><td class="r num">100</td><td class="r num self">88&#9733;</td><td class="r mean">89.38</td><td class="r num">89.83</td><td></td></tr>
+            <tr><td class="r num">6</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1364" target="_blank" rel="noopener">#1364</a></td><td class="model"><svg class="logo" role="img" aria-label="OpenAI" style="color:var(--c-terra)"><use href="#logo-openai"/></svg>GPT-5.6 Terra <span class="eff">xhigh</span></td><td class="r num">93</td><td class="r num">81</td><td class="r num">95</td><td class="r num">85</td><td class="r mean">88.50</td><td class="r num">88.50</td><td></td></tr>
+            <tr class="lc"><td class="r num">7</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1407" target="_blank" rel="noopener">#1407</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-opus5)"><use href="#logo-anthropic"/></svg>Opus 5 <span class="eff">medium</span></td><td class="r num">95.5</td><td class="r num">63.5</td><td class="r num">100</td><td class="r num self">87.5&#9733;</td><td class="r mean">86.63</td><td class="r num">86.33</td><td><span class="chip">panel split</span></td></tr>
+            <tr><td class="r num">8</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1332" target="_blank" rel="noopener">#1332</a></td><td class="model"><svg class="logo" role="img" aria-label="OpenAI" style="color:var(--c-sol)"><use href="#logo-openai"/></svg>GPT-5.6 Sol <span class="eff">high</span></td><td class="r num">93.5</td><td class="r num self">69.5&#9733;</td><td class="r num">97.5</td><td class="r num">85.5</td><td class="r mean">86.50</td><td class="r num">92.17</td><td></td></tr>
+            <tr><td class="r num">9</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1371" target="_blank" rel="noopener">#1371</a></td><td class="model"><svg class="logo" role="img" aria-label="xAI" style="color:var(--c-grok)"><use href="#logo-xai"/></svg>Grok 4.5 <span class="eff">medium</span></td><td class="r num">89.5</td><td class="r num">77.5</td><td class="r num self">92.5&#9733;</td><td class="r num">83.5</td><td class="r mean">85.75</td><td class="r num">83.50</td><td></td></tr>
+            <tr><td class="r num">10</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1363" target="_blank" rel="noopener">#1363</a></td><td class="model"><svg class="logo" role="img" aria-label="OpenAI" style="color:var(--c-luna)"><use href="#logo-openai"/></svg>GPT-5.6 Luna <span class="eff">high</span></td><td class="r num">89.5</td><td class="r num">70.5</td><td class="r num">84.5</td><td class="r num">86.5</td><td class="r mean">82.75</td><td class="r num">82.75</td><td></td></tr>
+            <tr><td class="r num">11</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1378" target="_blank" rel="noopener">#1378</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-sonnet)"><use href="#logo-anthropic"/></svg>Sonnet 5 <span class="eff">high</span></td><td class="r num">80</td><td class="r num">74</td><td class="r num">92.5</td><td class="r num">83.5</td><td class="r mean">82.50</td><td class="r num">82.50</td><td></td></tr>
+            <tr><td class="r num">12</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1361" target="_blank" rel="noopener">#1361</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-opus48)"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="eff">xhigh</span></td><td class="r num">92.5</td><td class="r num">72</td><td class="r num">86.5</td><td class="r num">77.5</td><td class="r mean">82.13</td><td class="r num">82.13</td><td></td></tr>
+            <tr><td class="r num">13</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1376" target="_blank" rel="noopener">#1376</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-fable)"><use href="#logo-anthropic"/></svg>Fable 5 <span class="eff">medium</span></td><td class="r num self">87.5&#9733;</td><td class="r num">73</td><td class="r num">86</td><td class="r num">75</td><td class="r mean">80.38</td><td class="r num">78.00</td><td></td></tr>
+            <tr><td class="r num">14</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1331" target="_blank" rel="noopener">#1331</a></td><td class="model"><svg class="logo" role="img" aria-label="xAI" style="color:var(--c-grok)"><use href="#logo-xai"/></svg>Grok 4.5 <span class="eff">high</span></td><td class="r num">93</td><td class="r num">58</td><td class="r num self">90&#9733;</td><td class="r num">78</td><td class="r mean">79.75</td><td class="r num">76.33</td><td></td></tr>
+            <tr class="lc"><td class="r num">15</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1375" target="_blank" rel="noopener">#1375</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-fable)"><use href="#logo-anthropic"/></svg>Fable 5 <span class="eff">low</span></td><td class="r num self">89&#9733;</td><td class="r num">52</td><td class="r num">93</td><td class="r num">78</td><td class="r mean">78.00</td><td class="r num">74.33</td><td><span class="chip">panel split</span></td></tr>
+            <tr><td class="r num">16</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1337" target="_blank" rel="noopener">#1337</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-opus48)"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="eff">xhigh</span></td><td class="r num">87</td><td class="r num">59</td><td class="r num">93</td><td class="r num">72.5</td><td class="r mean">77.88</td><td class="r num">77.88</td><td></td></tr>
+            <tr><td class="r num">17</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1379" target="_blank" rel="noopener">#1379</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-sonnet)"><use href="#logo-anthropic"/></svg>Sonnet 5 <span class="eff">xhigh</span></td><td class="r num">87</td><td class="r num">59.5</td><td class="r num">86.5</td><td class="r num">77</td><td class="r mean">77.50</td><td class="r num">77.50</td><td></td></tr>
+            <tr><td class="r num">18</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1380" target="_blank" rel="noopener">#1380</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-sonnet)"><use href="#logo-anthropic"/></svg>Sonnet 5 <span class="eff">xhigh</span></td><td class="r num">86.5</td><td class="r num">59.5</td><td class="r num">80.5</td><td class="r num">81.5</td><td class="r mean">77.00</td><td class="r num">77.00</td><td></td></tr>
+            <tr><td class="r num">19</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1336" target="_blank" rel="noopener">#1336</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-opus48)"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="eff">high</span></td><td class="r num">85</td><td class="r num">56</td><td class="r num">86</td><td class="r num">73.5</td><td class="r mean">75.13</td><td class="r num">75.13</td><td></td></tr>
+            <tr><td class="r num">20</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1373" target="_blank" rel="noopener">#1373</a></td><td class="model"><svg class="logo" role="img" aria-label="xAI" style="color:var(--c-grok)"><use href="#logo-xai"/></svg>Grok 4.5 <span class="eff">low</span></td><td class="r num">83.5</td><td class="r num">62.5</td><td class="r num self">73&#9733;</td><td class="r num">70</td><td class="r mean">72.25</td><td class="r num">72.00</td><td></td></tr>
+            <tr><td class="r num">21</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1365" target="_blank" rel="noopener">#1365</a></td><td class="model"><svg class="logo" role="img" aria-label="OpenAI" style="color:var(--c-sol)"><use href="#logo-openai"/></svg>GPT-5.6 Sol <span class="eff">medium</span></td><td class="r num">81.5</td><td class="r num self">61&#9733;</td><td class="r num">87.5</td><td class="r num">55.5</td><td class="r mean">71.38</td><td class="r num">74.83</td><td></td></tr>
+            <tr class="lc"><td class="r num">22</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1360" target="_blank" rel="noopener">#1360</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-opus48)"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="eff">high</span></td><td class="r num">88</td><td class="r num">55.5</td><td class="r num">85</td><td class="r num">53.5</td><td class="r mean">70.50</td><td class="r num">70.50</td><td><span class="chip">panel split</span></td></tr>
+            <tr><td class="r num">23</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1377" target="_blank" rel="noopener">#1377</a></td><td class="model"><svg class="logo" role="img" aria-label="Anthropic" style="color:var(--c-sonnet)"><use href="#logo-anthropic"/></svg>Sonnet 5 <span class="eff">high</span></td><td class="r num">88</td><td class="r num">57</td><td class="r num">65.5</td><td class="r num">61.5</td><td class="r mean">68.00</td><td class="r num">68.00</td><td></td></tr>
+            <tr><td class="r num">24</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1366" target="_blank" rel="noopener">#1366</a></td><td class="model"><svg class="logo" role="img" aria-label="OpenAI" style="color:var(--c-luna)"><use href="#logo-openai"/></svg>GPT-5.6 Luna <span class="eff">xhigh</span></td><td class="r num">64.5</td><td class="r num">57.5</td><td class="r num">86</td><td class="r num">52</td><td class="r mean">65.00</td><td class="r num">65.00</td><td></td></tr>
+            <tr><td class="r num">25</td><td><a class="pr num" href="https://github.com/richkuo/go-trader/pull/1362" target="_blank" rel="noopener">#1362</a></td><td class="model"><svg class="logo" role="img" aria-label="OpenAI" style="color:var(--c-terra)"><use href="#logo-openai"/></svg>GPT-5.6 Terra <span class="eff">high</span></td><td class="r num">45.5</td><td class="r num">36.5</td><td class="r num">33.5</td><td class="r num">34.5</td><td class="r mean">37.50</td><td class="r num">37.50</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-legend" style="padding: 0 28px 24px;"><b>&#9733; = self-score</b> (a judge grading its own model's entry, kept at full weight). <b>Mean</b> = average of the four scores as submitted; <b>no-self</b> = the average with self-scores removed. Amber rows carry the panel-split flag: four-judge ranges of 34.5 to 41 points, so treat those means as rough. Fifteen of the twenty-five ranks shift between the two columns.</div>
+    </details>
+  </div>
+</section>
+
+<!-- THE OVERACHIEVERS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">v.</span><span>The overachievers</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Two underdogs punched above their weight.</h2>
+    <p class="lead reveal">The quiet story in the table is two entries from GPT-5.6's lesser known siblings. <b style="color:var(--c-terra)">Terra</b> at xhigh scored 88.50 and took sixth, ahead of Sol's high entry and every Opus 4.8, Sonnet 5 and Grok entry in the field. <b style="color:var(--c-luna)">Luna</b> at plain high scored 82.75 and took tenth, ahead of both Opus 4.8 entries running at xhigh. Neither model came in with a reputation, and both out-placed bigger names running harder settings.</p>
+    <p class="lead reveal">The catch: neither result survives a different effort setting, and they break in opposite directions. Terra needed the extra effort; its high entry is the 37.50 dead-last card whose hedge can never switch on. Luna choked on it; its xhigh entry fell to 65.00, second from the bottom. Same family, same dial, opposite reactions. If this table hands you one practical rule, it is this: test your model at more than one effort level before you trust it.</p>
+  </div>
+</section>
+
+<!-- VERDICT INTRO -->
+<section class="verdict-intro">
+  <div class="wrap">
+    <div class="kicker reveal">The reckoning</div>
+    <h2 class="display reveal">So who<br /><span class="serif-it" style="color:var(--gold)">actually</span> won?</h2>
+    <p class="lead reveal">Twenty-five entries, one hundred blind grades, averaged. The published order below uses the mean of four as submitted; the fairness column waits on the other side of the reveal. First, the field in one breath.</p>
+    <p class="lead serif-it reveal" style="margin-top:1.6rem;color:var(--muted2)">Counting down, from twenty-fifth place&hellip;</p>
+  </div>
+</section>
+
+<!-- FAST LIST 25 to 5 -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="fastlist reveal">
+      <div class="fl-row" style="--sig:var(--c-terra)"><div class="fl-rank">25</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-openai"/></svg>GPT-5.6 Terra <span class="eff">high</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1362" target="_blank" rel="noopener">#1362</a></div><div class="fl-score">37.50</div></div>
+      <div class="fl-row" style="--sig:var(--c-luna)"><div class="fl-rank">24</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-openai"/></svg>GPT-5.6 Luna <span class="eff">xhigh</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1366" target="_blank" rel="noopener">#1366</a></div><div class="fl-score">65.00</div></div>
+      <div class="fl-row" style="--sig:var(--c-sonnet)"><div class="fl-rank">23</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Sonnet 5 <span class="eff">high</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1377" target="_blank" rel="noopener">#1377</a></div><div class="fl-score">68.00</div></div>
+      <div class="fl-row" style="--sig:var(--c-opus48)"><div class="fl-rank">22</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="eff">high</span> <span class="chip">panel split &middot; 34.5 pts</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1360" target="_blank" rel="noopener">#1360</a></div><div class="fl-score">70.50</div></div>
+      <div class="fl-row" style="--sig:var(--c-sol)"><div class="fl-rank">21</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-openai"/></svg>GPT-5.6 Sol <span class="eff">medium</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1365" target="_blank" rel="noopener">#1365</a></div><div class="fl-score">71.38</div></div>
+      <div class="fl-row" style="--sig:var(--c-grok)"><div class="fl-rank">20</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-xai"/></svg>Grok 4.5 <span class="eff">low</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1373" target="_blank" rel="noopener">#1373</a></div><div class="fl-score">72.25</div></div>
+      <div class="fl-row" style="--sig:var(--c-opus48)"><div class="fl-rank">19</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="eff">high</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1336" target="_blank" rel="noopener">#1336</a></div><div class="fl-score">75.13</div></div>
+      <div class="fl-row" style="--sig:var(--c-sonnet)"><div class="fl-rank">18</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Sonnet 5 <span class="eff">xhigh</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1380" target="_blank" rel="noopener">#1380</a></div><div class="fl-score">77.00</div></div>
+      <div class="fl-row" style="--sig:var(--c-sonnet)"><div class="fl-rank">17</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Sonnet 5 <span class="eff">xhigh</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1379" target="_blank" rel="noopener">#1379</a></div><div class="fl-score">77.50</div></div>
+      <div class="fl-row" style="--sig:var(--c-opus48)"><div class="fl-rank">16</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="eff">xhigh</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1337" target="_blank" rel="noopener">#1337</a></div><div class="fl-score">77.88</div></div>
+      <div class="fl-row" style="--sig:var(--c-fable)"><div class="fl-rank">15</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Fable 5 <span class="eff">low</span> <span class="chip">panel split &middot; 41 pts</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1375" target="_blank" rel="noopener">#1375</a></div><div class="fl-score">78.00</div></div>
+      <div class="fl-row" style="--sig:var(--c-grok)"><div class="fl-rank">14</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-xai"/></svg>Grok 4.5 <span class="eff">high</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1331" target="_blank" rel="noopener">#1331</a></div><div class="fl-score">79.75</div></div>
+      <div class="fl-row" style="--sig:var(--c-fable)"><div class="fl-rank">13</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Fable 5 <span class="eff">medium</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1376" target="_blank" rel="noopener">#1376</a></div><div class="fl-score">80.38</div></div>
+      <div class="fl-row" style="--sig:var(--c-opus48)"><div class="fl-rank">12</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 4.8 <span class="eff">xhigh</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1361" target="_blank" rel="noopener">#1361</a></div><div class="fl-score">82.13</div></div>
+      <div class="fl-row" style="--sig:var(--c-sonnet)"><div class="fl-rank">11</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Sonnet 5 <span class="eff">high</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1378" target="_blank" rel="noopener">#1378</a></div><div class="fl-score">82.50</div></div>
+      <div class="fl-row" style="--sig:var(--c-luna)"><div class="fl-rank">10</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-openai"/></svg>GPT-5.6 Luna <span class="eff">high</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1363" target="_blank" rel="noopener">#1363</a></div><div class="fl-score">82.75</div></div>
+      <div class="fl-row" style="--sig:var(--c-grok)"><div class="fl-rank">9</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-xai"/></svg>Grok 4.5 <span class="eff">medium</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1371" target="_blank" rel="noopener">#1371</a></div><div class="fl-score">85.75</div></div>
+      <div class="fl-row" style="--sig:var(--c-sol)"><div class="fl-rank">8</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-openai"/></svg>GPT-5.6 Sol <span class="eff">high</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1332" target="_blank" rel="noopener">#1332</a></div><div class="fl-score">86.50</div></div>
+      <div class="fl-row" style="--sig:var(--c-opus5)"><div class="fl-rank">7</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 5 <span class="eff">medium</span> <span class="chip">panel split &middot; 36.5 pts</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1407" target="_blank" rel="noopener">#1407</a></div><div class="fl-score">86.63</div></div>
+      <div class="fl-row" style="--sig:var(--c-terra)"><div class="fl-rank">6</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-openai"/></svg>GPT-5.6 Terra <span class="eff">xhigh</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1364" target="_blank" rel="noopener">#1364</a></div><div class="fl-score">88.50</div></div>
+      <div class="fl-row" style="--sig:var(--c-opus5)"><div class="fl-rank">5</div><div class="fl-name"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 5 <span class="eff">high</span></div><div class="fl-pr"><a href="https://github.com/richkuo/go-trader/pull/1406" target="_blank" rel="noopener">#1406</a></div><div class="fl-score">89.38</div></div>
+    </div>
+    <p class="lead reveal" style="margin-top:1.6rem">Last place earned it the hard way: all four judges independently found the same defect in <b>#1362</b>. Its hedge machinery exists, but nothing in the live bot ever calls it, so the safety feature can never switch on. That is worse than skipping the job, because it looks done. The top four get their own screens.</p>
+  </div>
+</section>
+
+<!-- RANK 4 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">&middot; Fourth place &middot;</div>
+      <div class="rankrow" style="--sig:var(--c-sol)">
+        <div>
+          <span class="ranklogo"><svg class="logo" role="img" aria-label="OpenAI"><use href="#logo-openai"/></svg></span>
+          <div class="rankname">GPT-5.6 Sol<span class="eff">xhigh &middot; PR #1367</span>
+            <span class="sub">Three judges scored this entry <b>94.5, 97.5, and 91.5</b>. The fourth score, a <b>75.5</b>, came from Sol itself, the panel's harshest grader anywhere. Strip the self-scores and this entry's average jumps to <b>94.50</b>. Hold that thought for the other side of the reveal.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="89.75" data-dec="2">89.75</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANK 3 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">&middot; Third place &middot;</div>
+      <div class="rankrow" style="--sig:var(--c-kimi)">
+        <div>
+          <span class="ranklogo"><svg class="logo" role="img" aria-label="Moonshot AI"><use href="#logo-kimi"/></svg></span>
+          <div class="rankname">Kimi<span class="eff">high &middot; PR #1405 &middot; debut</span>
+            <span class="sub">One of the four late arrivals, on its <b>first ever entry</b> in this series, straight onto the podium. Also the panel's loudest argument: <b>one judge gave it a 100, another a 73</b>. Same code. Its podium spot survives the fairness column untouched, because Kimi wasn't judging anyone.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="90.25" data-dec="2">90.25</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RANK 2 -->
+<section class="rank">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="placetag">&middot; Second place &middot;</div>
+      <div class="rankrow" style="--sig:var(--c-fable)">
+        <div>
+          <span class="ranklogo"><svg class="logo" role="img" aria-label="Anthropic"><use href="#logo-anthropic"/></svg></span>
+          <div class="rankname">Fable 5<span class="eff">high &middot; PR #1333</span>
+            <span class="sub">Last episode's champion, one step short of repeating. One asterisk, literally: the highest of its four scores, a <b>97</b>, came from its own judge. Remove the self-scores and it sits at <b>91.50</b>. Whether that 97 was favoritism gets answered after the reveal, and the answer surprised me.</span>
+          </div>
+        </div>
+        <div class="score"><span class="count" data-to="92.88" data-dec="2">92.88</span><small>/100</small></div>
+      </div>
+      <div class="rankrule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIAL AWARDS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">&#10022;</span><span>Before first place: three things that shouldn't both be true</span><span class="ln"></span></div>
+    <div class="awards">
+      <div class="award reveal" style="--sig:var(--gold)">
+        <div class="crown">&#128207;</div>
+        <h4>Biggest build vs. smallest build</h4>
+        <div class="who">5,507 vs. 465 lines</div>
+        <p>The largest rewrite in the field, <b>5,507 lines added across 27 files</b>, is still ahead of you on this page. The smallest, <b>465 lines across 14 files</b>, is already behind you: last place, and its hedge can never actually run. Size is never scored. This episode it still tells the story.</p>
+      </div>
+      <div class="award reveal" style="--sig:var(--c-grok)">
+        <div class="crown">&#129689;</div>
+        <h4>The nine-point coin flip</h4>
+        <div class="who">Same code, 9 points apart</div>
+        <p>Two of the twenty-five entries are <b>byte-for-byte identical code</b> under different PR numbers. One judge scored that identical code twice: <b>86.5 and 77.5</b>. Nine points is this table's noise floor. Two mid-table entries a few points apart are effectively tied.</p>
+      </div>
+      <div class="award reveal" style="--sig:var(--flag)">
+        <div class="crown">&#127941;</div>
+        <h4>The podium that moves</h4>
+        <div class="who" style="color:var(--flag)">15 of 25 shift</div>
+        <p>Remove the twelve starred self-scores and <b>fifteen of the twenty-five entries change rank</b>, including two of the three podium spots. Who moves, which judge moved them, and why it isn't the bias you'd guess: after the reveal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINALE -->
+<section class="finale" id="finale">
+  <div class="rays" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="trophy">&#127942;</div>
+    <div class="crowned">&middot; First place &middot;</div>
+    <div class="winword">The late arrival took it.</div>
+    <p class="lead" style="max-width:56ch;margin:.6rem auto 0;color:var(--muted)">Four entries crashed a finished contest and forced a re-grade. One of them won the whole thing, <b style="color:var(--paper)">on its first attempt in this series</b>.</p>
+    <div class="wincol">
+      <div class="winlogo"><svg class="logo" role="img" aria-label="Anthropic"><use href="#logo-anthropic"/></svg></div>
+      <div class="who">Opus 5</div>
+      <div class="org">Anthropic &middot; xhigh &middot; series debut</div>
+      <div class="pr"><a href="https://github.com/richkuo/go-trader/pull/1404" target="_blank" rel="noopener">PR #1404 &#8599;</a></div>
+      <div class="badge"><span class="count" data-to="97.00" data-dec="2">97.00</span><small>&nbsp;/100</small></div>
+      <p class="descr"><b>The panel's calmest verdict.</b> Its four blind scores (96, 97, 100, 95) sit within <b>five points</b> of each other, the tightest agreement in the field (SD 1.87), and it was the <b>only entry every judge put in its own personal top three</b>. It wins by 4.12 points, and by more (97.67) when self-scores come out. It also shipped the largest change in the field: <b>+5,507 / &minus;50 across 27 files</b>.</p>
+    </div>
+    <p class="why">First under the published average. First under the no-self average. <b>First under every alternative way I sliced the scores.</b> On a table where the judges split by up to 41 points elsewhere, they agreed hardest about this one.</p>
+    <p class="caveat">The re-grade exists because this entry and three others arrived late. Redoing the whole round blind was the only honest way to let them in, and the newcomer beat the reigning champion by <b>4.12 points</b>.</p>
+  </div>
+</section>
+
+<!-- FINDING 1: THE NO-SELF FLIP -->
+<section style="background:linear-gradient(180deg,transparent,rgba(217,168,63,0.035),transparent);">
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">&#10022;</span><span>Now the promised part</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">The podium moves when the self-scores leave.</h2>
+    <p class="lead reveal">Under the published average, the podium is <b>Opus 5, Fable 5, Kimi</b>. Throw out every judge's score of its own work and it becomes <b>Opus 5, then Sol's xhigh entry (94.50), then Sol's high entry (92.17)</b>. Fifteen of the twenty-five entries shift at least one place between the two columns; the big movers are Sol's high entry (up five places), Fable's low entry (down five), and Grok's high entry (down three).</p>
+    <p class="lead reveal">And the mechanism is the opposite of what you'd guess. <b>Nobody inflated their own grade.</b> Fable 5 gave its own entry a 97, the highest score that entry got from anyone, but Fable graded the <i>whole field</i> generously, <b>7.91 points above the panel average</b>, and that habit reached its own paper too. Sol graded its own two best entries at <b>75.5 and 69.5</b>, two of its most brutal verdicts anywhere; Sol is the panel's harshest judge, <b>12.67 points below the panel average</b>, and it never once scored any entry above the group's mean, its own included. Its harshness hit its own work hardest and knocked both entries off the podium.</p>
+    <p class="lead reveal">I ran the check across all four judges: <b>none shows a systematic bias toward its own entries.</b> Fable is slightly stingier with its own work than its lenient norm, Sol even harsher on its own than usual, Grok less generous on its own, and Opus 5 close to neutral. The flip comes from judges with strong personal grading scales sitting inside the race they're grading. The winner is the one entry the flip can't touch: first in both columns.</p>
+  </div>
+</section>
+
+<!-- SUMMARY CARDS -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">&#10022;</span><span>Summary</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">The top eight, and the floor.</h2>
+    <div class="sumgrid">
+
+      <div class="sumcard win reveal" style="--sig:var(--c-opus5)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic &middot; xhigh &middot; debut</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 5</div>
+            <span class="stag">Winner</span>
+          </div>
+          <div class="sbody-right"><div class="slbl">Mean of 4</div><div class="sval big-score"><span class="count" data-to="97.00" data-dec="2">97.00</span><small> /100</small></div></div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">No-self</div><div class="sval">97.67</div></div><div style="text-align:right"><div class="slbl">PR</div><div class="sval"><a href="https://github.com/richkuo/go-trader/pull/1404" target="_blank" rel="noopener" style="color:inherit">#1404</a></div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Only entry in every judge's top three &middot; tightest agreement (SD 1.87) &middot; <span style="color:var(--muted2)">+5,507 / &minus;50 across 27 files, the field's largest</span></div></div>
+      </div>
+
+      <div class="sumcard reveal" style="--sig:var(--c-fable)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic &middot; high</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Fable 5</div>
+            <span class="stag" style="color:var(--muted);border-color:var(--line)">2nd</span>
+          </div>
+          <div class="sbody-right"><div class="slbl">Mean of 4</div><div class="sval big-score"><span class="count" data-to="92.88" data-dec="2">92.88</span><small> /100</small></div></div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">No-self</div><div class="sval">91.50</div></div><div style="text-align:right"><div class="slbl">PR</div><div class="sval"><a href="https://github.com/richkuo/go-trader/pull/1333" target="_blank" rel="noopener" style="color:inherit">#1333</a></div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Last episode's champion &middot; its own judge's 97 was its highest grade &middot; drops to 3rd in the no-self column</div></div>
+      </div>
+
+      <div class="sumcard reveal" style="--sig:var(--c-kimi)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Moonshot AI &middot; high &middot; debut</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-kimi"/></svg>Kimi</div>
+            <span class="stag" style="color:var(--muted);border-color:var(--line)">3rd</span>
+          </div>
+          <div class="sbody-right"><div class="slbl">Mean of 4</div><div class="sval big-score"><span class="count" data-to="90.25" data-dec="2">90.25</span><small> /100</small></div></div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">No-self</div><div class="sval">90.25</div></div><div style="text-align:right"><div class="slbl">PR</div><div class="sval"><a href="https://github.com/richkuo/go-trader/pull/1405" target="_blank" rel="noopener" style="color:inherit">#1405</a></div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Podium on its first entry ever &middot; the panel's widest single argument: a 100 from one judge, a 73 from another</div></div>
+      </div>
+
+      <div class="sumcard reveal" style="--sig:var(--c-sol)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">OpenAI &middot; xhigh</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-openai"/></svg>GPT-5.6 Sol</div>
+            <span class="stag" style="color:var(--muted);border-color:var(--line)">4th</span>
+          </div>
+          <div class="sbody-right"><div class="slbl">Mean of 4</div><div class="sval big-score"><span class="count" data-to="89.75" data-dec="2">89.75</span><small> /100</small></div></div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">No-self</div><div class="sval">94.50</div></div><div style="text-align:right"><div class="slbl">PR</div><div class="sval"><a href="https://github.com/richkuo/go-trader/pull/1367" target="_blank" rel="noopener" style="color:inherit">#1367</a></div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">2nd in the no-self column &middot; kept off the published podium by its own 75.5 self-grade, one of Sol's harshest anywhere</div></div>
+      </div>
+
+      <div class="sumcard reveal" style="--sig:var(--c-opus5)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic &middot; high &middot; debut</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 5</div>
+            <span class="stag" style="color:var(--muted);border-color:var(--line)">5th</span>
+          </div>
+          <div class="sbody-right"><div class="slbl">Mean of 4</div><div class="sval big-score"><span class="count" data-to="89.38" data-dec="2">89.38</span><small> /100</small></div></div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">No-self</div><div class="sval">89.83</div></div><div style="text-align:right"><div class="slbl">PR</div><div class="sval"><a href="https://github.com/richkuo/go-trader/pull/1406" target="_blank" rel="noopener" style="color:inherit">#1406</a></div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Two perfect-adjacent grades (95, 100) against Sol's 74.5 &middot; the debut model's second entry in the top five</div></div>
+      </div>
+
+      <div class="sumcard reveal" style="--sig:var(--c-terra)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">OpenAI &middot; xhigh</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-openai"/></svg>GPT-5.6 Terra</div>
+            <span class="stag" style="color:var(--muted);border-color:var(--line)">6th</span>
+          </div>
+          <div class="sbody-right"><div class="slbl">Mean of 4</div><div class="sval big-score"><span class="count" data-to="88.50" data-dec="2">88.50</span><small> /100</small></div></div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">No-self</div><div class="sval">88.50</div></div><div style="text-align:right"><div class="slbl">PR</div><div class="sval"><a href="https://github.com/richkuo/go-trader/pull/1364" target="_blank" rel="noopener" style="color:inherit">#1364</a></div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">No self-scores, no drama: identical in both columns &middot; the same model's other entry finished 25th</div></div>
+      </div>
+
+      <div class="sumcard reveal" style="--sig:var(--c-opus5)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">Anthropic &middot; medium &middot; debut</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-anthropic"/></svg>Opus 5 <span class="chip">panel split</span></div>
+            <span class="stag" style="color:var(--muted);border-color:var(--line)">7th</span>
+          </div>
+          <div class="sbody-right"><div class="slbl">Mean of 4</div><div class="sval big-score"><span class="count" data-to="86.63" data-dec="2">86.63</span><small> /100</small></div></div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">No-self</div><div class="sval">86.33</div></div><div style="text-align:right"><div class="slbl">PR</div><div class="sval"><a href="https://github.com/richkuo/go-trader/pull/1407" target="_blank" rel="noopener" style="color:inherit">#1407</a></div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">Low-confidence: judges split 36.5 points (a 100 and a 63.5 on the same code) &middot; read the mean as rough</div></div>
+      </div>
+
+      <div class="sumcard reveal" style="--sig:var(--c-sol)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">OpenAI &middot; high</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-openai"/></svg>GPT-5.6 Sol</div>
+            <span class="stag" style="color:var(--muted);border-color:var(--line)">8th</span>
+          </div>
+          <div class="sbody-right"><div class="slbl">Mean of 4</div><div class="sval big-score"><span class="count" data-to="86.50" data-dec="2">86.50</span><small> /100</small></div></div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">No-self</div><div class="sval">92.17</div></div><div style="text-align:right"><div class="slbl">PR</div><div class="sval"><a href="https://github.com/richkuo/go-trader/pull/1332" target="_blank" rel="noopener" style="color:inherit">#1332</a></div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">The no-self column's biggest climber: up five places to 3rd once Sol's own 69.5 comes out</div></div>
+      </div>
+
+      <div class="sumcard reveal" style="--sig:var(--c-terra)">
+        <div class="stape"></div>
+        <div class="sbody">
+          <div class="sbody-left">
+            <div class="sco">OpenAI &middot; high</div>
+            <div class="sname"><svg class="logo" aria-hidden="true"><use href="#logo-openai"/></svg>GPT-5.6 Terra</div>
+            <span class="stag" style="color:var(--danger);border-color:var(--danger)">25th</span>
+          </div>
+          <div class="sbody-right"><div class="slbl">Mean of 4</div><div class="sval big-score" style="--sig:var(--danger)"><span class="count" data-to="37.50" data-dec="2">37.50</span><small> /100</small></div></div>
+        </div>
+        <div class="srow srow-split"><div><div class="slbl">No-self</div><div class="sval">37.50</div></div><div style="text-align:right"><div class="slbl">PR</div><div class="sval"><a href="https://github.com/richkuo/go-trader/pull/1362" target="_blank" rel="noopener" style="color:inherit">#1362</a></div></div></div>
+        <div class="srow"><div class="slbl">Verdict</div><div class="sval muted">All four judges found the same defect: hedge code the live bot never calls &middot; <span style="color:var(--muted2)">+465 / &minus;14 across 14 files, the field's smallest</span></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EPILOGUE -->
+<section>
+  <div class="wrap">
+    <div class="seclabel reveal"><span class="no">&#10022;</span><span>Epilogue: what shipped</span><span class="ln"></span></div>
+    <h2 class="sec display reveal">Nothing, yet.</h2>
+    <p class="lead reveal">The hedge issue is still open and none of the twenty-five entries has merged. When one does, or when I blend the best of them, that's a future episode's story. For now the verdict stands on four blind opinions, averaged, with every star and every split disclosed above.</p>
+    <div class="srclinks reveal" style="justify-content:flex-start;margin-top:24px">
+      <a href="https://github.com/richkuo/go-trader/issues/1159" target="_blank" rel="noopener">Issue #1159 (open) <span class="ar">&#8599;</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="srclinks">
+    <a href="https://github.com/richkuo/go-trader" target="_blank" rel="noopener">go-trader repo <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/go-trader/issues/1159" target="_blank" rel="noopener">Issue #1159 <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/1404" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-opus5)" aria-hidden="true"><use href="#logo-anthropic"/></svg>PR #1404 &middot; Opus 5 xhigh (winner) <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/1333" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-fable)" aria-hidden="true"><use href="#logo-anthropic"/></svg>PR #1333 &middot; Fable 5 <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/1405" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-kimi)" aria-hidden="true"><use href="#logo-kimi"/></svg>PR #1405 &middot; Kimi <span class="ar">&#8599;</span></a>
+    <a href="https://github.com/richkuo/go-trader/pull/1367" target="_blank" rel="noopener"><svg class="logo" style="color:var(--c-sol)" aria-hidden="true"><use href="#logo-openai"/></svg>PR #1367 &middot; GPT-5.6 Sol <span class="ar">&#8599;</span></a>
+  </div>
+  <div class="byline">by <b>Rich Kuo</b>, product engineer building creative &amp; technical products</div>
+  <div class="socials">
+    <a href="https://www.richkuo.com" target="_blank" rel="noopener">Newsletter</a>
+    <a href="https://github.com/richkuo" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/richkuo" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://youtube.com/@richkuo7" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://x.com/richkuo7" target="_blank" rel="noopener">X</a>
+    <a href="https://tiktok.com/@rich_kuo1" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://instagram.com/richkuo7" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://discord.gg/44BykmWZsP" target="_blank" rel="noopener">Discord</a>
+  </div>
+  <div class="mono" style="margin-top:32px">Episode&nbsp;9 &middot; Issue&nbsp;#1159 &middot; Hedge legs &middot; 25-entry bake-off, re-judged</div>
+  <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px">
+    <span>Winner: Opus 5 (Anthropic, xhigh, series debut), 97.00 &middot; Fable 5 92.88 &middot; Kimi 90.25 &middot; last place 37.50</span>
+    <span>Judges: Fable 5, GPT-5.6 Sol, Grok 4.5, Opus 5, all at high effort, one round, blind labels A to Y</span>
+    <span>All four judges are also contestants; 12 of 100 grades are self-scores, kept at full weight, starred, with a no-self column beside the mean</span>
+    <span>No verification pass ran: scores are the judges' opinions as submitted, averaged, never audited</span>
+    <span>Created with LLM: Fable 5 | high | Harness: Claude Code</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+<script>
+  /* ---- Motion layer: GSAP + ScrollTrigger ---- */
+  /* If the CDN scripts didn't load (blocked, offline), fall back to the no-JS
+     static page so every .reveal stays visible. */
+  if (!window.gsap || !window.ScrollTrigger) {
+    document.documentElement.classList.remove('js');
+    document.getElementById('finale').classList.add('in');
+    document.querySelectorAll('.count').forEach(el => { el.textContent = el.dataset.to; });
+  } else {
+  gsap.registerPlugin(ScrollTrigger);
+  const mm = gsap.matchMedia();
+
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // Hero logo battle: four lab marks rotate the crown forever and never settle,
+    // because this page withholds the winner until the bottom. Whoever sits last
+    // crouches, explodes up to seize the crown, the champ tumbles down a rung,
+    // everyone shuffles. Identity after four takeovers = a clean loop.
+    const lbs = gsap.utils.toArray('.lb');
+    const crown = { y: 8,   scale: 1.16, autoAlpha: 1,    boxShadow: '0 0 30px rgba(227,178,90,0.60)' };
+    const p2    = { y: 96,  scale: 0.90, autoAlpha: 0.8,  boxShadow: '0 0 0px rgba(227,178,90,0)' };
+    const p3    = { y: 182, scale: 0.78, autoAlpha: 0.55, boxShadow: '0 0 0px rgba(227,178,90,0)' };
+    const p4    = { y: 262, scale: 0.70, autoAlpha: 0.42, boxShadow: '0 0 0px rgba(227,178,90,0)' };
+    const slots = [crown, p2, p3, p4];
+    lbs.forEach((el) => gsap.set(el, { left: 29, x: 0 }));
+    lbs.forEach((el, i) => gsap.set(el, slots[i]));
+
+    const fight = gsap.timeline({ repeat: -1 });
+    let order = [...lbs];               // [champ, 2nd, 3rd, last]
+    const STEP = 2.4;
+    for (let s = 0; s < 4; s++) {       // one takeover per mark; identity after 4 = loop-safe
+      const at = s * STEP;
+      const [champ, second, third, fourth] = order;
+      fight
+        .to(fourth, { y: 278, scale: 0.66, duration: 0.18, ease: 'power2.in' }, at)                     // crouch (gather)
+        .to(fourth, { ...crown, duration: 0.6, ease: 'back.out(2.6)' }, at + 0.18)                      // explode up, seize crown
+        .to(champ,  { x: 34, duration: 0.12, ease: 'power3.out' }, at + 0.52)                           // shouldered aside on impact
+        .to(champ,  { ...p2, x: 0, duration: 0.6, ease: 'bounce.out' }, at + 0.64)                      // tumbles to 2nd
+        .to(second, { ...p3, duration: 0.55, ease: 'power2.inOut' }, at + 0.22)                         // bumped down
+        .to(third,  { ...p4, duration: 0.55, ease: 'power2.inOut' }, at + 0.3)                          // bumped to last
+        .to(fourth, { x: 7, duration: 0.09, yoyo: true, repeat: 5, ease: 'power2.inOut' }, at + 0.74)   // triumphant wobble
+        .to(fourth, { x: 0, duration: 0.12 }, at + 1.36)
+        .to(third,  { y: 248, duration: 0.22, yoyo: true, repeat: 1, ease: 'power2.inOut' }, at + 1.7); // new last twitches, eager
+      order = [fourth, champ, second, third];   // crown rotates
+    }
+
+    // Hero intro on load.
+    gsap.from('.hero .reveal', { opacity: 0, y: 30, duration: 0.9, stagger: 0.12, ease: 'power3.out', delay: 0.15 });
+
+    // Scroll reveals below the hero.
+    const below = gsap.utils.toArray('.reveal').filter(el => !el.closest('.hero'));
+    gsap.set(below, { opacity: 0, y: 40 });
+    ScrollTrigger.batch(below, {
+      start: 'top 85%',
+      onEnter: (els) => {
+        gsap.to(els, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', overwrite: true });
+      },
+    });
+
+    // Count scores up as they enter view (decimal-aware).
+    gsap.utils.toArray('.count').forEach((el) => {
+      const dec = +(el.dataset.dec || 0);
+      const o = { v: 0 };
+      gsap.to(o, {
+        v: +el.dataset.to, duration: 1.3, ease: 'power1.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+        onUpdate: () => { el.textContent = o.v.toFixed(dec); },
+      });
+    });
+
+    // Finale: fire the CSS spotlight/glow when it scrolls in.
+    ScrollTrigger.create({
+      trigger: '#finale', start: 'top 60%', once: true,
+      onEnter: () => document.getElementById('finale').classList.add('in'),
+    });
+
+    window.addEventListener('load', () => ScrollTrigger.refresh()); // recalc after fonts/images settle
+  });
+
+  mm.add('(prefers-reduced-motion: reduce)', () => {
+    // Static, accessible end-state, no motion; the .reveal hide is beaten by the
+    // reduced-motion CSS override. The logo battle stays a neutral vertical stack
+    // (its CSS fallback), which also keeps the winner withheld.
+    document.getElementById('finale').classList.add('in');
+    document.querySelectorAll('.count').forEach(el => { el.textContent = el.dataset.to; });
+    // Neutral static stack for the four lab marks (no crown, winner stays withheld).
+    gsap.utils.toArray('.lb').forEach((el, i) => gsap.set(el, { y: i * 92, x: 0 }));
+  });
+  }
+
+  (function () {
+    const root = document.documentElement, KEY = 'theme-pref';
+    const btn = document.getElementById('themeToggle');
+    const ico = document.getElementById('themeIco'), lbl = document.getElementById('themeLbl');
+    const meta = { auto: ['🖥️', 'Auto'], light: ['☀️', 'Light'], dark: ['🌙', 'Dark'] };
+    let pref;
+    try { pref = localStorage.getItem(KEY) || 'auto'; } catch (e) { pref = 'auto'; }
+    if (!meta[pref]) pref = 'auto';
+    function apply(p) {
+      if (p === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', p);
+      ico.textContent = meta[p][0]; lbl.textContent = meta[p][1];
+    }
+    apply(pref);
+    btn.addEventListener('click', () => {
+      pref = pref === 'auto' ? 'light' : pref === 'light' ? 'dark' : 'auto';
+      try { localStorage.setItem(KEY, pref); } catch (e) {}
+      apply(pref);
+    });
+  })();
+
+  (function () {
+    const modal = document.getElementById('promptModal');
+    const open = document.getElementById('promptBtn');
+    const close = document.getElementById('promptClose');
+    function show() { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); }
+    function hide() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); }
+    open.addEventListener('click', show);
+    close.addEventListener('click', hide);
+    modal.addEventListener('click', (e) => { if (e.target === modal) hide(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+  })();
+</script>
+</body>
+</html>
