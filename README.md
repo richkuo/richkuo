@@ -8,7 +8,7 @@ Live at **https://www.richkuo.com**.
 
 A static, single-page-forward marketing site built with Astro. The homepage introduces Rich, links to social profiles, and surfaces five main content areas:
 
-- **Current projects** — products and tools (e.g. go-trader, SceneCutAI, Art Ping Pong) with optional external links or detail pages under `/projects/[slug]/`.
+- **Current projects** — products and tools (e.g. BagTheJob, go-trader, SceneCutAI) with optional external links or detail pages under `/projects/[slug]/`.
 - **Friend projects** — collaborations and side projects by others.
 - **OpenClaw** — YouTube videos and written guides (VPS setup, trading bots, MCP servers, bugfix notes) under `/openclaw/[slug]/` or external links.
 - **Resources** — standalone articles and tool pages (e.g. `/fableplan`, `/rk-skills`) on AI coding workflows, alongside the OpenClaw written guides.
