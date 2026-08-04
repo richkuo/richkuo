@@ -334,7 +334,10 @@ const graphJsonLd = {
   .divider { height: 1px; background: var(--border); }
 
   /* ---- work with me CTA ---- */
-  .cta-wrap { display: flex; justify-content: center; padding: 26px 0 10px; }
+  .cta-wrap {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
+    padding: 26px 0 10px;
+  }
   .cta {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 9px 20px; border-radius: 14px; border: 3px solid var(--ink);
@@ -467,7 +470,7 @@ const graphJsonLd = {
 
   <div class="topbar" id="topbar">
     <span class="brand" role="button" tabindex="0" aria-label="Back to top">Rich Kuo</span>
-    <a class="nav-cta" id="navCta" href="mailto:rich.kuo.ai@gmail.com" aria-label="Work with me">
+    <a class="nav-cta" id="navCta" href="mailto:rich.kuo.ai@gmail.com?subject=Work%20with%20me" aria-label="Work with me">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25H21"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
     </a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
@@ -495,9 +498,13 @@ const graphJsonLd = {
   <div class="divider"></div>
 
   <div class="cta-wrap">
-    <a class="cta" id="cta" href="mailto:rich.kuo.ai@gmail.com">
+    <a class="cta" id="cta" href="mailto:rich.kuo.ai@gmail.com?subject=Work%20with%20me">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25H21"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
       Work with me
+    </a>
+    <a class="cta" id="ctaLabs" href="https://ascendbiolabs.com/affiliate/dashboard" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>
+      ai research chemicals
     </a>
   </div>
 
@@ -738,6 +745,7 @@ mm.add({
       scrollTrigger: { trigger: '.cta-wrap', start: 'top top+=120', end: 'top top+=26', scrub: true },
     });
     tl.fromTo('#cta', { autoAlpha: 1, scale: 1 }, { autoAlpha: 0, scale: 0.5, ease: 'none', immediateRender: false }, 0);
+    tl.fromTo('#ctaLabs', { autoAlpha: 1, scale: 1 }, { autoAlpha: 0, scale: 0.5, ease: 'none', immediateRender: false }, 0);
     tl.fromTo('#navCta', { scale: 0, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: 'none', immediateRender: false }, 0);
   }
 
@@ -851,15 +859,16 @@ mm.add({
     });
 
     /* CTA magnetic */
-    const cta = document.getElementById('cta');
-    const cx = gsap.quickTo(cta, 'x', { duration: 0.4, ease: 'power3' });
-    const cy = gsap.quickTo(cta, 'y', { duration: 0.4, ease: 'power3' });
-    cta.addEventListener('mousemove', (e) => {
-      const r = cta.getBoundingClientRect();
-      cx((e.clientX - (r.left + r.width/2)) * 0.4);
-      cy((e.clientY - (r.top + r.height/2)) * 0.4);
+    document.querySelectorAll('.cta').forEach((cta) => {
+      const cx = gsap.quickTo(cta, 'x', { duration: 0.4, ease: 'power3' });
+      const cy = gsap.quickTo(cta, 'y', { duration: 0.4, ease: 'power3' });
+      cta.addEventListener('mousemove', (e) => {
+        const r = cta.getBoundingClientRect();
+        cx((e.clientX - (r.left + r.width/2)) * 0.4);
+        cy((e.clientY - (r.top + r.height/2)) * 0.4);
+      });
+      cta.addEventListener('mouseleave', () => { cx(0); cy(0); });
     });
-    cta.addEventListener('mouseleave', () => { cx(0); cy(0); });
 
     /* ---- cursor glow follow ---- */
     const glow = document.getElementById('cursor-glow');
