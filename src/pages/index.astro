@@ -219,14 +219,22 @@ const graphJsonLd = {
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* clip (not hidden) avoids the overflow-x/overflow-y pairing quirk that
+       turns overflow-x:hidden + overflow-y:visible into scrollable overflow,
+       which lets off-screen GSAP card transforms create horizontal scroll. */
+    overflow-x: clip;
+    max-width: 100%;
+  }
   body {
     margin: 0;
     font-family: var(--font-sans);
     color: var(--ink);
     background: var(--paper);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
     -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; text-decoration: none; }
@@ -327,6 +335,12 @@ const graphJsonLd = {
   .social-row svg {
     width: calc(38px - var(--nav-p) * 14px); height: calc(38px - var(--nav-p) * 14px);
   }
+  @media (max-width: 380px) {
+    .social-row { gap: 4px; }
+    .social-row svg {
+      width: calc(32px - var(--nav-p) * 10px); height: calc(32px - var(--nav-p) * 10px);
+    }
+  }
   @media (min-width: 768px) {
     .social-row svg { width: calc(46px - var(--nav-p) * 20px); height: calc(46px - var(--nav-p) * 20px); }
   }
@@ -385,6 +399,8 @@ const graphJsonLd = {
   }
 
   /* ---- cards ---- */
+  /* Clip GSAP slide-in transforms (±120% x) so they can't widen the page. */
+  .card-list { overflow-x: clip; }
   .card {
     position: relative; display: flex; gap: 18px; align-items: center;
     padding: 20px; border-radius: 26px;
@@ -505,7 +521,7 @@ const graphJsonLd = {
 
   <!-- CURRENT PROJECTS -->
   <h2 id="current-projects" class="eyebrow reveal-text"><a class="section-anchor" href="#current-projects" aria-label="Link to Current Projects"><span>Current Projects</span></a></h2>
-  <div id="currentProjects">
+  <div id="currentProjects" class="card-list">
     {currentProjects.map((p) => {
       const href = p.href ?? p.link ?? '#';
       const external = /^https?:/.test(href);
@@ -531,7 +547,7 @@ const graphJsonLd = {
 
   <!-- FRIEND PROJECTS -->
   <h2 id="friend-projects" class="eyebrow reveal-text"><a class="section-anchor" href="#friend-projects" aria-label="Link to Friend Projects"><span>Friend Projects</span></a></h2>
-  <div id="friendProjects">
+  <div id="friendProjects" class="card-list">
     {friendProjects.map((p) => {
       const href = p.href ?? p.link ?? '#';
       const external = /^https?:/.test(href);
@@ -554,9 +570,9 @@ const graphJsonLd = {
 
   <div class="bubble-row them"><div class="bubble them">How exciting</div></div>
 
-  <!-- LLM BATTLES -->
+  <!-- LLM BAKE-OFFS -->
   <h2 id="llm-bake-offs" class="eyebrow reveal-text"><a class="section-anchor" href="#llm-bake-offs" aria-label="Link to LLM Bake-Offs"><span>LLM Bake-Offs</span></a></h2>
-  <div id="llmBakeOffs">
+  <div id="llmBakeOffs" class="card-list">
     {llmBakeOffs.map((p) => {
       const href = p.href ?? p.link ?? '#';
       const external = /^https?:/.test(href);
@@ -578,7 +594,7 @@ const graphJsonLd = {
 
   <!-- VIDEOS -->
   <h2 id="videos" class="eyebrow reveal-text"><a class="section-anchor" href="#videos" aria-label="Link to Videos"><span>Videos</span></a></h2>
-  <div id="videos">
+  <div id="videoList" class="card-list">
     {videos.map((p) => {
       const href = p.href ?? p.link ?? '#';
       const external = /^https?:/.test(href);
@@ -601,7 +617,7 @@ const graphJsonLd = {
 
   <!-- RESOURCES -->
   <h2 id="resources" class="eyebrow reveal-text"><a class="section-anchor" href="#resources" aria-label="Link to Resources"><span>Resources</span></a></h2>
-  <div id="resources">
+  <div id="resourceList" class="card-list">
     {resources.map((p) => {
       const href = p.href ?? p.link ?? '#';
       const external = /^https?:/.test(href);
