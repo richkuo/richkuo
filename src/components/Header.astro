@@ -5,49 +5,54 @@ import HeaderLink from "./HeaderLink.astro";
 const site = await getSite();
 const hasNavItems = true;
 import ThemeToggle from "./ThemeToggle.astro";
+import GlassFilter from "./GlassFilter.astro";
 ---
 
 <header class="site-header">
-  <nav class="h-full w-full flex items-center justify-end">
-    {hasNavItems ? (
-      <>
-        <button
-          id="nav-toggle"
-          aria-label="Toggle navigation"
-          aria-pressed="false"
-          class="md:hidden text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase"
-        >
-          Menu
-        </button>
+  <nav class="h-full w-full">
+    <GlassFilter id="glass-nav-filter" target="#glass-nav" />
 
-        <div
-          class="hidden md:flex gap-4 text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase"
-        >
-          <HeaderLink href="/">Home</HeaderLink>
-          <HeaderLink href="/projects/">Projects</HeaderLink>
-          <HeaderLink href="/openclaw/">Guides</HeaderLink>
-          <ThemeToggle class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase" />
-        </div>
+    <div id="glass-nav" class="glass-nav flex items-center justify-end">
+      {hasNavItems ? (
+        <>
+          <button
+            id="nav-toggle"
+            aria-label="Toggle navigation"
+            aria-pressed="false"
+            class="md:hidden text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase"
+          >
+            Menu
+          </button>
 
-        <!-- Mobile modal menu (brutalist, simple) -->
-        <div id="mobile-nav" role="dialog" aria-label="Mobile navigation" aria-hidden="true" style="display:none;" class="fixed inset-0 z-[1000] p-8 overflow-auto bg-[var(--color-paper)] text-[var(--color-ink)]">
-          <button id="mobile-close" aria-label="Close navigation" style="position:absolute;right:1rem;top:1rem;" class="text-xs 2xl:text-lg font-bold uppercase">Close</button>
-          <div class="flex flex-col gap-2 items-start text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase">
+          <div
+            class="hidden md:flex items-center gap-4 text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase"
+          >
             <HeaderLink href="/">Home</HeaderLink>
             <HeaderLink href="/projects/">Projects</HeaderLink>
             <HeaderLink href="/openclaw/">Guides</HeaderLink>
-            <ThemeToggle class="text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase sm:mt-5" />
+            <ThemeToggle class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase" />
           </div>
+        </>
+      ) : (
+        <ThemeToggle class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase sm:mt-5" />
+      )}
+    </div>
+
+    {hasNavItems && (
+      <div id="mobile-nav" role="dialog" aria-label="Mobile navigation" aria-hidden="true" style="display:none;" class="fixed inset-0 z-[1000] p-8 overflow-auto bg-[var(--color-paper)] text-[var(--color-ink)]">
+        <button id="mobile-close" aria-label="Close navigation" style="position:absolute;right:1rem;top:1rem;" class="text-xs 2xl:text-lg font-bold uppercase">Close</button>
+        <div class="flex flex-col gap-2 items-start text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase">
+          <HeaderLink href="/">Home</HeaderLink>
+          <HeaderLink href="/projects/">Projects</HeaderLink>
+          <HeaderLink href="/openclaw/">Guides</HeaderLink>
+          <ThemeToggle class="text-xs 2xl:text-lg hover:text-base-500 font-bold uppercase sm:mt-5" />
         </div>
-      </>
-    ) : (
-      <ThemeToggle class="text-xs 2xl:text-lg text-base-900 hover:text-base-500 font-bold uppercase sm:mt-5" />
+      </div>
     )}
   </nav>
 </header>
 
 <script is:inline>
-  // Cache selectors to avoid repeated DOM queries
   const navButton = document.getElementById("nav-toggle");
   const mobileNav = document.getElementById("mobile-nav");
   const mobileClose = document.getElementById("mobile-close");
@@ -63,11 +68,9 @@ import ThemeToggle from "./ThemeToggle.astro";
       mobileNav.setAttribute("aria-hidden", isOpen ? "false" : "true");
 
       if (isOpen) {
-        // focus the first interactive element inside the mobile nav for accessibility
         const first = mobileNav.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
         if (first instanceof HTMLElement) first.focus();
       } else {
-        // restore focus to the toggle button
         if (navButton instanceof HTMLElement) navButton.focus();
       }
     }
@@ -83,12 +86,10 @@ import ThemeToggle from "./ThemeToggle.astro";
   on(navButton, "click", () => toggleNav());
   on(mobileClose, "click", closeNav);
 
-  // close nav with Escape
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && document.documentElement.dataset.nav === 'open') closeNav();
   });
 
-  // delegate link clicks to the nav container (works for both desktop and mobile)
   if (navElement) {
     navElement.addEventListener('click', (e) => {
       const t = e.target;
@@ -97,7 +98,6 @@ import ThemeToggle from "./ThemeToggle.astro";
     });
   }
 
-  // click-away closes the nav (keeps existing behavior)
   document.addEventListener("click", (event) => {
     if (document.documentElement.dataset.nav !== "open") return;
     const target = event.target;

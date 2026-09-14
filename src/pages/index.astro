@@ -1,6 +1,7 @@
 ---
 import profilePic from '../assets/profile.jpg';
 import { getSite } from '../utils/consts';
+import GlassFilter from '../components/GlassFilter.astro';
 
 const site = await getSite();
 const SITE_URL = 'https://www.richkuo.com';
@@ -287,6 +288,9 @@ const graphJsonLd = {
       inset 0 1px 1px 0 rgba(255, 255, 255, calc(var(--nav-p) * 0.45)),
       0 calc(var(--nav-p) * 10px) calc(var(--nav-p) * 30px) rgba(0, 0, 0, calc(var(--nav-p) * 0.16));
   }
+  .topbar.liquid-ready.is-docked {
+    backdrop-filter: url("#topbar-glass-filter") blur(3px) saturate(145%);
+  }
   .topbar .nav-cta { margin-left: auto; }
   .nav-cta {
     display: inline-flex; align-items: center; justify-content: center;
@@ -481,6 +485,7 @@ const graphJsonLd = {
 
 <main class="shell">
 
+  <GlassFilter id="topbar-glass-filter" target="#topbar" />
   <div class="topbar" id="topbar">
     <span class="brand" role="button" tabindex="0" aria-label="Back to top">Rich Kuo</span>
     <a class="nav-cta" id="navCta" href="mailto:rich.kuo.ai@gmail.com" aria-label="Work with me">
@@ -741,10 +746,12 @@ mm.add({
   /* ---- the social icons row scrubs up into the top bar, merging with brand + toggle ---- */
   {
     const socialRow = document.getElementById('socialRow');
+    const topbar = document.getElementById('topbar');
     gsap.fromTo(document.documentElement,
       { '--nav-p': 0 },
       { '--nav-p': 1, ease: 'none', immediateRender: false,
-        scrollTrigger: { trigger: socialRow, start: 'top top+=100', end: 'top top+=12', scrub: true } }
+        scrollTrigger: { trigger: socialRow, start: 'top top+=100', end: 'top top+=12', scrub: true,
+          onUpdate: (self) => topbar.classList.toggle('is-docked', self.progress >= 0.98) } }
     );
   }
 
