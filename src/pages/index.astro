@@ -239,6 +239,7 @@ const graphJsonLd = {
     -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; text-decoration: none; }
+  html.lenis, html.lenis body { height: auto; }
 
   /* ---- drifting gradient blobs ---- */
   .blob-field {
@@ -651,6 +652,7 @@ const graphJsonLd = {
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script is:inline>
 /* ---------------- palette (drives card accents + hero shimmer) ---------------- */
 /* Cards, hero letters, and social icons are server-rendered in the markup above;
@@ -683,11 +685,16 @@ document.querySelectorAll('.eyebrow').forEach((h) => {
   });
 })();
 
+/* Lenis smooth scroll instance, created only when motion is allowed */
+let lenis = null;
+
 /* clicking the brand scrolls back to the top */
 (function(){
   const brand = document.querySelector('.brand');
   if (!brand) return;
-  const toTop = () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  const toTop = () => lenis
+    ? lenis.scrollTo(0)
+    : window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   brand.addEventListener('click', toTop);
   brand.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toTop(); } });
 })();
@@ -714,6 +721,19 @@ mm.add({
     gsap.set(['.hero-letters span', '#avatar', '.social-row a', '.cta', '.bubble', '.reveal-text span', '.card'], { clearProps: 'all', opacity: 1 });
     gsap.set('.eyebrow-rule', { scaleX: 1 });
     return;
+  }
+
+  /* ---- Lenis smooth scroll, driven by the GSAP ticker so ScrollTrigger stays in sync ---- */
+  lenis = new Lenis({ lerp: 0.3 });
+  const lenisRaf = (time) => lenis.raf(time * 1000);
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(lenisRaf);
+  gsap.ticker.lagSmoothing(0);
+
+  /* ---- scroll velocity skews card contents (not the blurred glass cards), easing back to rest ---- */
+  {
+    const skewTo = gsap.quickTo('.card-body, .card-thumb, .bubble', 'skewY', { duration: 0.5, ease: 'power3' });
+    lenis.on('scroll', ({ velocity }) => skewTo(gsap.utils.clamp(-6, 6, velocity * 0.25)));
   }
 
   /* ---- hero scales + fades as it scrolls away (no pin, so no reserved gap) ---- */
@@ -892,6 +912,13 @@ mm.add({
     window.addEventListener('mouseenter', () => gsap.to(glow, { autoAlpha: 1, duration: 0.4 }));
     window.addEventListener('mouseleave', () => gsap.to(glow, { autoAlpha: 0, duration: 0.4 }));
   }
+
+  return () => {
+    gsap.ticker.remove(lenisRaf);
+    gsap.ticker.lagSmoothing(500, 33);
+    lenis.destroy();
+    lenis = null;
+  };
 });
 </script>
 </body>
