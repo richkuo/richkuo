@@ -724,7 +724,7 @@ mm.add({
   }
 
   /* ---- Lenis smooth scroll, driven by the GSAP ticker so ScrollTrigger stays in sync ---- */
-  lenis = new Lenis({ lerp: 0.2 });
+  lenis = new Lenis({ lerp: 0.3 });
   const lenisRaf = (time) => lenis.raf(time * 1000);
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(lenisRaf);
