@@ -730,9 +730,9 @@ mm.add({
   gsap.ticker.add(lenisRaf);
   gsap.ticker.lagSmoothing(0);
 
-  /* ---- scroll velocity skews the content, easing back to rest when scrolling stops ---- */
+  /* ---- scroll velocity skews card contents (not the blurred glass cards), easing back to rest ---- */
   {
-    const skewTo = gsap.quickTo('.card-list, .bubble-row', 'skewY', { duration: 0.5, ease: 'power3' });
+    const skewTo = gsap.quickTo('.card-body, .card-thumb, .bubble', 'skewY', { duration: 0.5, ease: 'power3' });
     lenis.on('scroll', ({ velocity }) => skewTo(gsap.utils.clamp(-6, 6, velocity * 0.25)));
   }
 
