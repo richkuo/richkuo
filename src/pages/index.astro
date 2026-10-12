@@ -47,6 +47,9 @@ const socials = [
 
 type Card = { title: string; icon: string; desc?: string; link?: string; href?: string; vid?: string; img?: string; badge?: string };
 
+const newItems: Card[] = [
+	{ title: 'Local LLM Mobile App: Step by Step Run a Large Language Model on Your Phone', icon: 'youtube', link: 'https://www.youtube.com/watch?v=iLUhY4uU9hk', vid: 'iLUhY4uU9hk', badge: 'NEW', desc: 'The only tutorial online that walks through building a local LLM mobile app from start to finish, step by step, so a large language model runs on your phone.' },
+];
 const currentProjects: Card[] = [
 	{ title: 'SceneCut AI', icon: 'video', link: 'https://www.scenecutai.com', desc: 'The best content creation app — no edits, easy reshoots, scripting, voice overs, sound effects, advanced AI video generation, and more.' },
 	{ title: 'go-trader', icon: 'chart', link: 'https://github.com/richkuo/go-trader', desc: 'An OpenClaw trading bot for Discord that enables custom trading platforms and algorithms.' },
@@ -57,7 +60,6 @@ const friendProjects: Card[] = [
 	{ title: 'Art Ping Pong', icon: 'palette', link: 'https://artpingpong.valyss.com', desc: 'AI enhanced drawing fun for the entire family. Draw and share digital art together!' },
 ];
 const videos: Card[] = [
-	{ title: 'Local LLM Mobile App: Step by Step Run a Large Language Model on Your Phone', icon: 'youtube', link: 'https://www.youtube.com/watch?v=iLUhY4uU9hk', vid: 'iLUhY4uU9hk', badge: 'NEW', desc: 'The only tutorial online that walks through building a local LLM mobile app from start to finish, step by step, so a large language model runs on your phone.' },
 	{ title: 'How to Build a Feature End-to-End with AI (Opus 4.8 + Cursor Tutorial)', icon: 'youtube', link: 'https://www.youtube.com/watch?v=7paxjEwckCo', vid: '7paxjEwckCo', desc: 'YouTube tutorial walking through building a complete software feature end-to-end with AI, using Claude Opus 4.8 and the Cursor IDE.' },
 	{ title: 'Full OpenClaw Setup on a VPS with TailScale VPN and Maximum Firewall', icon: 'youtube', link: 'https://youtu.be/SHcTKVAdgV0', vid: 'SHcTKVAdgV0', desc: 'YouTube video walkthrough of setting up OpenClaw on a VPS with TailScale VPN and maximum firewall configuration.' },
 	{ title: 'Openclaw Full Setup Part 2: Discord Bot and the UI Dashboard', icon: 'youtube', link: 'https://youtu.be/4UjAP6W06TY', vid: '4UjAP6W06TY', desc: 'YouTube video walkthrough of setting up the OpenClaw Discord bot and UI dashboard.' },
@@ -526,6 +528,30 @@ const graphJsonLd = {
     </a>
   </div>
 
+  <!-- NEW -->
+  <h2 id="new" class="eyebrow reveal-text"><a class="section-anchor" href="#new" aria-label="Link to New"><span>New</span></a></h2>
+  <div id="newList" class="card-list">
+    {newItems.map((p) => {
+      const href = p.href ?? p.link ?? '#';
+      const external = /^https?:/.test(href);
+      return (
+        <a class="card" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+          <div class="card-body">
+            <div class="card-title"><Fragment set:html={ICONS[p.icon]} /><span>{p.title}</span></div>
+            {p.link && <p class="card-link">{p.link}</p>}
+            {p.badge && <span class="card-badge">{p.badge}</span>}
+            {p.desc && <p class="card-desc">{p.desc}</p>}
+          </div>
+          {p.vid && (
+            <div class="card-thumb">
+              <img src={`https://img.youtube.com/vi/${p.vid}/mqdefault.jpg`} alt={p.title} loading="lazy" />
+            </div>
+          )}
+        </a>
+      );
+    })}
+  </div>
+
   <div class="bubble-row them"><div class="bubble them">It's time for your next adventure</div></div>
 
   <!-- CURRENT PROJECTS -->
@@ -612,7 +638,6 @@ const graphJsonLd = {
           <div class="card-body">
             <div class="card-title"><Fragment set:html={ICONS[p.icon]} /><span>{p.title}</span></div>
             {p.link && <p class="card-link">{p.link}</p>}
-            {p.badge && <span class="card-badge">{p.badge}</span>}
             {p.desc && <p class="card-desc">{p.desc}</p>}
           </div>
           {p.vid && (
