@@ -12,7 +12,7 @@
     "@astrojs/mdx": "^4.3.14",
     "@astrojs/rss": "4.0.15",
     "@astrojs/sitemap": "3.7.0",
-    "@iconify-json/tabler": "^1.2.39",
+    "@iconify-json/tabler": "^1.2.42",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "5.18.0",
