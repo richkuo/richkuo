@@ -33,6 +33,7 @@ const ICONS: Record<string, string> = {
 	plan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M9 3a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H9z"/><path d="M9 12l2 2 4-4"/></svg>',
 	briefcase: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M2 13h20"/></svg>',
 	keyboard: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>',
+	link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
 };
 
 const socials = [
@@ -49,6 +50,9 @@ type Card = { title: string; icon: string; desc?: string; link?: string; href?: 
 
 const localLlmVideo: Card = { title: 'Local LLM Mobile App: Step by Step Run a Large Language Model on Your Phone', icon: 'youtube', link: 'https://www.youtube.com/watch?v=iLUhY4uU9hk', vid: 'iLUhY4uU9hk', badge: 'NEW', desc: 'The only tutorial online that walks through building a local LLM mobile app from start to finish, step by step, so a large language model runs on your phone.' };
 const newItems: Card[] = [localLlmVideo];
+const affiliates: Card[] = [
+	{ title: 'Inworld', icon: 'link', link: 'https://inworld.1stcollab.com/rich_kuo1_tt' },
+];
 const currentProjects: Card[] = [
 	{ title: 'SceneCut AI', icon: 'video', link: 'https://www.scenecutai.com', desc: 'The best content creation app — no edits, easy reshoots, scripting, voice overs, sound effects, advanced AI video generation, and more.' },
 	{ title: 'go-trader', icon: 'chart', link: 'https://github.com/richkuo/go-trader', desc: 'An OpenClaw trading bot for Discord that enables custom trading platforms and algorithms.' },
@@ -526,6 +530,24 @@ const graphJsonLd = {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25H21"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
       Work with me
     </a>
+  </div>
+
+  <!-- AFFILIATES -->
+  <h2 id="affiliates" class="eyebrow reveal-text"><a class="section-anchor" href="#affiliates" aria-label="Link to Affiliates"><span>Affiliates</span></a></h2>
+  <div id="affiliateList" class="card-list">
+    {affiliates.map((p) => {
+      const href = p.href ?? p.link ?? '#';
+      const external = /^https?:/.test(href);
+      return (
+        <a class="card" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer sponsored' : undefined}>
+          <div class="card-body">
+            <div class="card-title"><Fragment set:html={ICONS[p.icon]} /><span>{p.title}</span></div>
+            {p.link && <p class="card-link">{p.link}</p>}
+            {p.desc && <p class="card-desc">{p.desc}</p>}
+          </div>
+        </a>
+      );
+    })}
   </div>
 
   <!-- NEW -->
