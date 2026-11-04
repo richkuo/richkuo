@@ -1,6 +1,7 @@
 ---
 import profilePic from '../assets/profile.jpg';
 import { getSite } from '../utils/consts';
+import GlassFilter from '../components/GlassFilter.astro';
 
 const site = await getSite();
 const SITE_URL = 'https://www.richkuo.com';
@@ -31,6 +32,8 @@ const ICONS: Record<string, string> = {
 	skills: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>',
 	plan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M9 3a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H9z"/><path d="M9 12l2 2 4-4"/></svg>',
 	briefcase: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M2 13h20"/></svg>',
+	keyboard: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>',
+	link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
 };
 
 const socials = [
@@ -45,16 +48,22 @@ const socials = [
 
 type Card = { title: string; icon: string; desc?: string; link?: string; href?: string; vid?: string; img?: string; badge?: string };
 
+const localLlmVideo: Card = { title: 'Local LLM Mobile App: Step by Step Run a Large Language Model on Your Phone', icon: 'youtube', link: 'https://www.youtube.com/watch?v=iLUhY4uU9hk', vid: 'iLUhY4uU9hk', badge: 'NEW', desc: 'The only tutorial online that walks through building a local LLM mobile app from start to finish, step by step, so a large language model runs on your phone.' };
+const newItems: Card[] = [localLlmVideo];
+const affiliates: Card[] = [
+	{ title: 'Inworld', icon: 'link', link: 'https://inworld.1stcollab.com/rich_kuo1_tt' },
+];
 const currentProjects: Card[] = [
-	{ title: 'BagTheJob', icon: 'briefcase', link: 'https://www.bagthejob.ai', badge: 'Limited Time Launch Promo 50% Off', desc: 'Apply to 100+ jobs per week in minutes. AI job agent that finds real openings, tailors your résumé and cover letter per role, fills the application, without you needing to be at your computer.' },
 	{ title: 'SceneCut AI', icon: 'video', link: 'https://www.scenecutai.com', desc: 'The best content creation app — no edits, easy reshoots, scripting, voice overs, sound effects, advanced AI video generation, and more.' },
 	{ title: 'go-trader', icon: 'chart', link: 'https://github.com/richkuo/go-trader', desc: 'An OpenClaw trading bot for Discord that enables custom trading platforms and algorithms.' },
 	{ title: 'VibeCode Support', icon: 'headset', link: 'https://www.officialvibecodesupport.com', desc: 'Got a vibe coded app? Stuck on a bug? Schedule a consultation today! Bugfix guaranteed!' },
+	{ title: 'BagTheJob', icon: 'briefcase', link: 'https://www.bagthejob.ai', badge: 'Limited Time Launch Promo 50% Off', desc: 'Apply to 100+ jobs per week in minutes. AI job agent that finds real openings, tailors your résumé and cover letter per role, fills the application, without you needing to be at your computer.' },
 ];
 const friendProjects: Card[] = [
 	{ title: 'Art Ping Pong', icon: 'palette', link: 'https://artpingpong.valyss.com', desc: 'AI enhanced drawing fun for the entire family. Draw and share digital art together!' },
 ];
 const videos: Card[] = [
+	localLlmVideo,
 	{ title: 'How to Build a Feature End-to-End with AI (Opus 4.8 + Cursor Tutorial)', icon: 'youtube', link: 'https://www.youtube.com/watch?v=7paxjEwckCo', vid: '7paxjEwckCo', desc: 'YouTube tutorial walking through building a complete software feature end-to-end with AI, using Claude Opus 4.8 and the Cursor IDE.' },
 	{ title: 'Full OpenClaw Setup on a VPS with TailScale VPN and Maximum Firewall', icon: 'youtube', link: 'https://youtu.be/SHcTKVAdgV0', vid: 'SHcTKVAdgV0', desc: 'YouTube video walkthrough of setting up OpenClaw on a VPS with TailScale VPN and maximum firewall configuration.' },
 	{ title: 'Openclaw Full Setup Part 2: Discord Bot and the UI Dashboard', icon: 'youtube', link: 'https://youtu.be/4UjAP6W06TY', vid: '4UjAP6W06TY', desc: 'YouTube video walkthrough of setting up the OpenClaw Discord bot and UI dashboard.' },
@@ -65,10 +74,11 @@ const videos: Card[] = [
 const resources: Card[] = [
 	{ title: 'MiniMax Web Search MCP Server Setup for OpenClaw', icon: 'search', href: '/openclaw/minimax-websearch-mcp-setup/', desc: "Step-by-step guide to setting up MiniMax's web search MCP server with mcporter for real-time search in OpenClaw agents." },
 	{ title: 'OpenClaw Kimi K2.6 Bugfix', icon: 'bug', href: '/openclaw/kimi-k2-6-bugfix/', desc: 'How to fix Kimi configuration drift in OpenClaw where sessions silently fall back to a different model instead of staying on kimi-k2.6.' },
-	{ title: '/fableplan', icon: 'plan', href: '/fableplan', link: 'https://github.com/richkuo/fableplan', desc: 'Why I plan with Fable 5 and build with Opus or Sonnet: a Claude Code skill that delegates implementation planning to a Fable 5 subagent, then builds from the vetted plan in an isolated git worktree.' },
 	{ title: '/rk-skills', icon: 'skills', href: '/rk-skills', link: 'https://github.com/richkuo/rk-skills', desc: 'Claude Code workflow skills — GitHub issue, PR, and release automation plus Fable-driven planning. Install via npx or as a Claude Code plugin.' },
+	{ title: 'Model Effort Shortcuts', icon: 'keyboard', link: 'https://github.com/richkuo/claude-code-model-effort-shortcuts', desc: 'A Claude Code plugin that switches the model and the reasoning effort from the keyboard. Option+P cycles the model, Option+E cycles the effort, and the footer shows what the next request uses.' },
+	{ title: '/fableplan', icon: 'plan', href: '/fableplan', link: 'https://github.com/richkuo/fableplan', desc: 'Why I plan with Fable 5 and build with Opus or Sonnet: a Claude Code skill that delegates implementation planning to a Fable 5 subagent, then builds from the vetted plan in an isolated git worktree.' },
 ];
-const llmBattles: Card[] = [
+const llmBakeOffs: Card[] = [
 	{ title: 'Bake-off Ep.1 — The First Feature', icon: 'trophy', href: '/reports/issue-844/index.html', img: '/reports/issue-844/og-ai-model-bakeoff.png', desc: 'Four models each build the same trading-bot feature from one spec, scored on cost, speed, review rounds, and code quality. Winner: GPT-5.' },
 	{ title: 'Bake-off Ep.2 — Scale-In', icon: 'trophy', href: '/reports/issue-873/index.html', img: '/reports/issue-873/og-scale-in-bakeoff.png', desc: 'Three models add to an open position without breaking its original risk plan. Winner: Opus 4.8 — speed and cost ran exactly backwards to correctness.' },
 	{ title: 'Bake-off Ep.3 — The Regime Refactor', icon: 'trophy', href: '/reports/issue-879/index.html', img: '/reports/issue-879/og-regime-bakeoff.png', desc: 'Six AI runs across five models refactor a live-trading market-regime calc into one shared source of truth. Winner: Fable 5 — and the fastest run shipped a silent production crash.' },
@@ -116,17 +126,17 @@ const profilePageJsonLd = {
 	inLanguage: 'en-US',
 };
 
-// Enumerate the LLM Battles series so answer/generative engines can list the
+// Enumerate the LLM Bake-Offs series so answer/generative engines can list the
 // full set of bake-offs and cite the individual reports.
-const llmBattlesItemList = {
+const llmBakeOffsItemList = {
 	'@type': 'ItemList',
-	'@id': `${SITE_URL}/#llm-battles`,
-	name: 'LLM Battles — AI coding bake-offs',
+	'@id': `${SITE_URL}/#llm-bake-offs`,
+	name: 'LLM Bake-Offs — AI coding bake-offs',
 	description:
 		'Head-to-head bake-offs scoring frontier AI models (GPT, Claude Opus, GLM, Fable, Composer) on identical real-world coding tasks — cost, speed, review rounds, and code quality.',
 	itemListOrder: 'https://schema.org/ItemListOrderAscending',
-	numberOfItems: llmBattles.length,
-	itemListElement: llmBattles.map((b, i) => ({
+	numberOfItems: llmBakeOffs.length,
+	itemListElement: llmBakeOffs.map((b, i) => ({
 		'@type': 'ListItem',
 		position: i + 1,
 		name: b.title,
@@ -136,7 +146,7 @@ const llmBattlesItemList = {
 
 const graphJsonLd = {
 	'@context': 'https://schema.org',
-	'@graph': [personJsonLd, websiteJsonLd, profilePageJsonLd, llmBattlesItemList],
+	'@graph': [personJsonLd, websiteJsonLd, profilePageJsonLd, llmBakeOffsItemList],
 };
 ---
 <!DOCTYPE html>
@@ -219,17 +229,26 @@ const graphJsonLd = {
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* clip (not hidden) avoids the overflow-x/overflow-y pairing quirk that
+       turns overflow-x:hidden + overflow-y:visible into scrollable overflow,
+       which lets off-screen GSAP card transforms create horizontal scroll. */
+    overflow-x: clip;
+    max-width: 100%;
+  }
   body {
     margin: 0;
     font-family: var(--font-sans);
     color: var(--ink);
     background: var(--paper);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
     -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; text-decoration: none; }
+  html.lenis, html.lenis body { height: auto; }
 
   /* ---- drifting gradient blobs ---- */
   .blob-field {
@@ -279,6 +298,9 @@ const graphJsonLd = {
       inset 0 1px 1px 0 rgba(255, 255, 255, calc(var(--nav-p) * 0.45)),
       0 calc(var(--nav-p) * 10px) calc(var(--nav-p) * 30px) rgba(0, 0, 0, calc(var(--nav-p) * 0.16));
   }
+  .topbar.liquid-ready.is-docked {
+    backdrop-filter: url("#topbar-glass-filter") blur(3px) saturate(145%);
+  }
   .topbar .nav-cta { margin-left: auto; }
   .nav-cta {
     display: inline-flex; align-items: center; justify-content: center;
@@ -326,6 +348,12 @@ const graphJsonLd = {
   .social-row a { display: inline-flex; will-change: transform; color: var(--ink); }
   .social-row svg {
     width: calc(38px - var(--nav-p) * 14px); height: calc(38px - var(--nav-p) * 14px);
+  }
+  @media (max-width: 380px) {
+    .social-row { gap: 4px; }
+    .social-row svg {
+      width: calc(32px - var(--nav-p) * 10px); height: calc(32px - var(--nav-p) * 10px);
+    }
   }
   @media (min-width: 768px) {
     .social-row svg { width: calc(46px - var(--nav-p) * 20px); height: calc(46px - var(--nav-p) * 20px); }
@@ -388,6 +416,8 @@ const graphJsonLd = {
   }
 
   /* ---- cards ---- */
+  /* Clip GSAP slide-in transforms (±120% x) so they can't widen the page. */
+  .card-list { overflow-x: clip; }
   .card {
     position: relative; display: flex; gap: 18px; align-items: center;
     padding: 20px; border-radius: 26px;
@@ -468,6 +498,7 @@ const graphJsonLd = {
 
 <main class="shell">
 
+  <GlassFilter id="topbar-glass-filter" target="#topbar" />
   <div class="topbar" id="topbar">
     <span class="brand" role="button" tabindex="0" aria-label="Back to top">Rich Kuo</span>
     <a class="nav-cta" id="navCta" href="mailto:rich.kuo.ai@gmail.com?subject=Work%20with%20me" aria-label="Work with me">
@@ -508,11 +539,53 @@ const graphJsonLd = {
     </a>
   </div>
 
+  <!-- AFFILIATES -->
+  <h2 id="affiliates" class="eyebrow reveal-text"><a class="section-anchor" href="#affiliates" aria-label="Link to Affiliates"><span>Affiliates</span></a></h2>
+  <div id="affiliateList" class="card-list">
+    {affiliates.map((p) => {
+      const href = p.href ?? p.link ?? '#';
+      const external = /^https?:/.test(href);
+      return (
+        <a class="card" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer sponsored' : undefined}>
+          <div class="card-body">
+            <div class="card-title"><Fragment set:html={ICONS[p.icon]} /><span>{p.title}</span></div>
+            {p.link && <p class="card-link">{p.link}</p>}
+            {p.desc && <p class="card-desc">{p.desc}</p>}
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <!-- NEW -->
+  <h2 id="new" class="eyebrow reveal-text"><a class="section-anchor" href="#new" aria-label="Link to New"><span>New</span></a></h2>
+  <div id="newList" class="card-list">
+    {newItems.map((p) => {
+      const href = p.href ?? p.link ?? '#';
+      const external = /^https?:/.test(href);
+      return (
+        <a class="card" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+          <div class="card-body">
+            <div class="card-title"><Fragment set:html={ICONS[p.icon]} /><span>{p.title}</span></div>
+            {p.link && <p class="card-link">{p.link}</p>}
+            {p.badge && <span class="card-badge">{p.badge}</span>}
+            {p.desc && <p class="card-desc">{p.desc}</p>}
+          </div>
+          {p.vid && (
+            <div class="card-thumb">
+              <img src={`https://img.youtube.com/vi/${p.vid}/mqdefault.jpg`} alt={p.title} loading="lazy" />
+            </div>
+          )}
+        </a>
+      );
+    })}
+  </div>
+
   <div class="bubble-row them"><div class="bubble them">It's time for your next adventure</div></div>
 
   <!-- CURRENT PROJECTS -->
   <h2 id="current-projects" class="eyebrow reveal-text"><a class="section-anchor" href="#current-projects" aria-label="Link to Current Projects"><span>Current Projects</span></a></h2>
-  <div id="currentProjects">
+  <div id="currentProjects" class="card-list">
     {currentProjects.map((p) => {
       const href = p.href ?? p.link ?? '#';
       const external = /^https?:/.test(href);
@@ -538,7 +611,7 @@ const graphJsonLd = {
 
   <!-- FRIEND PROJECTS -->
   <h2 id="friend-projects" class="eyebrow reveal-text"><a class="section-anchor" href="#friend-projects" aria-label="Link to Friend Projects"><span>Friend Projects</span></a></h2>
-  <div id="friendProjects">
+  <div id="friendProjects" class="card-list">
     {friendProjects.map((p) => {
       const href = p.href ?? p.link ?? '#';
       const external = /^https?:/.test(href);
@@ -561,10 +634,10 @@ const graphJsonLd = {
 
   <div class="bubble-row them"><div class="bubble them">How exciting</div></div>
 
-  <!-- LLM BATTLES -->
-  <h2 id="llm-battles" class="eyebrow reveal-text"><a class="section-anchor" href="#llm-battles" aria-label="Link to LLM Battles"><span>LLM Battles</span></a></h2>
-  <div id="llmBattles">
-    {llmBattles.map((p) => {
+  <!-- LLM BAKE-OFFS -->
+  <h2 id="llm-bake-offs" class="eyebrow reveal-text"><a class="section-anchor" href="#llm-bake-offs" aria-label="Link to LLM Bake-Offs"><span>LLM Bake-Offs</span></a></h2>
+  <div id="llmBakeOffs" class="card-list">
+    {llmBakeOffs.map((p) => {
       const href = p.href ?? p.link ?? '#';
       const external = /^https?:/.test(href);
       return (
@@ -585,7 +658,7 @@ const graphJsonLd = {
 
   <!-- VIDEOS -->
   <h2 id="videos" class="eyebrow reveal-text"><a class="section-anchor" href="#videos" aria-label="Link to Videos"><span>Videos</span></a></h2>
-  <div id="videos">
+  <div id="videoList" class="card-list">
     {videos.map((p) => {
       const href = p.href ?? p.link ?? '#';
       const external = /^https?:/.test(href);
@@ -594,6 +667,7 @@ const graphJsonLd = {
           <div class="card-body">
             <div class="card-title"><Fragment set:html={ICONS[p.icon]} /><span>{p.title}</span></div>
             {p.link && <p class="card-link">{p.link}</p>}
+            {p.badge && <span class="card-badge">{p.badge}</span>}
             {p.desc && <p class="card-desc">{p.desc}</p>}
           </div>
           {p.vid && (
@@ -608,7 +682,7 @@ const graphJsonLd = {
 
   <!-- RESOURCES -->
   <h2 id="resources" class="eyebrow reveal-text"><a class="section-anchor" href="#resources" aria-label="Link to Resources"><span>Resources</span></a></h2>
-  <div id="resources">
+  <div id="resourceList" class="card-list">
     {resources.map((p) => {
       const href = p.href ?? p.link ?? '#';
       const external = /^https?:/.test(href);
@@ -637,6 +711,7 @@ const graphJsonLd = {
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
 <script is:inline>
 /* ---------------- palette (drives card accents + hero shimmer) ---------------- */
 /* Cards, hero letters, and social icons are server-rendered in the markup above;
@@ -669,11 +744,16 @@ document.querySelectorAll('.eyebrow').forEach((h) => {
   });
 })();
 
+/* Lenis smooth scroll instance, created only when motion is allowed */
+let lenis = null;
+
 /* clicking the brand scrolls back to the top */
 (function(){
   const brand = document.querySelector('.brand');
   if (!brand) return;
-  const toTop = () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  const toTop = () => lenis
+    ? lenis.scrollTo(0)
+    : window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   brand.addEventListener('click', toTop);
   brand.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toTop(); } });
 })();
@@ -700,6 +780,19 @@ mm.add({
     gsap.set(['.hero-letters span', '#avatar', '.social-row a', '.cta', '.bubble', '.reveal-text span', '.card'], { clearProps: 'all', opacity: 1 });
     gsap.set('.eyebrow-rule', { scaleX: 1 });
     return;
+  }
+
+  /* ---- Lenis smooth scroll, driven by the GSAP ticker so ScrollTrigger stays in sync ---- */
+  lenis = new Lenis({ lerp: 0.3 });
+  const lenisRaf = (time) => lenis.raf(time * 1000);
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(lenisRaf);
+  gsap.ticker.lagSmoothing(0);
+
+  /* ---- scroll velocity skews card contents (not the blurred glass cards), easing back to rest ---- */
+  {
+    const skewTo = gsap.quickTo('.card-body, .card-thumb, .bubble', 'skewY', { duration: 0.5, ease: 'power3' });
+    lenis.on('scroll', ({ velocity }) => skewTo(gsap.utils.clamp(-6, 6, velocity * 0.25)));
   }
 
   /* ---- hero scales + fades as it scrolls away (no pin, so no reserved gap) ---- */
@@ -732,10 +825,12 @@ mm.add({
   /* ---- the social icons row scrubs up into the top bar, merging with brand + toggle ---- */
   {
     const socialRow = document.getElementById('socialRow');
+    const topbar = document.getElementById('topbar');
     gsap.fromTo(document.documentElement,
       { '--nav-p': 0 },
       { '--nav-p': 1, ease: 'none', immediateRender: false,
-        scrollTrigger: { trigger: socialRow, start: 'top top+=100', end: 'top top+=12', scrub: true } }
+        scrollTrigger: { trigger: socialRow, start: 'top top+=100', end: 'top top+=12', scrub: true,
+          onUpdate: (self) => topbar.classList.toggle('is-docked', self.progress >= 0.98) } }
     );
   }
 
@@ -878,6 +973,13 @@ mm.add({
     window.addEventListener('mouseenter', () => gsap.to(glow, { autoAlpha: 1, duration: 0.4 }));
     window.addEventListener('mouseleave', () => gsap.to(glow, { autoAlpha: 0, duration: 0.4 }));
   }
+
+  return () => {
+    gsap.ticker.remove(lenisRaf);
+    gsap.ticker.lagSmoothing(500, 33);
+    lenis.destroy();
+    lenis = null;
+  };
 });
 </script>
 </body>

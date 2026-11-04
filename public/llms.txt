@@ -23,7 +23,7 @@ Rich Kuo ships AI-native products end to end and documents real production setup
 - [GPT-5.5 + OpenClaw + AI Trading Bot (Part 1)](https://www.richkuo.com/openclaw/openclaw-gpt-5-5-ai-trading-bot/): Building an AI trading bot with GPT-5.5 and OpenClaw (video walkthrough).
 - [AI Trading with Go-Trader on Hyperliquid Part 2: Hermes/OpenClaw Bots Running 24/7](https://www.richkuo.com/openclaw/openclaw-go-trader-hyperliquid-part-2/): Running Hermes and OpenClaw trading bots 24/7 with Go-Trader on Hyperliquid (video walkthrough).
 
-## LLM Battles
+## LLM Bake-Offs
 Head-to-head bake-offs scoring frontier models (GPT, Claude Opus, GLM, Fable, Composer) on identical real-world coding tasks for cost, speed, review rounds, and code quality.
 - [Bake-off Ep.1 — The First Feature](https://www.richkuo.com/reports/issue-844/): Four models build the same trading-bot feature from one spec. Winner: GPT-5.
 - [Bake-off Ep.2 — Scale-In](https://www.richkuo.com/reports/issue-873/): Three models add to an open position without breaking its original risk plan. Winner: Opus 4.8.

@@ -1,0 +1,81 @@
+---
+interface Props {
+  id?: string;
+  target: string;
+  scale?: number;
+}
+
+const { id = "glass-filter", target, scale = 80 } = Astro.props;
+const mapId = `${id}-map`;
+const redScale = -scale;
+const greenScale = -(scale - 5);
+const blueScale = -(scale - 10);
+---
+
+<svg class="glass-filter-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <filter id={id} color-interpolation-filters="sRGB" x="0%" y="0%" width="100%" height="100%">
+    <feImage id={mapId} x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map" />
+    <feDisplacementMap in="SourceGraphic" in2="map" scale={redScale} xChannelSelector="R" yChannelSelector="G" result="dispRed" />
+    <feColorMatrix in="dispRed" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="red" />
+    <feDisplacementMap in="SourceGraphic" in2="map" scale={greenScale} xChannelSelector="R" yChannelSelector="G" result="dispGreen" />
+    <feColorMatrix in="dispGreen" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="green" />
+    <feDisplacementMap in="SourceGraphic" in2="map" scale={blueScale} xChannelSelector="R" yChannelSelector="G" result="dispBlue" />
+    <feColorMatrix in="dispBlue" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="blue" />
+    <feBlend in="red" in2="green" mode="screen" result="rg" />
+    <feBlend in="rg" in2="blue" mode="screen" result="output" />
+    <feGaussianBlur in="output" stdDeviation="0.5" />
+  </filter>
+</svg>
+
+<script is:inline define:vars={{ target, mapId }}>
+  let glassTarget = null;
+  const glassMap = document.getElementById(mapId);
+  const isChromium = /Chrom(e|ium)\//.test(navigator.userAgent);
+
+  const buildGlassMap = (width, height, radius) => {
+    const inset = 2.1;
+    const svg = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="glass-red" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#0000"/>
+          <stop offset="100%" stop-color="red"/>
+        </linearGradient>
+        <linearGradient id="glass-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#0000"/>
+          <stop offset="100%" stop-color="blue"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="${width}" height="${height}" fill="black"/>
+      <rect x="0" y="0" width="${width}" height="${height}" rx="${radius}" fill="url(#glass-red)"/>
+      <rect x="0" y="0" width="${width}" height="${height}" rx="${radius}" fill="url(#glass-blue)" style="mix-blend-mode:screen"/>
+      <rect x="${inset}" y="${inset}" width="${width - inset * 2}" height="${height - inset * 2}" rx="${radius}" fill="hsl(0 0% 50% / 0.93)" style="filter:blur(7px)"/>
+    </svg>`;
+    return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+  };
+
+  const updateGlassMap = () => {
+    if (!glassTarget || !glassMap) return;
+    const rect = glassTarget.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+    const radius = parseFloat(getComputedStyle(glassTarget).borderRadius) || 20;
+    glassMap.setAttribute("href", buildGlassMap(rect.width, rect.height, radius));
+  };
+
+  const initGlass = () => {
+    glassTarget = document.querySelector(target);
+    if (!glassTarget || !glassMap || !isChromium) return;
+    glassTarget.classList.add("liquid-ready");
+    updateGlassMap();
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(updateGlassMap).observe(glassTarget);
+    } else {
+      window.addEventListener("resize", updateGlassMap);
+    }
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initGlass, { once: true });
+  } else {
+    initGlass();
+  }
+</script>
