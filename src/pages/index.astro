@@ -49,7 +49,8 @@ const socials = [
 type Card = { title: string; icon: string; desc?: string; link?: string; href?: string; vid?: string; img?: string; badge?: string };
 
 const localLlmVideo: Card = { title: 'Local LLM Mobile App: Step by Step Run a Large Language Model on Your Phone', icon: 'youtube', link: 'https://www.youtube.com/watch?v=iLUhY4uU9hk', vid: 'iLUhY4uU9hk', badge: 'NEW', desc: 'The only tutorial online that walks through building a local LLM mobile app from start to finish, step by step, so a large language model runs on your phone.' };
-const newItems: Card[] = [localLlmVideo];
+const tanstackVideo: Card = { title: 'TanStack Start Just Hit 1.0… Here\'s What Changes vs Next.js', icon: 'youtube', link: 'https://www.youtube.com/watch?v=OJ2WWVjrW6o', vid: 'OJ2WWVjrW6o', badge: 'NEW', desc: 'YouTube video on the TanStack Start 1.0 release and what changes compared to Next.js.' };
+const newItems: Card[] = [tanstackVideo, localLlmVideo];
 const affiliates: Card[] = [
 	{ title: 'Inworld', icon: 'link', link: 'https://inworld.1stcollab.com/rich_kuo1_tt' },
 ];
@@ -63,6 +64,7 @@ const friendProjects: Card[] = [
 	{ title: 'Art Ping Pong', icon: 'palette', link: 'https://artpingpong.valyss.com', desc: 'AI enhanced drawing fun for the entire family. Draw and share digital art together!' },
 ];
 const videos: Card[] = [
+	tanstackVideo,
 	localLlmVideo,
 	{ title: 'How to Build a Feature End-to-End with AI (Opus 4.8 + Cursor Tutorial)', icon: 'youtube', link: 'https://www.youtube.com/watch?v=7paxjEwckCo', vid: '7paxjEwckCo', desc: 'YouTube tutorial walking through building a complete software feature end-to-end with AI, using Claude Opus 4.8 and the Cursor IDE.' },
 	{ title: 'Full OpenClaw Setup on a VPS with TailScale VPN and Maximum Firewall', icon: 'youtube', link: 'https://youtu.be/SHcTKVAdgV0', vid: 'SHcTKVAdgV0', desc: 'YouTube video walkthrough of setting up OpenClaw on a VPS with TailScale VPN and maximum firewall configuration.' },
