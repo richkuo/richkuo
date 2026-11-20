@@ -306,7 +306,7 @@ const zoomPhrases = [
   /* ---- hero ---- */
   .hero {
     min-height: 100svh; display: flex; flex-direction: column;
-    padding: 110px var(--gutter) 28px;
+    padding: 110px var(--gutter) clamp(28px, 9vh, 96px);
   }
   .hero-name {
     font-family: var(--font-display); font-weight: 400; color: var(--accent-text);
