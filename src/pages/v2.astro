@@ -139,7 +139,8 @@ const zoomPhrases = [
     font-size: 22.5vw; letter-spacing: -.01em;
     display: flex; justify-content: space-between; gap: .12em;
   }
-  .hero-name .word { display: inline-flex; overflow: hidden; padding-top: .04em; }
+  .hero-name .word { display: inline-flex; }
+  .hero-name .cl { display: inline-block; overflow: hidden; padding-top: .04em; will-change: transform; }
   .hero-name .ch { display: inline-block; will-change: transform; }
   .hero-role {
     margin-top: clamp(14px, 2vw, 28px); align-self: flex-end; text-align: right;
@@ -348,7 +349,7 @@ const zoomPhrases = [
   <section class="hero" aria-label="Intro">
     <h1 class="hero-name" id="heroName" aria-label="Rich Kuo">
       {['Rich', 'Kuo'].map((w) => (
-        <span class="word" aria-hidden="true">{w.split('').map((c) => <span class="ch">{c}</span>)}</span>
+        <span class="word" aria-hidden="true">{w.split('').map((c) => <span class="cl"><span class="ch">{c}</span></span>)}</span>
       ))}
     </h1>
     <p class="hero-role" id="heroRole" aria-label="Product Engineer">
@@ -582,10 +583,10 @@ const zoomPhrases = [
     .from('#heroRole .ch', { opacity: 0, y: 30, duration: 0.9, stagger: 0.025 }, '-=1.0')
     .from('.hero-foot > *', { opacity: 0, y: 30, duration: 1, stagger: 0.1 }, '-=0.8');
 
-  gsap.utils.toArray('#heroName .ch').forEach((ch, i, all) => {
+  gsap.utils.toArray('#heroName .cl').forEach((ch, i, all) => {
     const mid = (all.length - 1) / 2;
     gsap.to(ch, {
-      yPercent: -18 - Math.abs(i - mid) * 9,
+      yPercent: -4 - Math.abs(i - mid) * 4,
       ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
     });
