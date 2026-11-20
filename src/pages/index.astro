@@ -322,9 +322,22 @@ const zoomPhrases = [
     font-size: 7.4vw; line-height: 1; letter-spacing: -.01em;
   }
   .hero-role .ch { display: inline-block; }
+  .hero-socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: clamp(20px, 3vw, 40px); }
+  .hero-socials a {
+    display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+    border: 1px solid color-mix(in oklab, var(--fg) 22%, transparent); color: var(--fg);
+    transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .5s var(--ease-out-expo);
+  }
+  .hero-socials a:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); transform: translateY(-3px); }
+  .hero-socials svg { width: 20px; height: 20px; }
+  @media (max-width: 700px) {
+    .hero-socials { gap: 6px; }
+    .hero-socials a { width: 36px; height: 36px; }
+    .hero-socials svg { width: 16px; height: 16px; }
+  }
   .hero-foot {
     margin-top: auto; padding-top: 48px;
-    display: grid; grid-template-columns: auto 1fr auto; gap: 24px 40px; align-items: end;
+    display: flex; justify-content: center; align-items: center; gap: 24px clamp(32px, 4vw, 64px);
   }
   .scroll-cue {
     position: relative; padding-left: 22px;
@@ -332,7 +345,7 @@ const zoomPhrases = [
     font-size: clamp(26px, 2.6vw, 40px); line-height: .95;
   }
   .scroll-cue::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: -28px; width: 2px;
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
     background: var(--accent); transform-origin: 50% 0; animation: cue 2.2s var(--ease-out-expo) infinite;
   }
   @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: 50% 0; } 51% { transform-origin: 50% 100%; } 100% { transform: scaleY(0); transform-origin: 50% 100%; } }
@@ -343,7 +356,7 @@ const zoomPhrases = [
   }
   .hero-tag { max-width: 34ch; font-weight: 700; text-transform: uppercase; font-size: 14px; line-height: 1.35; }
   .hero-tag em { font-style: normal; color: var(--accent-text); }
-  .pills { display: flex; gap: 16px; justify-content: flex-end; }
+  .pills { display: flex; gap: 16px; justify-content: center; }
   .pill {
     position: relative; display: flex; align-items: center; overflow: hidden;
     min-width: min(300px, 100%); height: 60px; padding-right: 28px;
@@ -361,7 +374,9 @@ const zoomPhrases = [
   .pill:hover span:last-child { color: var(--accent); }
   .pill span:last-child { transition: color .3s ease .1s; }
   @media (max-width: 900px) {
-    .hero-foot { grid-template-columns: 1fr; }
+    .hero-foot { flex-direction: column; align-items: stretch; }
+    .scroll-cue { align-self: center; }
+    .hero-me { justify-content: center; }
     .pills { justify-content: stretch; }
     .pill { flex: 1; }
   }
@@ -559,6 +574,16 @@ const zoomPhrases = [
     <p class="hero-role" id="heroRole" aria-label="Product Engineer">
       {'Product Engineer'.split('').map((c) => <span class="ch" aria-hidden="true">{c === ' ' ? ' ' : c}</span>)}
     </p>
+    <nav class="hero-socials" id="heroSocials" aria-label="Social links">
+      {socials.map((s) => {
+        const ext = s.href.startsWith('http');
+        return (
+          <a href={s.href} aria-label={s.label} title={s.label} target={ext ? '_blank' : undefined} rel={ext ? 'noopener noreferrer' : undefined}>
+            <Fragment set:html={ICONS[s.icon]} />
+          </a>
+        );
+      })}
+    </nav>
     <div class="hero-foot">
       <div class="scroll-cue" aria-hidden="true">Scroll<br />to explore</div>
       <div class="hero-me">
@@ -846,6 +871,7 @@ const zoomPhrases = [
   intro
     .from('#heroName .ch', { yPercent: 110, duration: 1.4, stagger: 0.05 })
     .from('#heroRole .ch', { opacity: 0, y: 30, duration: 0.9, stagger: 0.025 }, '-=1.0')
+    .from('#heroSocials a', { opacity: 0, y: 20, duration: 0.8, stagger: 0.04 }, '-=0.7')
     .from('.hero-foot > *', { opacity: 0, y: 30, duration: 1, stagger: 0.1 }, '-=0.8');
 
   gsap.utils.toArray('#heroName .cl').forEach((ch, i, all) => {
@@ -856,6 +882,7 @@ const zoomPhrases = [
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
     });
   });
+  gsap.to('#heroSocials', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'center top', end: 'bottom top', scrub: true } });
   gsap.to('#heroRole', { xPercent: 8, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'center top', end: 'bottom top', scrub: true } });
 
   const heroName = document.getElementById('heroName');
