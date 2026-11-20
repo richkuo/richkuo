@@ -37,9 +37,6 @@ export type Card = { title: string; icon: string; desc?: string; link?: string; 
 const localLlmVideo: Card = { title: 'Local LLM Mobile App: Step by Step Run a Large Language Model on Your Phone', icon: 'youtube', link: 'https://www.youtube.com/watch?v=iLUhY4uU9hk', vid: 'iLUhY4uU9hk', badge: 'NEW', desc: 'The only tutorial online that walks through building a local LLM mobile app from start to finish, step by step, so a large language model runs on your phone.' };
 const tanstackVideo: Card = { title: 'TanStack Start Just Hit 1.0… Here\'s What Changes vs Next.js', icon: 'youtube', link: 'https://www.youtube.com/watch?v=OJ2WWVjrW6o', vid: 'OJ2WWVjrW6o', badge: 'NEW', desc: 'YouTube video on the TanStack Start 1.0 release and what changes compared to Next.js.' };
 export const newItems: Card[] = [tanstackVideo, localLlmVideo];
-export const affiliates: Card[] = [
-	{ title: 'Inworld', icon: 'link', link: 'https://inworld.1stcollab.com/rich_kuo1_tt' },
-];
 export const currentProjects: Card[] = [
 	{ title: 'SceneCut AI', icon: 'video', link: 'https://www.scenecutai.com', desc: 'The best content creation app — no edits, easy reshoots, scripting, voice overs, sound effects, advanced AI video generation, and more.' },
 	{ title: 'go-trader', icon: 'chart', link: 'https://github.com/richkuo/go-trader', desc: 'An OpenClaw trading bot for Discord that enables custom trading platforms and algorithms.' },
