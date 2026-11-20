@@ -217,7 +217,18 @@ const zoomPhrases = [
   .building-head { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; }
   .building-count { margin-top: 28px; font-family: var(--font-wide); font-size: 14px; color: var(--grey); }
   .building-count b { color: var(--accent); }
-  .build-item { scroll-snap-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 22px; max-width: 560px; }
+  .building-list { display: grid; gap: 8vh; align-content: start; }
+  .build-item {
+    scroll-snap-align: center; display: flex; flex-direction: column; gap: 22px; max-width: 620px;
+    padding: clamp(24px, 3vw, 44px); border-radius: 16px; border: 1px solid #242424; border-top: 3px solid var(--c);
+    background: #0b0b0b; box-shadow: 0 30px 80px rgba(0, 0, 0, .6); transform-origin: 50% 0;
+  }
+  .build-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .build-num { font-family: var(--font-display); color: var(--c); font-size: clamp(56px, 6vw, 96px); line-height: .85; }
+  .live .building { height: 100vh; padding-top: 0; padding-bottom: 0; align-items: center; }
+  .live .building-head { position: relative; height: auto; }
+  .live .building-list { display: grid; align-items: center; }
+  .live .build-item { grid-area: 1 / 1; will-change: transform; }
   .build-item .tag { font-weight: 700; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--grey); }
   .build-item h3 { color: var(--c); font-size: clamp(30px, 3.6vw, 56px); }
   .build-item p { font-size: clamp(17px, 1.35vw, 22px); line-height: 1.5; color: color-mix(in oklab, var(--white) 88%, transparent); }
@@ -232,7 +243,11 @@ const zoomPhrases = [
   @media (max-width: 900px) {
     .building { grid-template-columns: 1fr; }
     .building-head { position: relative; height: auto; padding: 0 0 4vh; }
-    .build-item { min-height: 70vh; }
+    .live .building { height: 100svh; padding-top: 96px; padding-bottom: 24px; grid-template-rows: auto 1fr; gap: 24px; align-items: start; }
+    .live .building-head { padding: 0; }
+    .live .building-count { display: none; }
+    .live .building-list { align-items: start; }
+    .live .building-head .display { font-size: clamp(44px, 13vw, 80px); }
   }
 
   /* ---- bake-offs: pinned horizontal track ---- */
@@ -283,9 +298,7 @@ const zoomPhrases = [
     transform-origin: 50% 0;
   }
   .stack-card:last-child { margin-bottom: 0; }
-  .stack-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-  .stack-num { font-family: var(--font-display); color: var(--c); font-size: clamp(64px, 7vw, 120px); line-height: .85; -webkit-text-stroke: 1px color-mix(in oklab, var(--c) 75%, black); }
-  .stack-new { padding: 4px 10px; border-radius: 999px; background: var(--black); color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+  .stack-new { align-self: flex-end; padding: 4px 10px; border-radius: 999px; background: var(--black); color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
   .stack-thumb { aspect-ratio: 16 / 9; overflow: hidden; border-radius: 2px; background: #ddd; }
   .stack-thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); transition: filter .6s ease, transform .9s var(--ease-out-expo); }
   .stack-card:hover .stack-thumb img { filter: none; transform: scale(1.04); }
@@ -394,7 +407,7 @@ const zoomPhrases = [
     <div class="building-list">
       {building.map((p, i) => (
         <article class="build-item" style={tone(i)}>
-          <span class="tag">{p.tag}</span>
+          <div class="build-top"><span class="build-num">{pad(i + 1)}</span><span class="tag">{p.tag}</span></div>
           <h3 class="wide">{p.title}</h3>
           {p.badge && <span class="promo">{p.badge}</span>}
           {p.desc && <p>{p.desc}</p>}
@@ -453,10 +466,7 @@ const zoomPhrases = [
       <div class="stack">
         {videos.map((v, i) => (
           <a class="stack-card" style={`--i:${i}; ${tone(i)}`} href={v.link} target="_blank" rel="noopener noreferrer">
-            <div class="stack-top">
-              <span class="stack-num">{pad(i + 1)}</span>
-              {newLinks.has(v.link) && <span class="stack-new">NEW</span>}
-            </div>
+            {newLinks.has(v.link) && <span class="stack-new">NEW</span>}
             {v.vid && (
               <div class="stack-thumb"><img src={`https://img.youtube.com/vi/${v.vid}/mqdefault.jpg`} alt="" loading="lazy" /></div>
             )}
@@ -525,9 +535,7 @@ const zoomPhrases = [
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
-<script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
-<script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis-snap.min.js" integrity="sha384-oq0TWGBcl0kQ4r07ikUsxvFYrNOoNpeM/mZPXt5FVZJuDS/l0bjZRlBqgKM3fEcg" crossorigin="anonymous"></script>
-<script is:inline>
+<script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script><script is:inline>
 (function () {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const nav = document.getElementById('nav');
@@ -578,23 +586,18 @@ const zoomPhrases = [
   gsap.to('#progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
 
   const idx = document.getElementById('buildIdx');
-  gsap.utils.toArray('.build-item').forEach((item, i) => {
-    ScrollTrigger.create({
-      trigger: item, start: 'top center', end: 'bottom center',
-      onToggle: (self) => { if (self.isActive) idx.textContent = String(i + 1).padStart(2, '0'); },
-    });
-  });
+  const setIdx = (i) => { idx.textContent = String(i + 1).padStart(2, '0'); };
 
-  if (reduce) return;
+  if (reduce) {
+    gsap.utils.toArray('.build-item').forEach((item, i) => {
+      ScrollTrigger.create({ trigger: item, start: 'top center', end: 'bottom center', onToggle: (self) => { if (self.isActive) setIdx(i); } });
+    });
+    return;
+  }
 
   document.documentElement.classList.add('live');
 
   const lenis = new Lenis({ lerp: 0.1, anchors: { offset: 0 } });
-  if (typeof Snap !== 'undefined') {
-    const snap = new Snap(lenis, { type: 'proximity', distanceThreshold: '50%', debounce: 250, duration: 0.9, easing: (t) => 1 - Math.pow(1 - t, 4) });
-    document.querySelectorAll('.build-item').forEach((el) => snap.addElement(el, { align: ['center'] }));
-    ScrollTrigger.addEventListener('refresh', () => snap.resize());
-  }
   lenis.on('scroll', (e) => { scrollY = e.scroll; ScrollTrigger.update(); });
   gsap.ticker.add((time) => { lenis.raf(time * 1000); drawStars(time * 1000); });
   gsap.ticker.lagSmoothing(0);
@@ -616,16 +619,56 @@ const zoomPhrases = [
   });
   gsap.to('#heroRole', { xPercent: 8, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'center top', end: 'bottom top', scrub: true } });
 
-  gsap.utils.toArray('.build-item').forEach((item) => {
-    const kids = item.children;
-    gsap.fromTo(kids, { opacity: 0, y: 60 }, {
-      opacity: 1, y: 0, stagger: 0.08, ease: 'none',
-      scrollTrigger: { trigger: item, start: 'top 85%', end: 'top 35%', scrub: true },
-    });
-    gsap.to(kids, {
-      opacity: 0.12, ease: 'none', immediateRender: false,
-      scrollTrigger: { trigger: item, start: 'bottom 65%', end: 'bottom 25%', scrub: true },
-    });
+  const builds = gsap.utils.toArray('.build-item');
+  const steps = builds.length - 1;
+  gsap.set(builds.slice(1), { yPercent: 120, rotate: 3, opacity: 0 });
+  const stackTl = gsap.timeline({
+    defaults: { ease: 'power2.inOut', duration: 1 },
+    scrollTrigger: {
+      trigger: '#building', start: 'top top', end: () => '+=' + steps * innerHeight,
+      pin: true, scrub: 0.6, invalidateOnRefresh: true,
+      onUpdate: (self) => setIdx(Math.round(self.progress * steps)),
+    },
+  });
+  for (let i = 1; i <= steps; i++) {
+    const at = i - 1;
+    stackTl.to(builds[i], { yPercent: 0, rotate: 0, opacity: 1 }, at);
+    for (let j = 0; j < i; j++) {
+      const depth = i - j;
+      stackTl.to(builds[j], { y: -22 * depth, scale: 1 - 0.05 * depth, filter: 'brightness(' + Math.max(0.25, 1 - 0.3 * depth) + ')', opacity: depth > 3 ? 0 : 1 }, at);
+    }
+  }
+  const stackST = stackTl.scrollTrigger;
+  const snapEase = (t) => 1 - Math.pow(1 - t, 4);
+  let snapping = false;
+  let wheelTimer;
+  let settleTimer;
+  let wheelDir = 1;
+  const snapTo = (dest) => {
+    if (Math.abs(dest - lenis.scroll) < 2) return;
+    snapping = true;
+    lenis.scrollTo(dest, { duration: 0.8, easing: snapEase, lock: true, onComplete: () => { snapping = false; } });
+  };
+  const decideSnap = (pos, dir) => {
+    const vh = innerHeight;
+    const s0 = stackST.start;
+    if (pos < s0 - vh * 0.5 || pos > stackST.end) return;
+    if (pos <= s0) { if (dir > 0) snapTo(s0); return; }
+    const f = (pos - s0) / vh;
+    const i = dir > 0 ? Math.ceil(f - 0.02) : Math.floor(f + 0.02);
+    snapTo(s0 + Math.max(0, Math.min(steps, i)) * vh);
+  };
+  lenis.on('virtual-scroll', (e) => {
+    if (snapping || !e.deltaY) return;
+    wheelDir = Math.sign(e.deltaY);
+    if (e.event.type.startsWith('touch')) return;
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(() => { if (!snapping) decideSnap(lenis.targetScroll, wheelDir); }, 120);
+  });
+  lenis.on('scroll', () => {
+    if (snapping) return;
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => { if (!snapping) decideSnap(lenis.scroll, lenis.direction || wheelDir); }, 160);
   });
 
   const track = document.getElementById('showTrack');
