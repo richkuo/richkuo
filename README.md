@@ -10,13 +10,13 @@ A static, single-page-forward marketing site built with Astro. The homepage intr
 
 - **Current projects** — products and tools (e.g. BagTheJob, go-trader, SceneCutAI) with optional external links or detail pages under `/projects/[slug]/`.
 - **Friend projects** — collaborations and side projects by others.
-- **OpenClaw** — YouTube videos and written guides (VPS setup, trading bots, MCP servers, bugfix notes) under `/openclaw/[slug]/` or external links.
+- **OpenClaw** — YouTube videos and written guides (VPS setup, trading bots, MCP servers, bugfix notes) under `/openclaw/[slug]/` or external links. The homepage shows them under **Videos** and **Resources**.
 - **Resources** — standalone articles and tool pages (e.g. `/fableplan`, `/rk-skills`) on AI coding workflows, alongside the OpenClaw written guides.
-- **LLM Bake-Offs** — several models build the same feature from one shared spec, scored on cost, speed, and code quality. Each episode links to a full HTML report under `/reports/issue-[n]/`.
+- **LLM Bake-Offs** — several models build the same feature from one shared spec, scored on cost, speed, and code quality. Each episode links to a full HTML report under `/reports/issue-[n]/`. These episodes appear on `/classic/`, not on the homepage.
 
-The homepage is a GSAP + ScrollTrigger single-page design: a floating glass nav capsule that assembles on scroll, glass project cards with 3D mouse-tilt and alternating slide-ins, drifting gradient blobs, letter-by-letter chat bubbles, and a scroll-scrubbed hero. A **Work with me** handshake icon links to email for inquiries.
+The homepage (`src/pages/index.astro`) is a single page built with GSAP, ScrollTrigger, and Lenis smooth scrolling. The hero name scrubs into a **Rich Kuo** badge in the top bar as you scroll. The building section pins its title while its project items pass by. Videos stack as sticky cards, and a starfield responds to scroll speed. A **Work with me** button links to email for inquiries. At 760 px wide or narrower, a hamburger menu replaces the section links. The earlier layout remains at `/classic/`.
 
-> **Note:** homepage content (projects, friend projects, videos, resources, LLM Bake-Offs, social links) is **hardcoded as JS arrays** in `src/pages/index.astro` — adding or editing a Markdown file in `src/content/` does **not** update the homepage automatically. The content collections (`/projects/[slug]/`, `/openclaw/[slug]/`) still power the individual detail pages.
+> **Note:** homepage content (projects, friend projects, videos, resources, LLM Bake-Offs, social links) is **hardcoded as JS arrays** in `src/data/home.ts` — adding or editing a Markdown file in `src/content/` does **not** update the homepage automatically. The content collections (`/projects/[slug]/`, `/openclaw/[slug]/`) still power the individual detail pages.
 
 ## Tech stack
 
@@ -69,7 +69,7 @@ tags: []
 ---
 ```
 
-Entries with a `link` open externally; otherwise Astro generates `/projects/[id]/` from the Markdown body. These entries power the detail pages only — the homepage project list is hardcoded in `index.astro` and must be updated separately.
+Entries with a `link` open externally; otherwise Astro generates `/projects/[id]/` from the Markdown body. These entries power the detail pages only — the homepage project list is hardcoded in `src/data/home.ts` and must be updated separately.
 
 ### OpenClaw frontmatter
 
@@ -78,14 +78,15 @@ Same shape as projects. Items whose `link` is a YouTube URL appear under **Video
 ## Customization
 
 - **Identity and socials** — edit [`src/site-config.yml`](src/site-config.yml).
-- **Homepage sections and hero** — all in [`src/pages/index.astro`](src/pages/index.astro); hardcoded JS arrays (`currentProjects`, `friendProjects`, `videos`, `resources`, `llmBakeOffs`) near the top of the component frontmatter. Profile image: [`src/assets/profile.jpg`](src/assets/profile.jpg).
-- **Global styles and design tokens** — [`src/styles/global.css`](src/styles/global.css).
+- **Homepage sections and hero** — layout and styles in [`src/pages/index.astro`](src/pages/index.astro). Content arrays (`currentProjects`, `friendProjects`, `videos`, `resources`, `llmBakeOffs`, `socials`) live in [`src/data/home.ts`](src/data/home.ts). Profile image: [`src/assets/profile.jpg`](src/assets/profile.jpg).
+- **Global styles and design tokens** — [`src/styles/global.css`](src/styles/global.css). The homepage defines its own color and font tokens in its style block in `index.astro`.
 - **Site URL** — [`astro.config.mjs`](astro.config.mjs) (`site` field).
 
 ## Theming
 
 - Defaults to the visitor’s **system** color scheme (`prefers-color-scheme`).
 - Header toggle saves an explicit `light` or `dark` choice in `localStorage` (`theme` key). Clear site data to follow the OS again.
+- The homepage has a three-button switch (system, light, dark). `/classic/` has a light and dark toggle. Both store the choice under the `theme-pref` key.
 - [`src/components/ThemeScript.astro`](src/components/ThemeScript.astro) runs in `<head>` to avoid a flash of the wrong scheme and to react to OS theme changes until overridden.
 
 ## Project layout
