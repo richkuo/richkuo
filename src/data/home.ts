@@ -1,4 +1,5 @@
 export const ICONS: Record<string, string> = {
+	instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>',
 	github: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>',
 	linkedin: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.8 2.6 4.8 6V21H18v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V21H10z"/></svg>',
 	x: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23.2 22h-6.6l-5.2-6.8L5.5 22H2.4l7.8-8.9L1.2 2h6.8l4.7 6.2zm-1.2 18h1.8L7.4 3.8H5.5z"/></svg>',
@@ -21,6 +22,7 @@ export const ICONS: Record<string, string> = {
 };
 
 export const socials = [
+	{ href: 'https://www.instagram.com/richkuo7/', label: 'Instagram', icon: 'instagram' },
 	{ href: 'https://github.com/richkuo', label: 'GitHub', icon: 'github' },
 	{ href: 'https://www.linkedin.com/in/richkuo', label: 'LinkedIn', icon: 'linkedin' },
 	{ href: 'https://x.com/richkuo7', label: 'X', icon: 'x' },
@@ -58,9 +60,9 @@ export const videos: Card[] = [
 	{ title: 'Ai Trading with Go-Trader on Hyperliquid Part 2: Hermes/OpenClaw Bots Running 24/7', icon: 'youtube', link: 'https://www.youtube.com/watch?v=n6OPc8j1GoQ', vid: 'n6OPc8j1GoQ', desc: 'YouTube video walkthrough of running Hermes and OpenClaw trading bots 24/7 with Go-Trader on Hyperliquid.' },
 ];
 export const resources: Card[] = [
+	{ title: '/rk-skills', icon: 'skills', href: '/rk-skills', link: 'https://github.com/richkuo/rk-skills', desc: 'Claude Code workflow skills — GitHub issue, PR, and release automation plus Fable-driven planning. Install via npx or as a Claude Code plugin.' },
 	{ title: 'MiniMax Web Search MCP Server Setup for OpenClaw', icon: 'search', href: '/openclaw/minimax-websearch-mcp-setup/', desc: "Step-by-step guide to setting up MiniMax's web search MCP server with mcporter for real-time search in OpenClaw agents." },
 	{ title: 'OpenClaw Kimi K2.6 Bugfix', icon: 'bug', href: '/openclaw/kimi-k2-6-bugfix/', desc: 'How to fix Kimi configuration drift in OpenClaw where sessions silently fall back to a different model instead of staying on kimi-k2.6.' },
-	{ title: '/rk-skills', icon: 'skills', href: '/rk-skills', link: 'https://github.com/richkuo/rk-skills', desc: 'Claude Code workflow skills — GitHub issue, PR, and release automation plus Fable-driven planning. Install via npx or as a Claude Code plugin.' },
 	{ title: 'Model Effort Shortcuts', icon: 'keyboard', link: 'https://github.com/richkuo/claude-code-model-effort-shortcuts', desc: 'A Claude Code plugin that switches the model and the reasoning effort from the keyboard. Option+P cycles the model, Option+E cycles the effort, and the footer shows what the next request uses.' },
 	{ title: '/fableplan', icon: 'plan', href: '/fableplan', link: 'https://github.com/richkuo/fableplan', desc: 'Why I plan with Fable 5 and build with Opus or Sonnet: a Claude Code skill that delegates implementation planning to a Fable 5 subagent, then builds from the vetted plan in an isolated git worktree.' },
 ];
