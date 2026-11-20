@@ -322,13 +322,13 @@ const zoomPhrases = [
     font-size: 7.4vw; line-height: 1; letter-spacing: -.01em;
   }
   .hero-role .ch { display: inline-block; }
-  .hero-socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: clamp(20px, 3vw, 40px); }
+  .hero-socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-block: auto; padding-block: clamp(20px, 3vw, 40px); }
   .hero-socials a {
     display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
     border: 1px solid color-mix(in oklab, var(--fg) 22%, transparent); color: var(--fg);
-    transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .5s var(--ease-out-expo);
+    transition: background-color .3s ease, color .3s ease, border-color .3s ease;
   }
-  .hero-socials a:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); transform: translateY(-3px); }
+  .hero-socials a:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
   .hero-socials svg { width: 20px; height: 20px; }
   @media (max-width: 700px) {
     .hero-socials { gap: 6px; }
@@ -336,7 +336,6 @@ const zoomPhrases = [
     .hero-socials svg { width: 16px; height: 16px; }
   }
   .hero-foot {
-    margin-top: auto; padding-top: 48px;
     display: flex; justify-content: center; align-items: center; gap: 24px clamp(32px, 4vw, 64px);
   }
   .scroll-cue {
@@ -362,17 +361,15 @@ const zoomPhrases = [
     min-width: min(300px, 100%); height: 60px; padding-right: 28px;
     border-radius: 14px; background: var(--accent); color: var(--accent-ink);
     font-weight: 700; text-transform: uppercase; font-size: 15px;
+    transition: background-color .3s ease, color .3s ease;
   }
+  .pill:hover { background: var(--royal); color: var(--royal-ink); }
   .pill .ico {
     display: grid; place-items: center; width: 56px; height: 56px; margin: 2px 22px 2px 2px;
     border-radius: 12px; background: var(--black); color: var(--accent);
-    transition: width .6s var(--ease-out-expo);
   }
   .pill .ico svg { width: 26px; height: 26px; }
   .pill span:last-child { flex: 1; text-align: center; position: relative; z-index: 1; }
-  .pill:hover .ico { width: calc(100% - 4px); }
-  .pill:hover span:last-child { color: var(--accent); }
-  .pill span:last-child { transition: color .3s ease .1s; }
   @media (max-width: 900px) {
     .hero-foot { flex-direction: column; align-items: stretch; }
     .scroll-cue { align-self: center; }
