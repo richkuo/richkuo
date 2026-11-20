@@ -292,9 +292,7 @@ const zoomPhrases = [
     display: grid; place-items: center; height: 44px; padding: 0 16px; border-radius: 8px; white-space: nowrap;
     background: var(--accent); color: var(--accent-ink);
     font: inherit; letter-spacing: inherit; text-transform: inherit;
-    transition: transform .5s var(--ease-out-expo);
   }
-  .badge:hover { transform: rotate(-8deg) scale(1.06); }
   .menu-btn {
     display: none; position: relative; width: 44px; height: 44px; margin-left: -10px; padding: 0;
     border: 0; background: transparent; color: inherit; cursor: pointer;
@@ -355,18 +353,18 @@ const zoomPhrases = [
     .hero-role { display: flex; flex-direction: column; align-items: center; }
     .hero-role .role-gap { display: none; }
   }
-  .hero-socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-block: auto; padding-block: clamp(20px, 3vw, 40px); }
+  .hero-socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-block: auto; padding-block: clamp(20px, 3vw, 40px); }
   .hero-socials a {
-    display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+    display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%;
     border: 1px solid color-mix(in oklab, var(--fg) 22%, transparent); color: var(--fg);
     transition: background-color .3s ease, color .3s ease, border-color .3s ease;
   }
   .hero-socials a:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-  .hero-socials svg { width: 20px; height: 20px; }
+  .hero-socials svg { width: 28px; height: 28px; }
   @media (max-width: 700px) {
-    .hero-socials { gap: 6px; }
-    .hero-socials a { width: 36px; height: 36px; }
-    .hero-socials svg { width: 16px; height: 16px; }
+    .hero-socials { gap: 4px; }
+    .hero-socials a { width: min(48px, calc((100vw - 64px) / 8)); height: auto; aspect-ratio: 1; }
+    .hero-socials svg { width: 45%; height: 45%; }
   }
   .hero-foot {
     display: flex; justify-content: center; align-items: center; gap: 24px clamp(32px, 4vw, 64px);
@@ -1047,6 +1045,15 @@ const zoomPhrases = [
   });
 
   if (matchMedia('(pointer: fine)').matches) {
+    const bx = gsap.quickTo(badge, 'x', { duration: 0.4, ease: 'power3' });
+    const by = gsap.quickTo(badge, 'y', { duration: 0.4, ease: 'power3' });
+    badge.addEventListener('mousemove', (e) => {
+      const r = badge.getBoundingClientRect();
+      bx((e.clientX - (r.left + r.width / 2)) * 0.4);
+      by((e.clientY - (r.top + r.height / 2)) * 0.4);
+    });
+    badge.addEventListener('mouseleave', () => { bx(0); by(0); });
+
     const cur = document.getElementById('cursor');
     const xTo = gsap.quickTo(cur, 'x', { duration: 0.45, ease: 'power3' });
     const yTo = gsap.quickTo(cur, 'y', { duration: 0.45, ease: 'power3' });
