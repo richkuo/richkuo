@@ -216,6 +216,15 @@ const zoomPhrases = [
   .building { padding: 18vh var(--gutter) 10vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; }
   .building-head { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; }
   .build-item { scroll-snap-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 22px; max-width: 560px; }
+  .live .building { height: 100vh; padding-top: 0; padding-bottom: 0; }
+  .live .building-head { position: relative; }
+  .live .building-wrap {
+    height: 100vh; overflow: hidden;
+    -webkit-mask-image: linear-gradient(transparent, #000 16%, #000 84%, transparent);
+    mask-image: linear-gradient(transparent, #000 16%, #000 84%, transparent);
+  }
+  .live .building-list { display: flex; flex-direction: column; gap: 16vh; padding: 34vh 0; will-change: transform; }
+  .live .build-item { min-height: 0; }
   .build-item .tag { font-weight: 700; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--grey); }
   .build-item h3 { color: var(--c); font-size: clamp(30px, 3.6vw, 56px); }
   .build-item p { font-size: clamp(17px, 1.35vw, 22px); line-height: 1.5; color: color-mix(in oklab, var(--white) 88%, transparent); }
@@ -231,6 +240,11 @@ const zoomPhrases = [
     .building { grid-template-columns: 1fr; }
     .building-head { position: relative; height: auto; padding: 0 0 4vh; }
     .build-item { min-height: 70vh; }
+    .live .building { height: 100svh; grid-template-rows: auto minmax(0, 1fr); gap: 0; padding-top: 88px; }
+    .live .building-head { height: auto; padding: 0 0 2vh; }
+    .live .building-head .display { font-size: clamp(44px, 13vw, 80px); }
+    .live .building-wrap { height: 100%; }
+    .live .building-list { padding: 16vh 0; gap: 12vh; }
   }
 
   /* ---- bake-offs: pinned horizontal track ---- */
@@ -386,7 +400,8 @@ const zoomPhrases = [
     <div class="building-head">
       <h2 class="display" id="buildingTitle">What<br />I'm<br />building</h2>
     </div>
-    <div class="building-list">
+    <div class="building-wrap">
+    <div class="building-list" id="buildList">
       {building.map((p, i) => (
         <article class="build-item" style={tone(i)}>
           <span class="tag">{p.tag}</span>
@@ -401,6 +416,7 @@ const zoomPhrases = [
           )}
         </article>
       ))}
+    </div>
     </div>
   </section>
 
@@ -594,57 +610,26 @@ const zoomPhrases = [
   gsap.to('#heroRole', { xPercent: 8, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'center top', end: 'bottom top', scrub: true } });
 
   const builds = gsap.utils.toArray('.build-item');
-  builds.forEach((item) => {
-    const kids = item.children;
-    gsap.fromTo(kids, { opacity: 0, y: 60 }, {
-      opacity: 1, y: 0, stagger: 0.08, ease: 'none',
-      scrollTrigger: { trigger: item, start: 'top 85%', end: 'top 35%', scrub: true },
-    });
-    gsap.to(kids, {
-      opacity: 0.12, ease: 'none', immediateRender: false,
-      scrollTrigger: { trigger: item, start: 'bottom 65%', end: 'bottom 25%', scrub: true },
-    });
-  });
-
-  let points = [];
-  const measure = () => {
-    points = builds.map((el) => {
+  const list = document.getElementById('buildList');
+  const wrap = list.parentElement;
+  const vdist = () => Math.max(0, list.offsetHeight - wrap.clientHeight);
+  const focusItems = () => {
+    const wr = wrap.getBoundingClientRect();
+    const mid = wr.top + wr.height / 2;
+    builds.forEach((el) => {
       const r = el.getBoundingClientRect();
-      return Math.round(r.top + lenis.scroll + r.height / 2 - innerHeight / 2);
+      const d = Math.min(1, Math.abs(r.top + r.height / 2 - mid) / (wr.height * 0.55));
+      el.style.opacity = String(1 - d * 0.75);
     });
   };
-  ScrollTrigger.addEventListener('refresh', measure);
-  measure();
-  const snapEase = (t) => 1 - Math.pow(1 - t, 4);
-  let snapping = false;
-  let wheelTimer;
-  let settleTimer;
-  let wheelDir = 1;
-  const snapTo = (dest) => {
-    if (Math.abs(dest - lenis.scroll) < 2) return;
-    snapping = true;
-    lenis.scrollTo(dest, { duration: 0.8, easing: snapEase, lock: true, onComplete: () => { snapping = false; } });
-  };
-  const decideSnap = (pos, dir) => {
-    if (!points.length) return;
-    const vh = innerHeight;
-    if (pos < points[0] - vh * 0.5 || pos > points[points.length - 1] + vh * 0.5) return;
-    const near = points.reduce((best, p) => (Math.abs(p - pos) < Math.abs(best - pos) ? p : best));
-    if (Math.abs(near - pos) < vh * 0.12) { snapTo(near); return; }
-    const dest = dir > 0 ? points.find((p) => p > pos) : [...points].reverse().find((p) => p < pos);
-    if (dest !== undefined) snapTo(dest);
-  };
-  lenis.on('virtual-scroll', (e) => {
-    if (snapping || !e.deltaY) return;
-    wheelDir = Math.sign(e.deltaY);
-    if (e.event.type.startsWith('touch')) return;
-    clearTimeout(wheelTimer);
-    wheelTimer = setTimeout(() => { if (!snapping) decideSnap(lenis.targetScroll, wheelDir); }, 120);
+  gsap.to(list, {
+    y: () => -vdist(), ease: 'none', onUpdate: focusItems,
+    scrollTrigger: { trigger: '#building', start: 'top top', end: () => '+=' + vdist(), pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1, onRefresh: focusItems },
   });
-  lenis.on('scroll', () => {
-    if (snapping) return;
-    clearTimeout(settleTimer);
-    settleTimer = setTimeout(() => { if (!snapping) decideSnap(lenis.scroll, lenis.direction || wheelDir); }, 160);
+  focusItems();
+  gsap.from('.build-item > *', {
+    y: 60, opacity: 0, stagger: 0.05, duration: 1.2, ease: 'expo.out',
+    scrollTrigger: { trigger: '#building', start: 'top 70%' },
   });
 
   const track = document.getElementById('showTrack');
