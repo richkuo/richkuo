@@ -66,11 +66,14 @@ const pageMeta = {
 export default defineConfig({
   site: SITE,
   compressHTML: true,
+  redirects: {
+    "/v2": "/",
+  },
   integrations: [
     mdx(),
     sitemap({
       customPages: reports.customPages,
-      filter: (page) => !pageMeta[new URL(page).pathname]?.unlisted,
+      filter: (page) => new URL(page).pathname !== "/classic/" && !pageMeta[new URL(page).pathname]?.unlisted,
       serialize: (item) => {
         const pathname = new URL(item.url).pathname;
         const lastmod = pageMeta[pathname]?.lastmod;
