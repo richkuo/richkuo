@@ -350,6 +350,11 @@ const zoomPhrases = [
     font-size: 7.4vw; line-height: 1; letter-spacing: -.01em;
   }
   .hero-role .ch { display: inline-block; }
+  .role-word { display: inline-block; }
+  @media (max-width: 700px) {
+    .hero-role { display: flex; flex-direction: column; align-items: center; }
+    .hero-role .role-gap { display: none; }
+  }
   .hero-socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-block: auto; padding-block: clamp(20px, 3vw, 40px); }
   .hero-socials a {
     display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
@@ -386,16 +391,19 @@ const zoomPhrases = [
   .pills { display: flex; gap: 16px; justify-content: center; }
   .pill {
     position: relative; display: flex; align-items: center; overflow: hidden;
-    min-width: min(300px, 100%); height: 60px; padding-right: 28px;
+    min-width: min(300px, 100%); height: 60px; padding: 0 28px 0 80px;
     border-radius: 14px; background: var(--accent); color: var(--accent-ink);
     font-weight: 700; text-transform: uppercase; font-size: 15px;
-    transition: background-color .3s ease, color .3s ease;
+    transition: background-color .3s ease, color .3s ease, padding .6s var(--ease-out-expo);
   }
-  .pill:hover { background: var(--royal); color: var(--royal-ink); }
+  .pill:hover { background: var(--royal); color: var(--royal-ink); padding: 0 80px 0 28px; }
   .pill .ico {
-    display: grid; place-items: center; width: 56px; height: 56px; margin: 2px 22px 2px 2px;
+    position: absolute; top: 2px; left: 2px; z-index: 2;
+    display: grid; place-items: center; width: 56px; height: 56px;
     border-radius: 12px; background: var(--black); color: var(--accent);
+    transition: left .6s var(--ease-out-expo);
   }
+  .pill:hover .ico { left: calc(100% - 58px); }
   .pill .ico svg { width: 26px; height: 26px; }
   .pill span:last-child { flex: 1; text-align: center; position: relative; z-index: 1; }
   @media (max-width: 900px) {
@@ -603,7 +611,12 @@ const zoomPhrases = [
       ))}
     </h1>
     <p class="hero-role" id="heroRole" aria-label="Product Engineer">
-      {'Product Engineer'.split('').map((c) => <span class="ch" aria-hidden="true">{c === ' ' ? ' ' : c}</span>)}
+      {['Product', 'Engineer'].map((w, i) => (
+        <Fragment>
+          {i > 0 && <span class="ch role-gap" aria-hidden="true">{' '}</span>}
+          <span class="role-word">{w.split('').map((c) => <span class="ch" aria-hidden="true">{c}</span>)}</span>
+        </Fragment>
+      ))}
     </p>
     <nav class="hero-socials" id="heroSocials" aria-label="Social links">
       {socials.map((s) => {
@@ -1059,8 +1072,10 @@ const zoomPhrases = [
   function fitRole() {
     const r = document.getElementById('heroRole');
     r.style.fontSize = '100px';
-    const chs = r.querySelectorAll('.ch');
-    const w = chs[chs.length - 1].getBoundingClientRect().right - chs[0].getBoundingClientRect().left;
+    const words = [...r.querySelectorAll('.role-word')];
+    const w = innerWidth <= 700
+      ? Math.max(...words.map((el) => el.getBoundingClientRect().width))
+      : words[words.length - 1].getBoundingClientRect().right - words[0].getBoundingClientRect().left;
     if (w) r.style.fontSize = ((100 * r.clientWidth) / w).toFixed(2) + 'px';
   }
   function fitHero() { fitName(); fitRole(); }
