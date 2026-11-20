@@ -340,7 +340,7 @@ const zoomPhrases = [
     display: flex; justify-content: center; align-items: center; gap: 24px clamp(32px, 4vw, 64px);
   }
   .scroll-cue {
-    position: relative; padding-left: 22px;
+    position: relative; padding-left: 22px; white-space: nowrap; flex-shrink: 0;
     font-family: var(--font-display); text-transform: uppercase;
     font-size: clamp(26px, 2.6vw, 40px); line-height: .95;
   }
@@ -585,7 +585,7 @@ const zoomPhrases = [
       })}
     </nav>
     <div class="hero-foot">
-      <div class="scroll-cue" aria-hidden="true">Scroll<br />to explore</div>
+      <div class="scroll-cue" aria-hidden="true">Scroll to explore</div>
       <div class="hero-me">
         <Image class="avatar" src={profilePic} width={184} height={184} alt="Rich Kuo" loading="eager" />
         <p class="hero-tag">AI-native products end to end. <em>AI video tooling, trading bots, agent infrastructure</em>, and head-to-head LLM coding evaluations.</p>
