@@ -635,32 +635,59 @@ const zoomPhrases = [
   const ctx = canvas.getContext('2d');
   const STAR_TINTS = ['251, 191, 36', '251, 191, 36', '251, 191, 36', '34, 139, 34', '65, 105, 225'];
   const root = document.documentElement;
+  const NEAR = 0.04;
   let stars = [];
-  let scrollY = 0;
+  let cx = 0;
+  let cy = 0;
+  let fov = 0;
+  let boost = 0;
+  let lastT = 0;
+  function spawn(s, far) {
+    s.x = (Math.random() * 2 - 1) * 1.3;
+    s.y = (Math.random() * 2 - 1) * 1.3;
+    s.z = far ? 0.8 + Math.random() * 0.2 : NEAR + Math.random() * (1 - NEAR);
+    s.r = Math.random() * 1.1 + 0.4;
+    s.k = Math.floor(Math.random() * STAR_TINTS.length);
+    return s;
+  }
   function sizeStars() {
     const dpr = Math.min(devicePixelRatio || 1, 2);
     canvas.width = innerWidth * dpr;
     canvas.height = innerHeight * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cx = innerWidth / 2;
+    cy = innerHeight / 2;
+    fov = Math.max(cx, cy) * 0.6;
     const n = Math.round((innerWidth * innerHeight) / 7000);
-    stars = Array.from({ length: n }, () => ({
-      x: Math.random() * innerWidth,
-      y: Math.random() * innerHeight,
-      r: Math.random() * 1.3 + 0.2,
-      k: Math.floor(Math.random() * STAR_TINTS.length),
-      d: Math.random() * 0.6 + 0.1,
-      p: Math.random() * Math.PI * 2,
-    }));
+    stars = Array.from({ length: n }, () => spawn({}, false));
   }
   function drawStars(t) {
+    const dt = lastT ? Math.max(0, Math.min((t - lastT) / 1000, 0.05)) : 0;
+    lastT = t;
+    const speed = 0.06 + boost * 0.012;
     ctx.clearRect(0, 0, innerWidth, innerHeight);
+    ctx.lineCap = 'round';
     for (const s of stars) {
-      const y = (((s.y - scrollY * s.d * 0.15) % innerHeight) + innerHeight) % innerHeight;
-      const a = reduce ? 0.6 : 0.35 + 0.45 * Math.sin(t * 0.0012 + s.p);
-      ctx.fillStyle = 'rgba(' + STAR_TINTS[s.k] + ',' + a.toFixed(3) + ')';
+      s.z -= speed * dt;
+      if (s.z <= NEAR) { spawn(s, true); continue; }
+      const k = fov / s.z;
+      const hx = cx + s.x * k;
+      const hy = cy + s.y * k;
+      if (hx < -40 || hx > innerWidth + 40 || hy < -40 || hy > innerHeight + 40) { spawn(s, true); continue; }
+      const tk = fov / (s.z + 0.02 + speed * 0.35);
+      const tx = cx + s.x * tk;
+      const ty = cy + s.y * tk;
+      const depth = 1 - s.z;
+      const tint = STAR_TINTS[s.k];
+      const g = ctx.createLinearGradient(tx, ty, hx, hy);
+      g.addColorStop(0, 'rgba(' + tint + ',0)');
+      g.addColorStop(1, 'rgba(' + tint + ',' + Math.min(1, depth * 1.4).toFixed(3) + ')');
+      ctx.strokeStyle = g;
+      ctx.lineWidth = s.r * (0.4 + depth * 2);
       ctx.beginPath();
-      ctx.arc(s.x, y, s.r, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(hx, hy);
+      ctx.stroke();
     }
   }
   sizeStars();
@@ -684,7 +711,6 @@ const zoomPhrases = [
     root.setAttribute('data-theme-pref', pref);
     themeMeta.setAttribute('content', dark ? '#050505' : '#efefef');
     themeButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.themeChoice === pref)));
-    drawStars(performance.now());
   }
   themeButtons.forEach((b) => b.addEventListener('click', () => {
     const pref = b.dataset.themeChoice;
@@ -712,8 +738,12 @@ const zoomPhrases = [
   document.documentElement.classList.add('live');
 
   const lenis = new Lenis({ lerp: 0.1, anchors: { offset: 0 } });
-  lenis.on('scroll', (e) => { scrollY = e.scroll; ScrollTrigger.update(); });
-  gsap.ticker.add((time) => { lenis.raf(time * 1000); drawStars(time * 1000); });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+    boost += (Math.min(Math.abs(lenis.velocity), 80) - boost) * 0.08;
+    drawStars(time * 1000);
+  });
   gsap.ticker.lagSmoothing(0);
   document.querySelector('.badge').addEventListener('click', (e) => { e.preventDefault(); lenis.scrollTo(0); });
 
