@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import profilePic from '../assets/profile.jpg';
 import { getSite } from '../utils/consts';
-import { ICONS, socials, newItems, affiliates, currentProjects, friendProjects, videos, resources, llmBakeOffs } from '../data/home';
+import { ICONS, socials, newItems, currentProjects, friendProjects, videos, resources, llmBakeOffs } from '../data/home';
 
 const site = await getSite();
 const SITE_URL = 'https://www.richkuo.com';
@@ -475,11 +475,11 @@ const zoomPhrases = [
   }
 
   .res { padding: 4vh var(--gutter) 16vh; }
-  .res-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; padding-bottom: 28px; border-bottom: 2px solid var(--alt-fg); }
-  .res-count { font-size: 14px; color: var(--alt-muted); }
+  .res-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; padding-bottom: 28px; border-bottom: 2px solid var(--fg); }
+  .res-count { font-size: 14px; color: var(--muted); }
   .res-row {
     position: relative; display: grid; grid-template-columns: 80px 1.1fr 1.4fr 40px; gap: 24px; align-items: center;
-    padding: 30px 0; border-bottom: 1px solid var(--alt-line); isolation: isolate;
+    padding: 30px 0; border-bottom: 1px solid color-mix(in oklab, var(--fg) 18%, transparent); isolation: isolate;
   }
   .res-row::before {
     content: ""; position: absolute; inset: 0 calc(-1 * var(--gutter)); z-index: -1;
@@ -487,12 +487,12 @@ const zoomPhrases = [
     transition: transform .6s var(--ease-out-expo);
   }
   .res-row:hover::before { transform: scaleY(1); transform-origin: 50% 0; }
-  .res-num { font-family: var(--font-display); font-size: 34px; color: var(--alt-muted); transition: color .3s; }
+  .res-num { font-family: var(--font-display); font-size: 34px; color: var(--muted); transition: color .3s; }
   .res-row { transition: color .3s; }
   .res-row:hover { color: var(--c-ink); }
   .res-row:hover .res-num, .res-row:hover p { color: var(--c-ink); }
   .res-row h3 { font-size: clamp(18px, 2vw, 32px); }
-  .res-row p { color: var(--alt-body); font-size: 15px; transition: color .3s; }
+  .res-row p { color: var(--body); font-size: 15px; transition: color .3s; }
   .res-row svg { width: 28px; height: 28px; transition: transform .5s var(--ease-out-expo); }
   .res-row:hover svg { transform: rotate(45deg); }
   @media (max-width: 800px) {
@@ -508,7 +508,7 @@ const zoomPhrases = [
   .marquee .o { color: transparent; -webkit-text-stroke: 2px var(--accent3); }
   .marquee .o.g { -webkit-text-stroke-color: var(--accent2); }
   .marquee a:hover { color: var(--accent-text); }
-  .foot-grid { padding: 10vh var(--gutter) 0; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+  .foot-grid { padding: 10vh var(--gutter) 0; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; }
   .foot-grid h4 { margin: 0 0 16px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
   .foot-links { display: flex; flex-direction: column; gap: 8px; font-weight: 700; text-transform: uppercase; font-size: 15px; }
   .foot-links a { display: inline-flex; gap: 10px; align-items: center; width: fit-content; }
@@ -603,6 +603,25 @@ const zoomPhrases = [
     </div>
   </section>
 
+  <section class="res" id="resources" aria-labelledby="resTitle">
+    <div class="res-head">
+      <h2 class="display" id="resTitle">Resources</h2>
+      <span class="wide res-count">{pad(resources.length)} guides &amp; tools</span>
+    </div>
+    {resources.map((r, i) => {
+      const href = r.href ?? r.link ?? '#';
+      const ext = isExternal(href);
+      return (
+        <a class="res-row" style={tone(i)} href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener noreferrer' : undefined}>
+          <span class="res-num">{pad(i + 1)}</span>
+          <h3 class="wide">{r.title}</h3>
+          {r.desc && <p>{r.desc}</p>}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9" /></svg>
+        </a>
+      );
+    })}
+  </section>
+
   <section class="show" id="bake-offs" aria-labelledby="showTitle">
     <div class="show-intro">
       <h2 class="display" id="showTitle">LLM<br />bake-offs</h2>
@@ -656,25 +675,6 @@ const zoomPhrases = [
         ))}
       </div>
     </section>
-
-    <section class="res" id="resources" aria-labelledby="resTitle">
-      <div class="res-head">
-        <h2 class="display" id="resTitle">Resources</h2>
-        <span class="wide res-count">{pad(resources.length)} guides &amp; tools</span>
-      </div>
-      {resources.map((r, i) => {
-        const href = r.href ?? r.link ?? '#';
-        const ext = isExternal(href);
-        return (
-          <a class="res-row" style={tone(i)} href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener noreferrer' : undefined}>
-            <span class="res-num">{pad(i + 1)}</span>
-            <h3 class="wide">{r.title}</h3>
-            {r.desc && <p>{r.desc}</p>}
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9" /></svg>
-          </a>
-        );
-      })}
-    </section>
   </div>
 </main>
 
@@ -696,14 +696,6 @@ const zoomPhrases = [
           <a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
             <Fragment set:html={ICONS[s.icon]} />{s.label}
           </a>
-        ))}
-      </div>
-    </div>
-    <div>
-      <h4>Affiliates</h4>
-      <div class="foot-links">
-        {affiliates.map((a) => (
-          <a href={a.link} target="_blank" rel="noopener noreferrer sponsored">{a.title}</a>
         ))}
       </div>
     </div>

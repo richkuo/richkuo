@@ -58,9 +58,9 @@ export const videos: Card[] = [
 	{ title: 'Ai Trading with Go-Trader on Hyperliquid Part 2: Hermes/OpenClaw Bots Running 24/7', icon: 'youtube', link: 'https://www.youtube.com/watch?v=n6OPc8j1GoQ', vid: 'n6OPc8j1GoQ', desc: 'YouTube video walkthrough of running Hermes and OpenClaw trading bots 24/7 with Go-Trader on Hyperliquid.' },
 ];
 export const resources: Card[] = [
+	{ title: '/rk-skills', icon: 'skills', href: '/rk-skills', link: 'https://github.com/richkuo/rk-skills', desc: 'Claude Code workflow skills — GitHub issue, PR, and release automation plus Fable-driven planning. Install via npx or as a Claude Code plugin.' },
 	{ title: 'MiniMax Web Search MCP Server Setup for OpenClaw', icon: 'search', href: '/openclaw/minimax-websearch-mcp-setup/', desc: "Step-by-step guide to setting up MiniMax's web search MCP server with mcporter for real-time search in OpenClaw agents." },
 	{ title: 'OpenClaw Kimi K2.6 Bugfix', icon: 'bug', href: '/openclaw/kimi-k2-6-bugfix/', desc: 'How to fix Kimi configuration drift in OpenClaw where sessions silently fall back to a different model instead of staying on kimi-k2.6.' },
-	{ title: '/rk-skills', icon: 'skills', href: '/rk-skills', link: 'https://github.com/richkuo/rk-skills', desc: 'Claude Code workflow skills — GitHub issue, PR, and release automation plus Fable-driven planning. Install via npx or as a Claude Code plugin.' },
 	{ title: 'Model Effort Shortcuts', icon: 'keyboard', link: 'https://github.com/richkuo/claude-code-model-effort-shortcuts', desc: 'A Claude Code plugin that switches the model and the reasoning effort from the keyboard. Option+P cycles the model, Option+E cycles the effort, and the footer shows what the next request uses.' },
 	{ title: '/fableplan', icon: 'plan', href: '/fableplan', link: 'https://github.com/richkuo/fableplan', desc: 'Why I plan with Fable 5 and build with Opus or Sonnet: a Claude Code skill that delegates implementation planning to a Fable 5 subagent, then builds from the vetted plan in an isolated git worktree.' },
 ];
