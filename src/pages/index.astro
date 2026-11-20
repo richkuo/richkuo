@@ -67,7 +67,6 @@ const graphJsonLd = {
 	'@graph': [personJsonLd, websiteJsonLd, profilePageJsonLd, llmBakeOffsItemList],
 };
 const WORK_MAIL = 'mailto:rich.kuo.ai@gmail.com?subject=Work%20with%20me';
-const github = socials.find((s) => s.icon === 'github');
 
 const building = [
 	...currentProjects.map((p) => ({ ...p, tag: 'Current project' })),
@@ -567,11 +566,6 @@ const zoomPhrases = [
         <p class="hero-tag">AI-native products end to end. <em>AI video tooling, trading bots, agent infrastructure</em>, and head-to-head LLM coding evaluations.</p>
       </div>
       <div class="pills">
-        {github && (
-          <a class="pill" href={github.href} target="_blank" rel="noopener noreferrer">
-            <span class="ico"><Fragment set:html={ICONS.github} /></span><span>GitHub</span>
-          </a>
-        )}
         <a class="pill" href={WORK_MAIL}>
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9" /></svg></span><span>Work with me</span>
         </a>
