@@ -16,6 +16,8 @@ const newLinks = new Set(newItems.map((n) => n.link));
 const pad = (n: number) => String(n).padStart(2, '0');
 const isExternal = (href: string) => /^(https?:|mailto:)/.test(href);
 const prettyUrl = (u?: string) => (u ?? '').replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+const CYCLE = ['accent', 'forest', 'royal'];
+const tone = (i: number) => `--c: var(--${CYCLE[i % CYCLE.length]}); --c-ink: var(--${CYCLE[i % CYCLE.length]}-ink)`;
 const zoomPhrases = [
 	["It's time for", 'your next adventure'],
 	['I have no idea what', "I'm going to do tomorrow"],
@@ -52,6 +54,12 @@ const zoomPhrases = [
     --grey: #9a9a9a;
     --accent: #fbbf24;
     --accent-ink: #1a1203;
+    --forest: #228b22;
+    --forest-ink: #ffffff;
+    --royal: #4169e1;
+    --royal-ink: #ffffff;
+    --c: var(--accent);
+    --c-ink: var(--accent-ink);
     --ink: var(--white);
     --font-display: "Anton", "Impact", sans-serif;
     --font-wide: "Unbounded", "Arial Black", sans-serif;
@@ -61,6 +69,7 @@ const zoomPhrases = [
   }
   * { box-sizing: border-box; }
   html { overflow-x: clip; background: var(--black); }
+  html:not(.live) { scroll-snap-type: y proximity; }
   html.lenis, html.lenis body { height: auto; }
   .lenis.lenis-smooth { scroll-behavior: auto !important; }
   body {
@@ -80,7 +89,10 @@ const zoomPhrases = [
   #stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
   .glow {
     position: fixed; inset: auto 0 0 0; height: 70vh; z-index: 0; pointer-events: none;
-    background: radial-gradient(120% 90% at 50% 120%, color-mix(in oklab, var(--accent) 26%, transparent), transparent 70%);
+    background:
+      radial-gradient(60% 70% at 8% 115%, color-mix(in oklab, var(--forest) 24%, transparent), transparent 70%),
+      radial-gradient(60% 70% at 92% 115%, color-mix(in oklab, var(--royal) 26%, transparent), transparent 70%),
+      radial-gradient(120% 90% at 50% 120%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 70%);
   }
   #cursor {
     position: fixed; top: 0; left: 0; z-index: 70; pointer-events: none;
@@ -205,15 +217,15 @@ const zoomPhrases = [
   .building-head { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; }
   .building-count { margin-top: 28px; font-family: var(--font-wide); font-size: 14px; color: var(--grey); }
   .building-count b { color: var(--accent); }
-  .build-item { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 22px; max-width: 560px; }
+  .build-item { scroll-snap-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 22px; max-width: 560px; }
   .build-item .tag { font-weight: 700; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--grey); }
-  .build-item h3 { color: var(--accent); font-size: clamp(30px, 3.6vw, 56px); }
+  .build-item h3 { color: var(--c); font-size: clamp(30px, 3.6vw, 56px); }
   .build-item p { font-size: clamp(17px, 1.35vw, 22px); line-height: 1.5; color: color-mix(in oklab, var(--white) 88%, transparent); }
   .build-item .promo { align-self: flex-start; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font-size: 13px; font-weight: 700; }
   .link-arrow {
     align-self: flex-start; display: inline-flex; gap: 10px; align-items: center;
     font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: .04em;
-    border-bottom: 2px solid var(--accent); padding-bottom: 4px;
+    border-bottom: 2px solid var(--c); padding-bottom: 4px;
   }
   .link-arrow svg { width: 16px; height: 16px; transition: transform .4s var(--ease-out-expo); }
   .link-arrow:hover svg { transform: translate(4px, -4px); }
@@ -236,7 +248,7 @@ const zoomPhrases = [
   .show-media { position: relative; aspect-ratio: 1200 / 630; overflow: hidden; border-radius: 14px; background: #151515; }
   .show-media img { position: absolute; inset: 0; width: 108%; max-width: none; height: 100%; object-fit: cover; left: -4%; transition: transform .9s var(--ease-out-expo); }
   .show-card:hover .show-media img { transform: scale(1.05); }
-  .show-num { display: inline-block; margin-top: 20px; color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .2em; }
+  .show-num { display: inline-block; margin-top: 20px; color: var(--c); font-size: 12px; font-weight: 700; letter-spacing: .2em; }
   .show-card h3 { margin-top: 6px; font-size: clamp(20px, 1.8vw, 30px); font-weight: 500; font-family: var(--font-body); }
   .show-card p { margin-top: 6px; color: var(--grey); font-size: 15px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; max-width: 60ch; }
   .show-end { flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; gap: 22px; padding-right: var(--gutter); }
@@ -272,7 +284,7 @@ const zoomPhrases = [
   }
   .stack-card:last-child { margin-bottom: 0; }
   .stack-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-  .stack-num { font-family: var(--font-display); color: var(--accent); font-size: clamp(64px, 7vw, 120px); line-height: .85; -webkit-text-stroke: 1px #c98f00; }
+  .stack-num { font-family: var(--font-display); color: var(--c); font-size: clamp(64px, 7vw, 120px); line-height: .85; -webkit-text-stroke: 1px color-mix(in oklab, var(--c) 75%, black); }
   .stack-new { padding: 4px 10px; border-radius: 999px; background: var(--black); color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
   .stack-thumb { aspect-ratio: 16 / 9; overflow: hidden; border-radius: 2px; background: #ddd; }
   .stack-thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); transition: filter .6s ease, transform .9s var(--ease-out-expo); }
@@ -292,14 +304,16 @@ const zoomPhrases = [
   }
   .res-row::before {
     content: ""; position: absolute; inset: 0 calc(-1 * var(--gutter)); z-index: -1;
-    background: var(--accent); transform: scaleY(0); transform-origin: 50% 100%;
+    background: var(--c); transform: scaleY(0); transform-origin: 50% 100%;
     transition: transform .6s var(--ease-out-expo);
   }
   .res-row:hover::before { transform: scaleY(1); transform-origin: 50% 0; }
   .res-num { font-family: var(--font-display); font-size: 34px; color: #a3a3a3; transition: color .3s; }
-  .res-row:hover .res-num { color: var(--black); }
+  .res-row { transition: color .3s; }
+  .res-row:hover { color: var(--c-ink); }
+  .res-row:hover .res-num, .res-row:hover p { color: var(--c-ink); }
   .res-row h3 { font-size: clamp(18px, 2vw, 32px); }
-  .res-row p { color: #4a4a4a; font-size: 15px; }
+  .res-row p { color: #4a4a4a; font-size: 15px; transition: color .3s; }
   .res-row svg { width: 28px; height: 28px; transition: transform .5s var(--ease-out-expo); }
   .res-row:hover svg { transform: rotate(45deg); }
   @media (max-width: 800px) {
@@ -312,7 +326,8 @@ const zoomPhrases = [
   footer { background: var(--black); color: var(--white); border-radius: 28px 28px 0 0; margin-top: -28px; padding: 12vh 0 32px; overflow: hidden; }
   .marquee { display: flex; white-space: nowrap; font-family: var(--font-display); text-transform: uppercase; font-size: clamp(80px, 16vw, 260px); line-height: .9; }
   .marquee-inner { display: flex; flex-shrink: 0; padding-right: .3em; gap: .3em; will-change: transform; }
-  .marquee .o { color: transparent; -webkit-text-stroke: 2px var(--accent); }
+  .marquee .o { color: transparent; -webkit-text-stroke: 2px var(--royal); }
+  .marquee .o.g { -webkit-text-stroke-color: var(--forest); }
   .marquee a:hover { color: var(--accent); }
   .foot-grid { padding: 10vh var(--gutter) 0; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
   .foot-grid h4 { margin: 0 0 16px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--grey); }
@@ -377,8 +392,8 @@ const zoomPhrases = [
       <p class="building-count" aria-hidden="true"><b id="buildIdx">01</b> / {pad(building.length)}</p>
     </div>
     <div class="building-list">
-      {building.map((p) => (
-        <article class="build-item">
+      {building.map((p, i) => (
+        <article class="build-item" style={tone(i)}>
           <span class="tag">{p.tag}</span>
           <h3 class="wide">{p.title}</h3>
           {p.badge && <span class="promo">{p.badge}</span>}
@@ -402,7 +417,7 @@ const zoomPhrases = [
     <div class="show-pin" id="showPin">
       <div class="show-track" id="showTrack">
         {llmBakeOffs.map((b, i) => (
-          <a class="show-card" href={b.href}>
+          <a class="show-card" href={b.href} style={tone(i)}>
             <div class="show-media">
               {b.img && <img src={b.img} alt="" loading="lazy" />}
             </div>
@@ -437,7 +452,7 @@ const zoomPhrases = [
       </div>
       <div class="stack">
         {videos.map((v, i) => (
-          <a class="stack-card" style={`--i:${i}`} href={v.link} target="_blank" rel="noopener noreferrer">
+          <a class="stack-card" style={`--i:${i}; ${tone(i)}`} href={v.link} target="_blank" rel="noopener noreferrer">
             <div class="stack-top">
               <span class="stack-num">{pad(i + 1)}</span>
               {newLinks.has(v.link) && <span class="stack-new">NEW</span>}
@@ -460,7 +475,7 @@ const zoomPhrases = [
         const href = r.href ?? r.link ?? '#';
         const ext = isExternal(href);
         return (
-          <a class="res-row" href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener noreferrer' : undefined}>
+          <a class="res-row" style={tone(i)} href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener noreferrer' : undefined}>
             <span class="res-num">{pad(i + 1)}</span>
             <h3 class="wide">{r.title}</h3>
             {r.desc && <p>{r.desc}</p>}
@@ -477,7 +492,7 @@ const zoomPhrases = [
     {[0, 1].map((k) => (
       <div class="marquee-inner" aria-hidden={k === 1 ? 'true' : undefined}>
         <a href={WORK_MAIL} tabindex={k === 1 ? '-1' : undefined}>Work with me</a><span class="o">Let's build</span>
-        <a href={WORK_MAIL} tabindex="-1">Work with me</a><span class="o">Let's build</span>
+        <a href={WORK_MAIL} tabindex="-1">Work with me</a><span class="o g">Let's build</span>
       </div>
     ))}
   </div>
@@ -511,6 +526,7 @@ const zoomPhrases = [
 <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis-snap.min.js" integrity="sha384-oq0TWGBcl0kQ4r07ikUsxvFYrNOoNpeM/mZPXt5FVZJuDS/l0bjZRlBqgKM3fEcg" crossorigin="anonymous"></script>
 <script is:inline>
 (function () {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -518,6 +534,7 @@ const zoomPhrases = [
 
   const canvas = document.getElementById('stars');
   const ctx = canvas.getContext('2d');
+  const STAR_TINTS = ['255, 214, 140', '255, 214, 140', '255, 214, 140', '110, 200, 110', '120, 150, 255'];
   let stars = [];
   let scrollY = 0;
   function sizeStars() {
@@ -530,6 +547,7 @@ const zoomPhrases = [
       x: Math.random() * innerWidth,
       y: Math.random() * innerHeight,
       r: Math.random() * 1.3 + 0.2,
+      c: STAR_TINTS[Math.floor(Math.random() * STAR_TINTS.length)],
       d: Math.random() * 0.6 + 0.1,
       p: Math.random() * Math.PI * 2,
     }));
@@ -539,7 +557,7 @@ const zoomPhrases = [
     for (const s of stars) {
       const y = (((s.y - scrollY * s.d * 0.15) % innerHeight) + innerHeight) % innerHeight;
       const a = reduce ? 0.6 : 0.35 + 0.45 * Math.sin(t * 0.0012 + s.p);
-      ctx.fillStyle = 'rgba(255, 214, 140,' + a.toFixed(3) + ')';
+      ctx.fillStyle = 'rgba(' + s.c + ',' + a.toFixed(3) + ')';
       ctx.beginPath();
       ctx.arc(s.x, y, s.r, 0, Math.PI * 2);
       ctx.fill();
@@ -572,6 +590,11 @@ const zoomPhrases = [
   document.documentElement.classList.add('live');
 
   const lenis = new Lenis({ lerp: 0.1, anchors: { offset: 0 } });
+  if (typeof Snap !== 'undefined') {
+    const snap = new Snap(lenis, { type: 'proximity', distanceThreshold: '50%', debounce: 250, duration: 0.9, easing: (t) => 1 - Math.pow(1 - t, 4) });
+    document.querySelectorAll('.build-item').forEach((el) => snap.addElement(el, { align: ['center'] }));
+    ScrollTrigger.addEventListener('refresh', () => snap.resize());
+  }
   lenis.on('scroll', (e) => { scrollY = e.scroll; ScrollTrigger.update(); });
   gsap.ticker.add((time) => { lenis.raf(time * 1000); drawStars(time * 1000); });
   gsap.ticker.lagSmoothing(0);
