@@ -155,9 +155,9 @@ const zoomPhrases = [
   .hero-name .cl { display: inline-block; overflow: hidden; padding-top: .04em; will-change: transform; }
   .hero-name .ch { display: inline-block; will-change: transform; }
   .hero-role {
-    margin-top: clamp(14px, 2vw, 28px); align-self: flex-end; text-align: right;
+    margin-top: clamp(14px, 2vw, 28px); align-self: stretch; white-space: nowrap;
     font-family: var(--font-wide); font-weight: 800; text-transform: uppercase;
-    font-size: clamp(22px, 5.2vw, 84px); line-height: 1; letter-spacing: -.01em;
+    font-size: 7.4vw; line-height: 1; letter-spacing: -.01em;
   }
   .hero-role .ch { display: inline-block; }
   .hero-foot {
@@ -714,9 +714,17 @@ const zoomPhrases = [
     w += 12 * (words.length - 1);
     h.style.fontSize = Math.floor((100 * avail) / w) + 'px';
   }
-  fitName();
-  if (document.fonts) document.fonts.ready.then(() => { fitName(); ScrollTrigger.refresh(); });
-  addEventListener('resize', fitName);
+  function fitRole() {
+    const r = document.getElementById('heroRole');
+    r.style.fontSize = '100px';
+    const chs = r.querySelectorAll('.ch');
+    const w = chs[chs.length - 1].getBoundingClientRect().right - chs[0].getBoundingClientRect().left;
+    if (w) r.style.fontSize = ((100 * r.clientWidth) / w).toFixed(2) + 'px';
+  }
+  function fitHero() { fitName(); fitRole(); }
+  fitHero();
+  if (document.fonts) document.fonts.ready.then(() => { fitHero(); ScrollTrigger.refresh(); });
+  addEventListener('resize', fitHero);
 })();
 </script>
 </body>
