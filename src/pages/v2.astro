@@ -218,9 +218,9 @@ const zoomPhrases = [
   }
   .nav-group a:hover::after { transform: scaleX(1); transform-origin: 0 50%; }
   .badge {
-    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 8px;
+    display: grid; place-items: center; height: 44px; padding: 0 16px; border-radius: 8px; white-space: nowrap;
     background: var(--accent); color: var(--accent-ink);
-    font-family: var(--font-body); font-weight: 500; font-size: 22px; letter-spacing: .01em;
+    font-family: var(--font-wide); font-weight: 600; font-size: 15px; letter-spacing: .05em; text-transform: none;
     transition: transform .5s var(--ease-out-expo);
   }
   .badge:hover { transform: rotate(-8deg) scale(1.06); }
@@ -460,7 +460,7 @@ const zoomPhrases = [
     <a href="#bake-offs">Bake-offs</a>
     <a href="#videos">Videos</a>
   </nav>
-  <a class="badge" href="#top" aria-label="Back to top">RK</a>
+  <a class="badge" id="badge" href="#top" aria-label="Back to top">Rich Kuo</a>
   <nav class="nav-group right" aria-label="More">
     <a href="#resources">Resources</a>
     <a href={WORK_MAIL}>Work with me</a>
@@ -782,7 +782,7 @@ const zoomPhrases = [
     drawStars(time * 1000);
   });
   gsap.ticker.lagSmoothing(0);
-  document.querySelector('.badge').addEventListener('click', (e) => { e.preventDefault(); lenis.scrollTo(0); });
+  document.getElementById('badge').addEventListener('click', (e) => { e.preventDefault(); lenis.scrollTo(0); });
 
   const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
   intro
@@ -799,6 +799,24 @@ const zoomPhrases = [
     });
   });
   gsap.to('#heroRole', { xPercent: 8, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'center top', end: 'bottom top', scrub: true } });
+
+  const heroName = document.getElementById('heroName');
+  const badge = document.getElementById('badge');
+  const pageTop = (el) => { let y = 0; for (let n = el; n; n = n.offsetParent) y += n.offsetTop; return y; };
+  const mergeEnd = () => Math.max(200, pageTop(heroName) + heroName.offsetHeight - (badge.offsetTop + badge.offsetHeight / 2));
+  const badgeTextWidth = () => { const r = document.createRange(); r.selectNodeContents(badge); return r.getBoundingClientRect().width; };
+  gsap.timeline({
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: () => '+=' + mergeEnd(), scrub: true, invalidateOnRefresh: true },
+  })
+    .to(heroName, {
+      x: () => badge.offsetLeft + badge.offsetWidth / 2 - (heroName.offsetLeft + heroName.offsetWidth / 2),
+      y: () => badge.offsetTop + badge.offsetHeight / 2 + mergeEnd() - (pageTop(heroName) + heroName.offsetHeight / 2),
+      ease: 'none',
+      duration: 1,
+    }, 0)
+    .to(heroName, { scale: () => badgeTextWidth() / heroName.offsetWidth, ease: 'power3.out', duration: 1 }, 0)
+    .to(heroName, { opacity: 0, ease: 'none', duration: 0.3 }, 0.7)
+    .fromTo(badge, { autoAlpha: 0, filter: 'blur(8px)' }, { autoAlpha: 1, filter: 'blur(0px)', ease: 'none', duration: 0.3 }, 0.7);
 
   const builds = gsap.utils.toArray('.build-item');
   const list = document.getElementById('buildList');
