@@ -312,7 +312,7 @@ const zoomPhrases = [
     font-family: var(--font-display); font-weight: 400; color: var(--accent-text);
     line-height: .86; text-transform: uppercase; white-space: nowrap;
     font-size: 22.5vw; letter-spacing: -.01em;
-    display: flex; justify-content: space-between; gap: .12em;
+    display: flex; justify-content: center; gap: .12em;
   }
   .hero-name .word { display: inline-flex; }
   .hero-name .cl { display: inline-block; overflow: hidden; padding-top: .04em; will-change: transform; }
@@ -367,7 +367,7 @@ const zoomPhrases = [
     .pill { flex: 1; }
   }
   @media (max-width: 700px) {
-    .hero-name { flex-direction: column; white-space: normal; font-size: 46vw; }
+    .hero-name { flex-direction: column; align-items: center; white-space: normal; font-size: 40vw; }
   }
 
   /* ---- section heads ---- */
@@ -868,6 +868,10 @@ const zoomPhrases = [
   const badge = document.getElementById('badge');
   const pageTop = (el) => { let y = 0; for (let n = el; n; n = n.offsetParent) y += n.offsetTop; return y; };
   const mergeEnd = () => Math.max(200, pageTop(heroName) + heroName.offsetHeight - (badge.offsetTop + badge.offsetHeight / 2));
+  const nameWidth = () => {
+    const ws = [...heroName.querySelectorAll('.word')];
+    return Math.max(...ws.map((w) => w.offsetLeft + w.offsetWidth)) - Math.min(...ws.map((w) => w.offsetLeft));
+  };
   const badgeTextWidth = () => { const r = document.createRange(); r.selectNodeContents(badge); return r.getBoundingClientRect().width; };
   gsap.timeline({
     scrollTrigger: { trigger: '.hero', start: 'top top', end: () => '+=' + mergeEnd(), scrub: true, invalidateOnRefresh: true },
@@ -878,7 +882,7 @@ const zoomPhrases = [
       ease: 'none',
       duration: 1,
     }, 0)
-    .to(heroName, { scale: () => badgeTextWidth() / heroName.offsetWidth, ease: 'power3.out', duration: 1 }, 0)
+    .to(heroName, { scale: () => badgeTextWidth() / nameWidth(), ease: 'power3.out', duration: 1 }, 0)
     .to(heroName, { opacity: 0, ease: 'none', duration: 0.3 }, 0.7)
     .fromTo(badge, { autoAlpha: 0, filter: 'blur(8px)' }, { autoAlpha: 1, filter: 'blur(0px)', ease: 'none', duration: 0.3 }, 0.7);
 
@@ -985,7 +989,7 @@ const zoomPhrases = [
     let w = 0;
     words.forEach((el) => { w += el.scrollWidth; });
     w += 12 * (words.length - 1);
-    h.style.fontSize = Math.floor((100 * avail) / w) + 'px';
+    h.style.fontSize = Math.floor((77 * avail) / w) + 'px';
   }
   function fitRole() {
     const r = document.getElementById('heroRole');
