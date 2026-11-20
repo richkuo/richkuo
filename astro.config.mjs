@@ -70,7 +70,7 @@ export default defineConfig({
     mdx(),
     sitemap({
       customPages: reports.customPages,
-      filter: (page) => !pageMeta[new URL(page).pathname]?.unlisted,
+      filter: (page) => new URL(page).pathname !== "/v2/" && !pageMeta[new URL(page).pathname]?.unlisted,
       serialize: (item) => {
         const pathname = new URL(item.url).pathname;
         const lastmod = pageMeta[pathname]?.lastmod;
