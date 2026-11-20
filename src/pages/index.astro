@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import profilePic from '../assets/profile.jpg';
 import { getSite } from '../utils/consts';
-import { ICONS, socials, newItems, currentProjects, friendProjects, videos, resources, llmBakeOffs } from '../data/home';
+import { ICONS, socials, newItems, currentProjects, friendProjects, videos, resources } from '../data/home';
 
 const site = await getSite();
 const SITE_URL = 'https://www.richkuo.com';
@@ -46,25 +46,9 @@ const profilePageJsonLd = {
 	inLanguage: 'en-US',
 };
 
-const llmBakeOffsItemList = {
-	'@type': 'ItemList',
-	'@id': `${SITE_URL}/#llm-bake-offs`,
-	name: 'LLM Bake-Offs — AI coding bake-offs',
-	description:
-		'Head-to-head bake-offs scoring frontier AI models (GPT, Claude Opus, GLM, Fable, Composer) on identical real-world coding tasks — cost, speed, review rounds, and code quality.',
-	itemListOrder: 'https://schema.org/ItemListOrderAscending',
-	numberOfItems: llmBakeOffs.length,
-	itemListElement: llmBakeOffs.map((b, i) => ({
-		'@type': 'ListItem',
-		position: i + 1,
-		name: b.title,
-		url: `${SITE_URL}${(b.href ?? '').replace(/index\.html$/, '')}`,
-	})),
-};
-
 const graphJsonLd = {
 	'@context': 'https://schema.org',
-	'@graph': [personJsonLd, websiteJsonLd, profilePageJsonLd, llmBakeOffsItemList],
+	'@graph': [personJsonLd, websiteJsonLd, profilePageJsonLd],
 };
 const WORK_MAIL = 'mailto:rich.kuo.ai@gmail.com?subject=Work%20with%20me';
 
@@ -159,7 +143,6 @@ const zoomPhrases = [
     --fg: #efefef;
     --muted: #9a9a9a;
     --body: color-mix(in oklab, #efefef 88%, transparent);
-    --media-bg: #151515;
     --alt-bg: #efefef;
     --alt-fg: #050505;
     --alt-muted: #a3a3a3;
@@ -178,7 +161,6 @@ const zoomPhrases = [
     --fg: #0a0a0a;
     --muted: #5f5f5f;
     --body: #2a2a2a;
-    --media-bg: #dcdcdc;
     --alt-bg: #050505;
     --alt-fg: #efefef;
     --alt-muted: #7a7a7a;
@@ -199,7 +181,6 @@ const zoomPhrases = [
       --fg: #0a0a0a;
       --muted: #5f5f5f;
       --body: #2a2a2a;
-      --media-bg: #dcdcdc;
       --alt-bg: #050505;
       --alt-fg: #efefef;
       --alt-muted: #7a7a7a;
@@ -458,26 +439,6 @@ const zoomPhrases = [
     .live .building-list { padding: 16vh 0; gap: 12vh; }
   }
 
-  /* ---- bake-offs: pinned horizontal track ---- */
-  .show-intro { padding: 16vh var(--gutter) 8vh; display: grid; grid-template-columns: 1.2fr 1fr; gap: 6vw; align-items: end; }
-  .show-intro p { font-size: clamp(17px, 1.35vw, 22px); max-width: 46ch; }
-  .show-pin { position: relative; height: 100vh; display: flex; align-items: center; overflow: hidden; }
-  .show-track {
-    display: flex; gap: clamp(20px, 2.5vw, 48px); padding: 0 var(--gutter);
-    overflow-x: auto; scroll-snap-type: x mandatory; width: 100%;
-  }
-  .live .show-track { overflow: visible; scroll-snap-type: none; width: max-content; }
-  .show-card { flex: 0 0 clamp(280px, 38vw, 720px); scroll-snap-align: start; }
-  .show-media { position: relative; aspect-ratio: 1200 / 630; overflow: hidden; border-radius: 14px; background: var(--media-bg); }
-  .show-media img { position: absolute; inset: 0; width: 108%; max-width: none; height: 100%; object-fit: cover; left: -4%; transition: transform .9s var(--ease-out-expo); }
-  .show-card:hover .show-media img { transform: scale(1.05); }
-  .show-num { display: inline-block; margin-top: 20px; color: var(--ct); font-size: 12px; font-weight: 700; letter-spacing: .2em; }
-  .show-card h3 { margin-top: 6px; font-size: clamp(20px, 1.8vw, 30px); font-weight: 500; font-family: var(--font-body); }
-  .show-card p { margin-top: 6px; color: var(--muted); font-size: 15px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; max-width: 60ch; }
-  .show-end { flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; gap: 22px; padding-right: var(--gutter); }
-  .show-end .display { font-size: clamp(48px, 7vw, 120px); }
-  @media (max-width: 900px) { .show-intro { grid-template-columns: 1fr; } .show-card { flex-basis: 82vw; } }
-
   /* ---- zoom phrases ---- */
   .zoom { position: relative; }
   .zoom-stage { padding: 12vh var(--gutter); display: grid; gap: 10vh; text-align: center; }
@@ -517,7 +478,7 @@ const zoomPhrases = [
     .stack-card { width: 100%; margin-left: 0; top: calc(80px + var(--i) * 12px); margin-bottom: 12vh; }
   }
 
-  .res { padding: 4vh var(--gutter) 16vh; }
+  .res { padding: 16vh var(--gutter); }
   .res-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; padding-bottom: 28px; border-bottom: 2px solid var(--fg); }
   .res-count { font-size: 14px; color: var(--muted); }
   .res-row {
@@ -574,7 +535,6 @@ const zoomPhrases = [
     <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
     <a href="#building">Building</a>
     <a href="#videos">Videos</a>
-    <a href="#bake-offs">Bake-offs</a>
   </nav>
   <a class="badge" id="badge" href="#top" aria-label="Back to top">Rich Kuo</a>
   <nav class="nav-group right" aria-label="More">
@@ -596,9 +556,8 @@ const zoomPhrases = [
 
 <nav class="menu" id="menu" aria-label="Menu">
   <a href="#building">Building</a>
-  <a href="#resources">Resources</a>
   <a href="#videos">Videos</a>
-  <a href="#bake-offs">Bake-offs</a>
+  <a href="#resources">Resources</a>
   <a href={WORK_MAIL}>Work with me</a>
 </nav>
 
@@ -665,25 +624,6 @@ const zoomPhrases = [
     </div>
   </section>
 
-  <section class="res" id="resources" aria-labelledby="resTitle">
-    <div class="res-head">
-      <h2 class="display" id="resTitle">Resources</h2>
-      <span class="wide res-count">{pad(resources.length)} guides &amp; tools</span>
-    </div>
-    {resources.map((r, i) => {
-      const href = r.href ?? r.link ?? '#';
-      const ext = isExternal(href);
-      return (
-        <a class="res-row" style={tone(i)} href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener noreferrer' : undefined}>
-          <span class="res-num">{pad(i + 1)}</span>
-          <h3 class="wide">{r.title}</h3>
-          {r.desc && <p>{r.desc}</p>}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9" /></svg>
-        </a>
-      );
-    })}
-  </section>
-
   <section class="zoom" id="zoom" aria-label="Interlude">
     <div class="zoom-stage" id="zoomStage">
       {zoomPhrases.map(([a, b]) => (
@@ -712,31 +652,23 @@ const zoomPhrases = [
     </section>
   </div>
 
-  <section class="show" id="bake-offs" aria-labelledby="showTitle">
-    <div class="show-intro">
-      <h2 class="display" id="showTitle">LLM<br />bake-offs</h2>
-      <p>Head-to-head bake-offs scoring frontier AI models on identical real-world coding tasks: cost, speed, review rounds, and code quality.</p>
+  <section class="res" id="resources" aria-labelledby="resTitle">
+    <div class="res-head">
+      <h2 class="display" id="resTitle">Resources</h2>
+      <span class="wide res-count">{pad(resources.length)} guides &amp; tools</span>
     </div>
-    <div class="show-pin" id="showPin">
-      <div class="show-track" id="showTrack">
-        {llmBakeOffs.map((b, i) => (
-          <a class="show-card" href={b.href} style={tone(i)}>
-            <div class="show-media">
-              {b.img && <img src={b.img} alt="" loading="lazy" />}
-            </div>
-            <span class="show-num">EP {pad(i + 1)}</span>
-            <h3>{b.title}</h3>
-            {b.desc && <p>{b.desc}</p>}
-          </a>
-        ))}
-        <div class="show-end">
-          <p class="display">More<br />soon</p>
-          <a class="link-arrow" href="#videos">Watch the videos
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9" /></svg>
-          </a>
-        </div>
-      </div>
-    </div>
+    {resources.map((r, i) => {
+      const href = r.href ?? r.link ?? '#';
+      const ext = isExternal(href);
+      return (
+        <a class="res-row" style={tone(i)} href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener noreferrer' : undefined}>
+          <span class="res-num">{pad(i + 1)}</span>
+          <h3 class="wide">{r.title}</h3>
+          {r.desc && <p>{r.desc}</p>}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9" /></svg>
+        </a>
+      );
+    })}
   </section>
 </main>
 
@@ -987,8 +919,6 @@ const zoomPhrases = [
     scrollTrigger: { trigger: '#building', start: 'top 70%' },
   });
 
-  gsap.from('.res-row', { y: 40, opacity: 0, stagger: 0.08, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.res', start: 'top 75%' } });
-
   const phrases = gsap.utils.toArray('.zoom-phrase');
   const zoom = gsap.timeline({
     defaults: { ease: 'none' },
@@ -1016,22 +946,7 @@ const zoomPhrases = [
     });
   });
 
-  const track = document.getElementById('showTrack');
-  const dist = () => Math.max(0, track.scrollWidth - innerWidth);
-  const slide = gsap.to(track, {
-    x: () => -dist(), ease: 'none',
-    scrollTrigger: { trigger: '#showPin', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 },
-  });
-  gsap.utils.toArray('.show-media img').forEach((img) => {
-    gsap.fromTo(img, { xPercent: -3.5 }, {
-      xPercent: 3.5, ease: 'none',
-      scrollTrigger: { trigger: img.parentElement, containerAnimation: slide, start: 'left right', end: 'right left', scrub: true },
-    });
-  });
-  gsap.from('.show-card', {
-    y: 80, opacity: 0, stagger: 0.08, duration: 1.2, ease: 'expo.out',
-    scrollTrigger: { trigger: '#showPin', start: 'top 70%' },
-  });
+  gsap.from('.res-row', { y: 40, opacity: 0, stagger: 0.08, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.res', start: 'top 75%' } });
 
   const inners = gsap.utils.toArray('.marquee-inner');
   let mx = 0;
