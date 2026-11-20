@@ -295,9 +295,37 @@ const zoomPhrases = [
     transition: transform .5s var(--ease-out-expo);
   }
   .badge:hover { transform: rotate(-8deg) scale(1.06); }
-  @media (max-width: 760px) {
-    .nav-group.left a:not(:first-child), .nav-group.right a:not(:last-child) { display: none; }
+  .menu-btn {
+    display: none; position: relative; width: 44px; height: 44px; margin-left: -10px; padding: 0;
+    border: 0; background: transparent; color: inherit; cursor: pointer;
   }
+  .menu-btn span {
+    position: absolute; left: 10px; right: 10px; height: 2px; background: currentColor;
+    transition: top .35s var(--ease-out-expo), transform .35s var(--ease-out-expo);
+  }
+  .menu-btn span:first-child { top: 17px; }
+  .menu-btn span:last-child { top: 25px; }
+  .menu-btn[aria-expanded="true"] span:first-child { top: 21px; transform: rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span:last-child { top: 21px; transform: rotate(-45deg); }
+  .menu {
+    position: fixed; inset: 0; z-index: 49; display: flex; flex-direction: column; justify-content: center;
+    gap: 6px; padding: 96px var(--gutter) 48px; background: var(--bg);
+    opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s linear .35s;
+  }
+  .menu.is-open { opacity: 1; visibility: visible; transition: opacity .35s ease; }
+  .menu a {
+    font-family: var(--font-display); text-transform: uppercase; line-height: 1.05;
+    font-size: clamp(44px, 13vw, 72px); color: var(--fg); transition: color .3s ease;
+  }
+  .menu a:hover, .menu a:focus-visible { color: var(--accent-text); }
+  html.menu-open { overflow: hidden; }
+  .menu-open .nav { color: var(--fg); }
+  .menu-open .nav::before { opacity: 0; }
+  @media (max-width: 760px) {
+    .nav-group.left a, .nav-group.right a:not(:last-child) { display: none; }
+    .menu-btn { display: block; }
+  }
+  @media (min-width: 761px) { .menu { display: none; } }
 
   main, footer { position: relative; z-index: 1; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -376,9 +404,6 @@ const zoomPhrases = [
     .hero-me { justify-content: center; }
     .pills { justify-content: stretch; }
     .pill { flex: 1; }
-  }
-  @media (max-width: 700px) {
-    .hero-name { flex-direction: column; align-items: center; white-space: normal; font-size: 40vw; }
   }
 
   /* ---- section heads ---- */
@@ -539,9 +564,10 @@ const zoomPhrases = [
 
 <header class="nav" id="nav">
   <nav class="nav-group left" aria-label="Sections">
+    <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
     <a href="#building">Building</a>
-    <a href="#bake-offs">Bake-offs</a>
     <a href="#videos">Videos</a>
+    <a href="#bake-offs">Bake-offs</a>
   </nav>
   <a class="badge" id="badge" href="#top" aria-label="Back to top">Rich Kuo</a>
   <nav class="nav-group right" aria-label="More">
@@ -560,6 +586,14 @@ const zoomPhrases = [
     </div>
   </nav>
 </header>
+
+<nav class="menu" id="menu" aria-label="Menu">
+  <a href="#building">Building</a>
+  <a href="#resources">Resources</a>
+  <a href="#videos">Videos</a>
+  <a href="#bake-offs">Bake-offs</a>
+  <a href={WORK_MAIL}>Work with me</a>
+</nav>
 
 <main id="top">
   <section class="hero" aria-label="Intro">
@@ -638,33 +672,6 @@ const zoomPhrases = [
     })}
   </section>
 
-  <section class="show" id="bake-offs" aria-labelledby="showTitle">
-    <div class="show-intro">
-      <h2 class="display" id="showTitle">LLM<br />bake-offs</h2>
-      <p>Head-to-head bake-offs scoring frontier AI models on identical real-world coding tasks: cost, speed, review rounds, and code quality.</p>
-    </div>
-    <div class="show-pin" id="showPin">
-      <div class="show-track" id="showTrack">
-        {llmBakeOffs.map((b, i) => (
-          <a class="show-card" href={b.href} style={tone(i)}>
-            <div class="show-media">
-              {b.img && <img src={b.img} alt="" loading="lazy" />}
-            </div>
-            <span class="show-num">EP {pad(i + 1)}</span>
-            <h3>{b.title}</h3>
-            {b.desc && <p>{b.desc}</p>}
-          </a>
-        ))}
-        <div class="show-end">
-          <p class="display">More<br />soon</p>
-          <a class="link-arrow" href="#videos">Watch the videos
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9" /></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="zoom" id="zoom" aria-label="Interlude">
     <div class="zoom-stage" id="zoomStage">
       {zoomPhrases.map(([a, b]) => (
@@ -692,6 +699,33 @@ const zoomPhrases = [
       </div>
     </section>
   </div>
+
+  <section class="show" id="bake-offs" aria-labelledby="showTitle">
+    <div class="show-intro">
+      <h2 class="display" id="showTitle">LLM<br />bake-offs</h2>
+      <p>Head-to-head bake-offs scoring frontier AI models on identical real-world coding tasks: cost, speed, review rounds, and code quality.</p>
+    </div>
+    <div class="show-pin" id="showPin">
+      <div class="show-track" id="showTrack">
+        {llmBakeOffs.map((b, i) => (
+          <a class="show-card" href={b.href} style={tone(i)}>
+            <div class="show-media">
+              {b.img && <img src={b.img} alt="" loading="lazy" />}
+            </div>
+            <span class="show-num">EP {pad(i + 1)}</span>
+            <h3>{b.title}</h3>
+            {b.desc && <p>{b.desc}</p>}
+          </a>
+        ))}
+        <div class="show-end">
+          <p class="display">More<br />soon</p>
+          <a class="link-arrow" href="#videos">Watch the videos
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M8 7h9v9" /></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -728,6 +762,19 @@ const zoomPhrases = [
 (function () {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const nav = document.getElementById('nav');
+  const menu = document.getElementById('menu');
+  const menuBtn = document.getElementById('menuBtn');
+  const setMenu = (open) => {
+    menu.classList.toggle('is-open', open);
+    document.documentElement.classList.toggle('menu-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.dispatchEvent(new CustomEvent('menutoggle', { detail: open }));
+  };
+  menuBtn.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); } });
+  matchMedia('(min-width: 761px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
 
   const canvas = document.getElementById('stars');
   const ctx = canvas.getContext('2d');
@@ -863,6 +910,7 @@ const zoomPhrases = [
   });
   gsap.ticker.lagSmoothing(0);
   document.getElementById('badge').addEventListener('click', (e) => { e.preventDefault(); lenis.scrollTo(0); });
+  document.addEventListener('menutoggle', (e) => { if (e.detail) lenis.stop(); else lenis.start(); });
 
   const intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
   intro
@@ -927,22 +975,7 @@ const zoomPhrases = [
     scrollTrigger: { trigger: '#building', start: 'top 70%' },
   });
 
-  const track = document.getElementById('showTrack');
-  const dist = () => Math.max(0, track.scrollWidth - innerWidth);
-  const slide = gsap.to(track, {
-    x: () => -dist(), ease: 'none',
-    scrollTrigger: { trigger: '#showPin', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 },
-  });
-  gsap.utils.toArray('.show-media img').forEach((img) => {
-    gsap.fromTo(img, { xPercent: -3.5 }, {
-      xPercent: 3.5, ease: 'none',
-      scrollTrigger: { trigger: img.parentElement, containerAnimation: slide, start: 'left right', end: 'right left', scrub: true },
-    });
-  });
-  gsap.from('.show-card', {
-    y: 80, opacity: 0, stagger: 0.08, duration: 1.2, ease: 'expo.out',
-    scrollTrigger: { trigger: '#showPin', start: 'top 70%' },
-  });
+  gsap.from('.res-row', { y: 40, opacity: 0, stagger: 0.08, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.res', start: 'top 75%' } });
 
   const phrases = gsap.utils.toArray('.zoom-phrase');
   const zoom = gsap.timeline({
@@ -971,7 +1004,22 @@ const zoomPhrases = [
     });
   });
 
-  gsap.from('.res-row', { y: 40, opacity: 0, stagger: 0.08, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.res', start: 'top 75%' } });
+  const track = document.getElementById('showTrack');
+  const dist = () => Math.max(0, track.scrollWidth - innerWidth);
+  const slide = gsap.to(track, {
+    x: () => -dist(), ease: 'none',
+    scrollTrigger: { trigger: '#showPin', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 },
+  });
+  gsap.utils.toArray('.show-media img').forEach((img) => {
+    gsap.fromTo(img, { xPercent: -3.5 }, {
+      xPercent: 3.5, ease: 'none',
+      scrollTrigger: { trigger: img.parentElement, containerAnimation: slide, start: 'left right', end: 'right left', scrub: true },
+    });
+  });
+  gsap.from('.show-card', {
+    y: 80, opacity: 0, stagger: 0.08, duration: 1.2, ease: 'expo.out',
+    scrollTrigger: { trigger: '#showPin', start: 'top 70%' },
+  });
 
   const inners = gsap.utils.toArray('.marquee-inner');
   let mx = 0;
@@ -1000,14 +1048,13 @@ const zoomPhrases = [
   function fitName() {
     const h = document.getElementById('heroName');
     h.style.fontSize = '';
-    if (innerWidth <= 700) return;
     const avail = h.clientWidth;
     h.style.fontSize = '100px';
     const words = h.querySelectorAll('.word');
     let w = 0;
     words.forEach((el) => { w += el.scrollWidth; });
     w += 12 * (words.length - 1);
-    h.style.fontSize = Math.floor((77 * avail) / w) + 'px';
+    h.style.fontSize = Math.floor(((innerWidth <= 700 ? 100 : 77) * avail) / w) + 'px';
   }
   function fitRole() {
     const r = document.getElementById('heroRole');
